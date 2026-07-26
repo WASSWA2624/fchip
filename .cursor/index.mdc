@@ -9,15 +9,20 @@ alwaysApply: false
 
 # FCHIP Rules Index
 
-FCHIP is the FairBanks Community Health Intelligence Platform monorepo (`backend/` + `frontend/`). Product framing must follow the SoT below.
+FCHIP is the FairBanks Community Health Intelligence Platform monorepo (`backend/` + `frontend/`).
 
 ## Source of truth
 
-1. [`.cursor/app-write-up.mdc`](app-write-up.mdc) — FairBanks / FCHIP product narrative, including the full Community Reach operating model (always apply).
+[`.cursor/app-write-up.mdc`](app-write-up.mdc) is the **only** product SoT (always apply). It owns:
+
+- FairBanks vs FCHIP positioning (FCHIP = FairBanks component on Data & Feedback)
+- Community Reach cascade, CHIS, indicators, partnership menu (section 2)
+- Canonical terms: FairBanks, FCHIP, Community Reach, CHIS, CHW/VHT, EMR/HMS, GIS + climate APIs
+- Vision, MVP, funding copy, and do-not-invent rules
+
+Slogan: **Your health, our mission.** Mission: Connecting Care, Empowering Communities, Creating Lasting Impact.
 
 ## Conflict order
-
-When rules conflict, apply this order:
 
 1. Security, privacy, safety, and compliance.
 2. `.cursor/app-write-up.mdc` for product identity, cascade, and scope.
@@ -27,8 +32,17 @@ When rules conflict, apply this order:
 ## Keep / do not invent
 
 - Frame FCHIP as FairBanks' intelligence layer on Community Reach — not a generic hospital brand.
-- Keep EMR/HMS wording only for **external** facility systems FCHIP interoperates with.
-- Do not invent alternate cascade order or programme names — follow section 2 of the SoT.
+- EMR/HMS means **external** facility systems FCHIP interoperates with via secure data APIs.
+- Do not invent alternate cascade order or programme names — follow SoT section 2.
+
+## Root `.cursor` helpers
+
+| File | Role |
+| --- | --- |
+| `app-write-up.mdc` | Product SoT |
+| `mandatories.mdc` | Shipping checks on every change |
+| `rule-file-standards.mdc` | How to write `.mdc` rules |
+| `locale-development.mdc` | English-first locale edits |
 
 ## Stack indexes
 
@@ -37,4 +51,4 @@ When rules conflict, apply this order:
 
 ## Application packs
 
-- Shared grant/doc rules live in `.cursor/rules/` (`documents.mdc`, `folder_structure.mdc`, `instructions.mdc`).
+Shared grant/doc rules: `.cursor/rules/` (`documents.mdc`, `folder_structure.mdc`, `instructions.mdc`). Narrative still comes from `app-write-up.mdc`.

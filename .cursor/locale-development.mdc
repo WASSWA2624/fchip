@@ -1,5 +1,5 @@
 ---
-description: English-first locale editing rule for routine development.
+description: English-first locale editing aligned with FairBanks / FCHIP product SoT
 globs:
   - "frontend/lib/l10n/**"
   - "backend/src/locales/**"
@@ -8,19 +8,28 @@ alwaysApply: false
 
 # Locale Development
 
-Edit English locale files by default and treat other locales as explicit work.
+Edit English locale files by default. Product wording must follow [`.cursor/app-write-up.mdc`](app-write-up.mdc).
 
-## Routine Edits
+## Routine edits
 
 - Frontend: edit `app_en.arb` first.
 - Backend: edit `en.json` first.
 - Add new keys in English before translating them.
 - Run locale generation after English changes when needed.
 
-## Explicit Overrides
+## Product wording (SoT)
+
+- Use canonical names exactly: **FairBanks**, **FCHIP**, **Community Reach**, **CHIS**, **CHW/VHT**.
+- Describe FCHIP as a FairBanks **component**, not a separate hospital brand.
+- EMR/HMS in copy = external systems FCHIP interoperates with — not FCHIP itself.
+- Do not invent alternate programme names or reorder the Community Reach cascade.
+- Slogan when needed: **Your health, our mission.**
+
+## Explicit overrides
 
 - Edit non-English locale files only when the user asks for translation or parity work.
 - Must not bulk-sync French or other locales during normal development.
+- Tagline languages in the SoT (*Obulamu eri Bonna* · *Afya kwa Wote* · *Oburamu bwa Boona*) are brand copy — add them only when the user asks for that string work.
 
 ## Invariants
 
@@ -28,7 +37,7 @@ Edit English locale files by default and treat other locales as explicit work.
 - Clinical, legal, and user-entered text must not be auto-translated.
 - English must remain the fallback when a non-English key is missing.
 
-## Related Rules
+## Related
 
 - `frontend/.cursor/localization_i18n.mdc`
 - `backend/.cursor/internationalization.mdc`

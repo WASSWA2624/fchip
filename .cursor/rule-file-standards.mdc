@@ -1,5 +1,5 @@
 ---
-description: Standards for creating and maintaining Cursor MDC rule files
+description: Standards for creating and maintaining Cursor MDC rule files using the product SoT
 alwaysApply: true
 ---
 
@@ -26,7 +26,9 @@ Apply these standards when creating or editing `.mdc` rule files.
 ## Quality requirements
 
 - Stay under 501 words (frontmatter included), except the product SoT [app-write-up.mdc](app-write-up.mdc).
-- Do not duplicate [app-write-up.mdc](app-write-up.mdc); point to it instead.
+- Do **not** duplicate [app-write-up.mdc](app-write-up.mdc). Point to it for FairBanks, FCHIP, Community Reach, CHIS, cascade, GIS/climate, MVP, and funding copy.
+- Product terms in rules must match the SoT canonical terms table.
+- Must not invent alternate programme names, cascade order, or describe FCHIP as a generic hospital brand.
 - Make each instruction actionable and testable.
 - Prefer concise bullets; one primary concern per rule.
 - Use `must`, `must not`, `should`, and `may` consistently.
@@ -34,4 +36,4 @@ Apply these standards when creating or editing `.mdc` rule files.
 
 ## Final check
 
-Confirm correct scope, word count, clarity, and no duplicates or contradictions with the product SoT.
+Confirm correct scope, word count, clarity, and no contradictions with [app-write-up.mdc](app-write-up.mdc).

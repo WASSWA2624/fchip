@@ -1,0 +1,64 @@
+{
+  "title": "Risk cohort insights",
+  "subtitle": "Anonymised cohorts for prevention planning",
+  "kind": "list",
+  "nav": "insurance",
+  "layout": "list-worklist",
+  "body_layouts": {
+    "mobile": "list-worklist",
+    "tablet": "list-worklist",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/12-insurance-insights/risk-cohort-insights",
+  "parent_route": "/12-insurance-insights/risk-cohort-insights",
+  "roles": [
+    "insurance-analyst"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "mvp",
+  "l10n_key_prefix": "12_insurance_insights.risk_cohort_insights",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Prevent",
+        "to": "/12-insurance-insights/prevention-overview"
+      },
+      {
+        "label": "Cohorts",
+        "to": "/12-insurance-insights/risk-cohort-insights"
+      },
+      {
+        "label": "Trends",
+        "to": "/12-insurance-insights/anonymised-trends"
+      },
+      {
+        "label": "More",
+        "to": "/00-shared/notifications-center"
+      }
+    ],
+    "primary_action": {
+      "label": "Export anonymised brief",
+      "to": "/12-insurance-insights/risk-cohort-insights"
+    },
+    "access_denied": "/00-shared/access-denied",
+    "not_found": "/00-shared/not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

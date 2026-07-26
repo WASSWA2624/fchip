@@ -49,7 +49,7 @@ Foundation may prepare reusable infrastructure without a screen. Steps `24`–`2
 | Path | Role |
 | --- | --- |
 | [`slices/chronology.yaml`](./slices/chronology.yaml) | **Build order** — every screen as `S-001` … `S-127` |
-| [`slices/registry.yaml`](./slices/registry.yaml) | Module ownership (`VS-00` … `VS-23`) |
+| [`slices/registry.yaml`](./slices/registry.yaml) | Module ownership (`VS-00` … `VS-12`) |
 | [`slices/tracker.md`](./slices/tracker.md) | Live status and per-screen pairing records |
 | [`slices/TEMPLATE.md`](./slices/TEMPLATE.md) | Per-screen record to copy into the tracker |
 

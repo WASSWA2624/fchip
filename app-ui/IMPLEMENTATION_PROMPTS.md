@@ -22,28 +22,28 @@ python app-ui/tool/generate_implementation_prompts.py
 | --- | ---: | ---: | ---: |
 | `00-shared` | 12 | 42 | 17 |
 | `01-chw-vht-mobile` | 14 | 0 | 0 |
-| `02-community-caregiver` | 4 | 0 | 0 |
-| `03-outreach-school-health` | 5 | 0 | 0 |
-| `04-cascade-metrics` | 3 | 0 | 0 |
-| `05-chis-livelihoods` | 4 | 0 | 0 |
-| `06-facility-dashboard` | 8 | 0 | 0 |
-| `07-referrals-desk` | 4 | 0 | 0 |
-| `08-emr-connector` | 5 | 0 | 0 |
-| `09-intelligence` | 7 | 0 | 0 |
-| `10-district-moh` | 5 | 0 | 0 |
-| `11-ngo-partner` | 5 | 0 | 0 |
-| `12-research-exports` | 4 | 0 | 0 |
-| `13-admin-consent` | 5 | 0 | 0 |
-| `14-schools-health` | 5 | 0 | 0 |
-| `15-pharmacy-outlets` | 5 | 0 | 0 |
-| `16-labs-poc` | 4 | 0 | 0 |
-| `17-corporate-wellness` | 4 | 0 | 0 |
-| `18-mch-touchpoints` | 5 | 0 | 0 |
-| `19-ncd-gericare` | 4 | 0 | 0 |
-| `20-hmis-dhis2` | 4 | 0 | 0 |
-| `21-community-events` | 4 | 0 | 0 |
-| `22-climate-feeds` | 4 | 0 | 0 |
-| `23-insurance-insights` | 3 | 0 | 0 |
+| `02-intelligence` | 7 | 0 | 0 |
+| `03-cascade-metrics` | 3 | 0 | 0 |
+| `04-facility-dashboard` | 8 | 0 | 0 |
+| `05-referrals-desk` | 4 | 0 | 0 |
+| `06-emr-connector` | 5 | 0 | 0 |
+| `07-climate-feeds` | 4 | 0 | 0 |
+| `08-district-moh` | 5 | 0 | 0 |
+| `09-community-caregiver` | 4 | 0 | 0 |
+| `10-outreach-school-health` | 5 | 0 | 0 |
+| `11-admin-consent` | 5 | 0 | 0 |
+| `12-insurance-insights` | 3 | 0 | 0 |
+| `13-chis-livelihoods` | 4 | 0 | 0 |
+| `14-ngo-partner` | 5 | 0 | 0 |
+| `15-schools-health` | 5 | 0 | 0 |
+| `16-pharmacy-outlets` | 5 | 0 | 0 |
+| `17-labs-poc` | 4 | 0 | 0 |
+| `18-corporate-wellness` | 4 | 0 | 0 |
+| `19-mch-touchpoints` | 5 | 0 | 0 |
+| `20-ncd-gericare` | 4 | 0 | 0 |
+| `21-hmis-dhis2` | 4 | 0 | 0 |
+| `22-community-events` | 4 | 0 | 0 |
+| `23-research-exports` | 4 | 0 | 0 |
 
 ## Prompt index
 
@@ -138,172 +138,172 @@ python app-ui/tool/generate_implementation_prompts.py
 - **screen** [`Today’s worklist`](01-chw-vht-mobile/worklist-home/IMPLEMENTATION_PROMPT.md) · `S-013`
 - **screen** [`Today’s worklist`](01-chw-vht-mobile/worklist-loading/IMPLEMENTATION_PROMPT.md) · `S-015`
 
-### `02-community-caregiver`
+### `02-intelligence`
 
-- **screen** [`Guidance`](02-community-caregiver/guidance-hints/IMPLEMENTATION_PROMPT.md) · `S-063`
-- **screen** [`Household needs`](02-community-caregiver/household-needs-capture/IMPLEMENTATION_PROMPT.md) · `S-064`
-- **screen** [`My household`](02-community-caregiver/my-household/IMPLEMENTATION_PROMPT.md) · `S-061`
-- **screen** [`Self-report`](02-community-caregiver/self-report/IMPLEMENTATION_PROMPT.md) · `S-062`
+- **screen** [`AI / predictive`](02-intelligence/ai-risk-scores/IMPLEMENTATION_PROMPT.md) · `S-054`
+- **screen** [`Alerts & worklists engine`](02-intelligence/alerts-worklists-engine/IMPLEMENTATION_PROMPT.md) · `S-055`
+- **screen** [`Climate fusion`](02-intelligence/climate-fusion/IMPLEMENTATION_PROMPT.md) · `S-053`
+- **screen** [`Clinical support guidance`](02-intelligence/clinical-support-guidance/IMPLEMENTATION_PROMPT.md) · `S-056`
+- **screen** [`Feeder health board`](02-intelligence/feeder-health-board/IMPLEMENTATION_PROMPT.md) · `S-028`
+- **screen** [`GIS maps`](02-intelligence/gis-explorer/IMPLEMENTATION_PROMPT.md) · `S-052`
+- **screen** [`Ingest & sync`](02-intelligence/ingest-pipeline/IMPLEMENTATION_PROMPT.md) · `S-027`
 
-### `03-outreach-school-health`
+### `03-cascade-metrics`
 
-- **screen** [`Campaign planner`](03-outreach-school-health/campaign-planner/IMPLEMENTATION_PROMPT.md) · `S-065`
-- **screen** [`Coverage map`](03-outreach-school-health/coverage-map/IMPLEMENTATION_PROMPT.md) · `S-067`
-- **screen** [`Home-visit batch`](03-outreach-school-health/home-visit-batch-upload/IMPLEMENTATION_PROMPT.md) · `S-069`
-- **screen** [`Screening results entry`](03-outreach-school-health/screening-results-entry/IMPLEMENTATION_PROMPT.md) · `S-068`
-- **screen** [`Session log`](03-outreach-school-health/session-log/IMPLEMENTATION_PROMPT.md) · `S-066`
+- **screen** [`Gap detection`](03-cascade-metrics/gap-detection/IMPLEMENTATION_PROMPT.md) · `S-030`
+- **screen** [`Cascade metrics`](03-cascade-metrics/indicators-overview/IMPLEMENTATION_PROMPT.md) · `S-029`
+- **screen** [`Partner reports`](03-cascade-metrics/partner-reports/IMPLEMENTATION_PROMPT.md) · `S-031`
 
-### `04-cascade-metrics`
+### `04-facility-dashboard`
 
-- **screen** [`Gap detection`](04-cascade-metrics/gap-detection/IMPLEMENTATION_PROMPT.md) · `S-030`
-- **screen** [`Cascade metrics`](04-cascade-metrics/indicators-overview/IMPLEMENTATION_PROMPT.md) · `S-029`
-- **screen** [`Partner reports`](04-cascade-metrics/partner-reports/IMPLEMENTATION_PROMPT.md) · `S-031`
+- **screen** [`Catchment map`](04-facility-dashboard/catchment-map/IMPLEMENTATION_PROMPT.md) · `S-033`
+- **screen** [`Clinical share confirm`](04-facility-dashboard/clinical-share-confirm/IMPLEMENTATION_PROMPT.md) · `S-037`
+- **screen** [`Manual case signal`](04-facility-dashboard/manual-case-signal/IMPLEMENTATION_PROMPT.md) · `S-038`
+- **screen** [`Medicine demand forecast`](04-facility-dashboard/medicine-demand-forecast/IMPLEMENTATION_PROMPT.md) · `S-122`
+- **screen** [`Referral summary`](04-facility-dashboard/open-referrals/IMPLEMENTATION_PROMPT.md) · `S-034`
+- **screen** [`Outreach priorities`](04-facility-dashboard/outreach-priorities/IMPLEMENTATION_PROMPT.md) · `S-036`
+- **screen** [`Facility overview`](04-facility-dashboard/overview/IMPLEMENTATION_PROMPT.md) · `S-032`
+- **screen** [`Stock signal`](04-facility-dashboard/stock-signal/IMPLEMENTATION_PROMPT.md) · `S-035`
 
-### `05-chis-livelihoods`
+### `05-referrals-desk`
 
-- **screen** [`Claims / access`](05-chis-livelihoods/claims-access/IMPLEMENTATION_PROMPT.md) · `S-080`
-- **screen** [`Contributions`](05-chis-livelihoods/contributions/IMPLEMENTATION_PROMPT.md) · `S-079`
-- **screen** [`CHIS enrolment`](05-chis-livelihoods/enrolment/IMPLEMENTATION_PROMPT.md) · `S-078`
-- **screen** [`IGA participation entry`](05-chis-livelihoods/iga-participation-entry/IMPLEMENTATION_PROMPT.md) · `S-081`
+- **screen** [`Outcome feedback`](05-referrals-desk/outcome-feedback/IMPLEMENTATION_PROMPT.md) · `S-042`
+- **screen** [`Referral detail`](05-referrals-desk/referral-detail/IMPLEMENTATION_PROMPT.md) · `S-041`
+- **screen** [`Referrals desk`](05-referrals-desk/referral-queue/IMPLEMENTATION_PROMPT.md) · `S-039`
+- **screen** [`Referrals desk`](05-referrals-desk/referral-queue-empty/IMPLEMENTATION_PROMPT.md) · `S-040`
 
-### `06-facility-dashboard`
+### `06-emr-connector`
 
-- **screen** [`Catchment map`](06-facility-dashboard/catchment-map/IMPLEMENTATION_PROMPT.md) · `S-033`
-- **screen** [`Clinical share confirm`](06-facility-dashboard/clinical-share-confirm/IMPLEMENTATION_PROMPT.md) · `S-037`
-- **screen** [`Manual case signal`](06-facility-dashboard/manual-case-signal/IMPLEMENTATION_PROMPT.md) · `S-038`
-- **screen** [`Medicine demand forecast`](06-facility-dashboard/medicine-demand-forecast/IMPLEMENTATION_PROMPT.md) · `S-122`
-- **screen** [`Referral summary`](06-facility-dashboard/open-referrals/IMPLEMENTATION_PROMPT.md) · `S-034`
-- **screen** [`Outreach priorities`](06-facility-dashboard/outreach-priorities/IMPLEMENTATION_PROMPT.md) · `S-036`
-- **screen** [`Facility overview`](06-facility-dashboard/overview/IMPLEMENTATION_PROMPT.md) · `S-032`
-- **screen** [`Stock signal`](06-facility-dashboard/stock-signal/IMPLEMENTATION_PROMPT.md) · `S-035`
+- **screen** [`API scopes setup`](06-emr-connector/api-scopes-setup/IMPLEMENTATION_PROMPT.md) · `S-045`
+- **screen** [`EMR / HMS connector`](06-emr-connector/connector-degraded/IMPLEMENTATION_PROMPT.md) · `S-044`
+- **screen** [`EMR / HMS connector`](06-emr-connector/connector-status/IMPLEMENTATION_PROMPT.md) · `S-043`
+- **screen** [`Facility onboarding`](06-emr-connector/facility-onboarding/IMPLEMENTATION_PROMPT.md) · `S-047`
+- **screen** [`Push event log`](06-emr-connector/push-event-log/IMPLEMENTATION_PROMPT.md) · `S-046`
 
-### `07-referrals-desk`
+### `07-climate-feeds`
 
-- **screen** [`Outcome feedback`](07-referrals-desk/outcome-feedback/IMPLEMENTATION_PROMPT.md) · `S-042`
-- **screen** [`Referral detail`](07-referrals-desk/referral-detail/IMPLEMENTATION_PROMPT.md) · `S-041`
-- **screen** [`Referrals desk`](07-referrals-desk/referral-queue/IMPLEMENTATION_PROMPT.md) · `S-039`
-- **screen** [`Referrals desk`](07-referrals-desk/referral-queue-empty/IMPLEMENTATION_PROMPT.md) · `S-040`
+- **screen** [`Climate feeds home`](07-climate-feeds/climate-home/IMPLEMENTATION_PROMPT.md) · `S-048`
+- **screen** [`Extremes · flood · heat`](07-climate-feeds/extremes-flood-heat/IMPLEMENTATION_PROMPT.md) · `S-050`
+- **screen** [`Feed config & audit`](07-climate-feeds/feed-config-audit/IMPLEMENTATION_PROMPT.md) · `S-051`
+- **screen** [`Rainfall & temperature`](07-climate-feeds/rainfall-temperature/IMPLEMENTATION_PROMPT.md) · `S-049`
 
-### `08-emr-connector`
+### `08-district-moh`
 
-- **screen** [`API scopes setup`](08-emr-connector/api-scopes-setup/IMPLEMENTATION_PROMPT.md) · `S-045`
-- **screen** [`EMR / HMS connector`](08-emr-connector/connector-degraded/IMPLEMENTATION_PROMPT.md) · `S-044`
-- **screen** [`EMR / HMS connector`](08-emr-connector/connector-status/IMPLEMENTATION_PROMPT.md) · `S-043`
-- **screen** [`Facility onboarding`](08-emr-connector/facility-onboarding/IMPLEMENTATION_PROMPT.md) · `S-047`
-- **screen** [`Push event log`](08-emr-connector/push-event-log/IMPLEMENTATION_PROMPT.md) · `S-046`
+- **screen** [`Deploy action`](08-district-moh/action-deploy/IMPLEMENTATION_PROMPT.md) · `S-059`
+- **screen** [`Cascade M&E planning`](08-district-moh/cascade-planning/IMPLEMENTATION_PROMPT.md) · `S-060`
+- **screen** [`Early warnings`](08-district-moh/early-warnings/IMPLEMENTATION_PROMPT.md) · `S-058`
+- **screen** [`MoH national roll-up`](08-district-moh/national-roll-up/IMPLEMENTATION_PROMPT.md) · `S-123`
+- **screen** [`Population map`](08-district-moh/population-map/IMPLEMENTATION_PROMPT.md) · `S-057`
 
-### `09-intelligence`
+### `09-community-caregiver`
 
-- **screen** [`AI / predictive`](09-intelligence/ai-risk-scores/IMPLEMENTATION_PROMPT.md) · `S-054`
-- **screen** [`Alerts & worklists engine`](09-intelligence/alerts-worklists-engine/IMPLEMENTATION_PROMPT.md) · `S-055`
-- **screen** [`Climate fusion`](09-intelligence/climate-fusion/IMPLEMENTATION_PROMPT.md) · `S-053`
-- **screen** [`Clinical support guidance`](09-intelligence/clinical-support-guidance/IMPLEMENTATION_PROMPT.md) · `S-056`
-- **screen** [`Feeder health board`](09-intelligence/feeder-health-board/IMPLEMENTATION_PROMPT.md) · `S-028`
-- **screen** [`GIS maps`](09-intelligence/gis-explorer/IMPLEMENTATION_PROMPT.md) · `S-052`
-- **screen** [`Ingest & sync`](09-intelligence/ingest-pipeline/IMPLEMENTATION_PROMPT.md) · `S-027`
+- **screen** [`Guidance`](09-community-caregiver/guidance-hints/IMPLEMENTATION_PROMPT.md) · `S-063`
+- **screen** [`Household needs`](09-community-caregiver/household-needs-capture/IMPLEMENTATION_PROMPT.md) · `S-064`
+- **screen** [`My household`](09-community-caregiver/my-household/IMPLEMENTATION_PROMPT.md) · `S-061`
+- **screen** [`Self-report`](09-community-caregiver/self-report/IMPLEMENTATION_PROMPT.md) · `S-062`
 
-### `10-district-moh`
+### `10-outreach-school-health`
 
-- **screen** [`Deploy action`](10-district-moh/action-deploy/IMPLEMENTATION_PROMPT.md) · `S-059`
-- **screen** [`Cascade M&E planning`](10-district-moh/cascade-planning/IMPLEMENTATION_PROMPT.md) · `S-060`
-- **screen** [`Early warnings`](10-district-moh/early-warnings/IMPLEMENTATION_PROMPT.md) · `S-058`
-- **screen** [`MoH national roll-up`](10-district-moh/national-roll-up/IMPLEMENTATION_PROMPT.md) · `S-123`
-- **screen** [`Population map`](10-district-moh/population-map/IMPLEMENTATION_PROMPT.md) · `S-057`
+- **screen** [`Campaign planner`](10-outreach-school-health/campaign-planner/IMPLEMENTATION_PROMPT.md) · `S-065`
+- **screen** [`Coverage map`](10-outreach-school-health/coverage-map/IMPLEMENTATION_PROMPT.md) · `S-067`
+- **screen** [`Home-visit batch`](10-outreach-school-health/home-visit-batch-upload/IMPLEMENTATION_PROMPT.md) · `S-069`
+- **screen** [`Screening results entry`](10-outreach-school-health/screening-results-entry/IMPLEMENTATION_PROMPT.md) · `S-068`
+- **screen** [`Session log`](10-outreach-school-health/session-log/IMPLEMENTATION_PROMPT.md) · `S-066`
 
-### `11-ngo-partner`
+### `11-admin-consent`
 
-- **screen** [`Field dataset upload`](11-ngo-partner/field-dataset-upload/IMPLEMENTATION_PROMPT.md) · `S-085`
-- **screen** [`Impact evidence`](11-ngo-partner/impact-evidence/IMPLEMENTATION_PROMPT.md) · `S-083`
-- **screen** [`Partner indicator entry`](11-ngo-partner/partner-indicator-entry/IMPLEMENTATION_PROMPT.md) · `S-086`
-- **screen** [`Programme monitoring`](11-ngo-partner/programme-monitoring/IMPLEMENTATION_PROMPT.md) · `S-082`
-- **screen** [`Training · skills analytics`](11-ngo-partner/training-skills-analytics/IMPLEMENTATION_PROMPT.md) · `S-084`
+- **screen** [`Consent & privacy`](11-admin-consent/consent-privacy/IMPLEMENTATION_PROMPT.md) · `S-072`
+- **screen** [`EMR API access`](11-admin-consent/emr-api-access/IMPLEMENTATION_PROMPT.md) · `S-073`
+- **screen** [`Feeder party registry`](11-admin-consent/feeder-party-registry/IMPLEMENTATION_PROMPT.md) · `S-074`
+- **screen** [`Org · catchment · facilities`](11-admin-consent/org-catchment/IMPLEMENTATION_PROMPT.md) · `S-070`
+- **screen** [`Users & roles`](11-admin-consent/users-roles/IMPLEMENTATION_PROMPT.md) · `S-071`
 
-### `12-research-exports`
+### `12-insurance-insights`
 
-- **screen** [`Evidence catalog`](12-research-exports/evidence-catalog/IMPLEMENTATION_PROMPT.md) · `S-124`
-- **screen** [`Export under review`](12-research-exports/export-pending/IMPLEMENTATION_PROMPT.md) · `S-127`
-- **screen** [`Export request`](12-research-exports/export-request/IMPLEMENTATION_PROMPT.md) · `S-125`
-- **screen** [`Research contribution upload`](12-research-exports/research-contribution-upload/IMPLEMENTATION_PROMPT.md) · `S-126`
+- **screen** [`Anonymised trends`](12-insurance-insights/anonymised-trends/IMPLEMENTATION_PROMPT.md) · `S-077`
+- **screen** [`Prevention overview`](12-insurance-insights/prevention-overview/IMPLEMENTATION_PROMPT.md) · `S-075`
+- **screen** [`Risk cohort insights`](12-insurance-insights/risk-cohort-insights/IMPLEMENTATION_PROMPT.md) · `S-076`
 
-### `13-admin-consent`
+### `13-chis-livelihoods`
 
-- **screen** [`Consent & privacy`](13-admin-consent/consent-privacy/IMPLEMENTATION_PROMPT.md) · `S-072`
-- **screen** [`EMR API access`](13-admin-consent/emr-api-access/IMPLEMENTATION_PROMPT.md) · `S-073`
-- **screen** [`Feeder party registry`](13-admin-consent/feeder-party-registry/IMPLEMENTATION_PROMPT.md) · `S-074`
-- **screen** [`Org · catchment · facilities`](13-admin-consent/org-catchment/IMPLEMENTATION_PROMPT.md) · `S-070`
-- **screen** [`Users & roles`](13-admin-consent/users-roles/IMPLEMENTATION_PROMPT.md) · `S-071`
+- **screen** [`Claims / access`](13-chis-livelihoods/claims-access/IMPLEMENTATION_PROMPT.md) · `S-080`
+- **screen** [`Contributions`](13-chis-livelihoods/contributions/IMPLEMENTATION_PROMPT.md) · `S-079`
+- **screen** [`CHIS enrolment`](13-chis-livelihoods/enrolment/IMPLEMENTATION_PROMPT.md) · `S-078`
+- **screen** [`IGA participation entry`](13-chis-livelihoods/iga-participation-entry/IMPLEMENTATION_PROMPT.md) · `S-081`
 
-### `14-schools-health`
+### `14-ngo-partner`
 
-- **screen** [`Absenteeism & wellness`](14-schools-health/absenteeism-wellness/IMPLEMENTATION_PROMPT.md) · `S-090`
-- **screen** [`Health education session`](14-schools-health/health-education-session/IMPLEMENTATION_PROMPT.md) · `S-088`
-- **screen** [`Learner screening entry`](14-schools-health/learner-screening-entry/IMPLEMENTATION_PROMPT.md) · `S-089`
-- **screen** [`School health home`](14-schools-health/school-home/IMPLEMENTATION_PROMPT.md) · `S-087`
-- **screen** [`School sync status`](14-schools-health/school-sync-status/IMPLEMENTATION_PROMPT.md) · `S-091`
+- **screen** [`Field dataset upload`](14-ngo-partner/field-dataset-upload/IMPLEMENTATION_PROMPT.md) · `S-085`
+- **screen** [`Impact evidence`](14-ngo-partner/impact-evidence/IMPLEMENTATION_PROMPT.md) · `S-083`
+- **screen** [`Partner indicator entry`](14-ngo-partner/partner-indicator-entry/IMPLEMENTATION_PROMPT.md) · `S-086`
+- **screen** [`Programme monitoring`](14-ngo-partner/programme-monitoring/IMPLEMENTATION_PROMPT.md) · `S-082`
+- **screen** [`Training · skills analytics`](14-ngo-partner/training-skills-analytics/IMPLEMENTATION_PROMPT.md) · `S-084`
 
-### `15-pharmacy-outlets`
+### `15-schools-health`
 
-- **screen** [`Common complaints`](15-pharmacy-outlets/common-complaints/IMPLEMENTATION_PROMPT.md) · `S-095`
-- **screen** [`Dispense log`](15-pharmacy-outlets/dispense-log/IMPLEMENTATION_PROMPT.md) · `S-094`
-- **screen** [`Pharmacy outlet home`](15-pharmacy-outlets/pharmacy-home/IMPLEMENTATION_PROMPT.md) · `S-092`
-- **screen** [`Pre-stock acknowledgement`](15-pharmacy-outlets/prestock-ack/IMPLEMENTATION_PROMPT.md) · `S-096`
-- **screen** [`Stock levels entry`](15-pharmacy-outlets/stock-levels-entry/IMPLEMENTATION_PROMPT.md) · `S-093`
+- **screen** [`Absenteeism & wellness`](15-schools-health/absenteeism-wellness/IMPLEMENTATION_PROMPT.md) · `S-090`
+- **screen** [`Health education session`](15-schools-health/health-education-session/IMPLEMENTATION_PROMPT.md) · `S-088`
+- **screen** [`Learner screening entry`](15-schools-health/learner-screening-entry/IMPLEMENTATION_PROMPT.md) · `S-089`
+- **screen** [`School health home`](15-schools-health/school-home/IMPLEMENTATION_PROMPT.md) · `S-087`
+- **screen** [`School sync status`](15-schools-health/school-sync-status/IMPLEMENTATION_PROMPT.md) · `S-091`
 
-### `16-labs-poc`
+### `16-pharmacy-outlets`
 
-- **screen** [`Batch results upload`](16-labs-poc/batch-results-upload/IMPLEMENTATION_PROMPT.md) · `S-099`
-- **screen** [`Lab / PoC home`](16-labs-poc/lab-home/IMPLEMENTATION_PROMPT.md) · `S-097`
-- **screen** [`Result entry`](16-labs-poc/result-entry/IMPLEMENTATION_PROMPT.md) · `S-098`
-- **screen** [`Result queue`](16-labs-poc/result-queue/IMPLEMENTATION_PROMPT.md) · `S-100`
+- **screen** [`Common complaints`](16-pharmacy-outlets/common-complaints/IMPLEMENTATION_PROMPT.md) · `S-095`
+- **screen** [`Dispense log`](16-pharmacy-outlets/dispense-log/IMPLEMENTATION_PROMPT.md) · `S-094`
+- **screen** [`Pharmacy outlet home`](16-pharmacy-outlets/pharmacy-home/IMPLEMENTATION_PROMPT.md) · `S-092`
+- **screen** [`Pre-stock acknowledgement`](16-pharmacy-outlets/prestock-ack/IMPLEMENTATION_PROMPT.md) · `S-096`
+- **screen** [`Stock levels entry`](16-pharmacy-outlets/stock-levels-entry/IMPLEMENTATION_PROMPT.md) · `S-093`
 
-### `17-corporate-wellness`
+### `17-labs-poc`
 
-- **screen** [`Camp summary push`](17-corporate-wellness/camp-summary-push/IMPLEMENTATION_PROMPT.md) · `S-103`
-- **screen** [`Camp vitals entry`](17-corporate-wellness/camp-vitals-entry/IMPLEMENTATION_PROMPT.md) · `S-102`
-- **screen** [`Corporate wellness home`](17-corporate-wellness/corporate-home/IMPLEMENTATION_PROMPT.md) · `S-101`
-- **screen** [`Occupational flags`](17-corporate-wellness/occupational-flags/IMPLEMENTATION_PROMPT.md) · `S-104`
+- **screen** [`Batch results upload`](17-labs-poc/batch-results-upload/IMPLEMENTATION_PROMPT.md) · `S-099`
+- **screen** [`Lab / PoC home`](17-labs-poc/lab-home/IMPLEMENTATION_PROMPT.md) · `S-097`
+- **screen** [`Result entry`](17-labs-poc/result-entry/IMPLEMENTATION_PROMPT.md) · `S-098`
+- **screen** [`Result queue`](17-labs-poc/result-queue/IMPLEMENTATION_PROMPT.md) · `S-100`
 
-### `18-mch-touchpoints`
+### `18-corporate-wellness`
 
-- **screen** [`ANC visit entry`](18-mch-touchpoints/anc-visit-entry/IMPLEMENTATION_PROMPT.md) · `S-106`
-- **screen** [`Immunisation entry`](18-mch-touchpoints/immunisation-entry/IMPLEMENTATION_PROMPT.md) · `S-108`
-- **screen** [`MCH touchpoints home`](18-mch-touchpoints/mch-home/IMPLEMENTATION_PROMPT.md) · `S-105`
-- **screen** [`Nutrition monitoring`](18-mch-touchpoints/nutrition-monitoring/IMPLEMENTATION_PROMPT.md) · `S-109`
-- **screen** [`PNC visit entry`](18-mch-touchpoints/pnc-visit-entry/IMPLEMENTATION_PROMPT.md) · `S-107`
+- **screen** [`Camp summary push`](18-corporate-wellness/camp-summary-push/IMPLEMENTATION_PROMPT.md) · `S-103`
+- **screen** [`Camp vitals entry`](18-corporate-wellness/camp-vitals-entry/IMPLEMENTATION_PROMPT.md) · `S-102`
+- **screen** [`Corporate wellness home`](18-corporate-wellness/corporate-home/IMPLEMENTATION_PROMPT.md) · `S-101`
+- **screen** [`Occupational flags`](18-corporate-wellness/occupational-flags/IMPLEMENTATION_PROMPT.md) · `S-104`
 
-### `19-ncd-gericare`
+### `19-mch-touchpoints`
 
-- **screen** [`BP screening batch`](19-ncd-gericare/bp-screening-batch/IMPLEMENTATION_PROMPT.md) · `S-112`
-- **screen** [`NCD / Gericare home`](19-ncd-gericare/cohort-home/IMPLEMENTATION_PROMPT.md) · `S-110`
-- **screen** [`Cohort visit entry`](19-ncd-gericare/cohort-visit-entry/IMPLEMENTATION_PROMPT.md) · `S-111`
-- **screen** [`Stroke / NCD risk flags`](19-ncd-gericare/stroke-risk-flags/IMPLEMENTATION_PROMPT.md) · `S-113`
+- **screen** [`ANC visit entry`](19-mch-touchpoints/anc-visit-entry/IMPLEMENTATION_PROMPT.md) · `S-106`
+- **screen** [`Immunisation entry`](19-mch-touchpoints/immunisation-entry/IMPLEMENTATION_PROMPT.md) · `S-108`
+- **screen** [`MCH touchpoints home`](19-mch-touchpoints/mch-home/IMPLEMENTATION_PROMPT.md) · `S-105`
+- **screen** [`Nutrition monitoring`](19-mch-touchpoints/nutrition-monitoring/IMPLEMENTATION_PROMPT.md) · `S-109`
+- **screen** [`PNC visit entry`](19-mch-touchpoints/pnc-visit-entry/IMPLEMENTATION_PROMPT.md) · `S-107`
 
-### `20-hmis-dhis2`
+### `20-ncd-gericare`
 
-- **screen** [`Aggregate push / pull`](20-hmis-dhis2/aggregate-push-pull/IMPLEMENTATION_PROMPT.md) · `S-116`
-- **screen** [`Dataset mapping`](20-hmis-dhis2/dataset-mapping/IMPLEMENTATION_PROMPT.md) · `S-115`
-- **screen** [`HMIS audit`](20-hmis-dhis2/hmis-audit/IMPLEMENTATION_PROMPT.md) · `S-117`
-- **screen** [`HMIS / DHIS2 home`](20-hmis-dhis2/hmis-home/IMPLEMENTATION_PROMPT.md) · `S-114`
+- **screen** [`BP screening batch`](20-ncd-gericare/bp-screening-batch/IMPLEMENTATION_PROMPT.md) · `S-112`
+- **screen** [`NCD / Gericare home`](20-ncd-gericare/cohort-home/IMPLEMENTATION_PROMPT.md) · `S-110`
+- **screen** [`Cohort visit entry`](20-ncd-gericare/cohort-visit-entry/IMPLEMENTATION_PROMPT.md) · `S-111`
+- **screen** [`Stroke / NCD risk flags`](20-ncd-gericare/stroke-risk-flags/IMPLEMENTATION_PROMPT.md) · `S-113`
 
-### `21-community-events`
+### `21-hmis-dhis2`
 
-- **screen** [`Community dialogue`](21-community-events/community-dialogue/IMPLEMENTATION_PROMPT.md) · `S-120`
-- **screen** [`Community events home`](21-community-events/events-home/IMPLEMENTATION_PROMPT.md) · `S-118`
-- **screen** [`Outreach event log`](21-community-events/outreach-event-log/IMPLEMENTATION_PROMPT.md) · `S-119`
-- **screen** [`Participation register`](21-community-events/participation-register/IMPLEMENTATION_PROMPT.md) · `S-121`
+- **screen** [`Aggregate push / pull`](21-hmis-dhis2/aggregate-push-pull/IMPLEMENTATION_PROMPT.md) · `S-116`
+- **screen** [`Dataset mapping`](21-hmis-dhis2/dataset-mapping/IMPLEMENTATION_PROMPT.md) · `S-115`
+- **screen** [`HMIS audit`](21-hmis-dhis2/hmis-audit/IMPLEMENTATION_PROMPT.md) · `S-117`
+- **screen** [`HMIS / DHIS2 home`](21-hmis-dhis2/hmis-home/IMPLEMENTATION_PROMPT.md) · `S-114`
 
-### `22-climate-feeds`
+### `22-community-events`
 
-- **screen** [`Climate feeds home`](22-climate-feeds/climate-home/IMPLEMENTATION_PROMPT.md) · `S-048`
-- **screen** [`Extremes · flood · heat`](22-climate-feeds/extremes-flood-heat/IMPLEMENTATION_PROMPT.md) · `S-050`
-- **screen** [`Feed config & audit`](22-climate-feeds/feed-config-audit/IMPLEMENTATION_PROMPT.md) · `S-051`
-- **screen** [`Rainfall & temperature`](22-climate-feeds/rainfall-temperature/IMPLEMENTATION_PROMPT.md) · `S-049`
+- **screen** [`Community dialogue`](22-community-events/community-dialogue/IMPLEMENTATION_PROMPT.md) · `S-120`
+- **screen** [`Community events home`](22-community-events/events-home/IMPLEMENTATION_PROMPT.md) · `S-118`
+- **screen** [`Outreach event log`](22-community-events/outreach-event-log/IMPLEMENTATION_PROMPT.md) · `S-119`
+- **screen** [`Participation register`](22-community-events/participation-register/IMPLEMENTATION_PROMPT.md) · `S-121`
 
-### `23-insurance-insights`
+### `23-research-exports`
 
-- **screen** [`Anonymised trends`](23-insurance-insights/anonymised-trends/IMPLEMENTATION_PROMPT.md) · `S-077`
-- **screen** [`Prevention overview`](23-insurance-insights/prevention-overview/IMPLEMENTATION_PROMPT.md) · `S-075`
-- **screen** [`Risk cohort insights`](23-insurance-insights/risk-cohort-insights/IMPLEMENTATION_PROMPT.md) · `S-076`
+- **screen** [`Evidence catalog`](23-research-exports/evidence-catalog/IMPLEMENTATION_PROMPT.md) · `S-124`
+- **screen** [`Export under review`](23-research-exports/export-pending/IMPLEMENTATION_PROMPT.md) · `S-127`
+- **screen** [`Export request`](23-research-exports/export-request/IMPLEMENTATION_PROMPT.md) · `S-125`
+- **screen** [`Research contribution upload`](23-research-exports/research-contribution-upload/IMPLEMENTATION_PROMPT.md) · `S-126`
 
 ## Rules referenced across prompts
 

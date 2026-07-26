@@ -1,0 +1,66 @@
+{
+  "title": "Home-visit batch",
+  "subtitle": "Supervisors upload structured visit packs",
+  "kind": "form",
+  "nav": "district",
+  "layout": "upload-batch",
+  "body_layouts": {
+    "mobile": "upload-batch",
+    "tablet": "upload-batch",
+    "desktop": "upload-batch"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "error",
+    "success",
+    "offline",
+    "forbidden"
+  ],
+  "route": "/10-outreach-school-health/home-visit-batch-upload",
+  "parent_route": "/08-district-moh/population-map",
+  "roles": [
+    "district-health-officer",
+    "moh"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "mvp",
+  "l10n_key_prefix": "10_outreach_school_health.home_visit_batch_upload",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Map",
+        "to": "/08-district-moh/population-map"
+      },
+      {
+        "label": "Warnings",
+        "to": "/08-district-moh/early-warnings"
+      },
+      {
+        "label": "Metrics",
+        "to": "/03-cascade-metrics/indicators-overview"
+      },
+      {
+        "label": "Plan",
+        "to": "/08-district-moh/cascade-planning"
+      }
+    ],
+    "primary_action": {
+      "label": "Upload batch",
+      "to": "/10-outreach-school-health/home-visit-batch-upload?state=success"
+    },
+    "access_denied": "/00-shared/access-denied",
+    "not_found": "/00-shared/not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

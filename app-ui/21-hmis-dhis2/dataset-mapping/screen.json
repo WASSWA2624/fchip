@@ -1,0 +1,64 @@
+{
+  "title": "Dataset mapping",
+  "subtitle": "Map HMIS/DHIS2 elements to cascade indicators",
+  "kind": "settings",
+  "nav": "hmis",
+  "layout": "settings-admin",
+  "body_layouts": {
+    "mobile": "settings-admin",
+    "tablet": "settings-admin",
+    "desktop": "settings-admin"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/21-hmis-dhis2/dataset-mapping",
+  "parent_route": "/21-hmis-dhis2/dataset-mapping",
+  "roles": [
+    "hmis-operator"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "phase-2",
+  "l10n_key_prefix": "21_hmis_dhis2.dataset_mapping",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Home",
+        "to": "/21-hmis-dhis2/hmis-home"
+      },
+      {
+        "label": "Map",
+        "to": "/21-hmis-dhis2/dataset-mapping"
+      },
+      {
+        "label": "Exchange",
+        "to": "/21-hmis-dhis2/aggregate-push-pull"
+      },
+      {
+        "label": "Audit",
+        "to": "/21-hmis-dhis2/hmis-audit"
+      }
+    ],
+    "primary_action": {
+      "label": "Save mapping",
+      "to": "/21-hmis-dhis2/dataset-mapping?state=success"
+    },
+    "access_denied": "/00-shared/access-denied",
+    "not_found": "/00-shared/not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

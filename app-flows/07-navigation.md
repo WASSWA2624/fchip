@@ -17,14 +17,14 @@ Splash → Sign in / Create account → Consent → Choose workspace → Role ho
 ## Primary role homes
 
 - CHW/VHT → `01-chw-vht-mobile/worklist-home`
-- Caregiver → `02-community-caregiver/my-household`
-- Facility → `06-facility-dashboard/overview`
-- District/MoH → `10-district-moh/population-map`
-- NGO/partner → `11-ngo-partner/programme-monitoring`
-- Admin → `13-admin-consent/org-catchment`
-- Intelligence operator → `09-intelligence/ingest-pipeline`
-- Research → `12-research-exports/evidence-catalog`
-- Insurance → `23-insurance-insights/prevention-overview`
+- Caregiver → `09-community-caregiver/my-household`
+- Facility → `04-facility-dashboard/overview`
+- District/MoH → `08-district-moh/population-map`
+- NGO/partner → `14-ngo-partner/programme-monitoring`
+- Admin → `11-admin-consent/org-catchment`
+- Intelligence operator → `02-intelligence/ingest-pipeline`
+- Research → `23-research-exports/evidence-catalog`
+- Insurance → `12-insurance-insights/prevention-overview`
 - Feeder roles → their module home or first capture screen
 
 ## CHW visit and referral loop

@@ -1,0 +1,61 @@
+{
+  "title": "Stroke / NCD risk flags",
+  "subtitle": "Signals that feed NCD predictions",
+  "kind": "list",
+  "nav": "ncd",
+  "layout": "list-worklist",
+  "body_layouts": {
+    "mobile": "list-worklist",
+    "tablet": "list-worklist",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/20-ncd-gericare/stroke-risk-flags",
+  "parent_route": "/20-ncd-gericare/stroke-risk-flags",
+  "roles": [
+    "ncd-care-worker"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "phase-2",
+  "l10n_key_prefix": "20_ncd_gericare.stroke_risk_flags",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Home",
+        "to": "/20-ncd-gericare/cohort-home"
+      },
+      {
+        "label": "Visit",
+        "to": "/20-ncd-gericare/cohort-visit-entry"
+      },
+      {
+        "label": "BP",
+        "to": "/20-ncd-gericare/bp-screening-batch"
+      },
+      {
+        "label": "Flags",
+        "to": "/20-ncd-gericare/stroke-risk-flags"
+      }
+    ],
+    "primary_action": null,
+    "access_denied": "/00-shared/access-denied",
+    "not_found": "/00-shared/not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

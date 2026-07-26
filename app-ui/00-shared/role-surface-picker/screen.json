@@ -48,91 +48,91 @@
     },
     {
       "workspace": "Caregiver mobile",
-      "to": "/02-community-caregiver/my-household"
+      "to": "/09-community-caregiver/my-household"
     },
     {
       "workspace": "Outreach planning",
-      "to": "/03-outreach-school-health/campaign-planner"
+      "to": "/10-outreach-school-health/campaign-planner"
     },
     {
       "workspace": "Cascade metrics",
-      "to": "/04-cascade-metrics/indicators-overview"
+      "to": "/03-cascade-metrics/indicators-overview"
     },
     {
       "workspace": "CHIS / livelihoods",
-      "to": "/05-chis-livelihoods/enrolment"
+      "to": "/13-chis-livelihoods/enrolment"
     },
     {
       "workspace": "Facility dashboard",
-      "to": "/06-facility-dashboard/overview"
+      "to": "/04-facility-dashboard/overview"
     },
     {
       "workspace": "Referrals desk",
-      "to": "/07-referrals-desk/referral-queue"
+      "to": "/05-referrals-desk/referral-queue"
     },
     {
       "workspace": "EMR / HMS connector",
-      "to": "/08-emr-connector/connector-status"
+      "to": "/06-emr-connector/connector-status"
     },
     {
       "workspace": "Intelligence operations",
-      "to": "/09-intelligence/ingest-pipeline"
+      "to": "/02-intelligence/ingest-pipeline"
     },
     {
       "workspace": "District / MoH",
-      "to": "/10-district-moh/population-map"
+      "to": "/08-district-moh/population-map"
     },
     {
       "workspace": "NGO / partner M&E",
-      "to": "/11-ngo-partner/programme-monitoring"
+      "to": "/14-ngo-partner/programme-monitoring"
     },
     {
       "workspace": "Research exports",
-      "to": "/12-research-exports/evidence-catalog"
+      "to": "/23-research-exports/evidence-catalog"
     },
     {
       "workspace": "Admin \u00b7 consent \u00b7 access",
-      "to": "/13-admin-consent/org-catchment"
+      "to": "/11-admin-consent/org-catchment"
     },
     {
       "workspace": "School health",
-      "to": "/14-schools-health/school-home"
+      "to": "/15-schools-health/school-home"
     },
     {
       "workspace": "Pharmacy outlet",
-      "to": "/15-pharmacy-outlets/stock-levels-entry"
+      "to": "/16-pharmacy-outlets/stock-levels-entry"
     },
     {
       "workspace": "Lab / PoC",
-      "to": "/16-labs-poc/lab-home"
+      "to": "/17-labs-poc/lab-home"
     },
     {
       "workspace": "Corporate wellness",
-      "to": "/17-corporate-wellness/corporate-home"
+      "to": "/18-corporate-wellness/corporate-home"
     },
     {
       "workspace": "MCH touchpoints",
-      "to": "/18-mch-touchpoints/mch-home"
+      "to": "/19-mch-touchpoints/mch-home"
     },
     {
       "workspace": "NCD / Gericare",
-      "to": "/19-ncd-gericare/cohort-home"
+      "to": "/20-ncd-gericare/cohort-home"
     },
     {
       "workspace": "HMIS / DHIS2",
-      "to": "/20-hmis-dhis2/hmis-home"
+      "to": "/21-hmis-dhis2/hmis-home"
     },
     {
       "workspace": "Community events",
-      "to": "/21-community-events/events-home"
+      "to": "/22-community-events/events-home"
     },
     {
       "workspace": "Climate feeds",
-      "to": "/22-climate-feeds/climate-home"
+      "to": "/07-climate-feeds/climate-home"
     },
     {
       "workspace": "Insurance insights",
-      "to": "/23-insurance-insights/prevention-overview"
+      "to": "/12-insurance-insights/prevention-overview"
     }
   ]
 }

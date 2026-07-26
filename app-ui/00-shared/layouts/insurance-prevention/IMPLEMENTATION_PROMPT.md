@@ -15,7 +15,7 @@ _Purpose: §7 prevention population insights — not claims / not CHIS identity_
 | Kind | Shared layout |
 | Slug | `insurance-prevention` |
 | Suggested Dart name | `AppInsurancePrevention` |
-| Surfaces | `23-insurance-insights` |
+| Surfaces | `12-insurance-insights` |
 | Breakpoints | `mobile`, `tablet`, `desktop` |
 | Themes | `light`, `dark`, `system` |
 

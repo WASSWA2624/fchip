@@ -35,180 +35,180 @@ slices:
     backend_paired: 0
     screens: [worklist-home, worklist-empty, worklist-loading, household-visit-form, symptoms-vitals, maternal-child-indicators, visit-saved, create-referral, referral-status, alerts-inbox, alert-follow-up, sync-status, sync-failed, sync-conflict]
   - id: VS-02
-    module: 02-community-caregiver
+    module: 02-intelligence
     phase: mvp
-    wave: 2
+    wave: 1
     backend_slice: VS-02
     status: not-started
     backend_paired: 0
-    screens: [my-household, self-report, guidance-hints, household-needs-capture]
+    screens: [ingest-pipeline, feeder-health-board, gis-explorer, climate-fusion, ai-risk-scores, alerts-worklists-engine, clinical-support-guidance]
   - id: VS-03
-    module: 03-outreach-school-health
+    module: 03-cascade-metrics
     phase: mvp
-    wave: 2
+    wave: 1
     backend_slice: VS-03
     status: not-started
     backend_paired: 0
-    screens: [campaign-planner, session-log, coverage-map, screening-results-entry, home-visit-batch-upload]
+    screens: [indicators-overview, gap-detection, partner-reports]
   - id: VS-04
-    module: 04-cascade-metrics
-    phase: mvp
+    module: 04-facility-dashboard
+    phase: mixed
     wave: 1
     backend_slice: VS-04
     status: not-started
     backend_paired: 0
-    screens: [indicators-overview, gap-detection, partner-reports]
+    screens: [overview, catchment-map, open-referrals, stock-signal, outreach-priorities, clinical-share-confirm, manual-case-signal, medicine-demand-forecast]
+    deferred_screens: [medicine-demand-forecast]
   - id: VS-05
-    module: 05-chis-livelihoods
-    phase: phase-2
-    wave: 3
+    module: 05-referrals-desk
+    phase: mvp
+    wave: 1
     backend_slice: VS-05
     status: not-started
     backend_paired: 0
-    screens: [enrolment, contributions, claims-access, iga-participation-entry]
+    screens: [referral-queue, referral-queue-empty, referral-detail, outcome-feedback]
   - id: VS-06
-    module: 06-facility-dashboard
-    phase: mixed
+    module: 06-emr-connector
+    phase: mvp
     wave: 1
     backend_slice: VS-06
     status: not-started
     backend_paired: 0
-    screens: [overview, catchment-map, open-referrals, stock-signal, outreach-priorities, clinical-share-confirm, manual-case-signal, medicine-demand-forecast]
-    deferred_screens: [medicine-demand-forecast]
+    screens: [connector-status, connector-degraded, api-scopes-setup, push-event-log, facility-onboarding]
   - id: VS-07
-    module: 07-referrals-desk
+    module: 07-climate-feeds
     phase: mvp
     wave: 1
     backend_slice: VS-07
     status: not-started
     backend_paired: 0
-    screens: [referral-queue, referral-queue-empty, referral-detail, outcome-feedback]
+    screens: [climate-home, rainfall-temperature, extremes-flood-heat, feed-config-audit]
   - id: VS-08
-    module: 08-emr-connector
-    phase: mvp
+    module: 08-district-moh
+    phase: mixed
     wave: 1
     backend_slice: VS-08
     status: not-started
     backend_paired: 0
-    screens: [connector-status, connector-degraded, api-scopes-setup, push-event-log, facility-onboarding]
+    screens: [population-map, early-warnings, action-deploy, cascade-planning, national-roll-up]
+    deferred_screens: [national-roll-up]
   - id: VS-09
-    module: 09-intelligence
+    module: 09-community-caregiver
     phase: mvp
-    wave: 1
+    wave: 2
     backend_slice: VS-09
     status: not-started
     backend_paired: 0
-    screens: [ingest-pipeline, feeder-health-board, gis-explorer, climate-fusion, ai-risk-scores, alerts-worklists-engine, clinical-support-guidance]
+    screens: [my-household, self-report, guidance-hints, household-needs-capture]
   - id: VS-10
-    module: 10-district-moh
-    phase: mixed
-    wave: 1
+    module: 10-outreach-school-health
+    phase: mvp
+    wave: 2
     backend_slice: VS-10
     status: not-started
     backend_paired: 0
-    screens: [population-map, early-warnings, action-deploy, cascade-planning, national-roll-up]
-    deferred_screens: [national-roll-up]
+    screens: [campaign-planner, session-log, coverage-map, screening-results-entry, home-visit-batch-upload]
   - id: VS-11
-    module: 11-ngo-partner
-    phase: phase-2
-    wave: 3
+    module: 11-admin-consent
+    phase: mvp
+    wave: 2
     backend_slice: VS-11
     status: not-started
     backend_paired: 0
-    screens: [programme-monitoring, impact-evidence, training-skills-analytics, field-dataset-upload, partner-indicator-entry]
+    screens: [org-catchment, users-roles, consent-privacy, emr-api-access, feeder-party-registry]
   - id: VS-12
-    module: 12-research-exports
-    phase: phase-4
-    wave: 4
+    module: 12-insurance-insights
+    phase: mvp
+    wave: 2
     backend_slice: VS-12
     status: not-started
     backend_paired: 0
-    screens: [evidence-catalog, export-request, research-contribution-upload, export-pending]
+    screens: [prevention-overview, risk-cohort-insights, anonymised-trends]
   - id: VS-13
-    module: 13-admin-consent
-    phase: mvp
-    wave: 2
+    module: 13-chis-livelihoods
+    phase: phase-2
+    wave: 3
     backend_slice: VS-13
     status: not-started
     backend_paired: 0
-    screens: [org-catchment, users-roles, consent-privacy, emr-api-access, feeder-party-registry]
+    screens: [enrolment, contributions, claims-access, iga-participation-entry]
   - id: VS-14
-    module: 14-schools-health
+    module: 14-ngo-partner
     phase: phase-2
     wave: 3
     backend_slice: VS-14
     status: not-started
     backend_paired: 0
-    screens: [school-home, health-education-session, learner-screening-entry, absenteeism-wellness, school-sync-status]
+    screens: [programme-monitoring, impact-evidence, training-skills-analytics, field-dataset-upload, partner-indicator-entry]
   - id: VS-15
-    module: 15-pharmacy-outlets
+    module: 15-schools-health
     phase: phase-2
     wave: 3
     backend_slice: VS-15
     status: not-started
     backend_paired: 0
-    screens: [pharmacy-home, stock-levels-entry, dispense-log, common-complaints, prestock-ack]
+    screens: [school-home, health-education-session, learner-screening-entry, absenteeism-wellness, school-sync-status]
   - id: VS-16
-    module: 16-labs-poc
+    module: 16-pharmacy-outlets
     phase: phase-2
     wave: 3
     backend_slice: VS-16
     status: not-started
     backend_paired: 0
-    screens: [lab-home, result-entry, batch-results-upload, result-queue]
+    screens: [pharmacy-home, stock-levels-entry, dispense-log, common-complaints, prestock-ack]
   - id: VS-17
-    module: 17-corporate-wellness
+    module: 17-labs-poc
     phase: phase-2
     wave: 3
     backend_slice: VS-17
     status: not-started
     backend_paired: 0
-    screens: [corporate-home, camp-vitals-entry, camp-summary-push, occupational-flags]
+    screens: [lab-home, result-entry, batch-results-upload, result-queue]
   - id: VS-18
-    module: 18-mch-touchpoints
+    module: 18-corporate-wellness
     phase: phase-2
     wave: 3
     backend_slice: VS-18
     status: not-started
     backend_paired: 0
-    screens: [mch-home, anc-visit-entry, pnc-visit-entry, immunisation-entry, nutrition-monitoring]
+    screens: [corporate-home, camp-vitals-entry, camp-summary-push, occupational-flags]
   - id: VS-19
-    module: 19-ncd-gericare
+    module: 19-mch-touchpoints
     phase: phase-2
     wave: 3
     backend_slice: VS-19
     status: not-started
     backend_paired: 0
-    screens: [cohort-home, cohort-visit-entry, bp-screening-batch, stroke-risk-flags]
+    screens: [mch-home, anc-visit-entry, pnc-visit-entry, immunisation-entry, nutrition-monitoring]
   - id: VS-20
-    module: 20-hmis-dhis2
+    module: 20-ncd-gericare
     phase: phase-2
     wave: 3
     backend_slice: VS-20
     status: not-started
     backend_paired: 0
-    screens: [hmis-home, dataset-mapping, aggregate-push-pull, hmis-audit]
+    screens: [cohort-home, cohort-visit-entry, bp-screening-batch, stroke-risk-flags]
   - id: VS-21
-    module: 21-community-events
+    module: 21-hmis-dhis2
     phase: phase-2
     wave: 3
     backend_slice: VS-21
     status: not-started
     backend_paired: 0
-    screens: [events-home, outreach-event-log, community-dialogue, participation-register]
+    screens: [hmis-home, dataset-mapping, aggregate-push-pull, hmis-audit]
   - id: VS-22
-    module: 22-climate-feeds
-    phase: mvp
-    wave: 1
+    module: 22-community-events
+    phase: phase-2
+    wave: 3
     backend_slice: VS-22
     status: not-started
     backend_paired: 0
-    screens: [climate-home, rainfall-temperature, extremes-flood-heat, feed-config-audit]
+    screens: [events-home, outreach-event-log, community-dialogue, participation-register]
   - id: VS-23
-    module: 23-insurance-insights
-    phase: mvp
-    wave: 2
+    module: 23-research-exports
+    phase: phase-4
+    wave: 4
     backend_slice: VS-23
     status: not-started
     backend_paired: 0
-    screens: [prevention-overview, risk-cohort-insights, anonymised-trends]
+    screens: [evidence-catalog, export-request, research-contribution-upload, export-pending]

@@ -47,14 +47,14 @@ Backend in tandem: identity/session recovery, consent, offline device unlock bou
 ### Wave 1 — MVP capture-to-action (`S-013`–`S-060`)
 
 1. `01-chw-vht-mobile` (`S-013`–`S-026`): worklist → visit → referral → alerts → sync states.
-2. `09-intelligence` foundation (`S-027`–`S-028`): ingest-pipeline, feeder-health-board.
-3. `04-cascade-metrics` (`S-029`–`S-031`).
-4. `06-facility-dashboard` MVP (`S-032`–`S-038`) — defer `medicine-demand-forecast`.
-5. `07-referrals-desk` (`S-039`–`S-042`).
-6. `08-emr-connector` (`S-043`–`S-047`).
-7. `22-climate-feeds` (`S-048`–`S-051`).
-8. `09-intelligence` decision (`S-052`–`S-056`).
-9. `10-district-moh` MVP (`S-057`–`S-060`) — defer `national-roll-up`.
+2. `02-intelligence` foundation (`S-027`–`S-028`): ingest-pipeline, feeder-health-board.
+3. `03-cascade-metrics` (`S-029`–`S-031`).
+4. `04-facility-dashboard` MVP (`S-032`–`S-038`) — defer `medicine-demand-forecast`.
+5. `05-referrals-desk` (`S-039`–`S-042`).
+6. `06-emr-connector` (`S-043`–`S-047`).
+7. `07-climate-feeds` (`S-048`–`S-051`).
+8. `02-intelligence` decision (`S-052`–`S-056`).
+9. `08-district-moh` MVP (`S-057`–`S-060`) — defer `national-roll-up`.
 
 Prove both MVP journeys before Wave 2:
 
@@ -63,19 +63,19 @@ Prove both MVP journeys before Wave 2:
 
 ### Wave 2 — Remaining MVP (`S-061`–`S-077`)
 
-`02-community-caregiver` → `03-outreach-school-health` → `13-admin-consent` → `23-insurance-insights`.
+`09-community-caregiver` → `10-outreach-school-health` → `11-admin-consent` → `12-insurance-insights`.
 
 Insurance responses must be prevention-focused, aggregated, anonymised, and unable to reveal raw PHI.
 
 ### Wave 3 — Phase 2 feeders (`S-078`–`S-121`)
 
-`05-chis-livelihoods` → `11-ngo-partner` → `14-schools-health` → `15-pharmacy-outlets` → `16-labs-poc` → `17-corporate-wellness` → `18-mch-touchpoints` → `19-ncd-gericare` → `20-hmis-dhis2` → `21-community-events`.
+`13-chis-livelihoods` → `14-ngo-partner` → `15-schools-health` → `16-pharmacy-outlets` → `17-labs-poc` → `18-corporate-wellness` → `19-mch-touchpoints` → `20-ncd-gericare` → `21-hmis-dhis2` → `22-community-events`.
 
 Each feeder enters the shared ingest/provenance spine and exposes feed health. CHIS stays optional and must not become product identity.
 
 ### Wave 4 — Later phase (`S-122`–`S-127`)
 
-Deferred phase-3 screens, then research exports: `medicine-demand-forecast`, `national-roll-up`, then `12-research-exports` (ethics review, anonymisation, expiring download, immutable audit; no raw PHI).
+Deferred phase-3 screens, then research exports: `medicine-demand-forecast`, `national-roll-up`, then `23-research-exports` (ethics review, anonymisation, expiring download, immutable audit; no raw PHI).
 
 ## Per-screen acceptance
 

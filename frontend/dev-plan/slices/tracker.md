@@ -51,32 +51,32 @@ Update this table whenever a screen opens or closes.
 | --- | --- | --- | --- | --- | --- |
 | 0 | VS-00 | `00-shared` | 12 | not-started | 0/12 |
 | 1 | VS-01 | `01-chw-vht-mobile` | 14 | not-started | 0/14 |
-| 1 | VS-04 | `04-cascade-metrics` | 3 | not-started | 0/3 |
-| 1 | VS-06 | `06-facility-dashboard` | 8 | not-started | 0/8 |
-| 1 | VS-07 | `07-referrals-desk` | 4 | not-started | 0/4 |
-| 1 | VS-08 | `08-emr-connector` | 5 | not-started | 0/5 |
-| 1 | VS-09 | `09-intelligence` | 7 | not-started | 0/7 |
-| 1 | VS-10 | `10-district-moh` | 5 | not-started | 0/5 |
-| 1 | VS-22 | `22-climate-feeds` | 4 | not-started | 0/4 |
-| 2 | VS-02 | `02-community-caregiver` | 4 | not-started | 0/4 |
-| 2 | VS-03 | `03-outreach-school-health` | 5 | not-started | 0/5 |
-| 2 | VS-13 | `13-admin-consent` | 5 | not-started | 0/5 |
-| 2 | VS-23 | `23-insurance-insights` | 3 | not-started | 0/3 |
-| 3 | VS-05 | `05-chis-livelihoods` | 4 | not-started | 0/4 |
-| 3 | VS-11 | `11-ngo-partner` | 5 | not-started | 0/5 |
-| 3 | VS-14 | `14-schools-health` | 5 | not-started | 0/5 |
-| 3 | VS-15 | `15-pharmacy-outlets` | 5 | not-started | 0/5 |
-| 3 | VS-16 | `16-labs-poc` | 4 | not-started | 0/4 |
-| 3 | VS-17 | `17-corporate-wellness` | 4 | not-started | 0/4 |
-| 3 | VS-18 | `18-mch-touchpoints` | 5 | not-started | 0/5 |
-| 3 | VS-19 | `19-ncd-gericare` | 4 | not-started | 0/4 |
-| 3 | VS-20 | `20-hmis-dhis2` | 4 | not-started | 0/4 |
-| 3 | VS-21 | `21-community-events` | 4 | not-started | 0/4 |
-| 4 | VS-12 | `12-research-exports` | 4 | not-started | 0/4 |
+| 1 | VS-02 | `02-intelligence` | 7 | not-started | 0/7 |
+| 1 | VS-03 | `03-cascade-metrics` | 3 | not-started | 0/3 |
+| 1 | VS-04 | `04-facility-dashboard` | 8 | not-started | 0/8 |
+| 1 | VS-05 | `05-referrals-desk` | 4 | not-started | 0/4 |
+| 1 | VS-06 | `06-emr-connector` | 5 | not-started | 0/5 |
+| 1 | VS-07 | `07-climate-feeds` | 4 | not-started | 0/4 |
+| 1 | VS-08 | `08-district-moh` | 5 | not-started | 0/5 |
+| 2 | VS-09 | `09-community-caregiver` | 4 | not-started | 0/4 |
+| 2 | VS-10 | `10-outreach-school-health` | 5 | not-started | 0/5 |
+| 2 | VS-11 | `11-admin-consent` | 5 | not-started | 0/5 |
+| 2 | VS-12 | `12-insurance-insights` | 3 | not-started | 0/3 |
+| 3 | VS-13 | `13-chis-livelihoods` | 4 | not-started | 0/4 |
+| 3 | VS-14 | `14-ngo-partner` | 5 | not-started | 0/5 |
+| 3 | VS-15 | `15-schools-health` | 5 | not-started | 0/5 |
+| 3 | VS-16 | `16-pharmacy-outlets` | 5 | not-started | 0/5 |
+| 3 | VS-17 | `17-labs-poc` | 4 | not-started | 0/4 |
+| 3 | VS-18 | `18-corporate-wellness` | 4 | not-started | 0/4 |
+| 3 | VS-19 | `19-mch-touchpoints` | 5 | not-started | 0/5 |
+| 3 | VS-20 | `20-ncd-gericare` | 4 | not-started | 0/4 |
+| 3 | VS-21 | `21-hmis-dhis2` | 4 | not-started | 0/4 |
+| 3 | VS-22 | `22-community-events` | 4 | not-started | 0/4 |
+| 4 | VS-23 | `23-research-exports` | 4 | not-started | 0/4 |
 
 **Total:** 0 of 127 screens delivered.
 
-Wave 4 also covers deferred screens inside earlier slices: `06-facility-dashboard/medicine-demand-forecast` (`S-122`) and `10-district-moh/national-roll-up` (`S-123`). Keep them feature-gated until unlocked.
+Wave 4 also covers deferred screens inside earlier slices: `04-facility-dashboard/medicine-demand-forecast` (`S-122`) and `08-district-moh/national-roll-up` (`S-123`). Keep them feature-gated until unlocked.
 
 ## Journey proofs
 

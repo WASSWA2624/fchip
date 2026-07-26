@@ -1,0 +1,64 @@
+{
+  "title": "Community events home",
+  "subtitle": "Churches \u00b7 mosques \u00b7 dialogues feed community signals",
+  "kind": "dashboard",
+  "nav": "community",
+  "layout": "feeder-home",
+  "body_layouts": {
+    "mobile": "feeder-home",
+    "tablet": "feeder-home",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/22-community-events/events-home",
+  "parent_route": "/22-community-events/events-home",
+  "roles": [
+    "community-programme-worker"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "phase-2",
+  "l10n_key_prefix": "22_community_events.events_home",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Home",
+        "to": "/22-community-events/events-home"
+      },
+      {
+        "label": "Events",
+        "to": "/22-community-events/outreach-event-log"
+      },
+      {
+        "label": "Dialogue",
+        "to": "/22-community-events/community-dialogue"
+      },
+      {
+        "label": "Register",
+        "to": "/22-community-events/participation-register"
+      }
+    ],
+    "primary_action": {
+      "label": "Log event",
+      "to": "/22-community-events/events-home"
+    },
+    "access_denied": "/00-shared/access-denied",
+    "not_found": "/00-shared/not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

@@ -39,32 +39,32 @@ class Screen:
 
 # Module notes injected into per-module READMEs
 MODULE_NOTES: dict[str, str] = {
-    "03-outreach-school-health": (
+    "10-outreach-school-health": (
         "**Programme planning** (campaigns, session logs, coverage). "
-        "School *feeder* capture lives in `14-schools-health`."
+        "School *feeder* capture lives in `15-schools-health`."
     ),
-    "06-facility-dashboard": (
+    "04-facility-dashboard": (
         "Population-health overview for facilities. "
-        "`open-referrals` is a summary; the working desk is `07-referrals-desk`."
+        "`open-referrals` is a summary; the working desk is `05-referrals-desk`."
     ),
-    "07-referrals-desk": (
-        "Operational referral queue/detail. Distinct from `06/.../open-referrals` overview."
+    "05-referrals-desk": (
+        "Operational referral queue/detail. Distinct from `04/.../open-referrals` overview."
     ),
-    "09-intelligence": (
+    "02-intelligence": (
         "Shared intelligence stack (flows 04 modules 9–13): ingest, AI, GIS, climate fusion, "
         "alerts routing, clinical support guidance, feeder health."
     ),
-    "10-district-moh": (
+    "08-district-moh": (
         "District console + Phase 3 **national roll-up** (`national-roll-up`). "
         "Same metrics spine; wider administrative scope."
     ),
-    "14-schools-health": (
+    "15-schools-health": (
         "**School data feeder** (sessions, screening, absenteeism). "
-        "Programme planning stays in `03-outreach-school-health`."
+        "Programme planning stays in `10-outreach-school-health`."
     ),
-    "23-insurance-insights": (
+    "12-insurance-insights": (
         "§7 insurance customers — **prevention-focused population insights only**. "
-        "Not claims admin. Not CHIS product identity (see `05-chis-livelihoods`)."
+        "Not claims admin. Not CHIS product identity (see `13-chis-livelihoods`)."
     ),
 }
 
@@ -382,7 +382,7 @@ SCREENS: list[Screen] = [
     ),
     # 02 community / caregiver
     Screen(
-        "02-community-caregiver",
+        "09-community-caregiver",
         "my-household",
         "My household",
         "Optional caregiver self-view",
@@ -397,7 +397,7 @@ SCREENS: list[Screen] = [
         layout="feeder-home",
     ),
     Screen(
-        "02-community-caregiver",
+        "09-community-caregiver",
         "self-report",
         "Self-report",
         "Symptoms · needs · concerns",
@@ -413,7 +413,7 @@ SCREENS: list[Screen] = [
         layout="form-capture",
     ),
     Screen(
-        "02-community-caregiver",
+        "09-community-caregiver",
         "guidance-hints",
         "Guidance",
         "Care tips · appointment hints — not booking/EMR",
@@ -427,7 +427,7 @@ SCREENS: list[Screen] = [
         layout="list-worklist",
     ),
     Screen(
-        "02-community-caregiver",
+        "09-community-caregiver",
         "household-needs-capture",
         "Household needs",
         "Community members feed priorities into cascade",
@@ -444,7 +444,7 @@ SCREENS: list[Screen] = [
     ),
     # 03 outreach
     Screen(
-        "03-outreach-school-health",
+        "10-outreach-school-health",
         "campaign-planner",
         "Campaign planner",
         "Outreach · screening · school health",
@@ -460,7 +460,7 @@ SCREENS: list[Screen] = [
         nav="district",
     ),
     Screen(
-        "03-outreach-school-health",
+        "10-outreach-school-health",
         "session-log",
         "Session log",
         "Attendance · topics · outcomes",
@@ -476,7 +476,7 @@ SCREENS: list[Screen] = [
         nav="district",
     ),
     Screen(
-        "03-outreach-school-health",
+        "10-outreach-school-health",
         "coverage-map",
         "Coverage map",
         "Where programmes ran",
@@ -486,7 +486,7 @@ SCREENS: list[Screen] = [
         nav="district",
     ),
     Screen(
-        "03-outreach-school-health",
+        "10-outreach-school-health",
         "screening-results-entry",
         "Screening results entry",
         "Outreach teams feed camp outcomes into ingest",
@@ -502,7 +502,7 @@ SCREENS: list[Screen] = [
         nav="district",
     ),
     Screen(
-        "03-outreach-school-health",
+        "10-outreach-school-health",
         "home-visit-batch-upload",
         "Home-visit batch",
         "Supervisors upload structured visit packs",
@@ -518,7 +518,7 @@ SCREENS: list[Screen] = [
     ),
     # 04 cascade metrics
     Screen(
-        "04-cascade-metrics",
+        "03-cascade-metrics",
         "indicators-overview",
         "Cascade metrics",
         "CHW · outreach · referrals · MCH · education",
@@ -537,7 +537,7 @@ SCREENS: list[Screen] = [
         nav="district",
     ),
     Screen(
-        "04-cascade-metrics",
+        "03-cascade-metrics",
         "gap-detection",
         "Gap detection",
         "Learn · improve · serve again",
@@ -552,7 +552,7 @@ SCREENS: list[Screen] = [
         nav="district",
     ),
     Screen(
-        "04-cascade-metrics",
+        "03-cascade-metrics",
         "partner-reports",
         "Partner reports",
         "M&E exports from metrics spine",
@@ -567,7 +567,7 @@ SCREENS: list[Screen] = [
     ),
     # 05 CHIS
     Screen(
-        "05-chis-livelihoods",
+        "13-chis-livelihoods",
         "enrolment",
         "CHIS enrolment",
         "Optional financial-protection data",
@@ -583,7 +583,7 @@ SCREENS: list[Screen] = [
         nav="partner",
     ),
     Screen(
-        "05-chis-livelihoods",
+        "13-chis-livelihoods",
         "contributions",
         "Contributions",
         "Where partners capture payments",
@@ -596,7 +596,7 @@ SCREENS: list[Screen] = [
         nav="partner",
     ),
     Screen(
-        "05-chis-livelihoods",
+        "13-chis-livelihoods",
         "claims-access",
         "Claims / access",
         "Livelihood-linked care access",
@@ -610,7 +610,7 @@ SCREENS: list[Screen] = [
     ),
     # 06 facility
     Screen(
-        "06-facility-dashboard",
+        "04-facility-dashboard",
         "overview",
         "Facility overview",
         "Alerts · caseload risk · cascade gaps",
@@ -629,7 +629,7 @@ SCREENS: list[Screen] = [
         nav="facility",
     ),
     Screen(
-        "06-facility-dashboard",
+        "04-facility-dashboard",
         "catchment-map",
         "Catchment map",
         "Village hotspots + climate overlay",
@@ -639,7 +639,7 @@ SCREENS: list[Screen] = [
         nav="facility",
     ),
     Screen(
-        "06-facility-dashboard",
+        "04-facility-dashboard",
         "open-referrals",
         "Referral summary",
         "Inbound volume and completion at a glance",
@@ -654,7 +654,7 @@ SCREENS: list[Screen] = [
         nav="facility",
     ),
     Screen(
-        "06-facility-dashboard",
+        "04-facility-dashboard",
         "stock-signal",
         "Stock signal",
         "Demand forecast hints",
@@ -669,7 +669,7 @@ SCREENS: list[Screen] = [
         layout="dashboard-metrics",
     ),
     Screen(
-        "06-facility-dashboard",
+        "04-facility-dashboard",
         "medicine-demand-forecast",
         "Medicine demand forecast",
         "§6.5 demand by facility / community (Phase 3 depth)",
@@ -688,7 +688,7 @@ SCREENS: list[Screen] = [
         layout="dashboard-metrics",
     ),
     Screen(
-        "06-facility-dashboard",
+        "04-facility-dashboard",
         "outreach-priorities",
         "Outreach priorities",
         "Where facility should support field action",
@@ -701,7 +701,7 @@ SCREENS: list[Screen] = [
         nav="facility",
     ),
     Screen(
-        "06-facility-dashboard",
+        "04-facility-dashboard",
         "clinical-share-confirm",
         "Clinical share confirm",
         "Facility staff approve what leaves EMR into FCHIP",
@@ -717,7 +717,7 @@ SCREENS: list[Screen] = [
         nav="facility",
     ),
     Screen(
-        "06-facility-dashboard",
+        "04-facility-dashboard",
         "manual-case-signal",
         "Manual case signal",
         "When EMR link is down — structured facility feed",
@@ -733,7 +733,7 @@ SCREENS: list[Screen] = [
     ),
     # 07 referrals desk
     Screen(
-        "07-referrals-desk",
+        "05-referrals-desk",
         "referral-queue",
         "Referrals desk",
         "Facility referral queue (working desk)",
@@ -749,7 +749,7 @@ SCREENS: list[Screen] = [
         layout="queue-desk",
     ),
     Screen(
-        "07-referrals-desk",
+        "05-referrals-desk",
         "referral-queue-empty",
         "Referrals desk",
         "No open inbound referrals",
@@ -762,7 +762,7 @@ SCREENS: list[Screen] = [
         state="empty",
     ),
     Screen(
-        "07-referrals-desk",
+        "05-referrals-desk",
         "referral-detail",
         "Referral detail",
         "Track completion · link EMR outcome",
@@ -779,7 +779,7 @@ SCREENS: list[Screen] = [
         layout="detail-action",
     ),
     Screen(
-        "07-referrals-desk",
+        "05-referrals-desk",
         "outcome-feedback",
         "Outcome feedback",
         "Completed referral outcomes return into cascade metrics",
@@ -796,7 +796,7 @@ SCREENS: list[Screen] = [
     ),
     # 08 EMR connector
     Screen(
-        "08-emr-connector",
+        "06-emr-connector",
         "connector-status",
         "EMR / HMS connector",
         "Secure ingest — does not replace EMR",
@@ -812,7 +812,7 @@ SCREENS: list[Screen] = [
         layout="connector-status",
     ),
     Screen(
-        "08-emr-connector",
+        "06-emr-connector",
         "connector-degraded",
         "EMR / HMS connector",
         "Degraded feed — queue held · no PHI dump",
@@ -830,7 +830,7 @@ SCREENS: list[Screen] = [
         state="error",
     ),
     Screen(
-        "08-emr-connector",
+        "06-emr-connector",
         "api-scopes-setup",
         "API scopes setup",
         "What clinical data may flow in",
@@ -846,7 +846,7 @@ SCREENS: list[Screen] = [
         layout="settings-admin",
     ),
     Screen(
-        "08-emr-connector",
+        "06-emr-connector",
         "push-event-log",
         "Push event log",
         "EMR/HMS systems feeding FCHIP in real time",
@@ -862,7 +862,7 @@ SCREENS: list[Screen] = [
         layout="list-worklist",
     ),
     Screen(
-        "08-emr-connector",
+        "06-emr-connector",
         "facility-onboarding",
         "Facility onboarding",
         "Register an existing EMR/HMS as a data feeder",
@@ -879,7 +879,7 @@ SCREENS: list[Screen] = [
     ),
     # 09 intelligence (shared stack — not district-owned chrome)
     Screen(
-        "09-intelligence",
+        "02-intelligence",
         "ingest-pipeline",
         "Ingest & sync",
         "All feeder parties → validate → store",
@@ -895,7 +895,7 @@ SCREENS: list[Screen] = [
         layout="dashboard-metrics",
     ),
     Screen(
-        "09-intelligence",
+        "02-intelligence",
         "ai-risk-scores",
         "AI / predictive",
         "Shared risk scores · explainable alerts",
@@ -911,7 +911,7 @@ SCREENS: list[Screen] = [
         layout="dashboard-metrics",
     ),
     Screen(
-        "09-intelligence",
+        "02-intelligence",
         "gis-explorer",
         "GIS maps",
         "Disease distribution · hotspots · gaps",
@@ -922,7 +922,7 @@ SCREENS: list[Screen] = [
         layout="map-explorer",
     ),
     Screen(
-        "09-intelligence",
+        "02-intelligence",
         "climate-fusion",
         "Climate fusion",
         "Rainfall · heat · floods × health",
@@ -937,7 +937,7 @@ SCREENS: list[Screen] = [
         layout="dashboard-metrics",
     ),
     Screen(
-        "09-intelligence",
+        "02-intelligence",
         "clinical-support-guidance",
         "Clinical support guidance",
         "Explainable next steps for CHW · facility — not Phase-4 CDS/EMR",
@@ -955,7 +955,7 @@ SCREENS: list[Screen] = [
         layout="detail-action",
     ),
     Screen(
-        "09-intelligence",
+        "02-intelligence",
         "alerts-worklists-engine",
         "Alerts & worklists engine",
         "Routes intelligence to surfaces",
@@ -971,7 +971,7 @@ SCREENS: list[Screen] = [
         layout="settings-admin",
     ),
     Screen(
-        "09-intelligence",
+        "02-intelligence",
         "feeder-health-board",
         "Feeder health board",
         "Which data parties are sending clean signals",
@@ -988,7 +988,7 @@ SCREENS: list[Screen] = [
     ),
     # 10 district
     Screen(
-        "10-district-moh",
+        "08-district-moh",
         "population-map",
         "Population map",
         "District early-warning geography",
@@ -998,7 +998,7 @@ SCREENS: list[Screen] = [
         nav="district",
     ),
     Screen(
-        "10-district-moh",
+        "08-district-moh",
         "early-warnings",
         "Early warnings",
         "Explainable outbreak & risk notices",
@@ -1013,7 +1013,7 @@ SCREENS: list[Screen] = [
         nav="district",
     ),
     Screen(
-        "10-district-moh",
+        "08-district-moh",
         "action-deploy",
         "Deploy action",
         "Testing · stock · outreach",
@@ -1028,7 +1028,7 @@ SCREENS: list[Screen] = [
         nav="district",
     ),
     Screen(
-        "10-district-moh",
+        "08-district-moh",
         "cascade-planning",
         "Cascade M&E planning",
         "Plan from gaps and metrics",
@@ -1043,7 +1043,7 @@ SCREENS: list[Screen] = [
         layout="dashboard-metrics",
     ),
     Screen(
-        "10-district-moh",
+        "08-district-moh",
         "national-roll-up",
         "MoH national roll-up",
         "Phase 3 — multi-district planning · outbreak preparedness",
@@ -1063,7 +1063,7 @@ SCREENS: list[Screen] = [
     ),
     # 11 NGO
     Screen(
-        "11-ngo-partner",
+        "14-ngo-partner",
         "programme-monitoring",
         "Programme monitoring",
         "Partner-scoped real-time M&E",
@@ -1078,7 +1078,7 @@ SCREENS: list[Screen] = [
         layout="dashboard-metrics",
     ),
     Screen(
-        "11-ngo-partner",
+        "14-ngo-partner",
         "impact-evidence",
         "Impact evidence",
         "Optimisation · donor-ready proof",
@@ -1093,7 +1093,7 @@ SCREENS: list[Screen] = [
         layout="list-worklist",
     ),
     Screen(
-        "11-ngo-partner",
+        "14-ngo-partner",
         "training-skills-analytics",
         "Training · skills analytics",
         "§2.4 research · partnerships · skills capacity",
@@ -1109,7 +1109,7 @@ SCREENS: list[Screen] = [
         layout="dashboard-metrics",
     ),
     Screen(
-        "11-ngo-partner",
+        "14-ngo-partner",
         "field-dataset-upload",
         "Field dataset upload",
         "NGO M&E teams feed anonymised programme data",
@@ -1124,7 +1124,7 @@ SCREENS: list[Screen] = [
         nav="partner",
     ),
     Screen(
-        "11-ngo-partner",
+        "14-ngo-partner",
         "partner-indicator-entry",
         "Partner indicator entry",
         "Manual M&E indicators where APIs are absent",
@@ -1140,7 +1140,7 @@ SCREENS: list[Screen] = [
     ),
     # 12 research
     Screen(
-        "12-research-exports",
+        "23-research-exports",
         "evidence-catalog",
         "Evidence catalog",
         "Anonymised datasets · no raw PHI dumps",
@@ -1153,7 +1153,7 @@ SCREENS: list[Screen] = [
         nav="partner",
     ),
     Screen(
-        "12-research-exports",
+        "23-research-exports",
         "export-request",
         "Export request",
         "Approved research access",
@@ -1168,7 +1168,7 @@ SCREENS: list[Screen] = [
         nav="partner",
     ),
     Screen(
-        "12-research-exports",
+        "23-research-exports",
         "research-contribution-upload",
         "Research contribution upload",
         "Academic partners feed approved anonymised field sets",
@@ -1184,7 +1184,7 @@ SCREENS: list[Screen] = [
     ),
     # 13 admin
     Screen(
-        "13-admin-consent",
+        "11-admin-consent",
         "org-catchment",
         "Org · catchment · facilities",
         "Where FCHIP is deployed",
@@ -1198,7 +1198,7 @@ SCREENS: list[Screen] = [
         nav="admin",
     ),
     Screen(
-        "13-admin-consent",
+        "11-admin-consent",
         "users-roles",
         "Users & roles",
         "Consumers and data-feeder roles",
@@ -1214,7 +1214,7 @@ SCREENS: list[Screen] = [
         nav="admin",
     ),
     Screen(
-        "13-admin-consent",
+        "11-admin-consent",
         "consent-privacy",
         "Consent & privacy",
         "Household consent · least privilege",
@@ -1229,7 +1229,7 @@ SCREENS: list[Screen] = [
         nav="admin",
     ),
     Screen(
-        "13-admin-consent",
+        "11-admin-consent",
         "emr-api-access",
         "EMR API access",
         "Facility credentials · scopes",
@@ -1244,7 +1244,7 @@ SCREENS: list[Screen] = [
         nav="admin",
     ),
     Screen(
-        "13-admin-consent",
+        "11-admin-consent",
         "feeder-party-registry",
         "Feeder party registry",
         "Register every source that may push into ingest",
@@ -1261,7 +1261,7 @@ SCREENS: list[Screen] = [
     ),
     # --- Data feeder parties (SoT §4.2 / app-flows 03) ---
     Screen(
-        "14-schools-health",
+        "15-schools-health",
         "school-home",
         "School health home",
         "Schools feed sessions · screening · absenteeism",
@@ -1276,7 +1276,7 @@ SCREENS: list[Screen] = [
         nav="school",
     ),
     Screen(
-        "14-schools-health",
+        "15-schools-health",
         "health-education-session",
         "Health education session",
         "School / community education metrics",
@@ -1291,7 +1291,7 @@ SCREENS: list[Screen] = [
         nav="school",
     ),
     Screen(
-        "14-schools-health",
+        "15-schools-health",
         "learner-screening-entry",
         "Learner screening entry",
         "School screening camp results → ingest",
@@ -1306,7 +1306,7 @@ SCREENS: list[Screen] = [
         nav="school",
     ),
     Screen(
-        "14-schools-health",
+        "15-schools-health",
         "absenteeism-wellness",
         "Absenteeism & wellness",
         "Wellness signals from school rolls",
@@ -1321,7 +1321,7 @@ SCREENS: list[Screen] = [
         nav="school",
     ),
     Screen(
-        "14-schools-health",
+        "15-schools-health",
         "school-sync-status",
         "School sync status",
         "Offline school forms → cloud",
@@ -1335,7 +1335,7 @@ SCREENS: list[Screen] = [
         nav="school",
     ),
     Screen(
-        "15-pharmacy-outlets",
+        "16-pharmacy-outlets",
         "pharmacy-home",
         "Pharmacy outlet home",
         "Drug shops feed stock · dispense · complaints",
@@ -1350,7 +1350,7 @@ SCREENS: list[Screen] = [
         nav="pharmacy",
     ),
     Screen(
-        "15-pharmacy-outlets",
+        "16-pharmacy-outlets",
         "stock-levels-entry",
         "Stock levels entry",
         "Medicine availability signals for demand forecasts",
@@ -1366,7 +1366,7 @@ SCREENS: list[Screen] = [
         nav="pharmacy",
     ),
     Screen(
-        "15-pharmacy-outlets",
+        "16-pharmacy-outlets",
         "dispense-log",
         "Dispense log",
         "Dispensing patterns into multi-source ingest",
@@ -1381,7 +1381,7 @@ SCREENS: list[Screen] = [
         nav="pharmacy",
     ),
     Screen(
-        "15-pharmacy-outlets",
+        "16-pharmacy-outlets",
         "common-complaints",
         "Common complaints",
         "Community symptom patterns from outlets",
@@ -1396,7 +1396,7 @@ SCREENS: list[Screen] = [
         nav="pharmacy",
     ),
     Screen(
-        "15-pharmacy-outlets",
+        "16-pharmacy-outlets",
         "prestock-ack",
         "Pre-stock acknowledgement",
         "Respond to district medicine demand actions",
@@ -1410,7 +1410,7 @@ SCREENS: list[Screen] = [
         nav="pharmacy",
     ),
     Screen(
-        "16-labs-poc",
+        "17-labs-poc",
         "lab-home",
         "Lab / PoC home",
         "Labs feed RDT · Hb · glucose and related results",
@@ -1425,7 +1425,7 @@ SCREENS: list[Screen] = [
         nav="lab",
     ),
     Screen(
-        "16-labs-poc",
+        "17-labs-poc",
         "result-entry",
         "Result entry",
         "Point-of-care / lab result → ingest",
@@ -1441,7 +1441,7 @@ SCREENS: list[Screen] = [
         nav="lab",
     ),
     Screen(
-        "16-labs-poc",
+        "17-labs-poc",
         "batch-results-upload",
         "Batch results upload",
         "Facility lab batches into FCHIP",
@@ -1456,7 +1456,7 @@ SCREENS: list[Screen] = [
         nav="lab",
     ),
     Screen(
-        "16-labs-poc",
+        "17-labs-poc",
         "result-queue",
         "Result queue",
         "Results waiting to sync or link to referrals",
@@ -1471,7 +1471,7 @@ SCREENS: list[Screen] = [
         nav="lab",
     ),
     Screen(
-        "17-corporate-wellness",
+        "18-corporate-wellness",
         "corporate-home",
         "Corporate wellness home",
         "Workplace programmes feed BP · BMI · glucose",
@@ -1486,7 +1486,7 @@ SCREENS: list[Screen] = [
         nav="corporate",
     ),
     Screen(
-        "17-corporate-wellness",
+        "18-corporate-wellness",
         "camp-vitals-entry",
         "Camp vitals entry",
         "BP · BMI · glucose from corporate / school wellness",
@@ -1502,7 +1502,7 @@ SCREENS: list[Screen] = [
         nav="corporate",
     ),
     Screen(
-        "17-corporate-wellness",
+        "18-corporate-wellness",
         "camp-summary-push",
         "Camp summary push",
         "Aggregate wellness signals to NCD intelligence",
@@ -1517,7 +1517,7 @@ SCREENS: list[Screen] = [
         nav="corporate",
     ),
     Screen(
-        "17-corporate-wellness",
+        "18-corporate-wellness",
         "occupational-flags",
         "Occupational flags",
         "Workplace health risk patterns",
@@ -1530,7 +1530,7 @@ SCREENS: list[Screen] = [
         nav="corporate",
     ),
     Screen(
-        "18-mch-touchpoints",
+        "19-mch-touchpoints",
         "mch-home",
         "MCH touchpoints home",
         "ANC / PNC · immunisation · nutrition posts feed care signals",
@@ -1545,7 +1545,7 @@ SCREENS: list[Screen] = [
         nav="mch",
     ),
     Screen(
-        "18-mch-touchpoints",
+        "19-mch-touchpoints",
         "anc-visit-entry",
         "ANC visit entry",
         "Antenatal touchpoint → maternal intelligence",
@@ -1560,7 +1560,7 @@ SCREENS: list[Screen] = [
         nav="mch",
     ),
     Screen(
-        "18-mch-touchpoints",
+        "19-mch-touchpoints",
         "pnc-visit-entry",
         "PNC visit entry",
         "Postnatal follow-up signals",
@@ -1575,7 +1575,7 @@ SCREENS: list[Screen] = [
         nav="mch",
     ),
     Screen(
-        "18-mch-touchpoints",
+        "19-mch-touchpoints",
         "immunisation-entry",
         "Immunisation entry",
         "Immunisation post doses → child health coverage",
@@ -1590,7 +1590,7 @@ SCREENS: list[Screen] = [
         nav="mch",
     ),
     Screen(
-        "18-mch-touchpoints",
+        "19-mch-touchpoints",
         "nutrition-monitoring",
         "Nutrition monitoring",
         "Growth / nutrition programme feed",
@@ -1605,7 +1605,7 @@ SCREENS: list[Screen] = [
         nav="mch",
     ),
     Screen(
-        "19-ncd-gericare",
+        "20-ncd-gericare",
         "cohort-home",
         "NCD / Gericare home",
         "Chronic and elderly cohorts feed longitudinal signals",
@@ -1620,7 +1620,7 @@ SCREENS: list[Screen] = [
         nav="ncd",
     ),
     Screen(
-        "19-ncd-gericare",
+        "20-ncd-gericare",
         "cohort-visit-entry",
         "Cohort visit entry",
         "Hypertension · diabetes · elderly care checks",
@@ -1636,7 +1636,7 @@ SCREENS: list[Screen] = [
         nav="ncd",
     ),
     Screen(
-        "19-ncd-gericare",
+        "20-ncd-gericare",
         "bp-screening-batch",
         "BP screening batch",
         "Community/clinic BP packs for hotspot detection",
@@ -1651,7 +1651,7 @@ SCREENS: list[Screen] = [
         nav="ncd",
     ),
     Screen(
-        "19-ncd-gericare",
+        "20-ncd-gericare",
         "stroke-risk-flags",
         "Stroke / NCD risk flags",
         "Signals that feed NCD predictions",
@@ -1664,7 +1664,7 @@ SCREENS: list[Screen] = [
         nav="ncd",
     ),
     Screen(
-        "20-hmis-dhis2",
+        "21-hmis-dhis2",
         "hmis-home",
         "HMIS / DHIS2 home",
         "Approved public-health aggregates into FCHIP",
@@ -1680,7 +1680,7 @@ SCREENS: list[Screen] = [
         nav="hmis",
     ),
     Screen(
-        "20-hmis-dhis2",
+        "21-hmis-dhis2",
         "dataset-mapping",
         "Dataset mapping",
         "Map HMIS/DHIS2 elements to cascade indicators",
@@ -1695,7 +1695,7 @@ SCREENS: list[Screen] = [
         nav="hmis",
     ),
     Screen(
-        "20-hmis-dhis2",
+        "21-hmis-dhis2",
         "aggregate-push-pull",
         "Aggregate push / pull",
         "Scheduled exchange with district HMIS",
@@ -1710,7 +1710,7 @@ SCREENS: list[Screen] = [
         nav="hmis",
     ),
     Screen(
-        "20-hmis-dhis2",
+        "21-hmis-dhis2",
         "hmis-audit",
         "HMIS audit",
         "What public aggregates entered the pipeline",
@@ -1723,7 +1723,7 @@ SCREENS: list[Screen] = [
         nav="hmis",
     ),
     Screen(
-        "21-community-events",
+        "22-community-events",
         "events-home",
         "Community events home",
         "Churches · mosques · dialogues feed community signals",
@@ -1738,7 +1738,7 @@ SCREENS: list[Screen] = [
         nav="community",
     ),
     Screen(
-        "21-community-events",
+        "22-community-events",
         "outreach-event-log",
         "Outreach event log",
         "Community outreach events → ingest",
@@ -1753,7 +1753,7 @@ SCREENS: list[Screen] = [
         nav="community",
     ),
     Screen(
-        "21-community-events",
+        "22-community-events",
         "community-dialogue",
         "Community dialogue",
         "Needs & priorities from community conversations",
@@ -1768,7 +1768,7 @@ SCREENS: list[Screen] = [
         nav="community",
     ),
     Screen(
-        "21-community-events",
+        "22-community-events",
         "participation-register",
         "Participation register",
         "Who engaged — cascade participation signal",
@@ -1782,7 +1782,7 @@ SCREENS: list[Screen] = [
         nav="community",
     ),
     Screen(
-        "22-climate-feeds",
+        "07-climate-feeds",
         "climate-home",
         "Climate feeds home",
         "Climate API as a first-class data feeder",
@@ -1797,7 +1797,7 @@ SCREENS: list[Screen] = [
         nav="climate",
     ),
     Screen(
-        "22-climate-feeds",
+        "07-climate-feeds",
         "rainfall-temperature",
         "Rainfall & temperature",
         "Weather signals fused with health",
@@ -1811,7 +1811,7 @@ SCREENS: list[Screen] = [
         nav="climate",
     ),
     Screen(
-        "22-climate-feeds",
+        "07-climate-feeds",
         "extremes-flood-heat",
         "Extremes · flood · heat",
         "Short-term climate risks for early warning",
@@ -1824,7 +1824,7 @@ SCREENS: list[Screen] = [
         nav="climate",
     ),
     Screen(
-        "22-climate-feeds",
+        "07-climate-feeds",
         "feed-config-audit",
         "Feed config & audit",
         "Which climate feeds may enter the pipeline",
@@ -1840,7 +1840,7 @@ SCREENS: list[Screen] = [
     ),
     # CHIS feeder extras (optional domain already module 05)
     Screen(
-        "05-chis-livelihoods",
+        "13-chis-livelihoods",
         "iga-participation-entry",
         "IGA participation entry",
         "Livelihood groups feed participation where tracked",
@@ -1857,7 +1857,7 @@ SCREENS: list[Screen] = [
     ),
     # 23 insurance insights (§7 — prevention population views only)
     Screen(
-        "23-insurance-insights",
+        "12-insurance-insights",
         "prevention-overview",
         "Prevention overview",
         "Insurance partners — population prevention insights",
@@ -1875,7 +1875,7 @@ SCREENS: list[Screen] = [
         layout="dashboard-metrics",
     ),
     Screen(
-        "23-insurance-insights",
+        "12-insurance-insights",
         "risk-cohort-insights",
         "Risk cohort insights",
         "Anonymised cohorts for prevention planning",
@@ -1890,7 +1890,7 @@ SCREENS: list[Screen] = [
         layout="list-worklist",
     ),
     Screen(
-        "23-insurance-insights",
+        "12-insurance-insights",
         "anonymised-trends",
         "Anonymised trends",
         "Prevention-focused population health trends",
@@ -2009,7 +2009,7 @@ SCREENS: list[Screen] = [
         state="conflict",
     ),
     Screen(
-        "12-research-exports",
+        "23-research-exports",
         "export-pending",
         "Export under review",
         "Approval and privacy checks are in progress",
@@ -2063,100 +2063,100 @@ NAV_ROUTES = {
         "/00-shared/notifications-center",
     ],
     "caregiver": [
-        "/02-community-caregiver/my-household",
-        "/02-community-caregiver/self-report",
-        "/02-community-caregiver/guidance-hints",
-        "/02-community-caregiver/household-needs-capture",
+        "/09-community-caregiver/my-household",
+        "/09-community-caregiver/self-report",
+        "/09-community-caregiver/guidance-hints",
+        "/09-community-caregiver/household-needs-capture",
     ],
     "facility": [
-        "/06-facility-dashboard/overview",
-        "/06-facility-dashboard/catchment-map",
-        "/07-referrals-desk/referral-queue",
-        "/06-facility-dashboard/stock-signal",
+        "/04-facility-dashboard/overview",
+        "/04-facility-dashboard/catchment-map",
+        "/05-referrals-desk/referral-queue",
+        "/04-facility-dashboard/stock-signal",
     ],
     "district": [
-        "/10-district-moh/population-map",
-        "/10-district-moh/early-warnings",
-        "/04-cascade-metrics/indicators-overview",
-        "/10-district-moh/cascade-planning",
+        "/08-district-moh/population-map",
+        "/08-district-moh/early-warnings",
+        "/03-cascade-metrics/indicators-overview",
+        "/08-district-moh/cascade-planning",
     ],
     "partner": [
-        "/11-ngo-partner/programme-monitoring",
-        "/11-ngo-partner/impact-evidence",
-        "/11-ngo-partner/training-skills-analytics",
-        "/12-research-exports/evidence-catalog",
+        "/14-ngo-partner/programme-monitoring",
+        "/14-ngo-partner/impact-evidence",
+        "/14-ngo-partner/training-skills-analytics",
+        "/23-research-exports/evidence-catalog",
     ],
     "admin": [
-        "/13-admin-consent/org-catchment",
-        "/13-admin-consent/users-roles",
-        "/13-admin-consent/consent-privacy",
-        "/08-emr-connector/connector-status",
+        "/11-admin-consent/org-catchment",
+        "/11-admin-consent/users-roles",
+        "/11-admin-consent/consent-privacy",
+        "/06-emr-connector/connector-status",
     ],
     "intel": [
-        "/09-intelligence/ingest-pipeline",
-        "/09-intelligence/ai-risk-scores",
-        "/09-intelligence/gis-explorer",
-        "/09-intelligence/clinical-support-guidance",
+        "/02-intelligence/ingest-pipeline",
+        "/02-intelligence/ai-risk-scores",
+        "/02-intelligence/gis-explorer",
+        "/02-intelligence/clinical-support-guidance",
     ],
     "insurance": [
-        "/23-insurance-insights/prevention-overview",
-        "/23-insurance-insights/risk-cohort-insights",
-        "/23-insurance-insights/anonymised-trends",
+        "/12-insurance-insights/prevention-overview",
+        "/12-insurance-insights/risk-cohort-insights",
+        "/12-insurance-insights/anonymised-trends",
         "/00-shared/notifications-center",
     ],
     "school": [
-        "/14-schools-health/school-home",
-        "/14-schools-health/health-education-session",
-        "/14-schools-health/learner-screening-entry",
-        "/14-schools-health/school-sync-status",
+        "/15-schools-health/school-home",
+        "/15-schools-health/health-education-session",
+        "/15-schools-health/learner-screening-entry",
+        "/15-schools-health/school-sync-status",
     ],
     "pharmacy": [
-        "/15-pharmacy-outlets/stock-levels-entry",
-        "/15-pharmacy-outlets/dispense-log",
-        "/15-pharmacy-outlets/common-complaints",
-        "/15-pharmacy-outlets/prestock-ack",
+        "/16-pharmacy-outlets/stock-levels-entry",
+        "/16-pharmacy-outlets/dispense-log",
+        "/16-pharmacy-outlets/common-complaints",
+        "/16-pharmacy-outlets/prestock-ack",
     ],
     "lab": [
-        "/16-labs-poc/lab-home",
-        "/16-labs-poc/result-entry",
-        "/16-labs-poc/result-queue",
-        "/16-labs-poc/batch-results-upload",
+        "/17-labs-poc/lab-home",
+        "/17-labs-poc/result-entry",
+        "/17-labs-poc/result-queue",
+        "/17-labs-poc/batch-results-upload",
     ],
     "corporate": [
-        "/17-corporate-wellness/corporate-home",
-        "/17-corporate-wellness/camp-vitals-entry",
-        "/17-corporate-wellness/camp-summary-push",
-        "/17-corporate-wellness/occupational-flags",
+        "/18-corporate-wellness/corporate-home",
+        "/18-corporate-wellness/camp-vitals-entry",
+        "/18-corporate-wellness/camp-summary-push",
+        "/18-corporate-wellness/occupational-flags",
     ],
     "mch": [
-        "/18-mch-touchpoints/mch-home",
-        "/18-mch-touchpoints/anc-visit-entry",
-        "/18-mch-touchpoints/immunisation-entry",
-        "/18-mch-touchpoints/nutrition-monitoring",
+        "/19-mch-touchpoints/mch-home",
+        "/19-mch-touchpoints/anc-visit-entry",
+        "/19-mch-touchpoints/immunisation-entry",
+        "/19-mch-touchpoints/nutrition-monitoring",
     ],
     "ncd": [
-        "/19-ncd-gericare/cohort-home",
-        "/19-ncd-gericare/cohort-visit-entry",
-        "/19-ncd-gericare/bp-screening-batch",
-        "/19-ncd-gericare/stroke-risk-flags",
+        "/20-ncd-gericare/cohort-home",
+        "/20-ncd-gericare/cohort-visit-entry",
+        "/20-ncd-gericare/bp-screening-batch",
+        "/20-ncd-gericare/stroke-risk-flags",
     ],
     "hmis": [
-        "/20-hmis-dhis2/hmis-home",
-        "/20-hmis-dhis2/dataset-mapping",
-        "/20-hmis-dhis2/aggregate-push-pull",
-        "/20-hmis-dhis2/hmis-audit",
+        "/21-hmis-dhis2/hmis-home",
+        "/21-hmis-dhis2/dataset-mapping",
+        "/21-hmis-dhis2/aggregate-push-pull",
+        "/21-hmis-dhis2/hmis-audit",
     ],
     "community": [
-        "/21-community-events/events-home",
-        "/21-community-events/outreach-event-log",
-        "/21-community-events/community-dialogue",
-        "/21-community-events/participation-register",
+        "/22-community-events/events-home",
+        "/22-community-events/outreach-event-log",
+        "/22-community-events/community-dialogue",
+        "/22-community-events/participation-register",
     ],
     "climate": [
-        "/22-climate-feeds/climate-home",
-        "/22-climate-feeds/rainfall-temperature",
-        "/22-climate-feeds/extremes-flood-heat",
-        "/22-climate-feeds/feed-config-audit",
+        "/07-climate-feeds/climate-home",
+        "/07-climate-feeds/rainfall-temperature",
+        "/07-climate-feeds/extremes-flood-heat",
+        "/07-climate-feeds/feed-config-audit",
     ],
 }
 
@@ -2202,41 +2202,41 @@ PRIMARY_TARGETS = {
     ("01-chw-vht-mobile", "alerts-inbox"): "/01-chw-vht-mobile/alert-follow-up",
     ("01-chw-vht-mobile", "alert-follow-up"): "/01-chw-vht-mobile/worklist-home",
     ("01-chw-vht-mobile", "sync-failed"): "/01-chw-vht-mobile/sync-status",
-    ("02-community-caregiver", "self-report"): "/02-community-caregiver/my-household?state=success",
-    ("06-facility-dashboard", "open-referrals"): "/07-referrals-desk/referral-queue",
-    ("07-referrals-desk", "referral-queue"): "/07-referrals-desk/referral-detail",
-    ("07-referrals-desk", "referral-detail"): "/07-referrals-desk/outcome-feedback",
-    ("07-referrals-desk", "outcome-feedback"): "/07-referrals-desk/referral-queue?state=success",
-    ("10-district-moh", "early-warnings"): "/10-district-moh/action-deploy",
-    ("10-district-moh", "action-deploy"): "/10-district-moh/cascade-planning?state=success",
-    ("12-research-exports", "export-request"): "/12-research-exports/export-pending",
-    ("12-research-exports", "export-pending"): "/12-research-exports/evidence-catalog",
+    ("09-community-caregiver", "self-report"): "/09-community-caregiver/my-household?state=success",
+    ("04-facility-dashboard", "open-referrals"): "/05-referrals-desk/referral-queue",
+    ("05-referrals-desk", "referral-queue"): "/05-referrals-desk/referral-detail",
+    ("05-referrals-desk", "referral-detail"): "/05-referrals-desk/outcome-feedback",
+    ("05-referrals-desk", "outcome-feedback"): "/05-referrals-desk/referral-queue?state=success",
+    ("08-district-moh", "early-warnings"): "/08-district-moh/action-deploy",
+    ("08-district-moh", "action-deploy"): "/08-district-moh/cascade-planning?state=success",
+    ("23-research-exports", "export-request"): "/23-research-exports/export-pending",
+    ("23-research-exports", "export-pending"): "/23-research-exports/evidence-catalog",
 }
 
 WORKSPACE_DESTINATIONS = [
     {"workspace": "CHW / VHT mobile", "to": "/01-chw-vht-mobile/worklist-home"},
-    {"workspace": "Caregiver mobile", "to": "/02-community-caregiver/my-household"},
-    {"workspace": "Outreach planning", "to": "/03-outreach-school-health/campaign-planner"},
-    {"workspace": "Cascade metrics", "to": "/04-cascade-metrics/indicators-overview"},
-    {"workspace": "CHIS / livelihoods", "to": "/05-chis-livelihoods/enrolment"},
-    {"workspace": "Facility dashboard", "to": "/06-facility-dashboard/overview"},
-    {"workspace": "Referrals desk", "to": "/07-referrals-desk/referral-queue"},
-    {"workspace": "EMR / HMS connector", "to": "/08-emr-connector/connector-status"},
-    {"workspace": "Intelligence operations", "to": "/09-intelligence/ingest-pipeline"},
-    {"workspace": "District / MoH", "to": "/10-district-moh/population-map"},
-    {"workspace": "NGO / partner M&E", "to": "/11-ngo-partner/programme-monitoring"},
-    {"workspace": "Research exports", "to": "/12-research-exports/evidence-catalog"},
-    {"workspace": "Admin · consent · access", "to": "/13-admin-consent/org-catchment"},
-    {"workspace": "School health", "to": "/14-schools-health/school-home"},
-    {"workspace": "Pharmacy outlet", "to": "/15-pharmacy-outlets/stock-levels-entry"},
-    {"workspace": "Lab / PoC", "to": "/16-labs-poc/lab-home"},
-    {"workspace": "Corporate wellness", "to": "/17-corporate-wellness/corporate-home"},
-    {"workspace": "MCH touchpoints", "to": "/18-mch-touchpoints/mch-home"},
-    {"workspace": "NCD / Gericare", "to": "/19-ncd-gericare/cohort-home"},
-    {"workspace": "HMIS / DHIS2", "to": "/20-hmis-dhis2/hmis-home"},
-    {"workspace": "Community events", "to": "/21-community-events/events-home"},
-    {"workspace": "Climate feeds", "to": "/22-climate-feeds/climate-home"},
-    {"workspace": "Insurance insights", "to": "/23-insurance-insights/prevention-overview"},
+    {"workspace": "Caregiver mobile", "to": "/09-community-caregiver/my-household"},
+    {"workspace": "Outreach planning", "to": "/10-outreach-school-health/campaign-planner"},
+    {"workspace": "Cascade metrics", "to": "/03-cascade-metrics/indicators-overview"},
+    {"workspace": "CHIS / livelihoods", "to": "/13-chis-livelihoods/enrolment"},
+    {"workspace": "Facility dashboard", "to": "/04-facility-dashboard/overview"},
+    {"workspace": "Referrals desk", "to": "/05-referrals-desk/referral-queue"},
+    {"workspace": "EMR / HMS connector", "to": "/06-emr-connector/connector-status"},
+    {"workspace": "Intelligence operations", "to": "/02-intelligence/ingest-pipeline"},
+    {"workspace": "District / MoH", "to": "/08-district-moh/population-map"},
+    {"workspace": "NGO / partner M&E", "to": "/14-ngo-partner/programme-monitoring"},
+    {"workspace": "Research exports", "to": "/23-research-exports/evidence-catalog"},
+    {"workspace": "Admin · consent · access", "to": "/11-admin-consent/org-catchment"},
+    {"workspace": "School health", "to": "/15-schools-health/school-home"},
+    {"workspace": "Pharmacy outlet", "to": "/16-pharmacy-outlets/stock-levels-entry"},
+    {"workspace": "Lab / PoC", "to": "/17-labs-poc/lab-home"},
+    {"workspace": "Corporate wellness", "to": "/18-corporate-wellness/corporate-home"},
+    {"workspace": "MCH touchpoints", "to": "/19-mch-touchpoints/mch-home"},
+    {"workspace": "NCD / Gericare", "to": "/20-ncd-gericare/cohort-home"},
+    {"workspace": "HMIS / DHIS2", "to": "/21-hmis-dhis2/hmis-home"},
+    {"workspace": "Community events", "to": "/22-community-events/events-home"},
+    {"workspace": "Climate feeds", "to": "/07-climate-feeds/climate-home"},
+    {"workspace": "Insurance insights", "to": "/12-insurance-insights/prevention-overview"},
 ]
 
 
@@ -2262,7 +2262,7 @@ def infer_layout(screen: Screen) -> str:
     if screen.kind == "form":
         return "upload-batch" if "upload" in screen.slug else "form-capture"
     if screen.kind == "dashboard":
-        if screen.module == "23-insurance-insights":
+        if screen.module == "12-insurance-insights":
             return "insurance-prevention"
         if screen.module[:2].isdigit() and 14 <= int(screen.module[:2]) <= 22:
             return "feeder-home"
@@ -2285,9 +2285,9 @@ def infer_phase(screen: Screen) -> str:
         return "shared"
     if screen.slug in {"medicine-demand-forecast", "national-roll-up"}:
         return "phase-3"
-    if screen.module == "12-research-exports":
+    if screen.module == "23-research-exports":
         return "phase-4"
-    if screen.module in {"11-ngo-partner", "05-chis-livelihoods"}:
+    if screen.module in {"14-ngo-partner", "13-chis-livelihoods"}:
         return "phase-2"
     if screen.module[:2].isdigit() and 14 <= int(screen.module[:2]) <= 21:
         return "phase-2"
@@ -2766,7 +2766,7 @@ def main():
             C.clear()
             C.update(light_palette)
 
-    for module, screens in by_module.items():
+    for module, screens in sorted(by_module.items()):
         write_module_readme(module, screens)
 
     # root index
@@ -2796,46 +2796,46 @@ def main():
         "| Feeder party | Module folder |",
         "| --- | --- |",
         "| CHWs / VHTs | `01-chw-vht-mobile` |",
-        "| Patients / caregivers | `02-community-caregiver` |",
-        "| Communities · events · dialogues | `21-community-events` (+ needs in `02`) |",
-        "| Outreach programmes | `03-outreach-school-health` |",
-        "| Schools | `14-schools-health` |",
-        "| Hospitals / clinics (manual + share) | `06-facility-dashboard` · `07-referrals-desk` |",
-        "| Existing EMR / HMS | `08-emr-connector` |",
-        "| Pharmacies / drug shops | `15-pharmacy-outlets` |",
-        "| ANC / PNC · immunisation · nutrition | `18-mch-touchpoints` |",
-        "| Corporate / workplace wellness | `17-corporate-wellness` |",
-        "| Labs / PoC | `16-labs-poc` |",
-        "| Gericare / NCD cohorts | `19-ncd-gericare` |",
-        "| CHIS / livelihoods (optional) | `05-chis-livelihoods` |",
-        "| HMIS / DHIS2 (where approved) | `20-hmis-dhis2` |",
-        "| Research / NGO M&E uploads | `11-ngo-partner` · `12-research-exports` |",
-        "| Climate API | `22-climate-feeds` (+ fusion in `09`) |",
+        "| Patients / caregivers | `09-community-caregiver` |",
+        "| Communities · events · dialogues | `22-community-events` (+ needs in `09`) |",
+        "| Outreach programmes | `10-outreach-school-health` |",
+        "| Schools | `15-schools-health` |",
+        "| Hospitals / clinics (manual + share) | `04-facility-dashboard` · `05-referrals-desk` |",
+        "| Existing EMR / HMS | `06-emr-connector` |",
+        "| Pharmacies / drug shops | `16-pharmacy-outlets` |",
+        "| ANC / PNC · immunisation · nutrition | `19-mch-touchpoints` |",
+        "| Corporate / workplace wellness | `18-corporate-wellness` |",
+        "| Labs / PoC | `17-labs-poc` |",
+        "| Gericare / NCD cohorts | `20-ncd-gericare` |",
+        "| CHIS / livelihoods (optional) | `13-chis-livelihoods` |",
+        "| HMIS / DHIS2 (where approved) | `21-hmis-dhis2` |",
+        "| Research / NGO M&E uploads | `14-ngo-partner` · `23-research-exports` |",
+        "| Climate API | `07-climate-feeds` (+ fusion in `02`) |",
         "",
         "## Consumer surfaces (§7)",
         "",
         "| Customer | Module |",
         "| --- | --- |",
         "| CHW / VHT | `01-chw-vht-mobile` |",
-        "| Caregivers (optional) | `02-community-caregiver` |",
-        "| Medical centres & clinics | `06` · `07` · `08` |",
-        "| District health offices | `10-district-moh` |",
-        "| Ministries of health (national) | `10-district-moh/national-roll-up` (Phase 3) |",
-        "| NGOs & partners | `11-ngo-partner` · `04-cascade-metrics` |",
-        "| Research institutions | `12-research-exports` |",
-        "| Insurance companies | `23-insurance-insights` (prevention only) |",
+        "| Caregivers (optional) | `09-community-caregiver` |",
+        "| Medical centres & clinics | `04` · `05` · `06` |",
+        "| District health offices | `08-district-moh` |",
+        "| Ministries of health (national) | `08-district-moh/national-roll-up` (Phase 3) |",
+        "| NGOs & partners | `14-ngo-partner` · `03-cascade-metrics` |",
+        "| Research institutions | `23-research-exports` |",
+        "| Insurance companies | `12-insurance-insights` (prevention only) |",
         "",
         "## Split notes",
         "",
-        "- `03-outreach-school-health` = programme planning; `14-schools-health` = school feeder.",
-        "- `06/.../open-referrals` = overview; `07-referrals-desk` = working queue.",
-        "- `09-intelligence` = shared stack (incl. clinical support guidance); not district-owned.",
+        "- `10-outreach-school-health` = programme planning; `15-schools-health` = school feeder.",
+        "- `04/.../open-referrals` = overview; `05-referrals-desk` = working queue.",
+        "- `02-intelligence` = shared stack (incl. clinical support guidance); not district-owned.",
         "- Screens reference kit layouts via `layout` in each `screen.json`.",
         "",
         "## Modules",
         "",
     ]
-    for module, screens in by_module.items():
+    for module, screens in sorted(by_module.items()):
         lines.append(f"### [{module}]({module}/README.md)")
         lines.append("")
         for s in screens:

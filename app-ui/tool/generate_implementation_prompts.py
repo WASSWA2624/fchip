@@ -100,7 +100,7 @@ PLAN_REFS = [
 
 
 def module_to_feature(module: str) -> str:
-    """00-shared → shared; 07-referrals-desk → referrals_desk."""
+    """00-shared → shared; 05-referrals-desk → referrals_desk."""
     body = re.sub(r"^\d+-", "", module)
     return body.replace("-", "_")
 

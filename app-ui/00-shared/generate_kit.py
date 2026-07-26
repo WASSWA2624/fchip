@@ -486,7 +486,7 @@ LAYOUTS_CATALOG: list[Layout] = [
         "Insurance prevention",
         "§7 prevention population insights — not claims / not CHIS identity",
         ["stat-card-row", "list-row-card", "note-banner", "primary-cta"],
-        ["23-insurance-insights"],
+        ["12-insurance-insights"],
     ),
 ]
 

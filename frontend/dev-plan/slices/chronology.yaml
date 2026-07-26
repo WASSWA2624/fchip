@@ -222,809 +222,809 @@ screens:
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-027
-    module: 09-intelligence
+    module: 02-intelligence
     screen: ingest-pipeline
-    slice: VS-09
+    slice: VS-02
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-028
-    module: 09-intelligence
+    module: 02-intelligence
     screen: feeder-health-board
-    slice: VS-09
+    slice: VS-02
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-029
-    module: 04-cascade-metrics
+    module: 03-cascade-metrics
     screen: indicators-overview
-    slice: VS-04
+    slice: VS-03
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-030
-    module: 04-cascade-metrics
+    module: 03-cascade-metrics
     screen: gap-detection
-    slice: VS-04
+    slice: VS-03
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-031
-    module: 04-cascade-metrics
+    module: 03-cascade-metrics
     screen: partner-reports
-    slice: VS-04
+    slice: VS-03
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-032
-    module: 06-facility-dashboard
+    module: 04-facility-dashboard
     screen: overview
-    slice: VS-06
+    slice: VS-04
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-033
-    module: 06-facility-dashboard
+    module: 04-facility-dashboard
     screen: catchment-map
-    slice: VS-06
+    slice: VS-04
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-034
-    module: 06-facility-dashboard
+    module: 04-facility-dashboard
     screen: open-referrals
-    slice: VS-06
+    slice: VS-04
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-035
-    module: 06-facility-dashboard
+    module: 04-facility-dashboard
     screen: stock-signal
-    slice: VS-06
+    slice: VS-04
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-036
-    module: 06-facility-dashboard
+    module: 04-facility-dashboard
     screen: outreach-priorities
-    slice: VS-06
+    slice: VS-04
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-037
-    module: 06-facility-dashboard
+    module: 04-facility-dashboard
     screen: clinical-share-confirm
-    slice: VS-06
+    slice: VS-04
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-038
-    module: 06-facility-dashboard
+    module: 04-facility-dashboard
     screen: manual-case-signal
-    slice: VS-06
+    slice: VS-04
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-039
-    module: 07-referrals-desk
+    module: 05-referrals-desk
     screen: referral-queue
-    slice: VS-07
+    slice: VS-05
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-040
-    module: 07-referrals-desk
+    module: 05-referrals-desk
     screen: referral-queue-empty
-    slice: VS-07
+    slice: VS-05
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-041
-    module: 07-referrals-desk
+    module: 05-referrals-desk
     screen: referral-detail
-    slice: VS-07
+    slice: VS-05
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-042
-    module: 07-referrals-desk
+    module: 05-referrals-desk
     screen: outcome-feedback
-    slice: VS-07
+    slice: VS-05
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-043
-    module: 08-emr-connector
+    module: 06-emr-connector
     screen: connector-status
-    slice: VS-08
+    slice: VS-06
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-044
-    module: 08-emr-connector
+    module: 06-emr-connector
     screen: connector-degraded
-    slice: VS-08
+    slice: VS-06
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-045
-    module: 08-emr-connector
+    module: 06-emr-connector
     screen: api-scopes-setup
-    slice: VS-08
+    slice: VS-06
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-046
-    module: 08-emr-connector
+    module: 06-emr-connector
     screen: push-event-log
-    slice: VS-08
+    slice: VS-06
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-047
-    module: 08-emr-connector
+    module: 06-emr-connector
     screen: facility-onboarding
-    slice: VS-08
+    slice: VS-06
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-048
-    module: 22-climate-feeds
+    module: 07-climate-feeds
     screen: climate-home
-    slice: VS-22
+    slice: VS-07
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-049
-    module: 22-climate-feeds
+    module: 07-climate-feeds
     screen: rainfall-temperature
-    slice: VS-22
+    slice: VS-07
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-050
-    module: 22-climate-feeds
+    module: 07-climate-feeds
     screen: extremes-flood-heat
-    slice: VS-22
+    slice: VS-07
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-051
-    module: 22-climate-feeds
+    module: 07-climate-feeds
     screen: feed-config-audit
-    slice: VS-22
+    slice: VS-07
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-052
-    module: 09-intelligence
+    module: 02-intelligence
     screen: gis-explorer
-    slice: VS-09
+    slice: VS-02
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-053
-    module: 09-intelligence
+    module: 02-intelligence
     screen: climate-fusion
-    slice: VS-09
+    slice: VS-02
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-054
-    module: 09-intelligence
+    module: 02-intelligence
     screen: ai-risk-scores
-    slice: VS-09
+    slice: VS-02
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-055
-    module: 09-intelligence
+    module: 02-intelligence
     screen: alerts-worklists-engine
-    slice: VS-09
+    slice: VS-02
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-056
-    module: 09-intelligence
+    module: 02-intelligence
     screen: clinical-support-guidance
-    slice: VS-09
+    slice: VS-02
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-057
-    module: 10-district-moh
+    module: 08-district-moh
     screen: population-map
-    slice: VS-10
+    slice: VS-08
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-058
-    module: 10-district-moh
+    module: 08-district-moh
     screen: early-warnings
-    slice: VS-10
+    slice: VS-08
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-059
-    module: 10-district-moh
+    module: 08-district-moh
     screen: action-deploy
-    slice: VS-10
+    slice: VS-08
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-060
-    module: 10-district-moh
+    module: 08-district-moh
     screen: cascade-planning
-    slice: VS-10
+    slice: VS-08
     wave: 1
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-061
-    module: 02-community-caregiver
+    module: 09-community-caregiver
     screen: my-household
-    slice: VS-02
+    slice: VS-09
     wave: 2
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-062
-    module: 02-community-caregiver
+    module: 09-community-caregiver
     screen: self-report
-    slice: VS-02
+    slice: VS-09
     wave: 2
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-063
-    module: 02-community-caregiver
+    module: 09-community-caregiver
     screen: guidance-hints
-    slice: VS-02
+    slice: VS-09
     wave: 2
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-064
-    module: 02-community-caregiver
+    module: 09-community-caregiver
     screen: household-needs-capture
-    slice: VS-02
+    slice: VS-09
     wave: 2
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-065
-    module: 03-outreach-school-health
+    module: 10-outreach-school-health
     screen: campaign-planner
-    slice: VS-03
+    slice: VS-10
     wave: 2
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-066
-    module: 03-outreach-school-health
+    module: 10-outreach-school-health
     screen: session-log
-    slice: VS-03
+    slice: VS-10
     wave: 2
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-067
-    module: 03-outreach-school-health
+    module: 10-outreach-school-health
     screen: coverage-map
-    slice: VS-03
+    slice: VS-10
     wave: 2
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-068
-    module: 03-outreach-school-health
+    module: 10-outreach-school-health
     screen: screening-results-entry
-    slice: VS-03
+    slice: VS-10
     wave: 2
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-069
-    module: 03-outreach-school-health
+    module: 10-outreach-school-health
     screen: home-visit-batch-upload
-    slice: VS-03
+    slice: VS-10
     wave: 2
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-070
-    module: 13-admin-consent
+    module: 11-admin-consent
     screen: org-catchment
-    slice: VS-13
+    slice: VS-11
     wave: 2
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-071
-    module: 13-admin-consent
+    module: 11-admin-consent
     screen: users-roles
-    slice: VS-13
+    slice: VS-11
     wave: 2
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-072
-    module: 13-admin-consent
+    module: 11-admin-consent
     screen: consent-privacy
-    slice: VS-13
+    slice: VS-11
     wave: 2
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-073
-    module: 13-admin-consent
+    module: 11-admin-consent
     screen: emr-api-access
-    slice: VS-13
+    slice: VS-11
     wave: 2
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-074
-    module: 13-admin-consent
+    module: 11-admin-consent
     screen: feeder-party-registry
-    slice: VS-13
+    slice: VS-11
     wave: 2
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-075
-    module: 23-insurance-insights
+    module: 12-insurance-insights
     screen: prevention-overview
-    slice: VS-23
+    slice: VS-12
     wave: 2
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-076
-    module: 23-insurance-insights
+    module: 12-insurance-insights
     screen: risk-cohort-insights
-    slice: VS-23
+    slice: VS-12
     wave: 2
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-077
-    module: 23-insurance-insights
+    module: 12-insurance-insights
     screen: anonymised-trends
-    slice: VS-23
+    slice: VS-12
     wave: 2
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-078
-    module: 05-chis-livelihoods
+    module: 13-chis-livelihoods
     screen: enrolment
-    slice: VS-05
+    slice: VS-13
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-079
-    module: 05-chis-livelihoods
+    module: 13-chis-livelihoods
     screen: contributions
-    slice: VS-05
+    slice: VS-13
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-080
-    module: 05-chis-livelihoods
+    module: 13-chis-livelihoods
     screen: claims-access
-    slice: VS-05
+    slice: VS-13
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-081
-    module: 05-chis-livelihoods
+    module: 13-chis-livelihoods
     screen: iga-participation-entry
-    slice: VS-05
+    slice: VS-13
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-082
-    module: 11-ngo-partner
+    module: 14-ngo-partner
     screen: programme-monitoring
-    slice: VS-11
+    slice: VS-14
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-083
-    module: 11-ngo-partner
+    module: 14-ngo-partner
     screen: impact-evidence
-    slice: VS-11
+    slice: VS-14
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-084
-    module: 11-ngo-partner
+    module: 14-ngo-partner
     screen: training-skills-analytics
-    slice: VS-11
+    slice: VS-14
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-085
-    module: 11-ngo-partner
+    module: 14-ngo-partner
     screen: field-dataset-upload
-    slice: VS-11
+    slice: VS-14
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-086
-    module: 11-ngo-partner
+    module: 14-ngo-partner
     screen: partner-indicator-entry
-    slice: VS-11
+    slice: VS-14
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-087
-    module: 14-schools-health
+    module: 15-schools-health
     screen: school-home
-    slice: VS-14
+    slice: VS-15
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-088
-    module: 14-schools-health
+    module: 15-schools-health
     screen: health-education-session
-    slice: VS-14
+    slice: VS-15
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-089
-    module: 14-schools-health
+    module: 15-schools-health
     screen: learner-screening-entry
-    slice: VS-14
+    slice: VS-15
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-090
-    module: 14-schools-health
+    module: 15-schools-health
     screen: absenteeism-wellness
-    slice: VS-14
+    slice: VS-15
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-091
-    module: 14-schools-health
+    module: 15-schools-health
     screen: school-sync-status
-    slice: VS-14
+    slice: VS-15
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-092
-    module: 15-pharmacy-outlets
+    module: 16-pharmacy-outlets
     screen: pharmacy-home
-    slice: VS-15
+    slice: VS-16
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-093
-    module: 15-pharmacy-outlets
+    module: 16-pharmacy-outlets
     screen: stock-levels-entry
-    slice: VS-15
+    slice: VS-16
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-094
-    module: 15-pharmacy-outlets
+    module: 16-pharmacy-outlets
     screen: dispense-log
-    slice: VS-15
+    slice: VS-16
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-095
-    module: 15-pharmacy-outlets
+    module: 16-pharmacy-outlets
     screen: common-complaints
-    slice: VS-15
+    slice: VS-16
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-096
-    module: 15-pharmacy-outlets
+    module: 16-pharmacy-outlets
     screen: prestock-ack
-    slice: VS-15
+    slice: VS-16
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-097
-    module: 16-labs-poc
+    module: 17-labs-poc
     screen: lab-home
-    slice: VS-16
+    slice: VS-17
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-098
-    module: 16-labs-poc
+    module: 17-labs-poc
     screen: result-entry
-    slice: VS-16
+    slice: VS-17
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-099
-    module: 16-labs-poc
+    module: 17-labs-poc
     screen: batch-results-upload
-    slice: VS-16
+    slice: VS-17
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-100
-    module: 16-labs-poc
+    module: 17-labs-poc
     screen: result-queue
-    slice: VS-16
+    slice: VS-17
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-101
-    module: 17-corporate-wellness
+    module: 18-corporate-wellness
     screen: corporate-home
-    slice: VS-17
+    slice: VS-18
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-102
-    module: 17-corporate-wellness
+    module: 18-corporate-wellness
     screen: camp-vitals-entry
-    slice: VS-17
+    slice: VS-18
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-103
-    module: 17-corporate-wellness
+    module: 18-corporate-wellness
     screen: camp-summary-push
-    slice: VS-17
+    slice: VS-18
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-104
-    module: 17-corporate-wellness
+    module: 18-corporate-wellness
     screen: occupational-flags
-    slice: VS-17
+    slice: VS-18
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-105
-    module: 18-mch-touchpoints
+    module: 19-mch-touchpoints
     screen: mch-home
-    slice: VS-18
+    slice: VS-19
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-106
-    module: 18-mch-touchpoints
+    module: 19-mch-touchpoints
     screen: anc-visit-entry
-    slice: VS-18
+    slice: VS-19
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-107
-    module: 18-mch-touchpoints
+    module: 19-mch-touchpoints
     screen: pnc-visit-entry
-    slice: VS-18
+    slice: VS-19
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-108
-    module: 18-mch-touchpoints
+    module: 19-mch-touchpoints
     screen: immunisation-entry
-    slice: VS-18
+    slice: VS-19
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-109
-    module: 18-mch-touchpoints
+    module: 19-mch-touchpoints
     screen: nutrition-monitoring
-    slice: VS-18
+    slice: VS-19
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-110
-    module: 19-ncd-gericare
+    module: 20-ncd-gericare
     screen: cohort-home
-    slice: VS-19
+    slice: VS-20
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-111
-    module: 19-ncd-gericare
+    module: 20-ncd-gericare
     screen: cohort-visit-entry
-    slice: VS-19
+    slice: VS-20
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-112
-    module: 19-ncd-gericare
+    module: 20-ncd-gericare
     screen: bp-screening-batch
-    slice: VS-19
+    slice: VS-20
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-113
-    module: 19-ncd-gericare
+    module: 20-ncd-gericare
     screen: stroke-risk-flags
-    slice: VS-19
+    slice: VS-20
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-114
-    module: 20-hmis-dhis2
+    module: 21-hmis-dhis2
     screen: hmis-home
-    slice: VS-20
+    slice: VS-21
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-115
-    module: 20-hmis-dhis2
+    module: 21-hmis-dhis2
     screen: dataset-mapping
-    slice: VS-20
+    slice: VS-21
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-116
-    module: 20-hmis-dhis2
+    module: 21-hmis-dhis2
     screen: aggregate-push-pull
-    slice: VS-20
+    slice: VS-21
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-117
-    module: 20-hmis-dhis2
+    module: 21-hmis-dhis2
     screen: hmis-audit
-    slice: VS-20
+    slice: VS-21
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-118
-    module: 21-community-events
+    module: 22-community-events
     screen: events-home
-    slice: VS-21
+    slice: VS-22
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-119
-    module: 21-community-events
+    module: 22-community-events
     screen: outreach-event-log
-    slice: VS-21
+    slice: VS-22
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-120
-    module: 21-community-events
+    module: 22-community-events
     screen: community-dialogue
-    slice: VS-21
+    slice: VS-22
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-121
-    module: 21-community-events
+    module: 22-community-events
     screen: participation-register
-    slice: VS-21
+    slice: VS-22
     wave: 3
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-122
-    module: 06-facility-dashboard
+    module: 04-facility-dashboard
     screen: medicine-demand-forecast
-    slice: VS-06
+    slice: VS-04
     wave: 4
     deferred: true
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-123
-    module: 10-district-moh
+    module: 08-district-moh
     screen: national-roll-up
-    slice: VS-10
+    slice: VS-08
     wave: 4
     deferred: true
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-124
-    module: 12-research-exports
+    module: 23-research-exports
     screen: evidence-catalog
-    slice: VS-12
+    slice: VS-23
     wave: 4
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-125
-    module: 12-research-exports
+    module: 23-research-exports
     screen: export-request
-    slice: VS-12
+    slice: VS-23
     wave: 4
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-126
-    module: 12-research-exports
+    module: 23-research-exports
     screen: research-contribution-upload
-    slice: VS-12
+    slice: VS-23
     wave: 4
     deferred: false
     status: not-started
     backend: pending  # pending | paired | none
   - seq: S-127
-    module: 12-research-exports
+    module: 23-research-exports
     screen: export-pending
-    slice: VS-12
+    slice: VS-23
     wave: 4
     deferred: false
     status: not-started

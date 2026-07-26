@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate IMPLEMENTATION_PROMPT.md for every app-ui screen, component, and layout."""
+"""Generate implementation_prompt.md for every app-ui screen, component, and layout."""
 
 from __future__ import annotations
 
@@ -11,8 +11,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 APP_UI = ROOT / "app-ui"
 CHRONOLOGY = ROOT / "frontend" / "dev-plan" / "slices" / "chronology.yaml"
-OUT_NAME = "IMPLEMENTATION_PROMPT.md"
-INDEX_NAME = "IMPLEMENTATION_PROMPTS.md"
+OUT_NAME = "implementation_prompt.md"
+INDEX_NAME = "implementation_prompts.md"
 
 # Common rule blocks referenced in every prompt
 RULES_ROOT = [
@@ -650,7 +650,7 @@ def write_index(rows: list[dict]) -> None:
         "# App UI — implementation prompts",
         "",
         "Professional, actionable prompts for every `app-ui` pack that has visual specimens.",
-        "Each leaf folder contains `IMPLEMENTATION_PROMPT.md` ready to paste into an agent session.",
+        "Each leaf folder contains `implementation_prompt.md` ready to paste into an agent session.",
         "",
         "Regenerate:",
         "",
@@ -661,7 +661,7 @@ def write_index(rows: list[dict]) -> None:
         "## How to use",
         "",
         "1. Pick the next unfinished screen from `frontend/dev-plan/slices/chronology.yaml` (screens only).",
-        "2. Open that folder's `IMPLEMENTATION_PROMPT.md` and paste it into the agent.",
+        "2. Open that folder's `implementation_prompt.md` and paste it into the agent.",
         "3. For missing shared chrome, run the matching **component** or **layout** prompt first.",
         "4. Follow the playbook in `frontend/dev-plan/25-slice-execution-playbook.md`.",
         "",

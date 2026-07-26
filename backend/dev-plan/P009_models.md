@@ -1,24 +1,24 @@
 # P009 Database Models
-Define complete domain ownership before routes and modules are implemented.
+Add only the data required by the active frontend screen or connected journey.
 
-## Model Groups
+## Slice Model Order
 
-Models must be added in this order:
+Within each slice:
 
-1. Access, organization, subscriptions, entitlements, governance, and audit.
-2. Patient registry, consent, scheduling, queues, encounters, clinical, inpatient, ICU, theatre, and emergency care.
-3. Laboratory, radiology, imaging, PACS, pharmacy, dispensing, and adverse events.
-4. Billing, insurance, coverage, workforce, shifts, rosters, leave, and payroll.
-5. Inventory, procurement, housekeeping, maintenance, assets, and biomedical equipment lifecycle.
-6. Mortuary custody and release; notifications, messaging, reporting, analytics, integrations, office context, handover, and closeout.
+1. Identify UI fields, filters, actions, states, scopes, provenance, consent, and history requirements.
+2. Reuse existing FCHIP entities when ownership is correct; do not duplicate records per surface.
+3. Add the smallest models, relations, indexes, and migration needed by the typed frontend contract.
+4. Add status history, audit, version, source, geography, and sync metadata when the journey requires them.
 
 ## Shared Contract
 
 - Names must use lowercase `snake_case`.
-- Tenant-owned models must consistently include `tenant_id`, `facility_id`, audit fields, indexes, and the approved soft-delete strategy.
-- Biomedical models must cover registry, location, maintenance, calibration, safety, downtime, incidents, recalls, parts, warranties, providers, and utilization.
-- Mortuary must have first-class case, deceased, storage, custody, viewing, post-mortem, authorization, billing, and release models; generic placeholders must not replace them.
+- Scoped models must consistently include the applicable tenant, catchment, facility, programme, feeder, geography, ownership, audit, version, and soft-delete fields.
+- Public entities need unique immutable `human_friendly_id`; raw primary keys stay internal.
+- Capture data must retain source and consent provenance. Referrals, alerts, sync, connectors, and export reviews must retain status history.
+- GIS/climate observations retain geography, observation time, source, and quality metadata.
+- Do not add generic HIS models unless a current FCHIP screen/flow explicitly needs them.
 
 ## Acceptance
 
-The schema must represent every group without naming or ownership drift.
+The migration and seed data must support every state of the active screen without speculative unrelated tables or ownership drift.

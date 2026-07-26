@@ -34,6 +34,7 @@ Define the database contract.
 - All mutations must create audit evidence.
 
 ## Domain
-- Workforce tables must support multi-role assignments and ABAC policy storage.
-- Biomedical tables must preserve equipment lifecycle history.
-- Mortuary tables must preserve custody and release evidence without name drift.
+- Identity tables must support multi-role assignments, module grants, subscriptions, and ABAC policy storage.
+- Community-health records must preserve consent, source, catchment, facility, feeder, and audit provenance.
+- Referrals, alerts, connector events, sync attempts, and export decisions must preserve their complete status history.
+- GIS and climate records must keep source, geography, observation time, and quality metadata.

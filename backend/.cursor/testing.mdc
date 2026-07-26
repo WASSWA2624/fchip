@@ -22,5 +22,6 @@ Define the minimum backend verification bar.
 ## Requirements
 - Every module must mirror its runtime structure in tests.
 - New modules are incomplete until tests and docs land together.
-- High-risk domains (billing, biomedical, mortuary, security, closeout) need workflow-level regression coverage.
+- High-risk domains (identity, consent, PHI sharing, referrals, connector access, alerts, offline conflicts, and anonymised exports) need workflow-level regression coverage.
+- Every product slice needs a contract test using the same fixture shape as its frontend repository and an integration test for its declared UI states.
 - Mocks must preserve real contract shape for Prisma, storage, websocket, and auth dependencies.

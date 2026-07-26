@@ -13,7 +13,7 @@ Define server behavior for sync-capable clients.
 - Endpoints exposed to offline clients should support incremental sync metadata.
 - Sync metadata (`updated_since`, version/etag fields) must use `human_friendly_id` for record identity.
 - After successful reconciliation, persisted mutations must still emit scoped realtime events per `websockets.mdc`.
-- Auth, entitlement changes, break-glass approval, payments, refunds, mortuary release, and last-office final close are online-only.
+- Account authentication, session issuance/revocation, entitlement or role changes, consent withdrawal, connector scope changes, export approval/download authorization, and security-sensitive approvals are online-only.
 - Conflict responses must identify the conflicting record and latest version metadata.
 - Server logic must not assume the client clock is authoritative.
 

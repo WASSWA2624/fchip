@@ -27,10 +27,11 @@ Define backend identity and authorization behavior.
 - All permission, role, module, and subscription changes must be atomic, versioned, auditable, and restorable.
 
 ## Roles
-- Support `UNIT_MANAGER`, `WARD_MANAGER`, `ICU_MANAGER`, and `THEATRE_MANAGER`; HR keeps tenant-wide workforce authority.
-- Scoped managers may manage rosters only inside their assigned scope.
+- Support the roles declared by current `app-ui/**/screen.json` files, including CHW/VHT, caregiver, facility, district/MoH, NGO/partner, admin, intelligence operator, research, insurance, and feeder roles.
+- Role homes and route visibility must match `app-flows/07-navigation.md`.
+- Scoped users may act only inside assigned tenant, catchment, facility, programme, feeder, or record ownership boundaries.
 
 ## Emergency and sensitive workflows
 - Break-glass access must be explicit, time-limited, audited, and queryable.
-- Patient, billing, payroll, security admin, mortuary release, and closeout actions require full audit evidence.
+- Household/person data, consent, referrals, clinical shares, security administration, connector scopes, alert actions, research exports, and sync conflict resolution require full audit evidence.
 - Sensitive reads must be loggable without exposing secrets.

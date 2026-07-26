@@ -11,7 +11,9 @@ Repeatable process for adding a feature to the FCHIP frontend.
 
 ## Requirements
 
-- Start by identifying route, state, data needs, validation, localization, responsive behavior, and tests.
+- Follow [`product_delivery.mdc`](./product_delivery.mdc): begin with the screen's `screen.json`, six visual references, and connected `app-flows/` journey.
+- Start by identifying route, declared states, roles, access, actions, data needs, validation, localization, responsive behavior, offline/realtime needs, and tests.
+- Implement the responsive Flutter UI with typed fixtures first; then define and deliver the smallest matching backend in the same slice.
 - Create the feature folder with the standard `data/domain/presentation` structure.
 - Define domain models and repository contracts before wiring UI to real data when non-trivial.
 - Add localization keys before adding user-facing text.
@@ -23,6 +25,7 @@ Repeatable process for adding a feature to the FCHIP frontend.
 - Enforce RBAC+ABAC visibility for menus, components, and actions.
 - Shared-data mutations must update Riverpod immediately and reconcile via [`instant_ui_sync.mdc`](./instant_ui_sync.mdc).
 - Add tests for controller logic, repository mapping, and important widgets.
+- Add backend contract/workflow tests and one cross-stack integration test before closing the slice.
 - Update docs when structure or conventions change.
 
 ## Acceptance
@@ -30,10 +33,12 @@ Repeatable process for adding a feature to the FCHIP frontend.
 - The feature works at supported breakpoints with no boundary violations.
 - Queue screens match [`ui-workspace.mdc`](./ui-workspace.mdc) when applicable.
 - Tests and localization are included.
+- The real backend contract is wired, or the tracker explicitly proves the screen is static and needs no backend.
 
 ## Related
 
 - [`ui-workspace.mdc`](./ui-workspace.mdc)
+- [`product_delivery.mdc`](./product_delivery.mdc)
 - [`architecture.mdc`](./architecture.mdc)
 - [`components.mdc`](./components.mdc)
 - [`testing.mdc`](./testing.mdc)

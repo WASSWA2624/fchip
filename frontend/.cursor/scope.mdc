@@ -13,11 +13,13 @@ FCHIP frontend is the Flutter client for the Community Health Intelligence Platf
 ## Mandatory rules
 
 - Must build production-ready workspaces aligned with the FCHIP SoT, not a generic disconnected starter.
+- Must implement the routes and journeys catalogued in [`app-ui/`](../../app-ui/) and [`app-flows/`](../../app-flows/) using the frontend-first tandem workflow in [`product_delivery.mdc`](./product_delivery.mdc).
 - Must support Android, iOS, Web, Windows, macOS, and Linux where enabled; extra-small mobile through large desktop; smartwatch out of scope.
 - Must integrate with `fchip-backend` via repositories and DTOs; HTTP details live in `backend/.cursor/api.mdc` and `network_api.mdc`.
 - Should prefer Flutter SDK widgets, Material Design, and shared `lib/shared/` abstractions before custom packages.
 - Must not duplicate dependencies, folders, components, rules, and competing design systems.
 - Menus, routes, forms, actions, and visibility must match backend permissions, entitlements, and APIs.
+- Product screens must be delivered in the phase and journey order in `frontend/dev-plan/24-product-vertical-slices.md`; foundation work must not become an open-ended substitute for user-visible delivery.
 - Must reference entities by `human_friendly_id`; backend maps internal IDs.
 - Must enforce RBAC+ABAC and subscription-package intersection ([`permissions.mdc`](./permissions.mdc)).
 

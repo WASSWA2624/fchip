@@ -1,0 +1,42 @@
+---
+description: Build FCHIP frontend-first vertical slices from app-ui and app-flows with matching backend delivery.
+globs:
+  - "frontend/**"
+alwaysApply: false
+---
+
+# Frontend-First Product Delivery
+
+`app-ui/` and `app-flows/` define the proposed screens, routes, states, and journeys. Product identity remains owned by `.cursor/app-write-up.mdc`.
+
+## Slice order
+
+For every screen or tightly connected journey:
+
+1. Read its `app-ui/<module>/<screen>/screen.json`, all six mockups, module `README.md`, and relevant `app-flows/` journey.
+2. List route, roles, access scope, responsive layout, supported states, actions, data, offline behavior, and backend effects.
+3. Implement the Flutter screen first with typed fixtures or a fake repository. Match mobile, tablet, desktop, light, and dark references without copying raster images into the UI.
+4. Define the smallest typed repository and API contract required by that UI. Do not design an unused generic backend.
+5. Implement the matching backend model, validation, authorization, service, endpoint, audit, sync/realtime behavior, tests, and seed data in the same slice.
+6. Replace fixtures with the real repository, then test the route and full user action across both stacks.
+
+Do not start the next product slice while the current slice has an undocumented backend gap. Static-only screens may state `backend: none`; all data, authentication, mutation, upload, export, sync, notification, map, analytics, or permission behavior requires backend proof.
+
+## Source precedence
+
+1. Security, privacy, safety, and `.cursor/app-write-up.mdc`.
+2. `app-flows/`, especially `06-mvp-phases.md` and `07-navigation.md`.
+3. The screen's `screen.json`.
+4. Its six `app-ui` visual references and shared kit.
+5. Frontend/backend technical rules.
+
+If references conflict, resolve and document the decision before coding.
+
+## Slice done gate
+
+- UI matches declared layouts, route, roles, navigation, localization, and supported states.
+- Loading, empty, error, forbidden, success, offline, and conflict states are implemented where declared.
+- API and websocket payloads expose `human_friendly_id`, never internal IDs.
+- RBAC + ABAC + subscription + assigned-module checks agree in frontend and backend.
+- Frontend unit/widget/golden tests, backend contract/workflow tests, and one integration test pass.
+- The slice tracker records screens, API routes/events, models, migrations, seed data, and validation evidence.

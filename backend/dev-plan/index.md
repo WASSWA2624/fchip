@@ -1,13 +1,19 @@
 # Backend Development Plan
-Follow this chronology to produce the reproducible FCHIP backend.
+Build the reusable backend foundation, then deliver product capabilities in tandem with the active frontend slice.
 
 ## Execution Order
 
-Phases must run without skipping: `P000_setup`, `P001_core`, `P002_prisma`, `P003_app`, `P004_i18n`, `P005_ws`, `P006_storage`, `P007_tests`, `P008_perf`, `P009_models`, `P010_api_endpoints`, `P011_modules`, `P012_seeder`, `P013_ws_features`, `P014_locales`, then `P015_offline`.
+1. Prepare or verify the minimum shared foundation in `P000_setup` through `P008_perf`.
+2. Start product work from [`frontend/dev-plan/24-product-vertical-slices.md`](../../frontend/dev-plan/24-product-vertical-slices.md), not from a backend module backlog.
+3. For each active frontend screen/journey, apply `P009_models` through `P015_offline` only as needed inside that same slice.
+4. Wire and prove the real frontend repository before opening the next slice.
+
+The backend may never get ahead by building speculative product domains. Foundation work may be reused across slices, but data models, endpoints, modules, seeds, events, locales, and offline behavior are justified by a current UI/flow.
 
 ## Release Gates
 
 - Each phase must satisfy its acceptance criteria before the next begins.
-- Module names, permission keys, entitlements, and route families must remain aligned with `../../.cursor/app-write-up.mdc` and `../../backend/.cursor/api.mdc`.
-- Implementations must preserve multi-role RBAC with ABAC, unit-manager roster authority, biomedical ownership, first-class Mortuary workflows, `snake_case`, documentation, and script hygiene.
-- Existing broad module coverage may be reused, but it must converge on this plan and `backend/.cursor/*`.
+- Every slice must follow `backend/.cursor/vertical-slice-delivery.mdc` and `backend/.cursor/module-creation.mdc`.
+- Module names, permissions, entitlements, routes, states, and contracts must remain aligned with the product SoT, `app-flows/`, the active `screen.json`, and the frontend repository.
+- Preserve multi-role RBAC + ABAC + subscription/module intersection, consent, audit, offline-first field work, `snake_case`, `human_friendly_id`, documentation, and script hygiene.
+- Existing generic HIS code may be reused only when it directly serves the FCHIP slice and is renamed/scoped without preserving unrelated hospital product behavior.

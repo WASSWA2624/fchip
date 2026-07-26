@@ -10,23 +10,23 @@ Define the mandatory build sequence for every backend module.
 
 ## Required sequence
 
-0. Permissions must be declared in `backend/.cursor/module-creation.mdc`, roles in `default_user_roles.mdc`, and the module in `subscriptions.mdc`.
-1. The contract must be defined in `../../.cursor/app-write-up.mdc`, `dev-plan/P010_api_endpoints.md`, and `dev-plan/P011_modules.md`.
-2. Module and mirrored test folders must be created.
-3. Zod schemas must use `snake_case` and `human_friendly_id` for public identifiers.
-4. Repositories must support `human_friendly_id` lookup, tenancy, soft-delete, and audit-friendly queries.
-5. Services must enforce RBAC, ABAC, entitlements, audit, workflow rules, and post-mutation websocket events.
-6. Controllers must use response helpers and must not contain business logic.
-7. Routes must include validation, auth, authorization, and documentation.
-8. The module must be mounted; every user-visible mutation must emit websockets.
-9. Tests, seeds, and docs must be complete before declaring done.
+0. A frontend screen or connected journey must be active in `frontend/dev-plan/24-product-vertical-slices.md`.
+1. Read the implemented UI/repository contract, its `screen.json`, mockups, and `app-flows/` journey; record the smallest backend capability needed.
+2. Declare module, role, permission, subscription, and ABAC scope in canonical catalogs.
+3. Define API/problem/event contracts, then create module and mirrored test folders.
+4. Add only required Prisma models and migrations.
+5. Zod schemas use `snake_case` and `human_friendly_id`; repositories enforce tenancy, scope, soft-delete, and audit-friendly access.
+6. Services enforce consent, RBAC, ABAC, entitlements, workflow rules, audit, idempotency/conflicts, and scoped events as applicable.
+7. Controllers use response helpers; routes include validation, auth, authorization, rate limits, and OpenAPI docs.
+8. Add deterministic seeds for every UI state, mount the module, and wire the real frontend repository.
+9. Backend tests and cross-stack integration tests must pass before declaring the slice done.
 
 ## Done gate
 
 - Owned tables and permission keys must exist.
 - Public routes and responses must use `human_friendly_id` only.
-- Defaults must match `frontend/.cursor/permissions.mdc` / `backend/.cursor/auth-security.mdc`; subscription intersection tests must pass.
+- Defaults must match `frontend/.cursor/permissions.mdc` and `backend/.cursor/auth-security.mdc`; subscription intersection tests must pass.
 - Effective permissions must equal `union(role, module, user grants) ∩ subscription ∩ ABAC`; unauthorized access must not occur.
-- Standalone workflow must work without another paid module open.
+- The screen's workflow must work without an unrelated paid module.
 - Mutations must create audit evidence; names must match docs.
 - Schema, repository, service, controller, and route tests must pass.

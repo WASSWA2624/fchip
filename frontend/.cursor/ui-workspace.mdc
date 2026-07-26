@@ -1,5 +1,5 @@
 ---
-description: Apply when designing or updating clinical or operational module workspace pages.
+description: Apply when designing or updating FCHIP worklists, dashboards, detail pages, and operational workspaces.
 globs:
   - "frontend/lib/features/**/presentation/**"
   - "frontend/lib/shared/components/**"
@@ -7,13 +7,13 @@ globs:
 alwaysApply: false
 ---
 
-# Module Workspace UI Contract
+# FCHIP Workspace UI Contract
 
-Keep clinical and operational module screens consistent. Applies to new and changed screens; legacy pages may refactor incrementally.
+Keep community, facility, intelligence, feeder, and partner screens consistent with `app-ui/00-shared`.
 
 ## Mandatory layout stack
 
-Module work queues (OPD, IPD, Lab, Billing, Nursing) must use this stack unless the interaction model is fundamentally different:
+Worklists, queues, dashboards, and detail/action screens must use this stack when it matches the `layout` and `shells` declared in `screen.json`:
 
 - Page root: `AsyncStateScaffold`
 - Page width: `ResponsivePage` + `PageMaxWidth`
@@ -28,8 +28,8 @@ Must import from `shared/layout`, `shared/components`, and `shared/actions` befo
 ## Mandatory behavior
 
 - Notifications submenu must filter the current worklist, not open modal lists; hide zero-value rows where expected.
-- Must use hospital workflow language; must not expose raw enum names, stage codes, or internal IDs.
-- Must surface `human_friendly_id` and patient display name; must not show raw table IDs or UUIDs.
+- Must use plain FCHIP community-health language; must not expose raw enum names, stage codes, or internal IDs.
+- Must surface `human_friendly_id` and the appropriate household, person, facility, feeder, programme, or alert label; must not show raw table IDs or UUIDs.
 - Must gate actions by backend stage, permission, and subscription entitlement.
 - Must keep worklists paginated/lazy and the shell responsive across mobile, tablet, desktop.
 - After modal mutations, must refresh the affected row, detail, counts, and nav badges via targeted refresh.

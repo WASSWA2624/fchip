@@ -14,21 +14,25 @@ Entry point to Flutter technical standards for FCHIP (`frontend/`).
 When rules conflict, you must apply this order:
 
 1. Security, privacy, and safety rules.
-2. [`backend/.cursor/api.mdc`](../../backend/.cursor/api.mdc) for HTTP and cross-stack behavior.
-3. [`instant_ui_sync.mdc`](./instant_ui_sync.mdc), then [`realtime_sync.mdc`](./realtime_sync.mdc).
-4. This index and the named owner file.
-5. Other frontend rule files.
-6. `dev-plan/` steps (chronology only).
+2. [`.cursor/app-write-up.mdc`](../../.cursor/app-write-up.mdc) for product identity and boundaries.
+3. [`app-flows/`](../../app-flows/), then each screen's `app-ui/**/screen.json` and visual references.
+4. [`backend/.cursor/api.mdc`](../../backend/.cursor/api.mdc) for HTTP and cross-stack behavior.
+5. [`product_delivery.mdc`](./product_delivery.mdc), [`instant_ui_sync.mdc`](./instant_ui_sync.mdc), then [`realtime_sync.mdc`](./realtime_sync.mdc).
+6. This index and the named owner file.
+7. Other frontend rules, then `dev-plan/` steps for chronology.
 
 ## Invariants
 
 - You must prioritize performance, uniform reusable UI in `frontend/lib/shared/`, real-time sync, full responsiveness, and simple workflows.
+- Product implementation is frontend-first: complete each UI as a vertical slice with its matching backend before starting the next slice.
+- Every screen must trace to `app-ui/<module>/<screen>/screen.json`; every journey must trace to `app-flows/`.
 - Entities must be referenced by `human_friendly_id` only; raw table IDs must not be exposed.
 - Effective access must equal role/module/user grants ∩ subscription package ∩ assigned modules ∩ ABAC scope, defined in [`frontend/.cursor/permissions.mdc`](./permissions.mdc) and `backend/.cursor/auth-security.mdc`.
 
 ## Owner map
 
-- Structure: [`project_structure.mdc`](./project_structure.mdc), [`feature_workflow.mdc`](./feature_workflow.mdc), [`checklists.mdc`](./checklists.mdc).
+- Delivery: [`product_delivery.mdc`](./product_delivery.mdc), [`feature_workflow.mdc`](./feature_workflow.mdc), [`checklists.mdc`](./checklists.mdc).
+- Structure: [`project_structure.mdc`](./project_structure.mdc).
 - UI/UX: [`design-system.mdc`](./design-system.mdc), [`components.mdc`](./components.mdc), [`layouts.mdc`](./layouts.mdc), [`ui-patterns.mdc`](./ui-patterns.mdc), [`ui-workspace.mdc`](./ui-workspace.mdc), [`ui-feedback.mdc`](./ui-feedback.mdc), [`navigation.mdc`](./navigation.mdc), [`accessibility.mdc`](./accessibility.mdc).
 - Data/network: [`state_management.mdc`](./state_management.mdc), [`data_modeling.mdc`](./data_modeling.mdc), [`network_api.mdc`](./network_api.mdc), [`database_strategy.mdc`](./database_strategy.mdc), [`realtime_sync.mdc`](./realtime_sync.mdc).
 - Security/auth: [`security.mdc`](./security.mdc), [`authentication_session.mdc`](./authentication_session.mdc), [`permissions.mdc`](./permissions.mdc).

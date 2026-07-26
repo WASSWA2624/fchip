@@ -23,7 +23,7 @@ Client-side offline behavior per [`backend/.cursor/api.mdc`](../../backend/.curs
 
 ## Online-only (must not queue)
 
-Auth/session changes, entitlement/break-glass approval, payments/refunds, mortuary release, final closeout — see `backend/.cursor/api.mdc`.
+Account authentication, session issuance/revocation, role or entitlement changes, consent withdrawal, export approval/download authorization, EMR scope changes, and other security-sensitive approvals — see `backend/.cursor/api.mdc`.
 
 ## Sync queue fields
 

@@ -11,7 +11,7 @@ Define the mandatory build sequence for every backend module.
 ## Required sequence
 
 0. A frontend screen or connected journey must be active in `frontend/dev-plan/24-product-vertical-slices.md`.
-1. Read the implemented UI/repository contract, its `screen.json`, mockups, and `app-flows/` journey; record the smallest backend capability needed.
+1. Read the implemented UI/repository contract, its `screen.json`, mockups, and `app-flows/` journey; derive the smallest backend capability with `backend/dev-plan/P016_slice_pairing.md`.
 2. Declare roles in `src/config/roles.js`, permissions in `src/config/permissions.js`, subscription/module mapping in `src/lib/subscriptions/plan-module-matrix.js`, and the applicable ABAC scope.
 3. Define API/problem/event contracts, then create module and mirrored test folders.
 4. Add only required Prisma models and migrations.
@@ -30,3 +30,4 @@ Define the mandatory build sequence for every backend module.
 - The screen's workflow must work without an unrelated paid module.
 - Mutations must create audit evidence; names must match docs.
 - Schema, repository, service, controller, and route tests must pass.
+- The pairing must be recorded in `frontend/dev-plan/slices/tracker.md` and `python tool/check_slice_coverage.py` must pass.

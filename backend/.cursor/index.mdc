@@ -23,7 +23,7 @@ Define backend technical standards for `fchip-backend`.
 - Effective access = `union(role, module, user grants) ∩ active subscription ∩ assigned modules ∩ ABAC scope`; no grant bypasses subscription limits.
 - Product framing follows the FCHIP SoT; do not present the API as a generic hospital or EMR brand.
 - Every business module must stay standalone and entitlement-aware.
-- Foundation is backend-owned; product domain work is frontend-led and ships in tandem with one UI screen or connected journey.
+- Foundation is backend-owned; product domain work is frontend-led and ships in tandem with one UI screen or connected journey, per [`.cursor/mandatories.mdc`](../../.cursor/mandatories.mdc).
 - Do not create speculative generic HIS domains that are absent from current FCHIP screens and flows.
 - Public APIs and complex logic require JSDoc documentation.
 - Circular dependencies are forbidden.
@@ -34,7 +34,7 @@ Define backend technical standards for `fchip-backend`.
 - `coding-standards.mdc`: naming, comments, reuse
 - `import-aliases.mdc`: aliases and import boundaries
 - `module-creation.mdc`: module build sequence
-- `vertical-slice-delivery.mdc`: frontend-led product delivery and cross-stack done gate
+- `vertical-slice-delivery.mdc`: frontend-led product delivery and cross-stack done gate; derivation in `backend/dev-plan/P016_slice_pairing.md`
 - `api.mdc`, `api-versioning.mdc`, `response-format.mdc`, `validation.mdc`: HTTP contract
 - `auth-security.mdc`: authn, authz, ABAC, break-glass
 - `cors.mdc`, `rate-limiting.mdc`, `health-checks.mdc`, `error-logging.mdc`, `constants-env.mdc`: runtime safety

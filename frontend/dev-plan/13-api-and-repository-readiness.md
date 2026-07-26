@@ -10,8 +10,9 @@ You must follow [`00-execution-policy.md`](./00-execution-policy.md), [`network_
 3. Put repository contracts in feature domain layers and implementations in data layers.
 4. Use fake or in-memory implementations only while building the UI-first half of an active slice.
 5. Network errors must map to typed failures.
-6. Derive each product contract from the implemented screen and user action; implement its backend before closing that slice.
+6. Derive each product contract from the implemented screen and user action using the derivation table in [`25-slice-execution-playbook.md`](./25-slice-execution-playbook.md); implement its backend before closing that slice.
 7. Keep fixture and backend response shapes contract-tested so switching repositories does not change presentation behavior.
+8. Treat every fake repository as temporary. Delete it when the real one lands, unless a test still overrides it.
 
 ## Acceptance Criteria
 - The shared foundation and widget tests must run without a live backend.

@@ -2,6 +2,8 @@
 
 Build the real FCHIP product from `app-ui/` and `app-flows/`. This plan starts product development after the shared foundation in steps `01`–`23`.
 
+This step owns **what to build and in what order**. [`25-slice-execution-playbook.md`](./25-slice-execution-playbook.md) owns **how to build one screen** and its backend. Status lives in [`slices/tracker.md`](./slices/tracker.md).
+
 ## Starting Baseline
 
 The current frontend/backend contain broad hospital HIS workspaces. Reuse suitable platform primitives such as auth, tenancy, consent, repositories, responsive shells, sync, integrations, and tests, but do not rename an HIS page and count it as a FCHIP screen. Add FCHIP feature folders and routes from `screen.json`; retire unrelated HIS surfaces through explicit migration/feature-gate decisions.
@@ -24,7 +26,15 @@ Follow `frontend/.cursor/product_delivery.mdc` and `backend/.cursor/vertical-sli
 
 For each screen keep: route; phase; roles/ABAC scope; visual references; supported states; frontend files/tests; repository methods; API routes/events; models/migration; permissions/consent/audit; offline/idempotency/conflict policy; seeds; and validation evidence. Mark `backend: none` only for a proven static screen.
 
-Maintain a machine-readable slice registry under `frontend/dev-plan/slices/` with the same slice IDs mirrored under `backend/dev-plan/slices/`. Add a coverage check that reads all `app-ui/**/screen.json` files and fails when a route, localization prefix, supported state, frontend owner, or backend disposition is missing.
+Keep the machine-readable registry at [`slices/registry.yaml`](./slices/registry.yaml) in step with its mirror at [`backend/dev-plan/slices/registry.yaml`](../../backend/dev-plan/slices/registry.yaml). Record each screen using [`slices/TEMPLATE.md`](./slices/TEMPLATE.md) in [`slices/tracker.md`](./slices/tracker.md).
+
+Enforce coverage with:
+
+```bash
+python tool/check_slice_coverage.py
+```
+
+It reads every `app-ui/**/screen.json` and fails when a screen has no owning slice, a registry lists a screen that does not exist, a route or localization prefix does not match, the two registries disagree, or a slice claims `done` without a backend paired to each screen.
 
 ## Delivery Order
 
@@ -93,7 +103,8 @@ Research export delivery must include ethics/privacy review, pending/denied/appr
 - Realtime-capable flows prove scoped delivery and targeted Riverpod reconciliation.
 - No public payload or UI exposes internal database IDs.
 - The real backend is wired and the connected journey passes before the next slice starts.
-- Frontend and backend slice registries agree, and automated coverage reports no missing or duplicate screen ownership.
+- Frontend and backend slice registries agree, and `python tool/check_slice_coverage.py` passes.
+- The tracker record names the backend module, endpoints, models, migration, seeds, and cross-stack proof for every screen in the slice.
 
 ## Completion
 

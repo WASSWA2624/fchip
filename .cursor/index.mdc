@@ -26,8 +26,13 @@ Slogan: **Your health, our mission.** Mission: Connecting Care, Empowering Commu
 
 1. Security, privacy, safety, and compliance.
 2. `.cursor/app-write-up.mdc` for product identity, cascade, and scope.
-3. `frontend/.cursor/index.mdc` or `backend/.cursor/index.mdc` for stack guidance.
-4. `dev-plan/` steps for chronology only.
+3. `.cursor/mandatories.mdc` for shipping checks, including frontend/backend pairing.
+4. `frontend/.cursor/index.mdc` or `backend/.cursor/index.mdc` for stack guidance.
+5. `dev-plan/` steps for chronology only.
+
+## Delivery model
+
+Product work is frontend-first and paired: build the Flutter screen from `app-ui/`, then ship its backend in the same vertical slice. Order lives in `frontend/dev-plan/24-product-vertical-slices.md`, the per-screen loop in `25-slice-execution-playbook.md`, and status in `frontend/dev-plan/slices/tracker.md`. Verify with `python tool/check_slice_coverage.py`.
 
 ## Keep / do not invent
 

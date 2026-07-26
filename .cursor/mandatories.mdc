@@ -7,11 +7,24 @@ alwaysApply: true
 
 Apply on every code change. Do not ship UI or API work that skips these.
 
+## Frontend UI ships with its backend
+
+Product work is frontend-first and **paired**. Every frontend UI must land with the backend that serves it, inside the same vertical slice:
+
+- Build the Flutter screen from `app-ui/<module>/<screen>/screen.json` and its mockups, then implement the matching Prisma model, migration, validation, authorization, endpoint, audit, events, seeds, and tests.
+- A slice closes only when the real repository is wired and the journey passes end to end. Fixtures or fake repositories must not close a slice.
+- Mark `backend: none` only for a screen proven static. Any data, auth, mutation, upload, export, sync, notification, map, or analytics behavior needs backend proof.
+- Record the pairing in `frontend/dev-plan/slices/tracker.md` and keep both slice registries in agreement.
+- Do not start the next slice while the active screen has an undocumented backend gap.
+- Do not build backend domains no current FCHIP screen needs.
+
+Order and gates: `frontend/dev-plan/24-product-vertical-slices.md`.
+
 ## Product framing
 
 Align with [`.cursor/app-write-up.mdc`](app-write-up.mdc):
 
-- **FCHIP** is the Community Health Intelligence Platform — the product this monorepo builds.
+- **FCHIP** is the Community Health Intelligence Platform.
 - Frame FCHIP as a **predictive intelligence platform** on the community health cascade Data & Feedback loop — not a company-ecosystem write-up and not a generic hospital/EMR brand.
 - EMR/HMS wording is only for **external** facility systems FCHIP connects to via secure data APIs.
 - Do not invent alternate cascade order, programme names, or a stand-alone hospital brand for FCHIP.
@@ -48,5 +61,5 @@ Align with [`.cursor/app-write-up.mdc`](app-write-up.mdc):
 
 ## Related
 
-- `frontend/.cursor/ui-feedback.mdc`, `layouts.mdc`, `instant_ui_sync.mdc`, `realtime_sync.mdc`, `permissions.mdc`
-- `backend/.cursor/prisma.mdc`
+- `frontend/.cursor/product_delivery.mdc`, `ui-feedback.mdc`, `layouts.mdc`, `instant_ui_sync.mdc`, `realtime_sync.mdc`, `permissions.mdc`
+- `backend/.cursor/vertical-slice-delivery.mdc`, `prisma.mdc`

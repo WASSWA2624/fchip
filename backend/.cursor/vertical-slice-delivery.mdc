@@ -15,7 +15,7 @@ Before backend domain work, inspect the slice's implemented Flutter UI, typed re
 
 ## Smallest complete backend
 
-For each slice:
+Derive the work with `backend/dev-plan/P016_slice_pairing.md`, whose table maps each UI fact to one backend obligation. For each slice:
 
 1. Confirm data ownership, roles, ABAC scope, subscription/module gate, consent, retention, offline, and realtime needs.
 2. Define request, response, problem, pagination, idempotency, conflict, and event contracts.
@@ -38,3 +38,5 @@ Do not build speculative hospital, billing, payroll, inpatient, theatre, mortuar
 ## Done gate
 
 A backend slice is not done until its frontend route uses the real contract and cross-stack tests cover success plus declared loading/error/forbidden/offline/conflict behavior as applicable.
+
+The slice ID must match `frontend/dev-plan/slices/registry.yaml`, the pairing must be recorded in `frontend/dev-plan/slices/tracker.md`, and `python tool/check_slice_coverage.py` must pass.

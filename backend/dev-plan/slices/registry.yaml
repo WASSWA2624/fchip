@@ -1,79 +1,257 @@
-version: 1
+version: 2
 frontend_registry: frontend/dev-plan/slices/registry.yaml
+tracker: frontend/dev-plan/slices/tracker.md
+pairing_guide: backend/dev-plan/P016_slice_pairing.md
+coverage_check: tool/check_slice_coverage.py
 policy:
   start_only_after_frontend_fixture_ui: true
   implementation_unit: schema_contract_module_seed_tests_and_frontend_wiring
   speculative_his_domains: forbidden
+# Slice IDs must match the frontend registry exactly.
+#
+# planned_modules and api_prefixes are PLANNING HINTS, not a build licence.
+# Confirm every model, route, and permission against the active screen.json
+# before writing code, and delete anything the screen does not need.
+#
+# status: not-started | in-progress | blocked | done
+# offline_writes: slice contains field writes needing idempotency + conflict rules
+# realtime: slice has a UI region needing live reconciliation
 slices:
   - id: VS-00
     frontend_module: 00-shared
     capability: identity_sessions_consent_access_notifications_preferences
+    wave: 0
+    status: not-started
+    planned_modules: [auth, user-session, consent, effective-access, notification, user-preference]
+    api_prefixes: [/api/v1/auth, /api/v1/sessions, /api/v1/consents, /api/v1/effective-access, /api/v1/notifications, /api/v1/user-preferences]
+    offline_writes: false
+    realtime: true
+    notes: Offline PIN unlock is a device boundary, not account authentication. Session issuance and revocation stay online-only.
   - id: VS-01
     frontend_module: 01-chw-vht-mobile
     capability: field_worklists_household_visits_referrals_alerts_offline_sync
+    wave: 1
+    status: not-started
+    planned_modules: [community-household, household-visit, visit-observation, mch-indicator, community-referral, field-worklist, community-alert, field-sync]
+    api_prefixes: [/api/v1/households, /api/v1/household-visits, /api/v1/mch-indicators, /api/v1/community-referrals, /api/v1/field-worklists, /api/v1/community-alerts, /api/v1/field-sync]
+    offline_writes: true
+    realtime: true
+    notes: Local save must never depend on connectivity. Pending, syncing, synced, failed, and conflict states must all preserve the record.
   - id: VS-02
     frontend_module: 02-community-caregiver
     capability: households_self_reports_guidance_and_needs
+    wave: 2
+    status: not-started
+    planned_modules: [caregiver-household, self-report, guidance-message, household-need]
+    api_prefixes: [/api/v1/caregiver-households, /api/v1/self-reports, /api/v1/guidance-messages, /api/v1/household-needs]
+    offline_writes: true
+    realtime: false
+    notes: Self-reports enter the shared ingest spine and may raise CHW follow-up tasks; they are not clinical records.
   - id: VS-03
     frontend_module: 03-outreach-school-health
     capability: outreach_planning_sessions_screening_coverage_and_batch_ingest
+    wave: 2
+    status: not-started
+    planned_modules: [outreach-campaign, outreach-session, screening-result, coverage-area, field-batch-upload]
+    api_prefixes: [/api/v1/outreach-campaigns, /api/v1/outreach-sessions, /api/v1/screening-results, /api/v1/coverage-areas, /api/v1/field-batch-uploads]
+    offline_writes: true
+    realtime: false
   - id: VS-04
     frontend_module: 04-cascade-metrics
     capability: indicators_gap_detection_and_partner_reports
+    wave: 1
+    status: not-started
+    planned_modules: [cascade-indicator, cascade-gap, partner-report]
+    api_prefixes: [/api/v1/cascade-indicators, /api/v1/cascade-gaps, /api/v1/partner-reports]
+    offline_writes: false
+    realtime: true
+    notes: Indicators must follow the SoT cascade order and indicator list. Report generation runs off the request thread.
   - id: VS-05
     frontend_module: 05-chis-livelihoods
     capability: optional_chis_enrolment_contributions_access_and_iga
+    wave: 3
+    status: not-started
+    planned_modules: [chis-enrolment, chis-contribution, chis-claim-access, iga-participation]
+    api_prefixes: [/api/v1/chis-enrolments, /api/v1/chis-contributions, /api/v1/chis-claim-access, /api/v1/iga-participations]
+    offline_writes: false
+    realtime: false
+    notes: Optional data domain only. Must not become FCHIP product identity or a billing/insurance claims engine.
   - id: VS-06
     frontend_module: 06-facility-dashboard
     capability: facility_intelligence_catchment_referral_stock_and_priority_views
+    wave: 1
+    status: not-started
+    planned_modules: [facility-intelligence, catchment-map, facility-referral-summary, stock-signal, outreach-priority, clinical-share, case-signal, demand-forecast]
+    api_prefixes: [/api/v1/facility-intelligence, /api/v1/catchment-map, /api/v1/stock-signals, /api/v1/outreach-priorities, /api/v1/clinical-shares, /api/v1/case-signals, /api/v1/demand-forecasts]
+    offline_writes: false
+    realtime: true
+    notes: Population-health views only; must not become an EMR. demand-forecast is phase 3 and stays feature-gated. Clinical share requires consent plus audit.
   - id: VS-07
     frontend_module: 07-referrals-desk
     capability: community_referral_queue_detail_outcome_and_status_history
+    wave: 1
+    status: not-started
+    planned_modules: [referral-queue, referral-outcome, referral-status-history]
+    api_prefixes: [/api/v1/referral-queues, /api/v1/community-referrals]
+    offline_writes: false
+    realtime: true
+    notes: Shares the community-referral model with VS-01. Outcome feedback must flow back to the CHW status view and cascade metrics.
   - id: VS-08
     frontend_module: 08-emr-connector
     capability: scoped_emr_connector_health_events_and_facility_onboarding
+    wave: 1
+    status: not-started
+    planned_modules: [emr-connector, connector-scope, connector-event-log, facility-onboarding]
+    api_prefixes: [/api/v1/emr-connectors, /api/v1/connector-scopes, /api/v1/connector-events, /api/v1/facility-onboarding]
+    offline_writes: false
+    realtime: true
+    notes: External EMR/HMS systems push into FCHIP under least privilege. Scope changes are online-only and audited.
   - id: VS-09
     frontend_module: 09-intelligence
     capability: ingest_feed_health_gis_climate_risk_guidance_alerts_and_worklists
+    wave: 1
+    status: not-started
+    planned_modules: [ingest-pipeline, feeder-health, gis-layer, climate-fusion, risk-score, alert-engine, clinical-guidance]
+    api_prefixes: [/api/v1/ingest-pipeline, /api/v1/feeder-health, /api/v1/gis-layers, /api/v1/climate-fusion, /api/v1/risk-scores, /api/v1/alerts, /api/v1/clinical-guidance]
+    offline_writes: false
+    realtime: true
+    notes: Shared spine for every feeder. All ingest retains source, consent, and quality provenance. Guidance is decision support, not prescribing.
   - id: VS-10
     frontend_module: 10-district-moh
     capability: population_maps_warnings_action_deployment_planning_and_rollup
+    wave: 1
+    status: not-started
+    planned_modules: [population-map, early-warning, action-deployment, cascade-plan, national-rollup]
+    api_prefixes: [/api/v1/population-map, /api/v1/early-warnings, /api/v1/action-deployments, /api/v1/cascade-plans, /api/v1/national-rollup]
+    offline_writes: false
+    realtime: true
+    notes: national-rollup is phase 3 and stays feature-gated. District scope is enforced by ABAC geography.
   - id: VS-11
     frontend_module: 11-ngo-partner
     capability: partner_monitoring_evidence_training_uploads_and_indicators
+    wave: 3
+    status: not-started
+    planned_modules: [partner-programme, impact-evidence, training-analytics, partner-dataset-upload, partner-indicator]
+    api_prefixes: [/api/v1/partner-programmes, /api/v1/impact-evidence, /api/v1/training-analytics, /api/v1/partner-dataset-uploads, /api/v1/partner-indicators]
+    offline_writes: false
+    realtime: false
+    notes: Same metrics spine as VS-04, partner-scoped by ABAC. No separate indicator store.
   - id: VS-12
     frontend_module: 12-research-exports
     capability: contribution_ingest_ethics_review_anonymisation_and_expiring_exports
+    wave: 4
+    status: not-started
+    planned_modules: [evidence-catalog, export-request, ethics-review, anonymised-export, research-contribution]
+    api_prefixes: [/api/v1/evidence-catalog, /api/v1/export-requests, /api/v1/ethics-reviews, /api/v1/anonymised-exports, /api/v1/research-contributions]
+    offline_writes: false
+    realtime: false
+    notes: Raw PHI export is forbidden. Requires ethics/privacy review, pending and denied states, anonymisation proof, expiring download authorization, and immutable audit.
   - id: VS-13
     frontend_module: 13-admin-consent
     capability: organisations_catchments_roles_consent_connector_access_and_feeders
+    wave: 2
+    status: not-started
+    planned_modules: [organisation-catchment, role-administration, consent-policy, emr-api-access, feeder-party-registry]
+    api_prefixes: [/api/v1/organisations, /api/v1/catchments, /api/v1/role-assignments, /api/v1/consent-policies, /api/v1/emr-api-access, /api/v1/feeder-parties]
+    offline_writes: false
+    realtime: true
+    notes: Role, entitlement, consent-withdrawal, and connector-scope changes are online-only with before/after audit and atomic downgrades.
   - id: VS-14
     frontend_module: 14-schools-health
     capability: school_sessions_screenings_wellness_and_offline_sync
+    wave: 3
+    status: not-started
+    planned_modules: [school-registry, school-session, learner-screening, absenteeism-record]
+    api_prefixes: [/api/v1/schools, /api/v1/school-sessions, /api/v1/learner-screenings, /api/v1/absenteeism-records]
+    offline_writes: true
+    realtime: false
+    notes: Learner data is minor-sensitive; consent and access scope must be explicit. Planning stays in VS-03.
   - id: VS-15
     frontend_module: 15-pharmacy-outlets
     capability: outlet_stock_dispensing_complaint_signals_and_prestock_actions
+    wave: 3
+    status: not-started
+    planned_modules: [outlet-registry, outlet-stock, outlet-dispense-log, complaint-signal, prestock-action]
+    api_prefixes: [/api/v1/outlets, /api/v1/outlet-stock, /api/v1/dispense-logs, /api/v1/complaint-signals, /api/v1/prestock-actions]
+    offline_writes: true
+    realtime: false
+    notes: Community demand signals only; must not become a hospital pharmacy or inventory product.
   - id: VS-16
     frontend_module: 16-labs-poc
     capability: lab_results_batches_and_result_queues
+    wave: 3
+    status: not-started
+    planned_modules: [lab-feeder, poc-result, result-batch, result-queue]
+    api_prefixes: [/api/v1/lab-feeders, /api/v1/poc-results, /api/v1/result-batches, /api/v1/result-queues]
+    offline_writes: true
+    realtime: true
+    notes: Community and point-of-care results feeding intelligence; not a hospital LIS.
   - id: VS-17
     frontend_module: 17-corporate-wellness
     capability: wellness_camps_vitals_summaries_and_occupational_flags
+    wave: 3
+    status: not-started
+    planned_modules: [corporate-account, wellness-camp, camp-vitals, occupational-flag]
+    api_prefixes: [/api/v1/corporate-accounts, /api/v1/wellness-camps, /api/v1/camp-vitals, /api/v1/occupational-flags]
+    offline_writes: true
+    realtime: false
+    notes: Employer-visible output must be aggregated; individual results stay with the person and their care pathway.
   - id: VS-18
     frontend_module: 18-mch-touchpoints
     capability: anc_pnc_immunisation_and_nutrition_touchpoints
+    wave: 3
+    status: not-started
+    planned_modules: [anc-touchpoint, pnc-touchpoint, immunisation-record, nutrition-monitoring]
+    api_prefixes: [/api/v1/anc-touchpoints, /api/v1/pnc-touchpoints, /api/v1/immunisation-records, /api/v1/nutrition-monitoring]
+    offline_writes: true
+    realtime: false
+    notes: Extends the VS-01 MCH indicator spine; must not duplicate it.
   - id: VS-19
     frontend_module: 19-ncd-gericare
     capability: cohorts_visits_bp_batches_and_ncd_risk_flags
+    wave: 3
+    status: not-started
+    planned_modules: [ncd-cohort, cohort-visit, bp-screening-batch, ncd-risk-flag]
+    api_prefixes: [/api/v1/ncd-cohorts, /api/v1/cohort-visits, /api/v1/bp-screening-batches, /api/v1/ncd-risk-flags]
+    offline_writes: true
+    realtime: false
+    notes: Risk flags are produced by VS-09 scoring, not a separate engine.
   - id: VS-20
     frontend_module: 20-hmis-dhis2
     capability: approved_dataset_mapping_aggregate_exchange_and_audit
+    wave: 3
+    status: not-started
+    planned_modules: [hmis-dataset-map, hmis-aggregate-exchange, hmis-audit]
+    api_prefixes: [/api/v1/hmis-dataset-maps, /api/v1/hmis-aggregate-exchange, /api/v1/hmis-audit]
+    offline_writes: false
+    realtime: false
+    notes: Aggregate exchange only, against approved dataset mappings. No patient-level push.
   - id: VS-21
     frontend_module: 21-community-events
     capability: events_dialogues_outreach_logs_and_participation
+    wave: 3
+    status: not-started
+    planned_modules: [community-event, community-dialogue, participation-register]
+    api_prefixes: [/api/v1/community-events, /api/v1/community-dialogues, /api/v1/participation-registers]
+    offline_writes: true
+    realtime: false
   - id: VS-22
     frontend_module: 22-climate-feeds
     capability: climate_observations_extremes_configuration_quality_and_audit
+    wave: 1
+    status: not-started
+    planned_modules: [climate-observation, climate-extreme, climate-feed-config]
+    api_prefixes: [/api/v1/climate-observations, /api/v1/climate-extremes, /api/v1/climate-feed-configs]
+    offline_writes: false
+    realtime: true
+    notes: External GIS and climate APIs. Retain geography, observation window, source, and quality metadata for every record.
   - id: VS-23
     frontend_module: 23-insurance-insights
     capability: prevention_only_aggregated_anonymised_insights
+    wave: 2
+    status: not-started
+    planned_modules: [prevention-insight, risk-cohort-insight, anonymised-trend]
+    api_prefixes: [/api/v1/prevention-insights, /api/v1/risk-cohort-insights, /api/v1/anonymised-trends]
+    offline_writes: false
+    realtime: false
+    notes: Prevention-focused, aggregated, anonymised responses with minimum cohort thresholds. Must not reveal raw PHI or become a claims engine.

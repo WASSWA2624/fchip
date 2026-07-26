@@ -22,6 +22,8 @@ For every screen or tightly connected journey:
 
 Do not start the next product slice while the current slice has an undocumented backend gap. Static-only screens may state `backend: none`; all data, authentication, mutation, upload, export, sync, notification, map, analytics, or permission behavior requires backend proof.
 
+The per-screen loop and its UI-to-backend derivation table live in `frontend/dev-plan/25-slice-execution-playbook.md`. The backend half is `backend/dev-plan/P016_slice_pairing.md`.
+
 ## Source precedence
 
 1. Security, privacy, safety, and `.cursor/app-write-up.mdc`.
@@ -40,4 +42,5 @@ If references conflict, resolve and document the decision before coding.
 - API and websocket payloads expose `human_friendly_id`, never internal IDs.
 - RBAC + ABAC + subscription + assigned-module checks agree in frontend and backend.
 - Frontend unit/widget/golden tests, backend contract/workflow tests, and one integration test pass.
-- The slice tracker records screens, API routes/events, models, migrations, seed data, and validation evidence.
+- `frontend/dev-plan/slices/tracker.md` records screens, API routes/events, models, migrations, seed data, and validation evidence.
+- `python tool/check_slice_coverage.py` passes.

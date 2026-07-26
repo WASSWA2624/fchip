@@ -24,14 +24,14 @@ When rules conflict, you must apply this order:
 ## Invariants
 
 - You must prioritize performance, uniform reusable UI in `frontend/lib/shared/`, real-time sync, full responsiveness, and simple workflows.
-- Product implementation is frontend-first: complete each UI as a vertical slice with its matching backend before starting the next slice.
+- Product implementation is frontend-first and paired: every UI ships with the backend that serves it, in the same slice, before the next slice starts. See [`.cursor/mandatories.mdc`](../../.cursor/mandatories.mdc).
 - Every screen must trace to `app-ui/<module>/<screen>/screen.json`; every journey must trace to `app-flows/`.
 - Entities must be referenced by `human_friendly_id` only; raw table IDs must not be exposed.
 - Effective access must equal role/module/user grants ∩ subscription package ∩ assigned modules ∩ ABAC scope, defined in [`frontend/.cursor/permissions.mdc`](./permissions.mdc) and `backend/.cursor/auth-security.mdc`.
 
 ## Owner map
 
-- Delivery: [`product_delivery.mdc`](./product_delivery.mdc), [`feature_workflow.mdc`](./feature_workflow.mdc), [`checklists.mdc`](./checklists.mdc).
+- Delivery: [`product_delivery.mdc`](./product_delivery.mdc), [`feature_workflow.mdc`](./feature_workflow.mdc), [`checklists.mdc`](./checklists.mdc); plan entry point [`frontend/dev-plan/index.md`](../dev-plan/index.md).
 - Structure: [`project_structure.mdc`](./project_structure.mdc).
 - UI/UX: [`design-system.mdc`](./design-system.mdc), [`components.mdc`](./components.mdc), [`layouts.mdc`](./layouts.mdc), [`ui-patterns.mdc`](./ui-patterns.mdc), [`ui-workspace.mdc`](./ui-workspace.mdc), [`ui-feedback.mdc`](./ui-feedback.mdc), [`navigation.mdc`](./navigation.mdc), [`accessibility.mdc`](./accessibility.mdc).
 - Data/network: [`state_management.mdc`](./state_management.mdc), [`data_modeling.mdc`](./data_modeling.mdc), [`network_api.mdc`](./network_api.mdc), [`database_strategy.mdc`](./database_strategy.mdc), [`realtime_sync.mdc`](./realtime_sync.mdc).

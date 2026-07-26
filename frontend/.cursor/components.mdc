@@ -13,6 +13,7 @@ Uniform, reusable UI built on Flutter Material primitives.
 ## Requirements
 
 - Prefer Material/Cupertino widgets; wrap only for consistency or repeated behavior.
+- Treat `app-ui/00-shared/components/README.md` and each component's `component.json` plus six specimens as the visual/variant catalog.
 - Reusable components must live under `frontend/lib/shared/`; must not duplicate in feature folders, and check the catalog before creating new UI.
 - Must not create multiple components for one job or embed product business logic.
 - Optimize for performance: `const` constructors, focused rebuilds, lazy builders for large lists.
@@ -26,7 +27,7 @@ Uniform, reusable UI built on Flutter Material primitives.
 
 ## Standard catalog
 
-Reuse the standard set instead of new abstractions: `AppWorkspace`, `AppListTable`, `AppWorkspaceDetailPanel`, `AppActionPanel`, `AppPermissionActionPanel`, `AppWorkspaceMutationDialog`, `AppButton`, `AppTextField`, `AppSelectField`, `AppRadioGroup`, `AppCheckboxField`, `AppSwitchField`, `AppDateField`, `AppDialog`, `AsyncStateScaffold`, `AppStatusBadge`, `ResponsivePage`, `ResponsiveAppShell`, `SideNavigation`.
+Reuse shared Flutter implementations of the `app-ui/00-shared/components` catalog plus structural primitives such as `AsyncStateScaffold`, `ResponsivePage`, and `ResponsiveAppShell`. Preserve one implementation per component job and map specimen names to clear Dart names.
 
 ## Styling bounds
 

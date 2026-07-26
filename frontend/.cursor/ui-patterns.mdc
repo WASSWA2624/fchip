@@ -16,7 +16,7 @@ Uniform form, table, and search patterns.
 - Must use design tokens exclusively; no hard-coded colors, spacing, or typography ([`design-system.mdc`](./design-system.mdc)).
 - Must stay fully responsive: mobile list/card fallbacks, desktop tables ([`layouts.mdc`](./layouts.mdc)).
 - Must use lazy lists, pagination, and debounced search ([`performance.mdc`](./performance.mdc)).
-- Workflows must use hospital language, not internal codes.
+- Workflows must use plain community-health language from `app-ui`/`app-flows`, not internal codes or generic HIS terminology.
 
 ## Forms
 

@@ -12,7 +12,7 @@ The backend may never get ahead by building speculative product domains. Foundat
 
 ## Release Gates
 
-- Each phase must satisfy its acceptance criteria before the next begins.
+- Foundation gates must pass before product slices; each active slice must pass its own frontend, backend, and cross-stack gates before the next slice begins.
 - Every slice must follow `backend/.cursor/vertical-slice-delivery.mdc` and `backend/.cursor/module-creation.mdc`.
 - Module names, permissions, entitlements, routes, states, and contracts must remain aligned with the product SoT, `app-flows/`, the active `screen.json`, and the frontend repository.
 - Preserve multi-role RBAC + ABAC + subscription/module intersection, consent, audit, offline-first field work, `snake_case`, `human_friendly_id`, documentation, and script hygiene.

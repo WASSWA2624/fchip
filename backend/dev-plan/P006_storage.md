@@ -1,5 +1,5 @@
 # P006 Storage
-Provide controlled binary storage for sensitive hospital artifacts.
+Provide controlled binary storage for sensitive FCHIP uploads, evidence, reports, and approved exports.
 
 ## Requirements
 

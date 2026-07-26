@@ -1,16 +1,18 @@
 # P015 Offline Synchronization
-Publish offline behavior only after core modules and conflict rules are stable.
+Deliver offline behavior with each screen that declares offline, failed-sync, or conflict states.
 
 ## Offline Candidates
 
-Patient quick edits with conflict checks, idempotent scheduling drafts and queue updates, nursing and observation drafts, housekeeping updates, and selected biomedical field updates may support offline synchronization.
+CHW visits, symptoms/vitals, MCH indicators, referrals, alert follow-up drafts, school/feeder capture, field logs, batch capture, and other explicitly declared field writes may save locally and synchronize later.
 
 ## Online-Only Actions
 
-Authentication and session issuance, entitlement changes, break-glass approval, payments, refunds, payroll finalization, Mortuary release approval or final release, and shift or day closeout finalization must remain online-only.
+Account authentication and session issuance, role/entitlement changes, consent withdrawal, connector scope changes, research export approval/download authorization, and other security-sensitive approvals remain online-only.
 
 ## Acceptance
 
 - Offline-capable endpoints must expose version metadata and idempotency behavior.
 - Conflict responses must be deterministic and documented for frontend consumers.
 - Synchronization must enforce current authorization when changes reach the server.
+- The frontend must prove pending, syncing, synced, failed, and conflict behavior before the slice closes.
+- Server time, version metadata, and idempotency keys—not the client clock—control reconciliation.

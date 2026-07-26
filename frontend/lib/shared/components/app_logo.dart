@@ -18,7 +18,8 @@ class AppLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
-    final Color resolvedBackground = backgroundColor ?? colorScheme.surface;
+    // Default transparent so the self-contained azure badge reads on any theme.
+    final Color resolvedBackground = backgroundColor ?? Colors.transparent;
 
     return SizedBox.square(
       dimension: size,

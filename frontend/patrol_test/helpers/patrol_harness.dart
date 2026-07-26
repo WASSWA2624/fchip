@@ -315,20 +315,11 @@ AppLocalizations patrolL10n(PatrolIntegrationTester $) {
 
 DemoAccount demoAccountForRoute(AppRouteData route) {
   return switch (route.name) {
-    'patients' => DemoAccount.reception,
-    'opd' => DemoAccount.doctor,
-    'clinical' => DemoAccount.doctor,
-    'lab' => DemoAccount.lab,
-    'radiology' => DemoAccount.radiology,
-    'pharmacy' => DemoAccount.pharmacy,
-    'billing' => DemoAccount.billing,
-    'claims' => DemoAccount.billing,
-    'hr' => DemoAccount.hr,
-    'biomedical' => DemoAccount.biomed,
-    'housekeeping' => DemoAccount.housekeeping,
-    'operations' => DemoAccount.operations,
-    'emergency' => DemoAccount.ambulance,
-    'nursing' => DemoAccount.nurse,
+    'subscriptions' => DemoAccount.tenantAdmin,
+    'communications' => DemoAccount.tenantAdmin,
+    'accessAdmin' => DemoAccount.tenantAdmin,
+    'tenantFacilitySetup' => DemoAccount.tenantAdmin,
+    'settings' => DemoAccount.tenantAdmin,
     _ => DemoAccount.tenantAdmin,
   };
 }
@@ -337,88 +328,12 @@ DemoAccount demoAccountForRoute(AppRouteData route) {
 final List<PatrolWorkspaceTarget> patrolWorkspaceTargets =
     <PatrolWorkspaceTarget>[
       const PatrolWorkspaceTarget(
-        route: AppRoutes.claims,
-        labels: <String>['Insurance and claims', 'Loading claims'],
-      ),
-      const PatrolWorkspaceTarget(
         route: AppRoutes.subscriptions,
         labels: <String>['Subscriptions', 'Loading subscriptions'],
       ),
       const PatrolWorkspaceTarget(
-        route: AppRoutes.emergency,
-        labels: <String>['Emergency board', 'Loading emergency board'],
-      ),
-      const PatrolWorkspaceTarget(
-        route: AppRoutes.ipd,
-        labels: <String>['Inpatient workspace', 'Loading inpatient workspace'],
-      ),
-      const PatrolWorkspaceTarget(
-        route: AppRoutes.roomsBeds,
-        labels: <String>['Rooms and beds', 'Loading rooms and beds'],
-      ),
-      const PatrolWorkspaceTarget(
-        route: AppRoutes.icu,
-        labels: <String>['ICU board', 'Loading ICU board'],
-      ),
-      const PatrolWorkspaceTarget(
-        route: AppRoutes.nursing,
-        labels: <String>['Nursing', 'Loading nursing workspace'],
-      ),
-      const PatrolWorkspaceTarget(
-        route: AppRoutes.physiotherapy,
-        labels: <String>['Physiotherapy', 'Loading physiotherapy workspace'],
-      ),
-      const PatrolWorkspaceTarget(
-        route: AppRoutes.lab,
-        labels: <String>['Laboratory', 'Loading laboratory'],
-      ),
-      const PatrolWorkspaceTarget(
-        route: AppRoutes.radiology,
-        labels: <String>['Radiology', 'Loading radiology workspace'],
-      ),
-      const PatrolWorkspaceTarget(
-        route: AppRoutes.pharmacy,
-        labels: <String>['Pharmacy', 'Loading pharmacy workspace'],
-      ),
-      const PatrolWorkspaceTarget(
-        route: AppRoutes.operations,
-        labels: <String>['Operations', 'Loading operations'],
-      ),
-      const PatrolWorkspaceTarget(
-        route: AppRoutes.housekeeping,
-        labels: <String>['Housekeeping', 'Loading housekeeping'],
-      ),
-      const PatrolWorkspaceTarget(
-        route: AppRoutes.hr,
-        labels: <String>['Human resources', 'Loading HR workspace'],
-      ),
-      const PatrolWorkspaceTarget(
-        route: AppRoutes.biomedical,
-        labels: <String>['Biomedical', 'Loading biomedical'],
-      ),
-      const PatrolWorkspaceTarget(
         route: AppRoutes.communications,
         labels: <String>['Communications', 'Loading communications'],
-      ),
-      const PatrolWorkspaceTarget(
-        route: AppRoutes.integrations,
-        labels: <String>['Integrations', 'Loading integrations'],
-      ),
-      const PatrolWorkspaceTarget(
-        route: AppRoutes.discharge,
-        labels: <String>['Discharge workspace', 'Loading discharge workspace'],
-      ),
-      const PatrolWorkspaceTarget(
-        route: AppRoutes.mortuary,
-        labels: <String>['Mortuary', 'Loading mortuary workspace'],
-      ),
-      const PatrolWorkspaceTarget(
-        route: AppRoutes.theater,
-        labels: <String>['Theater', 'Loading theater'],
-      ),
-      const PatrolWorkspaceTarget(
-        route: AppRoutes.reports,
-        labels: <String>['Reports and audit', 'Loading reports workspace'],
       ),
       const PatrolWorkspaceTarget(
         route: AppRoutes.tenantFacilitySetup,
@@ -427,6 +342,10 @@ final List<PatrolWorkspaceTarget> patrolWorkspaceTargets =
       const PatrolWorkspaceTarget(
         route: AppRoutes.accessAdmin,
         labels: <String>['Users and access', 'Loading access workspace'],
+      ),
+      const PatrolWorkspaceTarget(
+        route: AppRoutes.settings,
+        labels: <String>['Settings'],
       ),
     ];
 

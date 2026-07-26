@@ -16,7 +16,7 @@ void main() {
     await pumpFchipApp(
       tester,
       overrides: testReadyAppOverrides(
-        initialLocation: AppRoutes.patients.path,
+        initialLocation: AppRoutes.settings.path,
       ),
     );
     await tester.pumpAndSettle();

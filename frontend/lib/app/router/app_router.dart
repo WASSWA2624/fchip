@@ -25,55 +25,9 @@ import 'package:fchip/features/auth/presentation/pages/register_page.dart';
 import 'package:fchip/features/auth/presentation/pages/reset_password_page.dart';
 import 'package:fchip/features/auth/presentation/pages/verify_email_page.dart';
 import 'package:fchip/features/auth/presentation/widgets/auth_shell_layout.dart';
-import 'package:fchip/features/billing/domain/entities/billing_entities.dart';
-import 'package:fchip/features/billing/presentation/pages/billing_workspace_page.dart';
-import 'package:fchip/features/biomedical/domain/entities/biomedical_entities.dart';
-import 'package:fchip/features/biomedical/presentation/pages/biomedical_workspace_page.dart';
-import 'package:fchip/features/claims/domain/entities/claims_entities.dart';
-import 'package:fchip/features/claims/presentation/pages/claims_workspace_page.dart';
-import 'package:fchip/features/clinical/domain/entities/clinical_entities.dart';
-import 'package:fchip/features/clinical/presentation/pages/clinical_workspace_page.dart';
 import 'package:fchip/features/communications/domain/entities/communications_entities.dart';
 import 'package:fchip/features/communications/presentation/pages/communications_workspace_page.dart';
-import 'package:fchip/features/discharge/domain/entities/discharge_entities.dart';
-import 'package:fchip/features/discharge/presentation/pages/discharge_workspace_page.dart';
-import 'package:fchip/features/emergency/domain/entities/emergency_entities.dart';
-import 'package:fchip/features/emergency/presentation/pages/emergency_workspace_page.dart';
-import 'package:fchip/features/home/domain/entities/home_dashboard.dart';
 import 'package:fchip/features/home/presentation/pages/home_page.dart';
-import 'package:fchip/features/housekeeping/domain/entities/housekeeping_entities.dart';
-import 'package:fchip/features/housekeeping/presentation/pages/housekeeping_workspace_page.dart';
-import 'package:fchip/features/hr/domain/entities/hr_entities.dart';
-import 'package:fchip/features/hr/presentation/pages/hr_workspace_page.dart';
-import 'package:fchip/features/icu/domain/entities/icu_entities.dart';
-import 'package:fchip/features/icu/presentation/pages/icu_workspace_page.dart';
-import 'package:fchip/features/integrations/domain/entities/integration_entities.dart';
-import 'package:fchip/features/integrations/presentation/pages/integrations_workspace_page.dart';
-import 'package:fchip/features/ipd/domain/entities/ipd_entities.dart';
-import 'package:fchip/features/ipd/presentation/pages/ipd_workspace_page.dart';
-import 'package:fchip/features/lab/domain/entities/lab_entities.dart';
-import 'package:fchip/features/lab/presentation/pages/lab_workspace_page.dart';
-import 'package:fchip/features/mortuary/domain/entities/mortuary_entities.dart';
-import 'package:fchip/features/mortuary/presentation/pages/mortuary_workspace_page.dart';
-import 'package:fchip/features/nursing/domain/entities/nursing_entities.dart';
-import 'package:fchip/features/nursing/presentation/pages/nursing_workspace_page.dart';
-import 'package:fchip/features/opd/domain/entities/opd_entities.dart';
-import 'package:fchip/features/opd/presentation/pages/opd_workspace_page.dart';
-import 'package:fchip/features/operations/domain/entities/operations_entities.dart';
-import 'package:fchip/features/operations/presentation/pages/operations_workspace_page.dart';
-import 'package:fchip/features/patients/domain/entities/patient_entities.dart';
-import 'package:fchip/features/patients/presentation/pages/patient_registry_page.dart';
-import 'package:fchip/features/pharmacy/domain/entities/pharmacy_entities.dart';
-import 'package:fchip/features/pharmacy/presentation/pages/pharmacy_workspace_page.dart';
-import 'package:fchip/features/physiotherapy/domain/entities/physiotherapy_entities.dart';
-import 'package:fchip/features/physiotherapy/presentation/pages/physiotherapy_workspace_page.dart';
-import 'package:fchip/features/radiology/domain/entities/radiology_entities.dart';
-import 'package:fchip/features/radiology/presentation/pages/radiology_workspace_page.dart';
-import 'package:fchip/features/reception/domain/entities/reception_entities.dart';
-import 'package:fchip/features/reception/presentation/pages/reception_workspace_page.dart';
-import 'package:fchip/features/reports/presentation/pages/reports_workspace_page.dart';
-import 'package:fchip/features/rooms_beds/domain/entities/rooms_beds_entities.dart';
-import 'package:fchip/features/rooms_beds/presentation/pages/rooms_beds_workspace_page.dart';
 import 'package:fchip/features/settings/presentation/pages/settings_page.dart'
     show SettingsPage, SettingsPageQuery;
 import 'package:fchip/features/settings/presentation/widgets/settings_account_section.dart';
@@ -85,8 +39,6 @@ import 'package:fchip/features/subscriptions/presentation/widgets/subscription_r
 import 'package:fchip/features/subscriptions/presentation/widgets/subscription_upgrade_dialog.dart';
 import 'package:fchip/features/tenant_facility/presentation/pages/tenant_facility_setup_page.dart';
 import 'package:fchip/features/tenant_facility/presentation/widgets/tenant_facility_setup_helpers.dart';
-import 'package:fchip/features/theater/domain/entities/theater_entities.dart';
-import 'package:fchip/features/theater/presentation/pages/theater_workspace_page.dart';
 import 'package:fchip/l10n/app_localizations.dart';
 import 'package:fchip/l10n/app_localizations_x.dart';
 import 'package:fchip/shared/layout/app_shell_sidebar_preference.dart';
@@ -128,43 +80,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.home.path,
             name: AppRoutes.home.name,
-            builder: (_, GoRouterState state) => HomePage(
-              request: HomeDashboardRequest.fromQuery(
-                state.uri.queryParameters,
-              ),
-            ),
-          ),
-          GoRoute(
-            path: AppRoutes.patients.path,
-            name: AppRoutes.patients.name,
-            builder: (_, GoRouterState state) => PatientRegistryPage(
-              initialQuery: PatientListQuery.fromUri(state.uri),
-            ),
-          ),
-          GoRoute(
-            path: AppRoutes.reception.path,
-            name: AppRoutes.reception.name,
-            builder: (_, GoRouterState state) {
-              return ReceptionWorkspacePage(
-                initialQuery: ReceptionWorkspaceQuery.fromUri(state.uri),
-              );
-            },
-          ),
-          GoRoute(
-            path: AppRoutes.billing.path,
-            name: AppRoutes.billing.name,
-            builder: (_, GoRouterState state) => BillingWorkspacePage(
-              initialQuery: BillingWorkspaceQuery.fromUri(state.uri),
-            ),
-          ),
-          GoRoute(
-            path: AppRoutes.claims.path,
-            name: AppRoutes.claims.name,
-            builder: (_, GoRouterState state) {
-              return ClaimsWorkspacePage(
-                initialQuery: ClaimsWorkspaceQuery.fromUri(state.uri),
-              );
-            },
+            builder: (_, _) => const HomePage(),
           ),
           GoRoute(
             path: AppRoutes.subscriptions.path,
@@ -176,142 +92,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             },
           ),
           GoRoute(
-            path: AppRoutes.opd.path,
-            name: AppRoutes.opd.name,
-            builder: (_, GoRouterState state) {
-              return OpdWorkspacePage(
-                initialQuery: OpdWorkspaceQuery.fromUri(state.uri),
-              );
-            },
-          ),
-          GoRoute(
-            path: AppRoutes.emergency.path,
-            name: AppRoutes.emergency.name,
-            builder: (_, GoRouterState state) {
-              return EmergencyWorkspacePage(
-                initialQuery: EmergencyWorkspaceQuery.fromUri(state.uri),
-              );
-            },
-          ),
-          GoRoute(
-            path: AppRoutes.ipd.path,
-            name: AppRoutes.ipd.name,
-            builder: (_, GoRouterState state) {
-              return IpdWorkspacePage(
-                initialQuery: IpdAdmissionQuery.fromUri(state.uri),
-              );
-            },
-          ),
-          GoRoute(
-            path: AppRoutes.roomsBeds.path,
-            name: AppRoutes.roomsBeds.name,
-            builder: (_, GoRouterState state) {
-              return RoomsBedsWorkspacePage(
-                initialQuery: RoomsBedsQuery.fromUri(state.uri),
-              );
-            },
-          ),
-          GoRoute(
-            path: AppRoutes.icu.path,
-            name: AppRoutes.icu.name,
-            builder: (_, GoRouterState state) {
-              return IcuWorkspacePage(
-                initialQuery: IcuBoardQuery.fromUri(state.uri),
-              );
-            },
-          ),
-          GoRoute(
-            path: AppRoutes.nursing.path,
-            name: AppRoutes.nursing.name,
-            builder: (_, GoRouterState state) {
-              return NursingWorkspacePage(
-                initialQuery: NursingWorkspaceQuery.fromUri(state.uri),
-              );
-            },
-          ),
-          GoRoute(
-            path: AppRoutes.clinical.path,
-            name: AppRoutes.clinical.name,
-            builder: (_, GoRouterState state) {
-              return ClinicalWorkspacePage(
-                initialQuery: ClinicalWorkspaceQuery.fromUri(state.uri),
-              );
-            },
-          ),
-          GoRoute(
-            path: AppRoutes.physiotherapy.path,
-            name: AppRoutes.physiotherapy.name,
-            builder: (_, GoRouterState state) {
-              return PhysiotherapyWorkspacePage(
-                initialQuery: PhysiotherapyWorkspaceQuery.fromUri(state.uri),
-              );
-            },
-          ),
-          GoRoute(
-            path: AppRoutes.lab.path,
-            name: AppRoutes.lab.name,
-            builder: (_, GoRouterState state) {
-              return LabWorkspacePage(
-                initialQuery: LabWorkspaceQuery.fromUri(state.uri),
-              );
-            },
-          ),
-          GoRoute(
-            path: AppRoutes.radiology.path,
-            name: AppRoutes.radiology.name,
-            builder: (_, GoRouterState state) {
-              return RadiologyWorkspacePage(
-                initialQuery: RadiologyWorkspaceQuery.fromUri(state.uri),
-              );
-            },
-          ),
-          GoRoute(
-            path: AppRoutes.pharmacy.path,
-            name: AppRoutes.pharmacy.name,
-            builder: (_, GoRouterState state) {
-              return PharmacyWorkspacePage(
-                initialQuery: PharmacyWorkspaceQuery.fromUri(state.uri),
-              );
-            },
-          ),
-          GoRoute(
-            path: AppRoutes.operations.path,
-            name: AppRoutes.operations.name,
-            builder: (_, GoRouterState state) {
-              return OperationsWorkspacePage(
-                initialQuery: OperationsWorkspaceQuery.fromUri(state.uri),
-              );
-            },
-          ),
-          GoRoute(
-            path: AppRoutes.housekeeping.path,
-            name: AppRoutes.housekeeping.name,
-            builder: (_, GoRouterState state) {
-              final String? section = state.uri.queryParameters['section'];
-              final String? search = state.uri.queryParameters['search'];
-              return HousekeepingWorkspacePage(
-                initialSection: HousekeepingSection.fromQueryValue(section),
-                initialSearch: search ?? '',
-              );
-            },
-          ),
-          GoRoute(
-            path: AppRoutes.hr.path,
-            name: AppRoutes.hr.name,
-            builder: (_, GoRouterState state) {
-              return HrWorkspacePage(
-                initialQuery: HrWorkspaceQuery.fromUri(state.uri),
-              );
-            },
-          ),
-          GoRoute(
-            path: AppRoutes.biomedical.path,
-            name: AppRoutes.biomedical.name,
-            builder: (_, GoRouterState state) => BiomedicalWorkspacePage(
-              initialQuery: BiomedicalRouteQuery.fromUri(state.uri),
-            ),
-          ),
-          GoRoute(
             path: AppRoutes.communications.path,
             name: AppRoutes.communications.name,
             builder: (_, GoRouterState state) {
@@ -319,45 +99,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                 initialQuery: CommunicationsWorkspaceQuery.fromUri(state.uri),
               );
             },
-          ),
-          GoRoute(
-            path: AppRoutes.integrations.path,
-            name: AppRoutes.integrations.name,
-            builder: (_, GoRouterState state) {
-              return IntegrationsWorkspacePage(
-                initialQuery: IntegrationWorkspaceQuery.fromUri(state.uri),
-              );
-            },
-          ),
-          GoRoute(
-            path: AppRoutes.discharge.path,
-            name: AppRoutes.discharge.name,
-            builder: (_, GoRouterState state) {
-              return DischargeWorkspacePage(
-                initialQuery: DischargeWorklistQuery.fromUri(state.uri),
-              );
-            },
-          ),
-          GoRoute(
-            path: AppRoutes.mortuary.path,
-            name: AppRoutes.mortuary.name,
-            builder: (_, GoRouterState state) => MortuaryWorkspacePage(
-              initialQuery: MortuaryRouteQuery.fromUri(state.uri),
-            ),
-          ),
-          GoRoute(
-            path: AppRoutes.theater.path,
-            name: AppRoutes.theater.name,
-            builder: (_, GoRouterState state) {
-              return TheaterWorkspacePage(
-                initialQuery: TheaterBoardQuery.fromUri(state.uri),
-              );
-            },
-          ),
-          GoRoute(
-            path: AppRoutes.reports.path,
-            name: AppRoutes.reports.name,
-            builder: (_, _) => const ReportsWorkspacePage(),
           ),
           GoRoute(
             path: AppRoutes.settings.path,
@@ -470,48 +211,10 @@ final class _ShellDestinationRoute {
 List<_ShellDestinationRoute> _localizedShellDestinations(
   AppLocalizations l10n, {
   required AppAccessPolicy accessPolicy,
-  int? billingWorkloadCount,
-  int? claimsWorkloadCount,
   int? subscriptionsWorkloadCount,
-  int? receptionPatientCount,
-  int? opdWorkloadCount,
-  int? emergencyWorkloadCount,
-  int? ipdWorkloadCount,
-  int? roomsBedsWorkloadCount,
-  int? icuCriticalCount,
-  int? nursingWorkloadCount,
-  int? clinicalWorkloadCount,
-  int? labWorkloadCount,
-  int? radiologyWorkloadCount,
-  int? pharmacyWorkloadCount,
-  int? operationsWorkloadCount,
-  int? housekeepingWorkloadCount,
-  int? hrWorkloadCount,
-  int? biomedicalWorkloadCount,
   int? communicationsWorkloadCount,
-  int? integrationsWorkloadCount,
-  int? dischargeWorkloadCount,
-  int? mortuaryWorkloadCount,
-  int? theaterWorkloadCount,
 }) {
-  // Navigation groups follow primary hospital workflows:
-  // - Overview: landing dashboard
-  // - Patient intake: register → outpatient visit → emergency triage
-  // - Inpatient care: admit → bed capacity → ICU → ward nursing
-  // - Clinical care: documentation, rehab, surgery, discharge planning
-  // - Diagnostics & pharmacy: investigations and medication dispensing
-  // - Billing & revenue: charges → insurance claims → subscription plans
-  // - Facility services: non-clinical hospital operations
-  // - Administration: people, comms, integrations, reporting, configuration
   final String overviewGroup = l10n.navigationGroupOverviewLabel;
-  final String patientIntakeGroup = l10n.navigationGroupPatientAccessLabel;
-  final String inpatientCareGroup = l10n.navigationGroupInpatientCareLabel;
-  final String clinicalCareGroup = l10n.navigationGroupClinicalServicesLabel;
-  final String diagnosticsPharmacyGroup =
-      l10n.navigationGroupDiagnosticsMedicationLabel;
-  final String billingRevenueGroup = l10n.navigationGroupRevenueCycleLabel;
-  final String facilityServicesGroup =
-      l10n.navigationGroupFacilityOperationsLabel;
   final String administrationGroup = l10n.navigationGroupAdministrationLabel;
 
   return <_ShellDestinationRoute>[
@@ -526,257 +229,6 @@ List<_ShellDestinationRoute> _localizedShellDestinations(
       ),
     ),
     _ShellDestinationRoute(
-      route: AppRoutes.reception,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationReceptionLabel,
-        shortLabel: l10n.navigationReceptionShortLabel,
-        groupLabel: patientIntakeGroup,
-        icon: AppRouteIcons.reception,
-        selectedIcon: AppRouteIcons.receptionSelected,
-        badgeCount: receptionPatientCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.patients,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationPatientsLabel,
-        shortLabel: l10n.navigationPatientsShortLabel,
-        groupLabel: patientIntakeGroup,
-        icon: AppRouteIcons.patients,
-        selectedIcon: AppRouteIcons.patientsSelected,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.opd,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationOpdLabel,
-        shortLabel: l10n.navigationOpdShortLabel,
-        groupLabel: patientIntakeGroup,
-        icon: AppRouteIcons.opd,
-        selectedIcon: AppRouteIcons.opdSelected,
-        badgeCount: opdWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.emergency,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationEmergencyLabel,
-        shortLabel: l10n.navigationEmergencyShortLabel,
-        groupLabel: patientIntakeGroup,
-        icon: AppRouteIcons.emergency,
-        selectedIcon: AppRouteIcons.emergencySelected,
-        badgeCount: emergencyWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.ipd,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationIpdLabel,
-        shortLabel: l10n.navigationIpdShortLabel,
-        groupLabel: inpatientCareGroup,
-        icon: AppRouteIcons.ipd,
-        selectedIcon: AppRouteIcons.ipdSelected,
-        badgeCount: ipdWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.roomsBeds,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationRoomsBedsLabel,
-        shortLabel: l10n.navigationRoomsBedsShortLabel,
-        groupLabel: inpatientCareGroup,
-        icon: AppRouteIcons.roomsBeds,
-        selectedIcon: AppRouteIcons.roomsBedsSelected,
-        badgeCount: roomsBedsWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.icu,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationIcuLabel,
-        shortLabel: l10n.navigationIcuShortLabel,
-        groupLabel: inpatientCareGroup,
-        icon: AppRouteIcons.icu,
-        selectedIcon: AppRouteIcons.icuSelected,
-        badgeCount: icuCriticalCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.nursing,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationNursingLabel,
-        shortLabel: l10n.navigationNursingShortLabel,
-        groupLabel: inpatientCareGroup,
-        icon: AppRouteIcons.nursing,
-        selectedIcon: AppRouteIcons.nursingSelected,
-        badgeCount: nursingWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.clinical,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationClinicalLabel,
-        shortLabel: l10n.navigationClinicalShortLabel,
-        groupLabel: clinicalCareGroup,
-        icon: AppRouteIcons.clinical,
-        selectedIcon: AppRouteIcons.clinicalSelected,
-        badgeCount: clinicalWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.physiotherapy,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationPhysiotherapyLabel,
-        shortLabel: l10n.navigationPhysiotherapyShortLabel,
-        groupLabel: clinicalCareGroup,
-        icon: AppRouteIcons.physiotherapy,
-        selectedIcon: AppRouteIcons.physiotherapySelected,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.theater,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationTheaterLabel,
-        shortLabel: l10n.navigationTheaterShortLabel,
-        groupLabel: clinicalCareGroup,
-        icon: AppRouteIcons.theater,
-        selectedIcon: AppRouteIcons.theaterSelected,
-        badgeCount: theaterWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.discharge,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationDischargeLabel,
-        shortLabel: l10n.navigationDischargeShortLabel,
-        groupLabel: clinicalCareGroup,
-        icon: AppRouteIcons.discharge,
-        selectedIcon: AppRouteIcons.dischargeSelected,
-        badgeCount: dischargeWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.lab,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationLabLabel,
-        shortLabel: l10n.navigationLabShortLabel,
-        groupLabel: diagnosticsPharmacyGroup,
-        icon: AppRouteIcons.lab,
-        selectedIcon: AppRouteIcons.labSelected,
-        badgeCount: labWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.radiology,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationRadiologyLabel,
-        shortLabel: l10n.navigationRadiologyShortLabel,
-        groupLabel: diagnosticsPharmacyGroup,
-        icon: AppRouteIcons.radiology,
-        selectedIcon: AppRouteIcons.radiologySelected,
-        badgeCount: radiologyWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.pharmacy,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationPharmacyLabel,
-        shortLabel: l10n.navigationPharmacyShortLabel,
-        groupLabel: diagnosticsPharmacyGroup,
-        icon: AppRouteIcons.pharmacy,
-        selectedIcon: AppRouteIcons.pharmacySelected,
-        badgeCount: pharmacyWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.billing,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationBillingLabel,
-        shortLabel: l10n.navigationBillingShortLabel,
-        groupLabel: billingRevenueGroup,
-        icon: AppRouteIcons.billing,
-        selectedIcon: AppRouteIcons.billingSelected,
-        badgeCount: billingWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.claims,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationClaimsLabel,
-        shortLabel: l10n.navigationClaimsShortLabel,
-        groupLabel: billingRevenueGroup,
-        icon: AppRouteIcons.claims,
-        selectedIcon: AppRouteIcons.claimsSelected,
-        badgeCount: claimsWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.subscriptions,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationSubscriptionsLabel,
-        shortLabel: l10n.navigationSubscriptionsShortLabel,
-        groupLabel: billingRevenueGroup,
-        icon: AppRouteIcons.subscriptions,
-        selectedIcon: AppRouteIcons.subscriptionsSelected,
-        badgeCount: subscriptionsWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.operations,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationOperationsLabel,
-        shortLabel: l10n.navigationOperationsShortLabel,
-        groupLabel: facilityServicesGroup,
-        icon: AppRouteIcons.operations,
-        selectedIcon: AppRouteIcons.operationsSelected,
-        badgeCount: operationsWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.housekeeping,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationHousekeepingLabel,
-        shortLabel: l10n.navigationHousekeepingShortLabel,
-        groupLabel: facilityServicesGroup,
-        icon: AppRouteIcons.housekeeping,
-        selectedIcon: AppRouteIcons.housekeepingSelected,
-        badgeCount: housekeepingWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.biomedical,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationBiomedicalLabel,
-        shortLabel: l10n.navigationBiomedicalShortLabel,
-        groupLabel: facilityServicesGroup,
-        icon: AppRouteIcons.biomedical,
-        selectedIcon: AppRouteIcons.biomedicalSelected,
-        badgeCount: biomedicalWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.mortuary,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationMortuaryLabel,
-        shortLabel: l10n.navigationMortuaryShortLabel,
-        groupLabel: facilityServicesGroup,
-        icon: AppRouteIcons.mortuary,
-        selectedIcon: AppRouteIcons.mortuarySelected,
-        badgeCount: mortuaryWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
-      route: AppRoutes.hr,
-      destination: ResponsiveShellDestination(
-        label: l10n.navigationHrLabel,
-        shortLabel: l10n.navigationHrShortLabel,
-        groupLabel: administrationGroup,
-        icon: AppRouteIcons.hr,
-        selectedIcon: AppRouteIcons.hrSelected,
-        badgeCount: hrWorkloadCount,
-      ),
-    ),
-    _ShellDestinationRoute(
       route: AppRoutes.communications,
       destination: ResponsiveShellDestination(
         label: l10n.navigationCommunicationsLabel,
@@ -788,24 +240,24 @@ List<_ShellDestinationRoute> _localizedShellDestinations(
       ),
     ),
     _ShellDestinationRoute(
-      route: AppRoutes.integrations,
+      route: AppRoutes.accessAdmin,
       destination: ResponsiveShellDestination(
-        label: l10n.navigationIntegrationsLabel,
-        shortLabel: l10n.navigationIntegrationsShortLabel,
+        label: l10n.accessAdminTitle,
+        shortLabel: 'Access',
         groupLabel: administrationGroup,
-        icon: AppRouteIcons.integrations,
-        selectedIcon: AppRouteIcons.integrationsSelected,
-        badgeCount: integrationsWorkloadCount,
+        icon: AppRouteIcons.accessAdmin,
+        selectedIcon: AppRouteIcons.accessAdminSelected,
       ),
     ),
     _ShellDestinationRoute(
-      route: AppRoutes.reports,
+      route: AppRoutes.subscriptions,
       destination: ResponsiveShellDestination(
-        label: l10n.navigationReportsLabel,
-        shortLabel: l10n.navigationReportsShortLabel,
+        label: l10n.navigationSubscriptionsLabel,
+        shortLabel: l10n.navigationSubscriptionsShortLabel,
         groupLabel: administrationGroup,
-        icon: AppRouteIcons.reports,
-        selectedIcon: AppRouteIcons.reportsSelected,
+        icon: AppRouteIcons.subscriptions,
+        selectedIcon: AppRouteIcons.subscriptionsSelected,
+        badgeCount: subscriptionsWorkloadCount,
       ),
     ),
     _ShellDestinationRoute(
@@ -850,29 +302,8 @@ class _AppShell extends ConsumerWidget {
         _localizedShellDestinations(
               l10n,
               accessPolicy: accessPolicy,
-              billingWorkloadCount: badges.billingWorkloadCount,
-              claimsWorkloadCount: badges.claimsWorkloadCount,
               subscriptionsWorkloadCount: badges.subscriptionsWorkloadCount,
-              receptionPatientCount: badges.receptionPatientCount,
-              opdWorkloadCount: badges.opdWorkloadCount,
-              emergencyWorkloadCount: badges.emergencyWorkloadCount,
-              ipdWorkloadCount: badges.ipdWorkloadCount,
-              roomsBedsWorkloadCount: badges.roomsBedsWorkloadCount,
-              icuCriticalCount: badges.icuCriticalCount,
-              nursingWorkloadCount: badges.nursingWorkloadCount,
-              clinicalWorkloadCount: badges.clinicalWorkloadCount,
-              labWorkloadCount: badges.labWorkloadCount,
-              radiologyWorkloadCount: badges.radiologyWorkloadCount,
-              pharmacyWorkloadCount: badges.pharmacyWorkloadCount,
-              operationsWorkloadCount: badges.operationsWorkloadCount,
-              housekeepingWorkloadCount: badges.housekeepingWorkloadCount,
-              hrWorkloadCount: badges.hrWorkloadCount,
-              biomedicalWorkloadCount: badges.biomedicalWorkloadCount,
               communicationsWorkloadCount: badges.communicationsWorkloadCount,
-              integrationsWorkloadCount: badges.integrationsWorkloadCount,
-              dischargeWorkloadCount: badges.dischargeWorkloadCount,
-              mortuaryWorkloadCount: badges.mortuaryWorkloadCount,
-              theaterWorkloadCount: badges.theaterWorkloadCount,
             )
             .where((_ShellDestinationRoute destination) {
               return _canAccessShellRoute(destination.route, accessPolicy);

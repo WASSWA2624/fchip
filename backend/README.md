@@ -1,19 +1,19 @@
 # FairBanks Community Health Intelligence Platform (FCHIP) Backend API
 
-A comprehensive backend API for a modern, modular FairBanks Community Health Intelligence Platform built with Node.js, Express.js, and Prisma.
+A modular backend API for FCHIP platform auth and tenancy, built with Node.js, Express.js, and Prisma.
 
 ## Overview
 
-This backend provides RESTful APIs for managing clinical, operational, and administrative hospital workflows with a modular, multi-tenant architecture. It supports module-based subscriptions, customization requests, and flexible payments for both local and international deployments, while maintaining strict MVC patterns and clear separation of concerns.
+Clinical / hospital HIS modules have been removed from the mounted API. What remains is the FCHIP platform layer: login, users/roles, tenants/facilities, notifications, audit, consent, subscriptions, and an integrations skeleton for a future EMR connector. Prisma still contains legacy HIS models for now (not dropped in this pass).
 
 ## Core Capabilities
 
-- Modular FCHIP product modules (clinical, diagnostics, pharmacy, inventory, HR, billing)
-- Multi-tenant support for multiple hospitals/branches
-- Role-based access control (RBAC) and audit logging
-- Subscription, per-module billing, and perpetual licensing options
-- Multi-currency payments with local and international providers
-- Customization and integration request workflows
+- Auth, sessions, MFA, and OAuth account linking
+- Multi-tenant support with light facility / department / unit setup
+- Role-based access control (RBAC), ABAC policies, and audit logging
+- Subscriptions, module entitlements, and licensing
+- Notifications, templates, consent / terms acceptance
+- Integration / webhook / interop skeleton for external EMR connectors
 
 ## Technology Stack
 

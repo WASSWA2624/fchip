@@ -7,7 +7,6 @@ import 'package:fchip/core/responsive/app_breakpoints.dart';
 import 'package:fchip/l10n/app_localizations.dart';
 import 'package:fchip/l10n/app_localizations_x.dart';
 import 'package:fchip/shared/actions/app_global_fault_report_action.dart';
-import 'package:fchip/shared/actions/app_global_housekeeping_request_action.dart';
 import 'package:fchip/shared/actions/app_workspace_refresh_action.dart';
 import 'package:fchip/shared/components/app_action_label_scope.dart';
 import 'package:fchip/shared/components/app_button.dart';
@@ -324,8 +323,7 @@ class AppWorkspaceToolbar extends ConsumerWidget {
     if (action is AppWorkspaceViewToggle) {
       return showLabels ? _viewToggleWidth : _iconActionWidth;
     }
-    if (action is AppGlobalFaultReportAction ||
-        action is AppGlobalHousekeepingRequestAction) {
+    if (action is AppGlobalFaultReportAction) {
       return showLabels ? _longLabeledActionWidth : _iconActionWidth;
     }
     if (action is AppWorkspaceRefreshAction) {
@@ -348,13 +346,6 @@ class AppWorkspaceToolbar extends ConsumerWidget {
           onPressed: () {
             unawaited(config.onRefresh?.call());
           },
-        ),
-      );
-    }
-    if (config.showHousekeepingRequest) {
-      actions.add(
-        AppGlobalHousekeepingRequestAction(
-          label: config.housekeepingRequestLabel ?? 'Request maintenance',
         ),
       );
     }

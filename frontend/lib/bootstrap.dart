@@ -8,8 +8,6 @@ import 'package:fchip/app/startup/app_startup_initializer.dart';
 import 'package:fchip/app/startup/startup_shell.dart';
 import 'package:fchip/core/config/app_config.dart';
 import 'package:fchip/core/logging/app_logger.dart';
-import 'package:fchip/shared/workflow_actions/workflow_action_dialog_openers.dart';
-import 'package:fchip/shared/workflow_actions/workflow_action_registry.dart';
 
 Future<void> bootstrap({
   AppConfig? config,
@@ -17,8 +15,6 @@ Future<void> bootstrap({
 }) async {
   WidgetsFlutterBinding.ensureInitialized();
   configureAppUrlStrategy();
-  initializeWorkflowActionRegistry();
-  registerWorkflowDialogOpeners();
   final String initialLocation = _platformInitialLocation();
 
   runApp(ProviderScope(key: UniqueKey(), child: const StartupLoadingApp()));

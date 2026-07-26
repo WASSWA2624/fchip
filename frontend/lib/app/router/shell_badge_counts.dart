@@ -3,416 +3,72 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fchip/app/router/app_routes.dart';
 import 'package:fchip/app/router/shell_route_access.dart';
 import 'package:fchip/core/errors/result.dart';
-import 'package:fchip/core/permissions/access_policy.dart';
 import 'package:fchip/core/permissions/permission_providers.dart';
-import 'package:fchip/core/workspace/workspace_prefetch_ready_provider.dart';
-import 'package:fchip/features/billing/domain/entities/billing_entities.dart';
-import 'package:fchip/features/billing/presentation/controllers/billing_workspace_controller.dart';
-import 'package:fchip/features/biomedical/domain/entities/biomedical_entities.dart';
-import 'package:fchip/features/biomedical/presentation/controllers/biomedical_workspace_controller.dart';
-import 'package:fchip/features/claims/domain/entities/claims_entities.dart';
-import 'package:fchip/features/claims/presentation/controllers/claims_workspace_controller.dart';
-import 'package:fchip/features/clinical/domain/entities/clinical_entities.dart';
-import 'package:fchip/features/clinical/presentation/controllers/clinical_workspace_controller.dart';
 import 'package:fchip/features/communications/domain/entities/communications_entities.dart';
 import 'package:fchip/features/communications/presentation/controllers/communications_workspace_controller.dart';
-import 'package:fchip/features/discharge/domain/entities/discharge_entities.dart';
-import 'package:fchip/features/discharge/presentation/controllers/discharge_workspace_controller.dart';
-import 'package:fchip/features/emergency/domain/entities/emergency_entities.dart';
-import 'package:fchip/features/emergency/presentation/controllers/emergency_workspace_controller.dart';
-import 'package:fchip/features/housekeeping/domain/entities/housekeeping_entities.dart';
-import 'package:fchip/features/housekeeping/presentation/controllers/housekeeping_workspace_controller.dart';
-import 'package:fchip/features/hr/domain/entities/hr_entities.dart';
-import 'package:fchip/features/hr/presentation/controllers/hr_workspace_controller.dart';
-import 'package:fchip/features/icu/domain/entities/icu_entities.dart';
-import 'package:fchip/features/icu/presentation/controllers/icu_workspace_controller.dart';
-import 'package:fchip/features/integrations/domain/entities/integration_entities.dart';
-import 'package:fchip/features/integrations/presentation/controllers/integrations_workspace_controller.dart';
-import 'package:fchip/features/ipd/domain/entities/ipd_entities.dart';
-import 'package:fchip/features/ipd/presentation/controllers/ipd_workspace_controller.dart';
-import 'package:fchip/features/lab/domain/entities/lab_entities.dart';
-import 'package:fchip/features/lab/presentation/controllers/lab_workspace_controller.dart';
-import 'package:fchip/features/mortuary/domain/entities/mortuary_entities.dart';
-import 'package:fchip/features/mortuary/presentation/controllers/mortuary_workspace_controller.dart';
-import 'package:fchip/features/nursing/domain/entities/nursing_entities.dart';
-import 'package:fchip/features/nursing/presentation/controllers/nursing_workspace_controller.dart';
-import 'package:fchip/features/opd/domain/entities/opd_entities.dart';
-import 'package:fchip/features/opd/presentation/controllers/opd_workspace_controller.dart';
-import 'package:fchip/features/operations/domain/entities/operations_entities.dart';
-import 'package:fchip/features/operations/presentation/controllers/operations_workspace_controller.dart';
-import 'package:fchip/features/pharmacy/domain/entities/pharmacy_entities.dart';
-import 'package:fchip/features/pharmacy/presentation/controllers/pharmacy_workspace_controller.dart';
-import 'package:fchip/features/radiology/domain/entities/radiology_entities.dart';
-import 'package:fchip/features/radiology/presentation/controllers/radiology_workspace_controller.dart';
-import 'package:fchip/features/reception/domain/entities/reception_entities.dart';
-import 'package:fchip/features/reception/presentation/controllers/reception_follow_up_controller.dart';
-import 'package:fchip/features/reception/presentation/controllers/reception_payment_gate_controller.dart';
-import 'package:fchip/features/reception/presentation/reception_access.dart';
-import 'package:fchip/features/rooms_beds/domain/entities/rooms_beds_entities.dart';
-import 'package:fchip/features/rooms_beds/presentation/controllers/rooms_beds_workspace_controller.dart';
 import 'package:fchip/features/subscriptions/domain/entities/subscription_entities.dart';
 import 'package:fchip/features/subscriptions/presentation/controllers/subscriptions_workspace_controller.dart';
-import 'package:fchip/features/theater/domain/entities/theater_entities.dart';
-import 'package:fchip/features/theater/presentation/controllers/theater_workspace_controller.dart';
 
 @immutable
 final class ShellBadgeCounts {
   const ShellBadgeCounts({
-    this.receptionPatientCount,
-    this.opdWorkloadCount,
-    this.emergencyWorkloadCount,
-    this.ipdWorkloadCount,
-    this.roomsBedsWorkloadCount,
-    this.icuCriticalCount,
-    this.nursingWorkloadCount,
-    this.clinicalWorkloadCount,
-    this.labWorkloadCount,
-    this.radiologyWorkloadCount,
-    this.pharmacyWorkloadCount,
-    this.billingWorkloadCount,
-    this.claimsWorkloadCount,
     this.subscriptionsWorkloadCount,
-    this.operationsWorkloadCount,
-    this.housekeepingWorkloadCount,
-    this.hrWorkloadCount,
-    this.biomedicalWorkloadCount,
     this.communicationsWorkloadCount,
-    this.integrationsWorkloadCount,
-    this.dischargeWorkloadCount,
-    this.mortuaryWorkloadCount,
-    this.theaterWorkloadCount,
     this.notificationUnreadCount,
   });
 
   static const ShellBadgeCounts empty = ShellBadgeCounts();
 
-  final int? receptionPatientCount;
-  final int? opdWorkloadCount;
-  final int? emergencyWorkloadCount;
-  final int? ipdWorkloadCount;
-  final int? roomsBedsWorkloadCount;
-  final int? icuCriticalCount;
-  final int? nursingWorkloadCount;
-  final int? clinicalWorkloadCount;
-  final int? labWorkloadCount;
-  final int? radiologyWorkloadCount;
-  final int? pharmacyWorkloadCount;
-  final int? billingWorkloadCount;
-  final int? claimsWorkloadCount;
   final int? subscriptionsWorkloadCount;
-  final int? operationsWorkloadCount;
-  final int? housekeepingWorkloadCount;
-  final int? hrWorkloadCount;
-  final int? biomedicalWorkloadCount;
   final int? communicationsWorkloadCount;
-  final int? integrationsWorkloadCount;
-  final int? dischargeWorkloadCount;
-  final int? mortuaryWorkloadCount;
-  final int? theaterWorkloadCount;
   final int? notificationUnreadCount;
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         other is ShellBadgeCounts &&
-            receptionPatientCount == other.receptionPatientCount &&
-            opdWorkloadCount == other.opdWorkloadCount &&
-            emergencyWorkloadCount == other.emergencyWorkloadCount &&
-            ipdWorkloadCount == other.ipdWorkloadCount &&
-            roomsBedsWorkloadCount == other.roomsBedsWorkloadCount &&
-            icuCriticalCount == other.icuCriticalCount &&
-            nursingWorkloadCount == other.nursingWorkloadCount &&
-            clinicalWorkloadCount == other.clinicalWorkloadCount &&
-            labWorkloadCount == other.labWorkloadCount &&
-            radiologyWorkloadCount == other.radiologyWorkloadCount &&
-            pharmacyWorkloadCount == other.pharmacyWorkloadCount &&
-            billingWorkloadCount == other.billingWorkloadCount &&
-            claimsWorkloadCount == other.claimsWorkloadCount &&
             subscriptionsWorkloadCount == other.subscriptionsWorkloadCount &&
-            operationsWorkloadCount == other.operationsWorkloadCount &&
-            housekeepingWorkloadCount == other.housekeepingWorkloadCount &&
-            hrWorkloadCount == other.hrWorkloadCount &&
-            biomedicalWorkloadCount == other.biomedicalWorkloadCount &&
             communicationsWorkloadCount == other.communicationsWorkloadCount &&
-            integrationsWorkloadCount == other.integrationsWorkloadCount &&
-            dischargeWorkloadCount == other.dischargeWorkloadCount &&
-            mortuaryWorkloadCount == other.mortuaryWorkloadCount &&
-            theaterWorkloadCount == other.theaterWorkloadCount &&
             notificationUnreadCount == other.notificationUnreadCount;
   }
 
   @override
-  int get hashCode => Object.hashAll(<int?>[
-    receptionPatientCount,
-    opdWorkloadCount,
-    emergencyWorkloadCount,
-    ipdWorkloadCount,
-    roomsBedsWorkloadCount,
-    icuCriticalCount,
-    nursingWorkloadCount,
-    clinicalWorkloadCount,
-    labWorkloadCount,
-    radiologyWorkloadCount,
-    pharmacyWorkloadCount,
-    billingWorkloadCount,
-    claimsWorkloadCount,
+  int get hashCode => Object.hash(
     subscriptionsWorkloadCount,
-    operationsWorkloadCount,
-    housekeepingWorkloadCount,
-    hrWorkloadCount,
-    biomedicalWorkloadCount,
     communicationsWorkloadCount,
-    integrationsWorkloadCount,
-    dischargeWorkloadCount,
-    mortuaryWorkloadCount,
-    theaterWorkloadCount,
     notificationUnreadCount,
-  ]);
+  );
 }
 
 int? _positiveOrNull(int count) => count > 0 ? count : null;
 
-@visibleForTesting
-int? receptionPatientBadgeCount(
-  OpdWorkspaceState state, {
-  DateTime? now,
-  Set<ReceptionDeskSection>? sections,
-  Iterable<ReceptionPaymentGateEntry> paymentGateEntries =
-      const <ReceptionPaymentGateEntry>[],
-  Iterable<ReceptionFollowUpEntry> followUpEntries =
-      const <ReceptionFollowUpEntry>[],
-}) {
-  return _positiveOrNull(
-    receptionUniquePatientCount(
-      state,
-      now: now,
-      sections: sections,
-      paymentGateEntries: paymentGateEntries,
-      followUpEntries: followUpEntries,
-    ),
+int? _selectBadge<T>(
+  AsyncValue<Result<T>> value,
+  int? Function(T state) selector,
+) {
+  return value.maybeWhen(
+    data: (Result<T> result) {
+      return result.when(
+        success: selector,
+        failure: (_) => null,
+      );
+    },
+    orElse: () => null,
   );
 }
 
-@visibleForTesting
-Set<ReceptionDeskSection> authorizedReceptionDeskSections(
-  AppAccessPolicy accessPolicy,
-) {
-  return <ReceptionDeskSection>{
-    for (final ReceptionDeskSection section in ReceptionDeskSection.values)
-      if (receptionDeskSectionRequirement(section).isAllowed(accessPolicy))
-        section,
-  };
-}
-
-int? _selectBadge<S>(
-  AsyncValue<Result<S>> asyncResult,
-  int? Function(S state) extract,
-) {
-  return asyncResult.asData?.value.when(
-    success: (S state) => extract(state),
-    failure: (_) => null,
+final shellBadgeCountsProvider = Provider<ShellBadgeCounts>((Ref ref) {
+  final accessPolicy = ref.watch(appAccessPolicyProvider);
+  final bool canSubscriptions = canAccessShellRoute(
+    AppRoutes.subscriptions,
+    accessPolicy,
   );
-}
-
-/// Watches only badge counts from workspace controllers using [select],
-/// preventing full-shell rebuilds when workspace data (lists, filters, etc.)
-/// changes without affecting badge counts.
-final shellBadgeCountsProvider = Provider<ShellBadgeCounts>((ref) {
-  final bool ready = ref
-      .watch(workspacePrefetchReadyProvider)
-      .maybeWhen(data: (bool ready) => ready, orElse: () => false);
-  if (!ready) {
-    return ShellBadgeCounts.empty;
-  }
-
-  final AppAccessPolicy accessPolicy = ref.watch(appAccessPolicyProvider);
-
-  bool canAccess(AppRouteData route) =>
-      canAccessShellRoute(route, accessPolicy);
-
-  final bool canReception = canAccess(AppRoutes.reception);
-  final bool canOpd = canAccess(AppRoutes.opd);
-  final bool canEmergency = canAccess(AppRoutes.emergency);
-  final bool canIpd = canAccess(AppRoutes.ipd);
-  final bool canRoomsBeds = canAccess(AppRoutes.roomsBeds);
-  final bool canIcu = canAccess(AppRoutes.icu);
-  final bool canNursing = canAccess(AppRoutes.nursing);
-  final bool canClinical = canAccess(AppRoutes.clinical);
-  final bool canLab = canAccess(AppRoutes.lab);
-  final bool canRadiology = canAccess(AppRoutes.radiology);
-  final bool canPharmacy = canAccess(AppRoutes.pharmacy);
-  final bool canBilling = canAccess(AppRoutes.billing);
-  final bool canClaims = canAccess(AppRoutes.claims);
-  final bool canSubscriptions = canAccess(AppRoutes.subscriptions);
-  final bool canOperations = canAccess(AppRoutes.operations);
-  final bool canHousekeeping = canAccess(AppRoutes.housekeeping);
-  final bool canHr = canAccess(AppRoutes.hr);
-  final bool canBiomedical = canAccess(AppRoutes.biomedical);
-  final bool canCommunications = canAccess(AppRoutes.communications);
-  final bool canIntegrations = canAccess(AppRoutes.integrations);
-  final bool canDischarge = canAccess(AppRoutes.discharge);
-  final bool canMortuary = canAccess(AppRoutes.mortuary);
-  final bool canTheater = canAccess(AppRoutes.theater);
-  final Set<ReceptionDeskSection> receptionSections = canReception
-      ? authorizedReceptionDeskSections(accessPolicy)
-      : const <ReceptionDeskSection>{};
-  final List<ReceptionPaymentGateEntry> receptionPaymentEntries =
-      receptionSections.contains(ReceptionDeskSection.paymentGate)
-      ? ref.watch(
-          receptionPaymentGateControllerProvider.select((value) {
-            return value.asData?.value.when(
-                  success: (ReceptionPaymentGateState state) => state.entries,
-                  failure: (_) => const <ReceptionPaymentGateEntry>[],
-                ) ??
-                const <ReceptionPaymentGateEntry>[];
-          }),
-        )
-      : const <ReceptionPaymentGateEntry>[];
-  final List<ReceptionFollowUpEntry> receptionFollowUpEntries =
-      receptionSections.contains(ReceptionDeskSection.followUps)
-      ? ref.watch(
-          receptionFollowUpControllerProvider.select((value) {
-            return value.asData?.value.when(
-                  success: (ReceptionFollowUpState state) => state.entries,
-                  failure: (_) => const <ReceptionFollowUpEntry>[],
-                ) ??
-                const <ReceptionFollowUpEntry>[];
-          }),
-        )
-      : const <ReceptionFollowUpEntry>[];
+  final bool canCommunications = canAccessShellRoute(
+    AppRoutes.communications,
+    accessPolicy,
+  );
 
   return ShellBadgeCounts(
-    receptionPatientCount: canReception
-        ? ref.watch(
-            opdWorkspaceControllerProvider.select(
-              (v) => _selectBadge<OpdWorkspaceState>(v, (OpdWorkspaceState s) {
-                return receptionPatientBadgeCount(
-                  s,
-                  sections: receptionSections,
-                  paymentGateEntries: receptionPaymentEntries,
-                  followUpEntries: receptionFollowUpEntries,
-                );
-              }),
-            ),
-          )
-        : null,
-    opdWorkloadCount: canOpd
-        ? ref.watch(
-            opdWorkspaceControllerProvider.select(
-              (v) => _selectBadge<OpdWorkspaceState>(v, (s) => s.workloadCount),
-            ),
-          )
-        : null,
-    emergencyWorkloadCount: canEmergency
-        ? ref.watch(
-            emergencyWorkspaceControllerProvider.select(
-              (v) => _selectBadge<EmergencyWorkspaceState>(
-                v,
-                (s) => _positiveOrNull(s.workloadCount),
-              ),
-            ),
-          )
-        : null,
-    ipdWorkloadCount: canIpd
-        ? ref.watch(
-            ipdWorkspaceControllerProvider.select(
-              (v) => _selectBadge<IpdWorkspaceState>(
-                v,
-                (s) => _positiveOrNull(s.workloadCount),
-              ),
-            ),
-          )
-        : null,
-    roomsBedsWorkloadCount: canRoomsBeds
-        ? ref.watch(
-            roomsBedsWorkspaceControllerProvider.select(
-              (v) => _selectBadge<RoomsBedsWorkspaceState>(
-                v,
-                (s) => _positiveOrNull(s.workloadCount),
-              ),
-            ),
-          )
-        : null,
-    icuCriticalCount: canIcu
-        ? ref.watch(
-            icuWorkspaceControllerProvider.select(
-              (v) => _selectBadge<IcuWorkspaceState>(
-                v,
-                (s) => _positiveOrNull(s.criticalCount),
-              ),
-            ),
-          )
-        : null,
-    nursingWorkloadCount: canNursing
-        ? ref.watch(
-            nursingWorkspaceControllerProvider.select(
-              (v) => _selectBadge<NursingWorkspaceState>(
-                v,
-                (s) => _positiveOrNull(s.workloadCount),
-              ),
-            ),
-          )
-        : null,
-    clinicalWorkloadCount: canClinical
-        ? ref.watch(
-            clinicalWorkspaceControllerProvider.select(
-              (v) => _selectBadge<ClinicalWorkspaceState>(v, (s) {
-                final int count = s.workloadCount;
-                return count > 0 ? count : null;
-              }),
-            ),
-          )
-        : null,
-    labWorkloadCount: canLab
-        ? ref.watch(
-            labWorkspaceControllerProvider.select(
-              (v) => _selectBadge<LabWorkspaceState>(
-                v,
-                (s) => _positiveOrNull(s.workloadCount),
-              ),
-            ),
-          )
-        : null,
-    radiologyWorkloadCount: canRadiology
-        ? ref.watch(
-            radiologyWorkspaceControllerProvider.select(
-              (v) => _selectBadge<RadiologyWorkspaceState>(
-                v,
-                (s) => _positiveOrNull(s.workloadCount),
-              ),
-            ),
-          )
-        : null,
-    pharmacyWorkloadCount: canPharmacy
-        ? ref.watch(
-            pharmacyWorkspaceControllerProvider.select(
-              (v) => _selectBadge<PharmacyWorkspaceState>(
-                v,
-                (s) => _positiveOrNull(s.workloadCount),
-              ),
-            ),
-          )
-        : null,
-    billingWorkloadCount: canBilling
-        ? ref.watch(
-            billingWorkspaceControllerProvider.select(
-              (v) => _selectBadge<BillingWorkspaceState>(
-                v,
-                (s) => _positiveOrNull(s.workloadCount),
-              ),
-            ),
-          )
-        : null,
-    claimsWorkloadCount: canClaims
-        ? ref.watch(
-            claimsWorkspaceControllerProvider.select(
-              (v) => _selectBadge<ClaimsWorkspaceState>(
-                v,
-                (s) => _positiveOrNull(s.workloadCount),
-              ),
-            ),
-          )
-        : null,
     subscriptionsWorkloadCount: canSubscriptions
         ? ref.watch(
             subscriptionsWorkspaceControllerProvider.select(
@@ -423,90 +79,10 @@ final shellBadgeCountsProvider = Provider<ShellBadgeCounts>((ref) {
             ),
           )
         : null,
-    operationsWorkloadCount: canOperations
-        ? ref.watch(
-            operationsWorkspaceControllerProvider.select(
-              (v) => _selectBadge<OperationsWorkspaceState>(
-                v,
-                (s) => _positiveOrNull(s.workloadCount),
-              ),
-            ),
-          )
-        : null,
-    housekeepingWorkloadCount: canHousekeeping
-        ? ref.watch(
-            housekeepingWorkspaceControllerProvider.select(
-              (v) => _selectBadge<HousekeepingWorkspaceState>(
-                v,
-                (s) => _positiveOrNull(s.workloadCount),
-              ),
-            ),
-          )
-        : null,
-    hrWorkloadCount: canHr
-        ? ref.watch(
-            hrWorkspaceControllerProvider.select(
-              (v) => _selectBadge<HrWorkspaceState>(
-                v,
-                (s) => _positiveOrNull(s.workloadCount),
-              ),
-            ),
-          )
-        : null,
-    biomedicalWorkloadCount: canBiomedical
-        ? ref.watch(
-            biomedicalWorkspaceControllerProvider.select(
-              (v) => _selectBadge<BiomedicalWorkspaceState>(
-                v,
-                (s) => _positiveOrNull(s.workloadCount),
-              ),
-            ),
-          )
-        : null,
     communicationsWorkloadCount: canCommunications
         ? ref.watch(
             communicationsWorkspaceControllerProvider.select(
               (v) => _selectBadge<CommunicationsWorkspaceState>(
-                v,
-                (s) => _positiveOrNull(s.workloadCount),
-              ),
-            ),
-          )
-        : null,
-    integrationsWorkloadCount: canIntegrations
-        ? ref.watch(
-            integrationsWorkspaceControllerProvider.select(
-              (v) => _selectBadge<IntegrationWorkspaceState>(
-                v,
-                (s) => _positiveOrNull(s.workloadCount),
-              ),
-            ),
-          )
-        : null,
-    dischargeWorkloadCount: canDischarge
-        ? ref.watch(
-            dischargeWorkspaceControllerProvider.select(
-              (v) => _selectBadge<DischargeWorkspaceState>(
-                v,
-                (s) => _positiveOrNull(s.workloadCount),
-              ),
-            ),
-          )
-        : null,
-    mortuaryWorkloadCount: canMortuary
-        ? ref.watch(
-            mortuaryWorkspaceControllerProvider.select(
-              (v) => _selectBadge<MortuaryWorkspaceState>(
-                v,
-                (s) => _positiveOrNull(s.workloadCount),
-              ),
-            ),
-          )
-        : null,
-    theaterWorkloadCount: canTheater
-        ? ref.watch(
-            theaterWorkspaceControllerProvider.select(
-              (v) => _selectBadge<TheaterWorkspaceState>(
                 v,
                 (s) => _positiveOrNull(s.workloadCount),
               ),

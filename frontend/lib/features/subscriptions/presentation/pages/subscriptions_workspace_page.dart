@@ -4200,7 +4200,7 @@ IconData _moduleIconForLookup(SubscriptionLookupItem module) {
     'registry',
     'consent',
   ])) {
-    return AppRouteIcons.patients;
+    return Icons.assignment_ind_outlined;
   }
   if (_moduleKeyMatches(key, const <String>[
     'schedul',
@@ -4208,32 +4208,32 @@ IconData _moduleIconForLookup(SubscriptionLookupItem module) {
     'opd',
     'appointment',
   ])) {
-    return AppRouteIcons.opd;
+    return Icons.local_hospital_outlined;
   }
   if (_moduleKeyMatches(key, const <String>[
     'encounter',
     'vital',
     'clinical',
   ])) {
-    return AppRouteIcons.clinical;
+    return Icons.medical_information_outlined;
   }
   if (_moduleKeyMatches(key, const <String>['nurs'])) {
-    return AppRouteIcons.nursing;
+    return Icons.local_hospital_outlined;
   }
   if (_moduleKeyMatches(key, const <String>['ipd', 'bed', 'ward'])) {
-    return AppRouteIcons.ipd;
+    return Icons.bed_outlined;
   }
   if (_moduleKeyMatches(key, const <String>['icu', 'critical'])) {
-    return AppRouteIcons.icu;
+    return Icons.monitor_heart_outlined;
   }
   if (_moduleKeyMatches(key, const <String>['lab', 'patholog'])) {
-    return AppRouteIcons.lab;
+    return Icons.science_outlined;
   }
   if (_moduleKeyMatches(key, const <String>['radiolog', 'imaging'])) {
-    return AppRouteIcons.radiology;
+    return Icons.image_search_outlined;
   }
   if (_moduleKeyMatches(key, const <String>['pharmac', 'dispens'])) {
-    return AppRouteIcons.pharmacy;
+    return Icons.medication_liquid_outlined;
   }
   if (_moduleKeyMatches(key, const <String>[
     'billing',
@@ -4241,22 +4241,22 @@ IconData _moduleIconForLookup(SubscriptionLookupItem module) {
     'insurance',
     'claim',
   ])) {
-    return AppRouteIcons.billing;
+    return Icons.point_of_sale_outlined;
   }
   if (_moduleKeyMatches(key, const <String>['housekeep', 'cleaning'])) {
-    return AppRouteIcons.housekeeping;
+    return Icons.cleaning_services_outlined;
   }
   if (_moduleKeyMatches(key, const <String>['biomed', 'equipment'])) {
-    return AppRouteIcons.biomedical;
+    return Icons.biotech_outlined;
   }
   if (_moduleKeyMatches(key, const <String>['hr', 'roster', 'staff'])) {
-    return AppRouteIcons.hr;
+    return Icons.badge_outlined;
   }
   if (_moduleKeyMatches(key, const <String>['emergenc', 'triage'])) {
-    return AppRouteIcons.emergency;
+    return Icons.emergency_outlined;
   }
   if (_moduleKeyMatches(key, const <String>['mortuar'])) {
-    return AppRouteIcons.mortuary;
+    return Icons.spa_outlined;
   }
   if (_moduleKeyMatches(key, const <String>[
     'notif',
@@ -4267,10 +4267,10 @@ IconData _moduleIconForLookup(SubscriptionLookupItem module) {
     return AppRouteIcons.communications;
   }
   if (_moduleKeyMatches(key, const <String>['integrat', 'webhook', 'api'])) {
-    return AppRouteIcons.integrations;
+    return Icons.hub_outlined;
   }
   if (_moduleKeyMatches(key, const <String>['report', 'analytic', 'insight'])) {
-    return AppRouteIcons.reports;
+    return Icons.analytics_outlined;
   }
   if (_moduleKeyMatches(key, const <String>[
     'subscription',
@@ -4284,13 +4284,13 @@ IconData _moduleIconForLookup(SubscriptionLookupItem module) {
     'maintenance',
     'operation',
   ])) {
-    return AppRouteIcons.operations;
+    return Icons.engineering_outlined;
   }
   if (_moduleKeyMatches(key, const <String>['theater', 'theatre', 'surgery'])) {
-    return AppRouteIcons.theater;
+    return Icons.event_seat_outlined;
   }
   if (_moduleKeyMatches(key, const <String>['discharge'])) {
-    return AppRouteIcons.discharge;
+    return Icons.exit_to_app_outlined;
   }
   if (_moduleKeyMatches(key, const <String>[
     'auth',

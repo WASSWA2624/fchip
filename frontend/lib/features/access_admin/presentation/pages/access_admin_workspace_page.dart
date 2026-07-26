@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:fchip/app/router/app_route_icons.dart';
-import 'package:fchip/app/router/app_routes.dart';
 import 'package:fchip/app/theme/app_theme_extensions.dart';
 import 'package:fchip/core/errors/app_failure.dart';
 import 'package:fchip/core/errors/result.dart';
@@ -956,14 +954,6 @@ class _DetailContent extends ConsumerWidget {
                           ),
                     )
                     .toList(growable: false),
-          ),
-        ],
-        if (item.staffProfileId != null) ...<Widget>[
-          SizedBox(height: theme.spacing.md),
-          AppButton.secondary(
-            label: l10n.accessAdminOpenHrProfileAction,
-            leadingIcon: AppRouteIcons.hr,
-            onPressed: () => context.go(AppRoutes.hr.location()),
           ),
         ],
         if (item.isClinicalFlowRole)

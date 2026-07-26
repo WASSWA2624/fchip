@@ -2,43 +2,18 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:fchip/app/router/app_routes.dart';
 import 'package:fchip/app/router/shell_route_access.dart';
 import 'package:fchip/core/permissions/access_policy.dart';
-import 'package:fchip/core/permissions/app_permission.dart';
 import 'package:fchip/core/security/auth_session.dart';
 import 'package:fchip/core/security/session_tokens.dart';
 
 const List<AppModuleEntitlement> _activeShellModules = <AppModuleEntitlement>[
-  AppModuleEntitlement(code: 'patient-registry', licenseStatus: 'ACTIVE'),
-  AppModuleEntitlement(code: 'scheduling-queue', licenseStatus: 'ACTIVE'),
-  AppModuleEntitlement(
-    code: 'inpatient-bed-management',
-    licenseStatus: 'ACTIVE',
-  ),
-  AppModuleEntitlement(code: 'icu-critical-care', licenseStatus: 'ACTIVE'),
-  AppModuleEntitlement(code: 'encounters-vitals', licenseStatus: 'ACTIVE'),
-  AppModuleEntitlement(code: 'physiotherapy', licenseStatus: 'ACTIVE'),
-  AppModuleEntitlement(code: 'lab-workflows', licenseStatus: 'ACTIVE'),
-  AppModuleEntitlement(code: 'radiology-workflows', licenseStatus: 'ACTIVE'),
-  AppModuleEntitlement(code: 'pharmacy-dispensing', licenseStatus: 'ACTIVE'),
-  AppModuleEntitlement(code: 'facilities-maintenance', licenseStatus: 'ACTIVE'),
-  AppModuleEntitlement(code: 'hr-rosters', licenseStatus: 'ACTIVE'),
-  AppModuleEntitlement(
-    code: 'biomedical-engineering-suite',
-    licenseStatus: 'ACTIVE',
-  ),
   AppModuleEntitlement(
     code: 'notifications-communications',
     licenseStatus: 'ACTIVE',
   ),
-  AppModuleEntitlement(code: 'integrations-core', licenseStatus: 'ACTIVE'),
-  AppModuleEntitlement(code: 'theatre-anesthesia', licenseStatus: 'ACTIVE'),
-  AppModuleEntitlement(code: 'reporting-analytics', licenseStatus: 'ACTIVE'),
-  AppModuleEntitlement(code: 'billing-payments', licenseStatus: 'ACTIVE'),
-  AppModuleEntitlement(code: 'insurance-claims', licenseStatus: 'ACTIVE'),
-  AppModuleEntitlement(code: 'mortuary', licenseStatus: 'ACTIVE'),
 ];
 
 void main() {
-  group('shell route access matrix', () {
+  group('shell route access (FCHIP)', () {
     AppAccessPolicy policyForRole(String role) {
       return AppAccessPolicy.fromSession(
         AuthSession(
@@ -53,270 +28,35 @@ void main() {
       );
     }
 
-    bool canAccess(AppRouteData route, AppAccessPolicy policy) {
-      return canAccessShellRoute(route, policy);
-    }
-
-    test('doctor access follows clinical permission pack', () {
-      final policy = policyForRole('DOCTOR');
-
-      expect(canAccess(AppRoutes.home, policy), isTrue);
-      expect(canAccess(AppRoutes.patients, policy), isTrue);
-      expect(canAccess(AppRoutes.opd, policy), isTrue);
-      expect(canAccess(AppRoutes.clinical, policy), isTrue);
-      expect(canAccess(AppRoutes.lab, policy), isTrue);
-      expect(canAccess(AppRoutes.pharmacy, policy), isTrue);
-      expect(canAccess(AppRoutes.reports, policy), isTrue);
-      // Nursing/physiotherapy share clinical/patient permission codes.
-      expect(canAccess(AppRoutes.nursing, policy), isTrue);
-      expect(canAccess(AppRoutes.physiotherapy, policy), isTrue);
-      expect(canAccess(AppRoutes.billing, policy), isFalse);
-      expect(canAccess(AppRoutes.hr, policy), isFalse);
+    test('authenticated users can open home and settings', () {
+      final AppAccessPolicy policy = policyForRole('DOCTOR');
+      expect(canAccessShellRoute(AppRoutes.home, policy), isTrue);
+      expect(canAccessShellRoute(AppRoutes.settings, policy), isTrue);
     });
 
-    test('nurse access follows nursing permission pack', () {
-      final policy = policyForRole('NURSE');
+    test('communications requires module + role/permission pack', () {
+      final AppAccessPolicy doctor = policyForRole('DOCTOR');
+      expect(canAccessShellRoute(AppRoutes.communications, doctor), isTrue);
 
-      expect(canAccess(AppRoutes.nursing, policy), isTrue);
-      expect(canAccess(AppRoutes.lab, policy), isTrue);
-      expect(canAccess(AppRoutes.reports, policy), isTrue);
-      expect(canAccess(AppRoutes.clinical, policy), isTrue);
-      expect(canAccess(AppRoutes.billing, policy), isFalse);
+      final AppAccessPolicy patient = policyForRole('PATIENT');
+      // Patient role is not in communicationsWorkspaceRoles.
+      expect(canAccessShellRoute(AppRoutes.communications, patient), isFalse);
     });
 
-    test('ambulance access follows emergency permission pack', () {
-      final policy = policyForRole('AMBULANCE_OPERATOR');
+    test('subscriptions is super-admin only', () {
+      final AppAccessPolicy admin = policyForRole('SUPER_ADMIN');
+      expect(canAccessShellRoute(AppRoutes.subscriptions, admin), isTrue);
 
-      expect(canAccess(AppRoutes.emergency, policy), isTrue);
-      expect(canAccess(AppRoutes.reports, policy), isTrue);
-      expect(canAccess(AppRoutes.patients, policy), isFalse);
-      // OPD accepts emergency:read among its any-permissions.
-      expect(canAccess(AppRoutes.opd, policy), isTrue);
+      final AppAccessPolicy doctor = policyForRole('DOCTOR');
+      expect(canAccessShellRoute(AppRoutes.subscriptions, doctor), isFalse);
     });
 
-    test('lab access follows lab permission pack', () {
-      final policy = policyForRole('LAB_TECH');
+    test('access admin is available to facility admins', () {
+      final AppAccessPolicy facilityAdmin = policyForRole('FACILITY_ADMIN');
+      expect(canAccessShellRoute(AppRoutes.accessAdmin, facilityAdmin), isTrue);
 
-      expect(canAccess(AppRoutes.home, policy), isTrue);
-      expect(canAccess(AppRoutes.patients, policy), isTrue);
-      expect(canAccess(AppRoutes.lab, policy), isTrue);
-      expect(canAccess(AppRoutes.communications, policy), isTrue);
-      expect(canAccess(AppRoutes.settings, policy), isTrue);
-      expect(canAccess(AppRoutes.opd, policy), isFalse);
-      expect(canAccess(AppRoutes.nursing, policy), isFalse);
-      expect(canAccess(AppRoutes.physiotherapy, policy), isFalse);
-      expect(canAccess(AppRoutes.theater, policy), isFalse);
-      expect(canAccess(AppRoutes.reports, policy), isFalse);
+      final AppAccessPolicy doctor = policyForRole('DOCTOR');
+      expect(canAccessShellRoute(AppRoutes.accessAdmin, doctor), isFalse);
     });
-
-    test('pharmacist shell is limited to pharmacy-focused routes', () {
-      final policy = policyForRole('PHARMACIST');
-
-      expect(canAccess(AppRoutes.home, policy), isTrue);
-      expect(canAccess(AppRoutes.patients, policy), isTrue);
-      expect(canAccess(AppRoutes.pharmacy, policy), isTrue);
-      expect(canAccess(AppRoutes.communications, policy), isTrue);
-      expect(canAccess(AppRoutes.settings, policy), isTrue);
-      expect(canAccess(AppRoutes.reports, policy), isFalse);
-      expect(canAccess(AppRoutes.opd, policy), isFalse);
-      expect(canAccess(AppRoutes.nursing, policy), isFalse);
-      expect(canAccess(AppRoutes.lab, policy), isFalse);
-      expect(canAccess(AppRoutes.clinical, policy), isFalse);
-      expect(canAccess(AppRoutes.billing, policy), isFalse);
-    });
-
-    test('receptionist shell is limited to front-desk routes', () {
-      final policy = policyForRole('RECEPTIONIST');
-
-      expect(canAccess(AppRoutes.home, policy), isTrue);
-      expect(canAccess(AppRoutes.reception, policy), isTrue);
-      expect(canAccess(AppRoutes.patients, policy), isTrue);
-      expect(canAccess(AppRoutes.opd, policy), isTrue);
-      expect(canAccess(AppRoutes.emergency, policy), isTrue);
-      expect(canAccess(AppRoutes.communications, policy), isTrue);
-      expect(canAccess(AppRoutes.settings, policy), isTrue);
-      expect(canAccess(AppRoutes.ipd, policy), isFalse);
-      expect(canAccess(AppRoutes.roomsBeds, policy), isFalse);
-      expect(canAccess(AppRoutes.icu, policy), isFalse);
-      expect(canAccess(AppRoutes.nursing, policy), isFalse);
-      expect(canAccess(AppRoutes.theater, policy), isFalse);
-      expect(canAccess(AppRoutes.discharge, policy), isFalse);
-      expect(canAccess(AppRoutes.pharmacy, policy), isFalse);
-      expect(canAccess(AppRoutes.operations, policy), isFalse);
-      expect(canAccess(AppRoutes.housekeeping, policy), isFalse);
-      expect(canAccess(AppRoutes.biomedical, policy), isFalse);
-      expect(canAccess(AppRoutes.physiotherapy, policy), isFalse);
-      expect(canAccess(AppRoutes.billing, policy), isFalse);
-    });
-
-    test('billing access follows billing permission pack', () {
-      final policy = policyForRole('BILLING');
-
-      expect(canAccess(AppRoutes.home, policy), isTrue);
-      expect(canAccess(AppRoutes.patients, policy), isTrue);
-      expect(canAccess(AppRoutes.billing, policy), isTrue);
-      expect(canAccess(AppRoutes.claims, policy), isTrue);
-      expect(canAccess(AppRoutes.communications, policy), isTrue);
-      expect(canAccess(AppRoutes.reports, policy), isTrue);
-      expect(canAccess(AppRoutes.settings, policy), isTrue);
-      expect(canAccess(AppRoutes.opd, policy), isFalse);
-      expect(canAccess(AppRoutes.ipd, policy), isFalse);
-      expect(canAccess(AppRoutes.nursing, policy), isFalse);
-      expect(canAccess(AppRoutes.theater, policy), isFalse);
-      expect(canAccess(AppRoutes.radiology, policy), isFalse);
-      expect(canAccess(AppRoutes.discharge, policy), isFalse);
-      expect(canAccess(AppRoutes.physiotherapy, policy), isFalse);
-      expect(canAccess(AppRoutes.pharmacy, policy), isFalse);
-      expect(canAccess(AppRoutes.emergency, policy), isFalse);
-    });
-
-    test('operations access follows operations permission pack', () {
-      final policy = policyForRole('OPERATIONS');
-
-      expect(canAccess(AppRoutes.operations, policy), isTrue);
-      expect(canAccess(AppRoutes.reports, policy), isTrue);
-      expect(canAccess(AppRoutes.patients, policy), isFalse);
-    });
-
-    test('hr sees hr workspace and reports but not admin setup', () {
-      final policy = policyForRole('HR');
-
-      expect(canAccess(AppRoutes.hr, policy), isTrue);
-      expect(canAccess(AppRoutes.tenantFacilitySetup, policy), isFalse);
-      expect(canAccess(AppRoutes.reports, policy), isTrue);
-      expect(canAccess(AppRoutes.patients, policy), isFalse);
-    });
-
-    test('admins see full shell including integrations', () {
-      for (final String role in <String>[
-        'SUPER_ADMIN',
-        'TENANT_ADMIN',
-        'FACILITY_ADMIN',
-      ]) {
-        final policy = policyForRole(role);
-
-        expect(canAccess(AppRoutes.integrations, policy), isTrue, reason: role);
-        expect(canAccess(AppRoutes.nursing, policy), isTrue, reason: role);
-      }
-
-      expect(
-        canAccess(AppRoutes.subscriptions, policyForRole('SUPER_ADMIN')),
-        isTrue,
-      );
-      expect(
-        canAccess(AppRoutes.subscriptions, policyForRole('TENANT_ADMIN')),
-        isFalse,
-      );
-      expect(
-        canAccess(AppRoutes.subscriptions, policyForRole('FACILITY_ADMIN')),
-        isFalse,
-      );
-    });
-
-    test('custom role permissions unlock matching shell routes', () {
-      final policy = AppAccessPolicy.fromSession(
-        AuthSession(
-          tokens: SessionTokens(accessToken: 'token'),
-          user: const AuthUserProfile(
-            tenantId: 'tenant-1',
-            facilityId: 'facility-1',
-            roles: <String>['TESTING'],
-          ),
-          permissions: <AppPermission>[
-            AppPermissions.billingRead,
-            AppPermissions.clinicalRead,
-            AppPermissions.labRead,
-          ],
-          moduleEntitlements: _activeShellModules,
-        ),
-      );
-
-      expect(policy.isPermissionScopedShellUser, isTrue);
-      expect(canAccess(AppRoutes.home, policy), isTrue);
-      expect(canAccess(AppRoutes.settings, policy), isTrue);
-      expect(canAccess(AppRoutes.billing, policy), isTrue);
-      expect(canAccess(AppRoutes.claims, policy), isTrue);
-      expect(canAccess(AppRoutes.clinical, policy), isTrue);
-      expect(canAccess(AppRoutes.lab, policy), isTrue);
-      // Broad any-permission routes must not leak from clinical/billing/lab.
-      expect(canAccess(AppRoutes.patients, policy), isFalse);
-      expect(canAccess(AppRoutes.opd, policy), isFalse);
-      expect(canAccess(AppRoutes.nursing, policy), isFalse);
-      expect(canAccess(AppRoutes.ipd, policy), isFalse);
-      expect(canAccess(AppRoutes.icu, policy), isFalse);
-      expect(canAccess(AppRoutes.theater, policy), isFalse);
-      expect(canAccess(AppRoutes.physiotherapy, policy), isFalse);
-      expect(canAccess(AppRoutes.discharge, policy), isFalse);
-      expect(canAccess(AppRoutes.pharmacy, policy), isFalse);
-      expect(canAccess(AppRoutes.hr, policy), isFalse);
-      expect(canAccess(AppRoutes.communications, policy), isFalse);
-    });
-
-    test(
-      'custom patient grants unlock patient-flow workspaces only',
-      () {
-        final policy = AppAccessPolicy.fromSession(
-          AuthSession(
-            tokens: SessionTokens(accessToken: 'token'),
-            user: const AuthUserProfile(
-              tenantId: 'tenant-1',
-              facilityId: 'facility-1',
-              roles: <String>['FRONT_DESK_CUSTOM'],
-            ),
-            permissions: <AppPermission>[
-              AppPermissions.patientRead,
-              AppPermissions.patientWrite,
-            ],
-            moduleEntitlements: _activeShellModules,
-          ),
-        );
-
-        expect(canAccess(AppRoutes.patients, policy), isTrue);
-        expect(canAccess(AppRoutes.reception, policy), isTrue);
-        expect(canAccess(AppRoutes.opd, policy), isTrue);
-        expect(canAccess(AppRoutes.clinical, policy), isFalse);
-        expect(canAccess(AppRoutes.billing, policy), isFalse);
-        expect(canAccess(AppRoutes.lab, policy), isFalse);
-      },
-    );
-
-    test(
-      'extra grants unlock routes outside a focused shell without opening '
-      'routes that only overlap the base pack',
-      () {
-        final receptionistPolicy = policyForRole('RECEPTIONIST')
-            .copyWithPermissions(<AppPermission>{
-              ...policyForRole('RECEPTIONIST').permissions,
-              AppPermissions.billingRead,
-              AppPermissions.pharmacyRead,
-            });
-
-        expect(receptionistPolicy.isReceptionistFocusedShellUser, isTrue);
-        expect(canAccess(AppRoutes.billing, receptionistPolicy), isTrue);
-        expect(canAccess(AppRoutes.pharmacy, receptionistPolicy), isTrue);
-        // Routes that accept billing:read / pharmacy:read also unlock.
-        expect(canAccess(AppRoutes.theater, receptionistPolicy), isTrue);
-        expect(canAccess(AppRoutes.discharge, receptionistPolicy), isTrue);
-        // Still clamped: satisfied only by receptionist pack overlaps.
-        expect(canAccess(AppRoutes.nursing, receptionistPolicy), isFalse);
-        expect(canAccess(AppRoutes.icu, receptionistPolicy), isFalse);
-        expect(canAccess(AppRoutes.roomsBeds, receptionistPolicy), isFalse);
-
-        final labPolicy = policyForRole('LAB_TECH').copyWithPermissions(
-          <AppPermission>{
-            ...policyForRole('LAB_TECH').permissions,
-            AppPermissions.clinicalRead,
-          },
-        );
-        expect(labPolicy.isLabFocusedShellUser, isTrue);
-        expect(canAccess(AppRoutes.clinical, labPolicy), isTrue);
-        // Routes that accept clinical:read also unlock.
-        expect(canAccess(AppRoutes.opd, labPolicy), isTrue);
-        expect(canAccess(AppRoutes.physiotherapy, labPolicy), isTrue);
-        // Still clamped: no expanded grant matches these requirements.
-        expect(canAccess(AppRoutes.pharmacy, labPolicy), isFalse);
-        expect(canAccess(AppRoutes.billing, labPolicy), isFalse);
-      },
-    );
   });
 }

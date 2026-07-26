@@ -12,7 +12,7 @@ void main() {
       await pumpPatrolShellApp(
         $,
         overrides: testReadyAppOverrides(
-          initialLocation: AppRoutes.patients.path,
+          initialLocation: AppRoutes.settings.path,
         ),
       );
 

@@ -6,8 +6,6 @@ import 'package:fchip/core/permissions/app_permission.dart';
 import 'package:fchip/core/permissions/permission_providers.dart';
 import 'package:fchip/shared/actions/app_global_fault_report_action.dart';
 import 'package:fchip/shared/actions/app_global_fault_report_dialog.dart';
-import 'package:fchip/shared/actions/app_global_housekeeping_request_action.dart';
-import 'package:fchip/shared/actions/app_global_housekeeping_request_dialog.dart';
 import 'package:fchip/shared/actions/app_workspace_refresh_action.dart';
 import 'package:fchip/shared/components/app_button.dart';
 import 'package:fchip/shared/layout/app_workspace_board_toggle.dart';
@@ -37,14 +35,6 @@ const AccessRequirement _faultReportRequirement = AccessRequirement(
     AppPermissions.operationsWrite,
   ],
   activeModules: <String>['biomedical-engineering-suite'],
-);
-
-const AccessRequirement _housekeepingRequestRequirement = AccessRequirement(
-  anyPermissions: <AppPermission>[
-    AppPermissions.operationsWrite,
-    AppPermissions.operationsRead,
-  ],
-  activeModules: <String>['housekeeping-maintenance'],
 );
 
 List<AppToolbarOverflowEntry> resolveToolbarOverflowEntries(
@@ -110,26 +100,6 @@ AppToolbarOverflowEntry? _resolveAction(Widget action, WidgetRef ref) {
       },
     );
   }
-  if (action is AppGlobalHousekeepingRequestAction) {
-    final bool isAllowed = _housekeepingRequestRequirement.isAllowed(
-      ref.read(appAccessPolicyProvider),
-    );
-    return AppToolbarOverflowEntry(
-      icon: Icons.cleaning_services_outlined,
-      label: action.label,
-      enabled: isAllowed,
-      onSelected: (BuildContext context, WidgetRef menuRef) {
-        if (!isAllowed) {
-          return;
-        }
-        showAppGlobalHousekeepingRequestDialog(
-          context: context,
-          ref: menuRef,
-          onCompleted: action.onCompleted,
-        );
-      },
-    );
-  }
   if (action is AppWorkspaceViewToggle) {
     return AppToolbarOverflowEntry(
       icon: action.icon,
@@ -179,11 +149,6 @@ IconData? _segmentIcon(Widget? iconWidget) {
 bool isToolbarOverflowActionVisible(Widget action, WidgetRef ref) {
   if (action is AppGlobalFaultReportAction) {
     return _faultReportRequirement.isAllowed(ref.read(appAccessPolicyProvider));
-  }
-  if (action is AppGlobalHousekeepingRequestAction) {
-    return _housekeepingRequestRequirement.isAllowed(
-      ref.read(appAccessPolicyProvider),
-    );
   }
   return true;
 }

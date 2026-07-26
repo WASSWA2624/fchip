@@ -221,24 +221,24 @@ void main() {
           );
           final AppRouteGuards guards = AppRouteGuards(
             sessionState: SessionState.authenticated(session: session),
-            routes: const <AppRouteData>[AppRoutes.patients, AppRoutes.opd],
+            routes: const <AppRouteData>[AppRoutes.settings, AppRoutes.communications],
           );
 
           expect(
             guards.redirect(
               AppRouteGuardRequest(
-                location: Uri(path: AppRoutes.patients.path),
+                location: Uri(path: AppRoutes.settings.path),
               ),
             ),
             AppRoutes.forbidden.locationWithFrom(
-              Uri(path: AppRoutes.patients.path),
+              Uri(path: AppRoutes.settings.path),
             ),
           );
           expect(
             guards.redirect(
-              AppRouteGuardRequest(location: Uri(path: AppRoutes.opd.path)),
+              AppRouteGuardRequest(location: Uri(path: AppRoutes.communications.path)),
             ),
-            AppRoutes.forbidden.locationWithFrom(Uri(path: AppRoutes.opd.path)),
+            AppRoutes.forbidden.locationWithFrom(Uri(path: AppRoutes.communications.path)),
           );
         }
       },
@@ -255,35 +255,35 @@ void main() {
       );
       final AppRouteGuards guards = AppRouteGuards(
         sessionState: SessionState.authenticated(session: session),
-        routes: const <AppRouteData>[AppRoutes.patients, AppRoutes.opd],
+        routes: const <AppRouteData>[AppRoutes.settings, AppRoutes.communications],
       );
 
       expect(
         guards.redirect(
-          AppRouteGuardRequest(location: Uri(path: AppRoutes.patients.path)),
+          AppRouteGuardRequest(location: Uri(path: AppRoutes.settings.path)),
         ),
         isNull,
       );
       expect(
         guards.redirect(
-          AppRouteGuardRequest(location: Uri(path: AppRoutes.opd.path)),
+          AppRouteGuardRequest(location: Uri(path: AppRoutes.communications.path)),
         ),
         isNull,
       );
     });
 
-    test('gates the HR workspace by HR and roster permissions', () {
-      final Uri targetLocation = Uri(path: AppRoutes.hr.path);
+    test('gates communications by communications permissions', () {
+      final Uri targetLocation = Uri(path: AppRoutes.communications.path);
       final AuthSession session = AuthSession(
         tokens: SessionTokens(accessToken: 'access-token'),
         user: const AuthUserProfile(tenantId: 'tenant-1'),
         moduleEntitlements: const <AppModuleEntitlement>[
-          AppModuleEntitlement(code: 'hr-rosters'),
+          AppModuleEntitlement(code: 'notifications-communications'),
         ],
       );
       final AppRouteGuards guards = AppRouteGuards(
         sessionState: SessionState.authenticated(session: session),
-        routes: <AppRouteData>[AppRoutes.hr],
+        routes: <AppRouteData>[AppRoutes.communications],
       );
 
       expect(
@@ -296,7 +296,7 @@ void main() {
           AppRouteGuardRequest(
             location: targetLocation,
             grantedPermissions: AppPermissionGrant(<AppPermission>{
-              const AppPermission('hr:read'),
+              AppPermissions.communicationsRead,
             }),
           ),
         ),

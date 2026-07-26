@@ -7,58 +7,42 @@ import 'helpers/patrol_harness.dart';
 
 void main() {
   patrolTestWithDiagnostics(
-    'dashboard loads for authenticated tenant admin',
+    'home loads for authenticated tenant admin',
     ($) async {
       await pumpPatrolE2eApp($);
       await loginAs($, DemoAccount.tenantAdmin);
 
       expect(find.byType(HomePage), findsOneWidget);
-      expect(find.text('Organization overview'), findsOneWidget);
-      expect(find.text('Today at a glance'), findsOneWidget);
+      expect(
+        find.text('Welcome to FairBanks Community Health Information Platform.'),
+        findsOneWidget,
+      );
     },
     targetFile: 'patrol_test/home_navigation_test.dart',
   );
 
   patrolTestWithDiagnostics(
-    'sidebar navigation opens patient registry',
+    'sidebar navigation opens settings',
     ($) async {
       await pumpPatrolE2eApp($);
       await loginAs($, DemoAccount.tenantAdmin);
       final l10n = patrolL10n($);
 
-      await $.tester.tap(find.text(l10n.navigationPatientsLabel));
+      await $.tester.tap(find.text(l10n.navigationSettingsLabel));
       await $.pumpAndSettle();
 
-      expect(find.text(l10n.patientsTitle), findsWidgets);
+      expect(find.text(l10n.navigationSettingsLabel), findsWidgets);
     },
     targetFile: 'patrol_test/home_navigation_test.dart',
   );
 
   patrolTestWithDiagnostics(
-    'sidebar navigation opens billing workspace',
+    'direct route navigation reaches settings shell',
     ($) async {
-      await pumpPatrolE2eApp($);
-      await loginAs($, DemoAccount.billing);
+      await loginAndOpenRoute($, DemoAccount.tenantAdmin, AppRoutes.settings.path);
       final l10n = patrolL10n($);
 
-      await $.tester.tap(find.text(l10n.navigationBillingLabel));
-      await $.pumpAndSettle();
-
-      await expectAnyVisible($, <String>[
-        l10n.billingWorkspaceTitle,
-        l10n.billingLoadingTitle,
-      ]);
-    },
-    targetFile: 'patrol_test/home_navigation_test.dart',
-  );
-
-  patrolTestWithDiagnostics(
-    'direct route navigation reaches OPD workspace shell',
-    ($) async {
-      await loginAndOpenRoute($, DemoAccount.doctor, AppRoutes.opd.path);
-      final l10n = patrolL10n($);
-
-      await expectAnyVisible($, <String>[l10n.opdTitle, l10n.opdLoadingTitle]);
+      expect(find.text(l10n.navigationSettingsLabel), findsWidgets);
     },
     targetFile: 'patrol_test/home_navigation_test.dart',
   );

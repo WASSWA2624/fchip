@@ -343,9 +343,6 @@ void main() {
   testWidgets('facilities section hidden when both global actions disallowed', (
     WidgetTester tester,
   ) async {
-    const Widget housekeepingAction = AppGlobalHousekeepingRequestAction(
-      label: 'Request maintenance',
-    );
     const Widget faultReportAction = AppGlobalFaultReportAction(
       label: 'Report equipment fault',
     );
@@ -360,13 +357,12 @@ void main() {
             maxVisibleScreenActions: 0,
             overflowLabel: 'More actions',
             toolbarLayoutActions: <Widget>[
-              housekeepingAction,
               faultReportAction,
             ],
             overflowSections: <AppToolbarOverflowSection>[
               AppToolbarOverflowSection(
                 headerLabel: 'Facilities',
-                actions: <Widget>[housekeepingAction, faultReportAction],
+                actions: <Widget>[faultReportAction],
               ),
             ],
           ),

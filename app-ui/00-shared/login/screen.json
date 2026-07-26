@@ -1,7 +1,9 @@
 {
   "title": "Sign in",
-  "subtitle": "CHW · Facility · District · Partner",
+  "subtitle": "Consumers \u00b7 feeders \u00b7 admin \u2014 one platform",
   "kind": "auth",
   "nav": "auth",
+  "layout": "auth-centered-card",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

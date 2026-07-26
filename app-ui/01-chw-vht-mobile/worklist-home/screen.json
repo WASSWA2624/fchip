@@ -1,7 +1,9 @@
 {
-  "title": "Today’s worklist",
-  "subtitle": "Visits · follow-ups · alert tasks",
+  "title": "Today\u2019s worklist",
+  "subtitle": "Visits \u00b7 follow-ups \u00b7 alert tasks",
   "kind": "list",
   "nav": "field",
+  "layout": "list-worklist",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

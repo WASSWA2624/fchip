@@ -1,0 +1,19 @@
+{
+  "title": "Insurance prevention",
+  "slug": "insurance-prevention",
+  "purpose": "\u00a77 prevention population insights \u2014 not claims / not CHIS identity",
+  "composes": [
+    "stat-card-row",
+    "list-row-card",
+    "note-banner",
+    "primary-cta"
+  ],
+  "surfaces": [
+    "23-insurance-insights"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

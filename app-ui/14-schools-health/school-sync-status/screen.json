@@ -1,7 +1,9 @@
 {
   "title": "School sync status",
-  "subtitle": "Offline school forms → cloud",
+  "subtitle": "Offline school forms \u2192 cloud",
   "kind": "detail",
   "nav": "school",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

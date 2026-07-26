@@ -112,7 +112,7 @@ def draw_bottom_nav(draw, x0, y0, x1, y1, items: list[str], active=0):
 def draw_side_nav(draw, x0, y0, x1, y1, items: list[str], active=0):
     draw.rectangle([x0, y0, x1, y1], fill=C["chrome"])
     tx(draw, (x0 + 20, y0 + 24), "FCHIP", size=16, bold=True, fill=C["white"])
-    tx(draw, (x0 + 20, y0 + 48), "Community Health\nIntelligence", size=10, fill=(160, 190, 194))
+    tx(draw, (x0 + 20, y0 + 48), "Community Health\nIntelligence Platform", size=10, fill=(160, 190, 194))
     y = y0 + 100
     for i, item in enumerate(items):
         fill = C["accent"] if i == active else (32, 54, 60)
@@ -210,8 +210,11 @@ COMPONENTS_CATALOG: list[Component] = [
     Component("forms", "select-field", "Select field", "Single-choice shell", ["urgency", "facility picker"]),
     # navigation
     Component("navigation", "top-app-bar", "Top app bar", "Brand + slogan / screen title", ["all surfaces"]),
-    Component("navigation", "bottom-nav-field", "Bottom nav · field", "CHW / caregiver tabs", ["01", "02"]),
+    Component("navigation", "bottom-nav-field", "Bottom nav · field", "CHW tabs", ["01"]),
+    Component("navigation", "bottom-nav-caregiver", "Bottom nav · caregiver", "Home · Report · Guidance · More", ["02"]),
     Component("navigation", "bottom-nav-feeder", "Bottom nav · feeder", "School / pharmacy / lab / MCH tabs", ["14–19", "21"]),
+    Component("navigation", "bottom-nav-intel", "Bottom nav · intelligence", "Ingest · AI · GIS · Guidance", ["09"]),
+    Component("navigation", "bottom-nav-insurance", "Bottom nav · insurance", "Prevent · Cohorts · Trends", ["23"]),
     Component("navigation", "side-nav-desktop", "Side nav · desktop", "Desktop chrome navigation", ["facility", "district", "admin", "feeders"]),
     Component("navigation", "role-picker-row", "Role picker row", "Workspace choice row", ["role-surface-picker"]),
     Component("navigation", "section-header", "Section header", "Title + subtitle block", ["mobile/tablet screens"]),
@@ -240,7 +243,7 @@ def render_component(comp: Component, bp: str) -> Image.Image:
         tx(draw, (x, y + 64), "Community Health Intelligence Platform", size=13, fill=C["muted"])
     elif slug == "slogan-line":
         tx(draw, (x, y + 24), "Your health, our mission.", size=20, bold=True, fill=C["primary"])
-        tx(draw, (x, y + 56), "Obulamu eri Bonna · Afya kwa Wote", size=12, fill=C["muted"])
+        tx(draw, (x, y + 56), "Obulamu eri Bonna · Afya kwa Wote · Oburamu bwa Boona", size=11, fill=C["muted"])
     elif slug == "master-loop-badge":
         rr(draw, (x, y, x1, y + 90), C["primary_soft"], radius=16)
         tx(
@@ -322,8 +325,14 @@ def render_component(comp: Component, bp: str) -> Image.Image:
         draw_app_bar(draw, x, y, x1, y + 52)
     elif slug == "bottom-nav-field":
         draw_bottom_nav(draw, x, y, x1, y + 64, ["Worklist", "Alerts", "Sync", "More"])
+    elif slug == "bottom-nav-caregiver":
+        draw_bottom_nav(draw, x, y, x1, y + 64, ["Home", "Report", "Guidance", "More"])
     elif slug == "bottom-nav-feeder":
         draw_bottom_nav(draw, x, y, x1, y + 64, ["Home", "Session", "Screen", "Sync"])
+    elif slug == "bottom-nav-intel":
+        draw_bottom_nav(draw, x, y, x1, y + 64, ["Ingest", "AI", "GIS", "Guidance"])
+    elif slug == "bottom-nav-insurance":
+        draw_bottom_nav(draw, x, y, x1, y + 64, ["Prevent", "Cohorts", "Trends", "More"])
     elif slug == "side-nav-desktop":
         side_w = min(220, w)
         draw_side_nav(draw, x, y, x + side_w, y + 280, ["Overview", "Map", "Referrals", "Stock"])
@@ -498,6 +507,20 @@ LAYOUTS_CATALOG: list[Layout] = [
         "External system health (EMR, HMIS, climate)",
         ["stat-card-row", "list-row-card", "feeder-health-pill", "warn-banner"],
         ["08", "20", "22", "09 feeder board"],
+    ),
+    Layout(
+        "empty-state-shell",
+        "Empty state shell",
+        "Happy-path layout with empty body (worklist / queue)",
+        ["section-header", "status-chip", "empty-state", "primary-cta"],
+        ["01 worklist-empty", "07 referral-queue-empty"],
+    ),
+    Layout(
+        "insurance-prevention",
+        "Insurance prevention",
+        "§7 prevention population insights — not claims / not CHIS identity",
+        ["stat-card-row", "list-row-card", "note-banner", "primary-cta"],
+        ["23-insurance-insights"],
     ),
 ]
 

@@ -6,6 +6,7 @@ Does not read or import anything from frontend/.
 
 from __future__ import annotations
 
+import json
 import math
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -89,13 +90,47 @@ class Screen:
     slug: str
     title: str
     subtitle: str
-    kind: str  # list | form | map | dashboard | detail | auth | queue | settings
+    kind: str  # list | form | map | dashboard | detail | auth | queue | settings | empty
     chips: list[str] = field(default_factory=list)
     rows: list[tuple[str, str]] = field(default_factory=list)
     stats: list[tuple[str, str]] = field(default_factory=list)
     note: str = ""
     primary_cta: str = ""
-    nav: str = "field"  # field | facility | district | partner | admin | auth
+    nav: str = "field"
+    layout: str = ""  # kit layout slug in 00-shared/layouts
+    state: str = "default"  # default | empty | error | offline
+
+
+# Module notes injected into per-module READMEs
+MODULE_NOTES: dict[str, str] = {
+    "03-outreach-school-health": (
+        "**Programme planning** (campaigns, session logs, coverage). "
+        "School *feeder* capture lives in `14-schools-health`."
+    ),
+    "06-facility-dashboard": (
+        "Population-health overview for facilities. "
+        "`open-referrals` is a summary; the working desk is `07-referrals-desk`."
+    ),
+    "07-referrals-desk": (
+        "Operational referral queue/detail. Distinct from `06/.../open-referrals` overview."
+    ),
+    "09-intelligence": (
+        "Shared intelligence stack (flows 04 modules 9–13): ingest, AI, GIS, climate fusion, "
+        "alerts routing, clinical support guidance, feeder health."
+    ),
+    "10-district-moh": (
+        "District console + Phase 3 **national roll-up** (`national-roll-up`). "
+        "Same metrics spine; wider administrative scope."
+    ),
+    "14-schools-health": (
+        "**School data feeder** (sessions, screening, absenteeism). "
+        "Programme planning stays in `03-outreach-school-health`."
+    ),
+    "23-insurance-insights": (
+        "§7 insurance customers — **prevention-focused population insights only**. "
+        "Not claims admin. Not CHIS product identity (see `05-chis-livelihoods`)."
+    ),
+}
 
 
 SCREENS: list[Screen] = [
@@ -109,16 +144,69 @@ SCREENS: list[Screen] = [
         note="Community Health Intelligence Platform",
         primary_cta="Continue",
         nav="auth",
+        layout="auth-centered-card",
     ),
     Screen(
         "00-shared",
         "login",
         "Sign in",
-        "CHW · Facility · District · Partner",
+        "Consumers · feeders · admin — one platform",
         "auth",
         rows=[("Email / phone", "chw@fchip.ug"), ("Password", "••••••••")],
         primary_cta="Sign in",
         nav="auth",
+        layout="auth-centered-card",
+    ),
+    Screen(
+        "00-shared",
+        "forgot-password",
+        "Reset access",
+        "Recover account for field and console users",
+        "auth",
+        rows=[("Email / phone", "chw@fchip.ug"), ("Channel", "SMS · email")],
+        primary_cta="Send reset link",
+        nav="auth",
+        layout="auth-centered-card",
+    ),
+    Screen(
+        "00-shared",
+        "consent-first-onboarding",
+        "Consent first",
+        "Privacy before capture — least privilege",
+        "auth",
+        rows=[
+            ("Household / self data", "Explain · then consent"),
+            ("Clinical share (EMR)", "Facility scopes only"),
+            ("Research exports", "Anonymised only"),
+        ],
+        note="Required before first field or caregiver capture",
+        primary_cta="I understand · continue",
+        nav="auth",
+        layout="auth-centered-card",
+    ),
+    Screen(
+        "00-shared",
+        "offline-pin-lock",
+        "Offline PIN",
+        "Protect device when network is down",
+        "auth",
+        rows=[("PIN", "••••"), ("Biometric", "Optional")],
+        note="Field literacy-friendly · short PIN · local only",
+        primary_cta="Unlock",
+        nav="auth",
+        layout="auth-centered-card",
+        state="offline",
+    ),
+    Screen(
+        "00-shared",
+        "session-locked",
+        "Session locked",
+        "Idle timeout · re-authenticate",
+        "auth",
+        rows=[("User", "Namuli · CHW"), ("Reason", "Idle 15 minutes")],
+        primary_cta="Sign in again",
+        nav="auth",
+        layout="auth-centered-card",
     ),
     Screen(
         "00-shared",
@@ -126,17 +214,30 @@ SCREENS: list[Screen] = [
         "Choose your workspace",
         "Consumers · data feeders · admin",
         "list",
+        chips=["Consumers", "Feeders", "Admin"],
         rows=[
-            ("CHW / VHT mobile", "Worklists · visits · alerts"),
-            ("Facility dashboard", "Trends · referrals · maps"),
-            ("District / MoH console", "Early warning · M&E"),
-            ("NGO / partner M&E", "Programme impact"),
-            ("School health feed", "Sessions · screening · absenteeism"),
-            ("Pharmacy outlet feed", "Stock · dispense · complaints"),
-            ("Lab / PoC feed", "RDT · Hb · glucose results"),
-            ("Admin", "Org · consent · feeder access"),
+            ("CHW / VHT mobile", "Consumer · worklists · visits · alerts"),
+            ("Caregiver mobile", "Consumer · optional self-report"),
+            ("Facility dashboard", "Consumer · trends · referrals · maps"),
+            ("District console", "Consumer · early warning · M&E"),
+            ("MoH national roll-up", "Consumer · Phase 3 multi-district"),
+            ("NGO / partner M&E", "Consumer · programme impact"),
+            ("Research exports", "Consumer · anonymised evidence"),
+            ("Insurance insights", "Consumer · prevention population views"),
+            ("School health feed", "Feeder · sessions · screening"),
+            ("Pharmacy outlet feed", "Feeder · stock · dispense"),
+            ("Lab / PoC feed", "Feeder · RDT · Hb · glucose"),
+            ("MCH touchpoints", "Feeder · ANC / PNC · immunisation"),
+            ("Corporate wellness", "Feeder · BP · BMI · glucose"),
+            ("NCD / Gericare", "Feeder · chronic cohorts"),
+            ("Community events", "Feeder · dialogues · participation"),
+            ("HMIS / DHIS2", "Feeder · approved aggregates"),
+            ("Climate feeds", "Feeder · rainfall · heat · extremes"),
+            ("CHIS / livelihoods", "Feeder · optional programme data"),
+            ("Admin · consent · access", "Admin · org · roles · API scopes"),
         ],
         nav="auth",
+        layout="list-worklist",
     ),
     Screen(
         "00-shared",
@@ -151,6 +252,7 @@ SCREENS: list[Screen] = [
             ("Campaign starts tomorrow", "School health · Kisaasi"),
         ],
         nav="field",
+        layout="list-worklist",
     ),
     # 01 CHW
     Screen(
@@ -168,6 +270,20 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Start next visit",
         nav="field",
+        layout="list-worklist",
+    ),
+    Screen(
+        "01-chw-vht-mobile",
+        "worklist-empty",
+        "Today’s worklist",
+        "No open visits or alert tasks",
+        "empty",
+        chips=["0 visits", "Offline ready"],
+        note="Empty state — new assignments will appear here",
+        primary_cta="Pull latest when online",
+        nav="field",
+        layout="list-worklist",
+        state="empty",
     ),
     Screen(
         "01-chw-vht-mobile",
@@ -184,6 +300,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Save locally",
         nav="field",
+        layout="form-capture",
     ),
     Screen(
         "01-chw-vht-mobile",
@@ -200,6 +317,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Continue to MCH",
         nav="field",
+        layout="form-capture",
     ),
     Screen(
         "01-chw-vht-mobile",
@@ -216,6 +334,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Save indicators",
         nav="field",
+        layout="form-capture",
     ),
     Screen(
         "01-chw-vht-mobile",
@@ -232,6 +351,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Submit referral",
         nav="field",
+        layout="form-capture",
     ),
     Screen(
         "01-chw-vht-mobile",
@@ -247,6 +367,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Open top alert",
         nav="field",
+        layout="list-worklist",
     ),
     Screen(
         "01-chw-vht-mobile",
@@ -262,6 +383,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Mark follow-up done",
         nav="field",
+        layout="detail-action",
     ),
     Screen(
         "01-chw-vht-mobile",
@@ -277,8 +399,27 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Sync now",
         nav="field",
+        layout="detail-action",
     ),
-    # 02 community
+    Screen(
+        "01-chw-vht-mobile",
+        "sync-failed",
+        "Sync failed",
+        "Queue held on device — will retry",
+        "detail",
+        stats=[("Queued", "7"), ("Failed", "3"), ("Last try", "14:22")],
+        rows=[
+            ("Error", "Network timeout"),
+            ("Visits held locally", "5 forms safe offline"),
+            ("Next retry", "Automatic in 5 min"),
+        ],
+        note="Do not invent a new product — same sync surface, error state",
+        primary_cta="Retry now",
+        nav="field",
+        layout="detail-action",
+        state="error",
+    ),
+    # 02 community / caregiver
     Screen(
         "02-community-caregiver",
         "my-household",
@@ -291,7 +432,8 @@ SCREENS: list[Screen] = [
             ("Open referral", "ANC follow-up"),
             ("Guidance", "Hydration · heat advice"),
         ],
-        nav="field",
+        nav="caregiver",
+        layout="feeder-home",
     ),
     Screen(
         "02-community-caregiver",
@@ -306,20 +448,22 @@ SCREENS: list[Screen] = [
             ("Need help now", "Yes · CHW call"),
         ],
         primary_cta="Send to CHW worklist",
-        nav="field",
+        nav="caregiver",
+        layout="form-capture",
     ),
     Screen(
         "02-community-caregiver",
         "guidance-hints",
         "Guidance",
-        "Care tips · appointment hints",
+        "Care tips · appointment hints — not booking/EMR",
         "list",
         rows=[
             ("Heat safety", "Rest · drink water · shade"),
             ("ANC reminder", "Clinic visit due Friday"),
             ("When to seek care", "Fever > 2 days · danger signs"),
         ],
-        nav="field",
+        nav="caregiver",
+        layout="list-worklist",
     ),
     Screen(
         "02-community-caregiver",
@@ -334,7 +478,8 @@ SCREENS: list[Screen] = [
             ("Consent to share", "Yes · with CHW"),
         ],
         primary_cta="Submit needs signal",
-        nav="field",
+        nav="caregiver",
+        layout="form-capture",
     ),
     # 03 outreach
     Screen(
@@ -560,6 +705,26 @@ SCREENS: list[Screen] = [
             ("Horizon", "Next 14 days"),
         ],
         nav="facility",
+        layout="dashboard-metrics",
+    ),
+    Screen(
+        "06-facility-dashboard",
+        "medicine-demand-forecast",
+        "Medicine demand forecast",
+        "§6.5 demand by facility / community (Phase 3 depth)",
+        "dashboard",
+        chips=["Forecast", "Climate-linked"],
+        stats=[("ACT", "+28%"), ("ORS", "+12%"), ("RDT", "+15%"), ("Horizon", "14d")],
+        rows=[
+            ("Drivers", "Disease trends · rainfall · utilisation · outreach"),
+            ("Facility A", "Pre-stock ACT · RDTs"),
+            ("Community pharmacies", "Notify partner outlets"),
+            ("Action", "Procurement aligned to forecast"),
+        ],
+        note="Not an EMR pharmacy module — population demand intelligence",
+        primary_cta="Share with district / pharmacy",
+        nav="facility",
+        layout="dashboard-metrics",
     ),
     Screen(
         "06-facility-dashboard",
@@ -610,7 +775,7 @@ SCREENS: list[Screen] = [
         "07-referrals-desk",
         "referral-queue",
         "Referrals desk",
-        "Facility referral queue",
+        "Facility referral queue (working desk)",
         "queue",
         chips=["Queue", "Today"],
         rows=[
@@ -620,6 +785,20 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Claim next",
         nav="facility",
+        layout="queue-desk",
+    ),
+    Screen(
+        "07-referrals-desk",
+        "referral-queue-empty",
+        "Referrals desk",
+        "No open inbound referrals",
+        "empty",
+        chips=["Queue clear"],
+        note="Empty state — new CHW referrals will appear here",
+        primary_cta="Refresh queue",
+        nav="facility",
+        layout="queue-desk",
+        state="empty",
     ),
     Screen(
         "07-referrals-desk",
@@ -636,6 +815,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Mark completed",
         nav="facility",
+        layout="detail-action",
     ),
     Screen(
         "07-referrals-desk",
@@ -651,6 +831,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Sync outcome",
         nav="facility",
+        layout="form-capture",
     ),
     # 08 EMR connector
     Screen(
@@ -667,6 +848,25 @@ SCREENS: list[Screen] = [
         ],
         note="Authenticated · consent-aware · least privilege",
         nav="admin",
+        layout="connector-status",
+    ),
+    Screen(
+        "08-emr-connector",
+        "connector-degraded",
+        "EMR / HMS connector",
+        "Degraded feed — queue held · no PHI dump",
+        "dashboard",
+        stats=[("Linked facilities", "3"), ("Last push", "6h ago"), ("Errors", "12")],
+        rows=[
+            ("Clinic A", "Timeout · retrying"),
+            ("Medical centre B", "Healthy · batch"),
+            ("Hospital C", "Auth expired"),
+        ],
+        note="Error state of the same connector — not a new product",
+        primary_cta="Retry failed pushes",
+        nav="admin",
+        layout="connector-status",
+        state="error",
     ),
     Screen(
         "08-emr-connector",
@@ -682,6 +882,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Save scopes",
         nav="admin",
+        layout="settings-admin",
     ),
     Screen(
         "08-emr-connector",
@@ -697,6 +898,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Download audit CSV",
         nav="admin",
+        layout="list-worklist",
     ),
     Screen(
         "08-emr-connector",
@@ -712,8 +914,9 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Issue feeder credentials",
         nav="admin",
+        layout="form-capture",
     ),
-    # 09 intelligence
+    # 09 intelligence (shared stack — not district-owned chrome)
     Screen(
         "09-intelligence",
         "ingest-pipeline",
@@ -727,13 +930,14 @@ SCREENS: list[Screen] = [
             ("Corporate · NCD · HMIS", "Scheduled"),
             ("EMR APIs · climate API", "Real-time"),
         ],
-        nav="admin",
+        nav="intel",
+        layout="dashboard-metrics",
     ),
     Screen(
         "09-intelligence",
         "ai-risk-scores",
         "AI / predictive",
-        "Risk scores · explainable alerts",
+        "Shared risk scores · explainable alerts",
         "dashboard",
         stats=[("Models v1", "On"), ("Alerts today", "14"), ("Top risk", "Fever cluster")],
         rows=[
@@ -742,7 +946,8 @@ SCREENS: list[Screen] = [
             ("Child health", "Diarrhoea cluster watch"),
             ("NCD", "BP hotspot · parish 3"),
         ],
-        nav="district",
+        nav="intel",
+        layout="dashboard-metrics",
     ),
     Screen(
         "09-intelligence",
@@ -752,7 +957,8 @@ SCREENS: list[Screen] = [
         "map",
         chips=["Cases", "Resources"],
         note="Village/parish geography for early warning",
-        nav="district",
+        nav="intel",
+        layout="map-explorer",
     ),
     Screen(
         "09-intelligence",
@@ -766,7 +972,26 @@ SCREENS: list[Screen] = [
             ("Fusion note", "Rain + fever GIS cluster"),
             ("Action window", "Deploy testing / nets"),
         ],
-        nav="district",
+        nav="intel",
+        layout="dashboard-metrics",
+    ),
+    Screen(
+        "09-intelligence",
+        "clinical-support-guidance",
+        "Clinical support guidance",
+        "Explainable next steps for CHW · facility — not Phase-4 CDS/EMR",
+        "detail",
+        stats=[("Audience", "CHW+clinic"), ("Source", "Risk v1"), ("Explain", "On")],
+        rows=[
+            ("Signal", "Missed ANC + heat strain"),
+            ("Guidance", "Home BP check · refer within 48h · hydration advice"),
+            ("Not included", "Prescribe · replace facility EMR"),
+            ("Surfaces", "Alert follow-up · facility detail"),
+        ],
+        note="Architecture clinical-support box (§4.4 / §5) — guidance only",
+        primary_cta="Push to CHW worklist",
+        nav="intel",
+        layout="detail-action",
     ),
     Screen(
         "09-intelligence",
@@ -781,7 +1006,8 @@ SCREENS: list[Screen] = [
             ("Explainability", "Always show why"),
         ],
         primary_cta="Save routing",
-        nav="admin",
+        nav="intel",
+        layout="settings-admin",
     ),
     Screen(
         "09-intelligence",
@@ -796,7 +1022,8 @@ SCREENS: list[Screen] = [
             ("Climate API", "Healthy"),
         ],
         primary_cta="Open silent feeders",
-        nav="admin",
+        nav="intel",
+        layout="connector-status",
     ),
     # 10 district
     Screen(
@@ -852,6 +1079,26 @@ SCREENS: list[Screen] = [
             ("School health push", "2 sessions"),
         ],
         nav="district",
+        layout="dashboard-metrics",
+    ),
+    Screen(
+        "10-district-moh",
+        "national-roll-up",
+        "MoH national roll-up",
+        "Phase 3 — multi-district planning · outbreak preparedness",
+        "dashboard",
+        chips=["Phase 3", "National"],
+        stats=[("Districts", "12"), ("Open warnings", "7"), ("Cascade gaps", "4")],
+        rows=[
+            ("Central region", "Fever risk elevated"),
+            ("Referral completion", "68% national"),
+            ("Medicine demand", "ACT surge · 3 districts"),
+            ("Same spine", "Wider admin scope than district console"),
+        ],
+        note="§7 ministries — national/sub-national; not a separate product identity",
+        primary_cta="Open district drill-down",
+        nav="district",
+        layout="dashboard-metrics",
     ),
     # 11 NGO
     Screen(
@@ -867,6 +1114,7 @@ SCREENS: list[Screen] = [
             ("Risk flag", "Referral completion dip"),
         ],
         nav="partner",
+        layout="dashboard-metrics",
     ),
     Screen(
         "11-ngo-partner",
@@ -881,6 +1129,23 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Export brief",
         nav="partner",
+        layout="list-worklist",
+    ),
+    Screen(
+        "11-ngo-partner",
+        "training-skills-analytics",
+        "Training · skills analytics",
+        "§2.4 research · partnerships · skills capacity",
+        "dashboard",
+        stats=[("Trained CHWs", "48"), ("Sessions", "6"), ("Pass rate", "91%")],
+        rows=[
+            ("Digital CHW readiness", "Device + form training"),
+            ("Supervisor mentorship", "Kikaaya focus week"),
+            ("Partner placements", "Student · anonymised evidence"),
+        ],
+        primary_cta="Export training brief",
+        nav="partner",
+        layout="dashboard-metrics",
     ),
     Screen(
         "11-ngo-partner",
@@ -1627,6 +1892,58 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Submit IGA signal",
         nav="partner",
+        layout="form-capture",
+    ),
+    # 23 insurance insights (§7 — prevention population views only)
+    Screen(
+        "23-insurance-insights",
+        "prevention-overview",
+        "Prevention overview",
+        "Insurance partners — population prevention insights",
+        "dashboard",
+        chips=["§7", "Anonymised"],
+        stats=[("Catchments", "5"), ("Risk cohorts", "3"), ("Prevention lift", "+9%")],
+        rows=[
+            ("Fever / climate watch", "Early action reduces claims pressure"),
+            ("Maternal risk cohort", "ANC adherence gap"),
+            ("NCD hotspot", "BP screening opportunity"),
+        ],
+        note="Not claims admin · not CHIS product identity",
+        primary_cta="Open risk cohorts",
+        nav="insurance",
+        layout="dashboard-metrics",
+    ),
+    Screen(
+        "23-insurance-insights",
+        "risk-cohort-insights",
+        "Risk cohort insights",
+        "Anonymised cohorts for prevention planning",
+        "list",
+        rows=[
+            ("High maternal risk", "Parish aggregates only"),
+            ("Hypertension density", "No raw PHI"),
+            ("Child immunisation lag", "Coverage bands"),
+        ],
+        primary_cta="Export anonymised brief",
+        nav="insurance",
+        layout="list-worklist",
+    ),
+    Screen(
+        "23-insurance-insights",
+        "anonymised-trends",
+        "Anonymised trends",
+        "Prevention-focused population health trends",
+        "dashboard",
+        stats=[("Outbreak averted*", "Model"), ("Screening reach", "1.1k"), ("Referral done", "71%")],
+        rows=[
+            ("Time range", "Last 90 days"),
+            ("Grain", "Parish / facility catchment"),
+            ("Excluded", "Names · MRNs · claim lines"),
+        ],
+        note="*Illustrative intelligence metric — not a claims ledger",
+        primary_cta="Schedule partner report",
+        nav="insurance",
+        layout="dashboard-metrics",
     ),
 ]
 
@@ -1634,10 +1951,13 @@ SCREENS: list[Screen] = [
 NAV = {
     "auth": [],
     "field": ["Worklist", "Alerts", "Sync", "More"],
+    "caregiver": ["Home", "Report", "Guidance", "More"],
     "facility": ["Overview", "Map", "Referrals", "Stock"],
     "district": ["Map", "Warnings", "Metrics", "Plan"],
-    "partner": ["Monitor", "Evidence", "Reports", "More"],
+    "partner": ["Monitor", "Evidence", "Training", "More"],
     "admin": ["Org", "Users", "Consent", "APIs"],
+    "intel": ["Ingest", "AI", "GIS", "Guidance"],
+    "insurance": ["Prevent", "Cohorts", "Trends", "More"],
     "school": ["Home", "Session", "Screen", "Sync"],
     "pharmacy": ["Stock", "Dispense", "Complaints", "Sync"],
     "lab": ["Home", "Results", "Queue", "Sync"],
@@ -1673,10 +1993,10 @@ def draw_side_nav(img, draw, screen: Screen, breakpoint: str) -> int:
     sw = 220
     draw.rectangle([0, 0, sw, img.height], fill=C["chrome"])
     text(draw, (24, 28), "FCHIP", size=18, bold=True, fill=C["white"])
-    text(draw, (24, 54), "Community Health\nIntelligence", size=11, fill=(160, 190, 194))
+    text(draw, (24, 54), "Community Health\nIntelligence Platform", size=10, fill=(160, 190, 194))
     y = 110
     for item in NAV.get(screen.nav, []):
-        active = item.lower() in screen.title.lower() or item.lower() in screen.slug
+        active = item.lower() in screen.title.lower() or item.lower() in screen.slug.replace("-", " ")
         fill = C["accent"] if active else (32, 54, 60)
         round_rect(draw, (16, y, sw - 16, y + 40), fill, radius=10)
         text(draw, (28, y + 20), item, size=13, fill=C["white"], anchor="lm")
@@ -1696,10 +2016,17 @@ def draw_bottom_nav(draw, w, h, screen: Screen, breakpoint: str):
     if not items:
         return bh
     slot = w / len(items)
+    active_i = 0
+    hay = f"{screen.title} {screen.slug} {screen.kind}".lower()
+    for i, item in enumerate(items):
+        if item.lower() in hay or item.lower()[:4] in hay:
+            active_i = i
+            break
     for i, item in enumerate(items):
         cx = slot * i + slot / 2
-        text(draw, (cx, y0 + 24), "●", size=10, fill=C["primary"] if i == 0 else C["muted"], anchor="mm")
-        text(draw, (cx, y0 + 44), item, size=10, fill=C["ink"] if i == 0 else C["muted"], anchor="mm")
+        on = i == active_i
+        text(draw, (cx, y0 + 24), "●", size=10, fill=C["primary"] if on else C["muted"], anchor="mm")
+        text(draw, (cx, y0 + 44), item, size=10, fill=C["ink"] if on else C["muted"], anchor="mm")
     return bh
 
 
@@ -1851,9 +2178,17 @@ def render_screen(screen: Screen, breakpoint: str) -> Image.Image:
         draw_cta(draw, card_x + 24, min(fy + 10, y + 350), card_w - 48, screen.primary_cta or "Continue")
         text(
             draw,
-            (card_x + card_w / 2, y + 400),
-            "Obulamu eri Bonna",
+            (card_x + card_w / 2, y + 392),
+            "Health for All",
             size=11,
+            fill=C["muted"],
+            anchor="mm",
+        )
+        text(
+            draw,
+            (card_x + card_w / 2, y + 410),
+            "Obulamu eri Bonna · Afya kwa Wote · Oburamu bwa Boona",
+            size=9,
             fill=C["muted"],
             anchor="mm",
         )
@@ -1869,10 +2204,30 @@ def render_screen(screen: Screen, breakpoint: str) -> Image.Image:
         text(draw, (x, y), screen.subtitle, size=13, fill=C["muted"])
         y += 26
 
+    if screen.layout:
+        text(draw, (x, y), f"Layout · {screen.layout}", size=10, fill=C["accent"])
+        y += 18
+
     y = draw_chips(draw, x, y, screen.chips, max_w)
     y = draw_stats(draw, x, y, screen.stats, max_w, breakpoint)
 
-    if screen.kind == "map":
+    if screen.state == "error":
+        round_rect(draw, (x, y, x + max_w, y + 40), C["warn_soft"], radius=12)
+        text(draw, (x + 12, y + 20), "Error / degraded state", size=11, fill=C["warn"], anchor="lm")
+        y += 52
+    elif screen.state == "offline":
+        round_rect(draw, (x, y, x + max_w, y + 40), C["primary_soft"], radius=12)
+        text(draw, (x + 12, y + 20), "Offline-capable · local only", size=11, fill=C["primary"], anchor="lm")
+        y += 52
+
+    if screen.kind == "empty" or screen.state == "empty":
+        round_rect(draw, (x, y, x + max_w, y + 140), C["surface"], radius=16, outline=C["line"])
+        text(draw, (x + max_w / 2, y + 52), "No open items", size=16, bold=True, fill=C["muted"], anchor="mm")
+        empty_note = screen.note or "New work will show here"
+        for i, line in enumerate(wrap(draw, empty_note, int(max_w - 48), 12)[:2]):
+            text(draw, (x + max_w / 2, y + 84 + i * 18), line, size=12, fill=C["muted"], anchor="mm")
+        y += 156
+    elif screen.kind == "map":
         map_h = min(360, content_bottom - y - 80)
         y = draw_map(draw, x, y, max_w, map_h, screen.note)
     elif screen.kind == "form":
@@ -1893,11 +2248,13 @@ def render_screen(screen: Screen, breakpoint: str) -> Image.Image:
                 text(draw, (x, y), line, size=12, fill=C["muted"])
                 y += 18
 
-    if screen.note and screen.kind != "map" and screen.kind != "detail":
+    if screen.note and screen.kind not in {"map", "detail", "empty"} and screen.state != "empty":
         y += 4
-        round_rect(draw, (x, y, x + max_w, y + 44), C["warn_soft"], radius=12)
+        banner = C["warn_soft"] if screen.state == "error" else C["warn_soft"]
+        ink = C["warn"]
+        round_rect(draw, (x, y, x + max_w, y + 44), banner, radius=12)
         note_lines = wrap(draw, screen.note, int(max_w - 24), 11)
-        text(draw, (x + 12, y + 22), note_lines[0], size=11, fill=C["warn"], anchor="lm")
+        text(draw, (x + 12, y + 22), note_lines[0], size=11, fill=ink, anchor="lm")
         y += 56
 
     if screen.primary_cta:
@@ -1921,14 +2278,19 @@ def write_module_readme(module: str, screens: list[Screen]):
     lines = [
         f"# {module}",
         "",
-        "Source: `app-flows/04-modules.md` + `.cursor/app-write-up.mdc`.",
+        "Source: `app-flows/` + `.cursor/app-write-up.mdc` (especially §2, §4, §6, §7).",
         "",
-        "| Screen | Mobile | Tablet | Desktop |",
-        "| --- | --- | --- | --- |",
+    ]
+    if module in MODULE_NOTES:
+        lines += [MODULE_NOTES[module], ""]
+    lines += [
+        "| Screen | Layout (kit) | State | Mobile | Tablet | Desktop |",
+        "| --- | --- | --- | --- | --- | --- |",
     ]
     for s in screens:
         lines.append(
-            f"| {s.title} (`{s.slug}`) | [mobile]({s.slug}/mobile.png) | "
+            f"| {s.title} (`{s.slug}`) | `{s.layout or '—'}` | `{s.state}` | "
+            f"[mobile]({s.slug}/mobile.png) | "
             f"[tablet]({s.slug}/tablet.png) | [desktop]({s.slug}/desktop.png) |"
         )
     (mod_dir / "README.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
@@ -1945,14 +2307,11 @@ def main():
             "subtitle": screen.subtitle,
             "kind": screen.kind,
             "nav": screen.nav,
+            "layout": screen.layout,
+            "state": screen.state,
             "source": "app-flows + .cursor/app-write-up.mdc",
         }
-        (out_dir / "screen.json").write_text(
-            "{\n"
-            + ",\n".join(f'  "{k}": "{v}"' for k, v in meta.items())
-            + "\n}\n",
-            encoding="utf-8",
-        )
+        (out_dir / "screen.json").write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
         for bp in SIZES:
             img = render_screen(screen, bp)
             img.save(out_dir / f"{bp}.png", optimize=True)
@@ -2000,6 +2359,26 @@ def main():
         "| HMIS / DHIS2 (where approved) | `20-hmis-dhis2` |",
         "| Research / NGO M&E uploads | `11-ngo-partner` · `12-research-exports` |",
         "| Climate API | `22-climate-feeds` (+ fusion in `09`) |",
+        "",
+        "## Consumer surfaces (§7)",
+        "",
+        "| Customer | Module |",
+        "| --- | --- |",
+        "| CHW / VHT | `01-chw-vht-mobile` |",
+        "| Caregivers (optional) | `02-community-caregiver` |",
+        "| Medical centres & clinics | `06` · `07` · `08` |",
+        "| District health offices | `10-district-moh` |",
+        "| Ministries of health (national) | `10-district-moh/national-roll-up` (Phase 3) |",
+        "| NGOs & partners | `11-ngo-partner` · `04-cascade-metrics` |",
+        "| Research institutions | `12-research-exports` |",
+        "| Insurance companies | `23-insurance-insights` (prevention only) |",
+        "",
+        "## Split notes",
+        "",
+        "- `03-outreach-school-health` = programme planning; `14-schools-health` = school feeder.",
+        "- `06/.../open-referrals` = overview; `07-referrals-desk` = working queue.",
+        "- `09-intelligence` = shared stack (incl. clinical support guidance); not district-owned.",
+        "- Screens reference kit layouts via `layout` in each `screen.json`.",
         "",
         "## Modules",
         "",

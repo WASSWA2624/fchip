@@ -1,7 +1,9 @@
 {
   "title": "Gap detection",
-  "subtitle": "Learn · improve · serve again",
+  "subtitle": "Learn \u00b7 improve \u00b7 serve again",
   "kind": "list",
   "nav": "district",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

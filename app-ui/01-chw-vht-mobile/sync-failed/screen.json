@@ -1,0 +1,9 @@
+{
+  "title": "Sync failed",
+  "subtitle": "Queue held on device \u2014 will retry",
+  "kind": "detail",
+  "nav": "field",
+  "layout": "detail-action",
+  "state": "error",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

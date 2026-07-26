@@ -1,7 +1,9 @@
 {
   "title": "Immunisation entry",
-  "subtitle": "Immunisation post doses → child health coverage",
+  "subtitle": "Immunisation post doses \u2192 child health coverage",
   "kind": "form",
   "nav": "mch",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

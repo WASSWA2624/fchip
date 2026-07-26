@@ -1,7 +1,9 @@
 {
   "title": "Pharmacy outlet home",
-  "subtitle": "Drug shops feed stock · dispense · complaints",
+  "subtitle": "Drug shops feed stock \u00b7 dispense \u00b7 complaints",
   "kind": "dashboard",
   "nav": "pharmacy",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

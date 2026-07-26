@@ -1,0 +1,14 @@
+{
+  "title": "Bottom nav \u00b7 insurance",
+  "category": "navigation",
+  "slug": "bottom-nav-insurance",
+  "purpose": "Prevent \u00b7 Cohorts \u00b7 Trends",
+  "used_by": [
+    "23"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

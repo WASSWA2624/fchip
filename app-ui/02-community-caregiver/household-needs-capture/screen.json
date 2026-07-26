@@ -2,6 +2,8 @@
   "title": "Household needs",
   "subtitle": "Community members feed priorities into cascade",
   "kind": "form",
-  "nav": "field",
+  "nav": "caregiver",
+  "layout": "form-capture",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

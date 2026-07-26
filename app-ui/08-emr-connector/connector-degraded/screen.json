@@ -1,0 +1,9 @@
+{
+  "title": "EMR / HMS connector",
+  "subtitle": "Degraded feed \u2014 queue held \u00b7 no PHI dump",
+  "kind": "dashboard",
+  "nav": "admin",
+  "layout": "connector-status",
+  "state": "error",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

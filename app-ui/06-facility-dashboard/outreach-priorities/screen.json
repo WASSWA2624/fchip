@@ -3,5 +3,7 @@
   "subtitle": "Where facility should support field action",
   "kind": "list",
   "nav": "facility",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

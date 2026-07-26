@@ -3,5 +3,7 @@
   "subtitle": "Demand forecast hints",
   "kind": "dashboard",
   "nav": "facility",
+  "layout": "dashboard-metrics",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -1,0 +1,14 @@
+{
+  "title": "Bottom nav \u00b7 intelligence",
+  "category": "navigation",
+  "slug": "bottom-nav-intel",
+  "purpose": "Ingest \u00b7 AI \u00b7 GIS \u00b7 Guidance",
+  "used_by": [
+    "09"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

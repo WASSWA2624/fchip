@@ -3,5 +3,7 @@
   "subtitle": "Approved research access",
   "kind": "form",
   "nav": "partner",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

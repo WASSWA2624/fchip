@@ -1,7 +1,9 @@
 {
   "title": "Ingest & sync",
-  "subtitle": "All feeder parties → validate → store",
+  "subtitle": "All feeder parties \u2192 validate \u2192 store",
   "kind": "dashboard",
-  "nav": "admin",
+  "nav": "intel",
+  "layout": "dashboard-metrics",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

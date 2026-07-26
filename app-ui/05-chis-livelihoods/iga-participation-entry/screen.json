@@ -3,5 +3,7 @@
   "subtitle": "Livelihood groups feed participation where tracked",
   "kind": "form",
   "nav": "partner",
+  "layout": "form-capture",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

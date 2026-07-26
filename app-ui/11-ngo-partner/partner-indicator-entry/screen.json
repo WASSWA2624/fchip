@@ -3,5 +3,7 @@
   "subtitle": "Manual M&E indicators where APIs are absent",
   "kind": "form",
   "nav": "partner",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

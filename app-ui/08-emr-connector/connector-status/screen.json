@@ -1,7 +1,9 @@
 {
   "title": "EMR / HMS connector",
-  "subtitle": "Secure ingest — does not replace EMR",
+  "subtitle": "Secure ingest \u2014 does not replace EMR",
   "kind": "dashboard",
   "nav": "admin",
+  "layout": "connector-status",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

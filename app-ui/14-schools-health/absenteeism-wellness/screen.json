@@ -3,5 +3,7 @@
   "subtitle": "Wellness signals from school rolls",
   "kind": "form",
   "nav": "school",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

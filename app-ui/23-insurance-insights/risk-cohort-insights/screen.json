@@ -1,0 +1,9 @@
+{
+  "title": "Risk cohort insights",
+  "subtitle": "Anonymised cohorts for prevention planning",
+  "kind": "list",
+  "nav": "insurance",
+  "layout": "list-worklist",
+  "state": "default",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

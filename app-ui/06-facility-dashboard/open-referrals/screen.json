@@ -1,7 +1,9 @@
 {
   "title": "Open referrals",
-  "subtitle": "Inbound from CHWs · completion",
+  "subtitle": "Inbound from CHWs \u00b7 completion",
   "kind": "queue",
   "nav": "facility",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -1,7 +1,9 @@
 {
   "title": "School health home",
-  "subtitle": "Schools feed sessions · screening · absenteeism",
+  "subtitle": "Schools feed sessions \u00b7 screening \u00b7 absenteeism",
   "kind": "dashboard",
   "nav": "school",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -3,5 +3,7 @@
   "subtitle": "Where partners capture payments",
   "kind": "list",
   "nav": "partner",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

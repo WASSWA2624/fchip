@@ -1,7 +1,9 @@
 {
   "title": "Participation register",
-  "subtitle": "Who engaged — cascade participation signal",
+  "subtitle": "Who engaged \u2014 cascade participation signal",
   "kind": "list",
   "nav": "community",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

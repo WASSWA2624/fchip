@@ -3,5 +3,7 @@
   "subtitle": "Risk flags from intelligence core",
   "kind": "list",
   "nav": "field",
+  "layout": "list-worklist",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -1,0 +1,9 @@
+{
+  "title": "Training \u00b7 skills analytics",
+  "subtitle": "\u00a72.4 research \u00b7 partnerships \u00b7 skills capacity",
+  "kind": "dashboard",
+  "nav": "partner",
+  "layout": "dashboard-metrics",
+  "state": "default",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

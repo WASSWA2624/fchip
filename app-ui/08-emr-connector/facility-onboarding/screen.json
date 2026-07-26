@@ -3,5 +3,7 @@
   "subtitle": "Register an existing EMR/HMS as a data feeder",
   "kind": "form",
   "nav": "admin",
+  "layout": "form-capture",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

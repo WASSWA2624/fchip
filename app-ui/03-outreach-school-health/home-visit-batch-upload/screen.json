@@ -3,5 +3,7 @@
   "subtitle": "Supervisors upload structured visit packs",
   "kind": "form",
   "nav": "district",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

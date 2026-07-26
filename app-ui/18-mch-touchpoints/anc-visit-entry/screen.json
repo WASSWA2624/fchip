@@ -1,7 +1,9 @@
 {
   "title": "ANC visit entry",
-  "subtitle": "Antenatal touchpoint → maternal intelligence",
+  "subtitle": "Antenatal touchpoint \u2192 maternal intelligence",
   "kind": "form",
   "nav": "mch",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

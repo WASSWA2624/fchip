@@ -3,5 +3,7 @@
   "subtitle": "Livelihood-linked care access",
   "kind": "detail",
   "nav": "partner",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

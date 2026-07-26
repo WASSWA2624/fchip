@@ -3,5 +3,7 @@
   "subtitle": "School / community education metrics",
   "kind": "form",
   "nav": "school",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

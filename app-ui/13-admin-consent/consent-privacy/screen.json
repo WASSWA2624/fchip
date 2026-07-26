@@ -1,7 +1,9 @@
 {
   "title": "Consent & privacy",
-  "subtitle": "Household consent · least privilege",
+  "subtitle": "Household consent \u00b7 least privilege",
   "kind": "settings",
   "nav": "admin",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -3,5 +3,7 @@
   "subtitle": "Academic partners feed approved anonymised field sets",
   "kind": "form",
   "nav": "partner",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

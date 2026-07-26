@@ -1,7 +1,9 @@
 {
   "title": "Referral detail",
-  "subtitle": "Track completion · link EMR outcome",
+  "subtitle": "Track completion \u00b7 link EMR outcome",
   "kind": "detail",
   "nav": "facility",
+  "layout": "detail-action",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -1,0 +1,9 @@
+{
+  "title": "Offline PIN",
+  "subtitle": "Protect device when network is down",
+  "kind": "auth",
+  "nav": "auth",
+  "layout": "auth-centered-card",
+  "state": "offline",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

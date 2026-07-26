@@ -3,5 +3,7 @@
   "subtitle": "Results waiting to sync or link to referrals",
   "kind": "queue",
   "nav": "lab",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -1,0 +1,9 @@
+{
+  "title": "MoH national roll-up",
+  "subtitle": "Phase 3 \u2014 multi-district planning \u00b7 outbreak preparedness",
+  "kind": "dashboard",
+  "nav": "district",
+  "layout": "dashboard-metrics",
+  "state": "default",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

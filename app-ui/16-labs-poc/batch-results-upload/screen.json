@@ -3,5 +3,7 @@
   "subtitle": "Facility lab batches into FCHIP",
   "kind": "form",
   "nav": "lab",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

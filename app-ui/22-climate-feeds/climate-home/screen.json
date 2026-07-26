@@ -3,5 +3,7 @@
   "subtitle": "Climate API as a first-class data feeder",
   "kind": "dashboard",
   "nav": "climate",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -1,7 +1,9 @@
 {
   "title": "Evidence catalog",
-  "subtitle": "Anonymised datasets · no raw PHI dumps",
+  "subtitle": "Anonymised datasets \u00b7 no raw PHI dumps",
   "kind": "list",
   "nav": "partner",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

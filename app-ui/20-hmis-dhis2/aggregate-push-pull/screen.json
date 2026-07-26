@@ -3,5 +3,7 @@
   "subtitle": "Scheduled exchange with district HMIS",
   "kind": "form",
   "nav": "hmis",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

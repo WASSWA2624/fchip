@@ -3,5 +3,7 @@
   "subtitle": "Send household to facility",
   "kind": "form",
   "nav": "field",
+  "layout": "form-capture",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

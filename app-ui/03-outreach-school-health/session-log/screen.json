@@ -1,7 +1,9 @@
 {
   "title": "Session log",
-  "subtitle": "Attendance · topics · outcomes",
+  "subtitle": "Attendance \u00b7 topics \u00b7 outcomes",
   "kind": "form",
   "nav": "district",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -1,0 +1,9 @@
+{
+  "title": "Consent first",
+  "subtitle": "Privacy before capture \u2014 least privilege",
+  "kind": "auth",
+  "nav": "auth",
+  "layout": "auth-centered-card",
+  "state": "default",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

@@ -1,0 +1,9 @@
+{
+  "title": "Clinical support guidance",
+  "subtitle": "Explainable next steps for CHW \u00b7 facility \u2014 not Phase-4 CDS/EMR",
+  "kind": "detail",
+  "nav": "intel",
+  "layout": "detail-action",
+  "state": "default",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

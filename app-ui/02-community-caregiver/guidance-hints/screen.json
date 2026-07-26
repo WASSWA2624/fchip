@@ -1,7 +1,9 @@
 {
   "title": "Guidance",
-  "subtitle": "Care tips · appointment hints",
+  "subtitle": "Care tips \u00b7 appointment hints \u2014 not booking/EMR",
   "kind": "list",
-  "nav": "field",
+  "nav": "caregiver",
+  "layout": "list-worklist",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

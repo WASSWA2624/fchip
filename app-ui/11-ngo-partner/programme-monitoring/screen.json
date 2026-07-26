@@ -3,5 +3,7 @@
   "subtitle": "Partner-scoped real-time M&E",
   "kind": "dashboard",
   "nav": "partner",
+  "layout": "dashboard-metrics",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

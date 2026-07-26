@@ -3,5 +3,7 @@
   "subtitle": "Community/clinic BP packs for hotspot detection",
   "kind": "form",
   "nav": "ncd",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

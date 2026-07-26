@@ -1,7 +1,9 @@
 {
   "title": "Referrals desk",
-  "subtitle": "Facility referral queue",
+  "subtitle": "Facility referral queue (working desk)",
   "kind": "queue",
   "nav": "facility",
+  "layout": "queue-desk",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

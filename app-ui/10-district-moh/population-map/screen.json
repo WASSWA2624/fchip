@@ -3,5 +3,7 @@
   "subtitle": "District early-warning geography",
   "kind": "map",
   "nav": "district",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

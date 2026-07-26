@@ -1,7 +1,9 @@
 {
   "title": "Cohort visit entry",
-  "subtitle": "Hypertension · diabetes · elderly care checks",
+  "subtitle": "Hypertension \u00b7 diabetes \u00b7 elderly care checks",
   "kind": "form",
   "nav": "ncd",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

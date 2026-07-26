@@ -3,5 +3,7 @@
   "subtitle": "Where programmes ran",
   "kind": "map",
   "nav": "district",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

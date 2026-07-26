@@ -1,7 +1,9 @@
 {
   "title": "Lab / PoC home",
-  "subtitle": "Labs feed RDT · Hb · glucose and related results",
+  "subtitle": "Labs feed RDT \u00b7 Hb \u00b7 glucose and related results",
   "kind": "dashboard",
   "nav": "lab",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -3,7 +3,7 @@
 Visual directory of **proposed** FCHIP screens from `.cursor/app-write-up.mdc` and `app-flows/`.
 Not generated from `frontend/` code.
 
-**103 screens** × mobile / tablet / desktop = **309 mockups**.
+**118 screens** × mobile / tablet / desktop = **354 mockups**.
 
 Slogan: **Your health, our mission.**
 
@@ -36,18 +36,43 @@ Slogan: **Your health, our mission.**
 | Research / NGO M&E uploads | `11-ngo-partner` · `12-research-exports` |
 | Climate API | `22-climate-feeds` (+ fusion in `09`) |
 
+## Consumer surfaces (§7)
+
+| Customer | Module |
+| --- | --- |
+| CHW / VHT | `01-chw-vht-mobile` |
+| Caregivers (optional) | `02-community-caregiver` |
+| Medical centres & clinics | `06` · `07` · `08` |
+| District health offices | `10-district-moh` |
+| Ministries of health (national) | `10-district-moh/national-roll-up` (Phase 3) |
+| NGOs & partners | `11-ngo-partner` · `04-cascade-metrics` |
+| Research institutions | `12-research-exports` |
+| Insurance companies | `23-insurance-insights` (prevention only) |
+
+## Split notes
+
+- `03-outreach-school-health` = programme planning; `14-schools-health` = school feeder.
+- `06/.../open-referrals` = overview; `07-referrals-desk` = working queue.
+- `09-intelligence` = shared stack (incl. clinical support guidance); not district-owned.
+- Screens reference kit layouts via `layout` in each `screen.json`.
+
 ## Modules
 
 ### [00-shared](00-shared/README.md)
 
 - **FCHIP** — `00-shared/splash/` ([mobile](00-shared/splash/mobile.png) · [tablet](00-shared/splash/tablet.png) · [desktop](00-shared/splash/desktop.png))
 - **Sign in** — `00-shared/login/` ([mobile](00-shared/login/mobile.png) · [tablet](00-shared/login/tablet.png) · [desktop](00-shared/login/desktop.png))
+- **Reset access** — `00-shared/forgot-password/` ([mobile](00-shared/forgot-password/mobile.png) · [tablet](00-shared/forgot-password/tablet.png) · [desktop](00-shared/forgot-password/desktop.png))
+- **Consent first** — `00-shared/consent-first-onboarding/` ([mobile](00-shared/consent-first-onboarding/mobile.png) · [tablet](00-shared/consent-first-onboarding/tablet.png) · [desktop](00-shared/consent-first-onboarding/desktop.png))
+- **Offline PIN** — `00-shared/offline-pin-lock/` ([mobile](00-shared/offline-pin-lock/mobile.png) · [tablet](00-shared/offline-pin-lock/tablet.png) · [desktop](00-shared/offline-pin-lock/desktop.png))
+- **Session locked** — `00-shared/session-locked/` ([mobile](00-shared/session-locked/mobile.png) · [tablet](00-shared/session-locked/tablet.png) · [desktop](00-shared/session-locked/desktop.png))
 - **Choose your workspace** — `00-shared/role-surface-picker/` ([mobile](00-shared/role-surface-picker/mobile.png) · [tablet](00-shared/role-surface-picker/tablet.png) · [desktop](00-shared/role-surface-picker/desktop.png))
 - **Notifications** — `00-shared/notifications-center/` ([mobile](00-shared/notifications-center/mobile.png) · [tablet](00-shared/notifications-center/tablet.png) · [desktop](00-shared/notifications-center/desktop.png))
 
 ### [01-chw-vht-mobile](01-chw-vht-mobile/README.md)
 
 - **Today’s worklist** — `01-chw-vht-mobile/worklist-home/` ([mobile](01-chw-vht-mobile/worklist-home/mobile.png) · [tablet](01-chw-vht-mobile/worklist-home/tablet.png) · [desktop](01-chw-vht-mobile/worklist-home/desktop.png))
+- **Today’s worklist** — `01-chw-vht-mobile/worklist-empty/` ([mobile](01-chw-vht-mobile/worklist-empty/mobile.png) · [tablet](01-chw-vht-mobile/worklist-empty/tablet.png) · [desktop](01-chw-vht-mobile/worklist-empty/desktop.png))
 - **Household visit** — `01-chw-vht-mobile/household-visit-form/` ([mobile](01-chw-vht-mobile/household-visit-form/mobile.png) · [tablet](01-chw-vht-mobile/household-visit-form/tablet.png) · [desktop](01-chw-vht-mobile/household-visit-form/desktop.png))
 - **Symptoms & vitals** — `01-chw-vht-mobile/symptoms-vitals/` ([mobile](01-chw-vht-mobile/symptoms-vitals/mobile.png) · [tablet](01-chw-vht-mobile/symptoms-vitals/tablet.png) · [desktop](01-chw-vht-mobile/symptoms-vitals/desktop.png))
 - **Maternal / child** — `01-chw-vht-mobile/maternal-child-indicators/` ([mobile](01-chw-vht-mobile/maternal-child-indicators/mobile.png) · [tablet](01-chw-vht-mobile/maternal-child-indicators/tablet.png) · [desktop](01-chw-vht-mobile/maternal-child-indicators/desktop.png))
@@ -55,6 +80,7 @@ Slogan: **Your health, our mission.**
 - **Alerts inbox** — `01-chw-vht-mobile/alerts-inbox/` ([mobile](01-chw-vht-mobile/alerts-inbox/mobile.png) · [tablet](01-chw-vht-mobile/alerts-inbox/tablet.png) · [desktop](01-chw-vht-mobile/alerts-inbox/desktop.png))
 - **Act on alert** — `01-chw-vht-mobile/alert-follow-up/` ([mobile](01-chw-vht-mobile/alert-follow-up/mobile.png) · [tablet](01-chw-vht-mobile/alert-follow-up/tablet.png) · [desktop](01-chw-vht-mobile/alert-follow-up/desktop.png))
 - **Sync status** — `01-chw-vht-mobile/sync-status/` ([mobile](01-chw-vht-mobile/sync-status/mobile.png) · [tablet](01-chw-vht-mobile/sync-status/tablet.png) · [desktop](01-chw-vht-mobile/sync-status/desktop.png))
+- **Sync failed** — `01-chw-vht-mobile/sync-failed/` ([mobile](01-chw-vht-mobile/sync-failed/mobile.png) · [tablet](01-chw-vht-mobile/sync-failed/tablet.png) · [desktop](01-chw-vht-mobile/sync-failed/desktop.png))
 
 ### [02-community-caregiver](02-community-caregiver/README.md)
 
@@ -90,6 +116,7 @@ Slogan: **Your health, our mission.**
 - **Catchment map** — `06-facility-dashboard/catchment-map/` ([mobile](06-facility-dashboard/catchment-map/mobile.png) · [tablet](06-facility-dashboard/catchment-map/tablet.png) · [desktop](06-facility-dashboard/catchment-map/desktop.png))
 - **Open referrals** — `06-facility-dashboard/open-referrals/` ([mobile](06-facility-dashboard/open-referrals/mobile.png) · [tablet](06-facility-dashboard/open-referrals/tablet.png) · [desktop](06-facility-dashboard/open-referrals/desktop.png))
 - **Stock signal** — `06-facility-dashboard/stock-signal/` ([mobile](06-facility-dashboard/stock-signal/mobile.png) · [tablet](06-facility-dashboard/stock-signal/tablet.png) · [desktop](06-facility-dashboard/stock-signal/desktop.png))
+- **Medicine demand forecast** — `06-facility-dashboard/medicine-demand-forecast/` ([mobile](06-facility-dashboard/medicine-demand-forecast/mobile.png) · [tablet](06-facility-dashboard/medicine-demand-forecast/tablet.png) · [desktop](06-facility-dashboard/medicine-demand-forecast/desktop.png))
 - **Outreach priorities** — `06-facility-dashboard/outreach-priorities/` ([mobile](06-facility-dashboard/outreach-priorities/mobile.png) · [tablet](06-facility-dashboard/outreach-priorities/tablet.png) · [desktop](06-facility-dashboard/outreach-priorities/desktop.png))
 - **Clinical share confirm** — `06-facility-dashboard/clinical-share-confirm/` ([mobile](06-facility-dashboard/clinical-share-confirm/mobile.png) · [tablet](06-facility-dashboard/clinical-share-confirm/tablet.png) · [desktop](06-facility-dashboard/clinical-share-confirm/desktop.png))
 - **Manual case signal** — `06-facility-dashboard/manual-case-signal/` ([mobile](06-facility-dashboard/manual-case-signal/mobile.png) · [tablet](06-facility-dashboard/manual-case-signal/tablet.png) · [desktop](06-facility-dashboard/manual-case-signal/desktop.png))
@@ -97,12 +124,14 @@ Slogan: **Your health, our mission.**
 ### [07-referrals-desk](07-referrals-desk/README.md)
 
 - **Referrals desk** — `07-referrals-desk/referral-queue/` ([mobile](07-referrals-desk/referral-queue/mobile.png) · [tablet](07-referrals-desk/referral-queue/tablet.png) · [desktop](07-referrals-desk/referral-queue/desktop.png))
+- **Referrals desk** — `07-referrals-desk/referral-queue-empty/` ([mobile](07-referrals-desk/referral-queue-empty/mobile.png) · [tablet](07-referrals-desk/referral-queue-empty/tablet.png) · [desktop](07-referrals-desk/referral-queue-empty/desktop.png))
 - **Referral detail** — `07-referrals-desk/referral-detail/` ([mobile](07-referrals-desk/referral-detail/mobile.png) · [tablet](07-referrals-desk/referral-detail/tablet.png) · [desktop](07-referrals-desk/referral-detail/desktop.png))
 - **Outcome feed-back** — `07-referrals-desk/outcome-feed-back/` ([mobile](07-referrals-desk/outcome-feed-back/mobile.png) · [tablet](07-referrals-desk/outcome-feed-back/tablet.png) · [desktop](07-referrals-desk/outcome-feed-back/desktop.png))
 
 ### [08-emr-connector](08-emr-connector/README.md)
 
 - **EMR / HMS connector** — `08-emr-connector/connector-status/` ([mobile](08-emr-connector/connector-status/mobile.png) · [tablet](08-emr-connector/connector-status/tablet.png) · [desktop](08-emr-connector/connector-status/desktop.png))
+- **EMR / HMS connector** — `08-emr-connector/connector-degraded/` ([mobile](08-emr-connector/connector-degraded/mobile.png) · [tablet](08-emr-connector/connector-degraded/tablet.png) · [desktop](08-emr-connector/connector-degraded/desktop.png))
 - **API scopes setup** — `08-emr-connector/api-scopes-setup/` ([mobile](08-emr-connector/api-scopes-setup/mobile.png) · [tablet](08-emr-connector/api-scopes-setup/tablet.png) · [desktop](08-emr-connector/api-scopes-setup/desktop.png))
 - **Push event log** — `08-emr-connector/push-event-log/` ([mobile](08-emr-connector/push-event-log/mobile.png) · [tablet](08-emr-connector/push-event-log/tablet.png) · [desktop](08-emr-connector/push-event-log/desktop.png))
 - **Facility onboarding** — `08-emr-connector/facility-onboarding/` ([mobile](08-emr-connector/facility-onboarding/mobile.png) · [tablet](08-emr-connector/facility-onboarding/tablet.png) · [desktop](08-emr-connector/facility-onboarding/desktop.png))
@@ -113,6 +142,7 @@ Slogan: **Your health, our mission.**
 - **AI / predictive** — `09-intelligence/ai-risk-scores/` ([mobile](09-intelligence/ai-risk-scores/mobile.png) · [tablet](09-intelligence/ai-risk-scores/tablet.png) · [desktop](09-intelligence/ai-risk-scores/desktop.png))
 - **GIS maps** — `09-intelligence/gis-explorer/` ([mobile](09-intelligence/gis-explorer/mobile.png) · [tablet](09-intelligence/gis-explorer/tablet.png) · [desktop](09-intelligence/gis-explorer/desktop.png))
 - **Climate fusion** — `09-intelligence/climate-fusion/` ([mobile](09-intelligence/climate-fusion/mobile.png) · [tablet](09-intelligence/climate-fusion/tablet.png) · [desktop](09-intelligence/climate-fusion/desktop.png))
+- **Clinical support guidance** — `09-intelligence/clinical-support-guidance/` ([mobile](09-intelligence/clinical-support-guidance/mobile.png) · [tablet](09-intelligence/clinical-support-guidance/tablet.png) · [desktop](09-intelligence/clinical-support-guidance/desktop.png))
 - **Alerts & worklists engine** — `09-intelligence/alerts-worklists-engine/` ([mobile](09-intelligence/alerts-worklists-engine/mobile.png) · [tablet](09-intelligence/alerts-worklists-engine/tablet.png) · [desktop](09-intelligence/alerts-worklists-engine/desktop.png))
 - **Feeder health board** — `09-intelligence/feeder-health-board/` ([mobile](09-intelligence/feeder-health-board/mobile.png) · [tablet](09-intelligence/feeder-health-board/tablet.png) · [desktop](09-intelligence/feeder-health-board/desktop.png))
 
@@ -122,11 +152,13 @@ Slogan: **Your health, our mission.**
 - **Early warnings** — `10-district-moh/early-warnings/` ([mobile](10-district-moh/early-warnings/mobile.png) · [tablet](10-district-moh/early-warnings/tablet.png) · [desktop](10-district-moh/early-warnings/desktop.png))
 - **Deploy action** — `10-district-moh/action-deploy/` ([mobile](10-district-moh/action-deploy/mobile.png) · [tablet](10-district-moh/action-deploy/tablet.png) · [desktop](10-district-moh/action-deploy/desktop.png))
 - **Cascade M&E planning** — `10-district-moh/cascade-planning/` ([mobile](10-district-moh/cascade-planning/mobile.png) · [tablet](10-district-moh/cascade-planning/tablet.png) · [desktop](10-district-moh/cascade-planning/desktop.png))
+- **MoH national roll-up** — `10-district-moh/national-roll-up/` ([mobile](10-district-moh/national-roll-up/mobile.png) · [tablet](10-district-moh/national-roll-up/tablet.png) · [desktop](10-district-moh/national-roll-up/desktop.png))
 
 ### [11-ngo-partner](11-ngo-partner/README.md)
 
 - **Programme monitoring** — `11-ngo-partner/programme-monitoring/` ([mobile](11-ngo-partner/programme-monitoring/mobile.png) · [tablet](11-ngo-partner/programme-monitoring/tablet.png) · [desktop](11-ngo-partner/programme-monitoring/desktop.png))
 - **Impact evidence** — `11-ngo-partner/impact-evidence/` ([mobile](11-ngo-partner/impact-evidence/mobile.png) · [tablet](11-ngo-partner/impact-evidence/tablet.png) · [desktop](11-ngo-partner/impact-evidence/desktop.png))
+- **Training · skills analytics** — `11-ngo-partner/training-skills-analytics/` ([mobile](11-ngo-partner/training-skills-analytics/mobile.png) · [tablet](11-ngo-partner/training-skills-analytics/tablet.png) · [desktop](11-ngo-partner/training-skills-analytics/desktop.png))
 - **Field dataset upload** — `11-ngo-partner/field-dataset-upload/` ([mobile](11-ngo-partner/field-dataset-upload/mobile.png) · [tablet](11-ngo-partner/field-dataset-upload/tablet.png) · [desktop](11-ngo-partner/field-dataset-upload/desktop.png))
 - **Partner indicator entry** — `11-ngo-partner/partner-indicator-entry/` ([mobile](11-ngo-partner/partner-indicator-entry/mobile.png) · [tablet](11-ngo-partner/partner-indicator-entry/tablet.png) · [desktop](11-ngo-partner/partner-indicator-entry/desktop.png))
 
@@ -209,6 +241,12 @@ Slogan: **Your health, our mission.**
 - **Rainfall & temperature** — `22-climate-feeds/rainfall-temperature/` ([mobile](22-climate-feeds/rainfall-temperature/mobile.png) · [tablet](22-climate-feeds/rainfall-temperature/tablet.png) · [desktop](22-climate-feeds/rainfall-temperature/desktop.png))
 - **Extremes · flood · heat** — `22-climate-feeds/extremes-flood-heat/` ([mobile](22-climate-feeds/extremes-flood-heat/mobile.png) · [tablet](22-climate-feeds/extremes-flood-heat/tablet.png) · [desktop](22-climate-feeds/extremes-flood-heat/desktop.png))
 - **Feed config & audit** — `22-climate-feeds/feed-config-audit/` ([mobile](22-climate-feeds/feed-config-audit/mobile.png) · [tablet](22-climate-feeds/feed-config-audit/tablet.png) · [desktop](22-climate-feeds/feed-config-audit/desktop.png))
+
+### [23-insurance-insights](23-insurance-insights/README.md)
+
+- **Prevention overview** — `23-insurance-insights/prevention-overview/` ([mobile](23-insurance-insights/prevention-overview/mobile.png) · [tablet](23-insurance-insights/prevention-overview/tablet.png) · [desktop](23-insurance-insights/prevention-overview/desktop.png))
+- **Risk cohort insights** — `23-insurance-insights/risk-cohort-insights/` ([mobile](23-insurance-insights/risk-cohort-insights/mobile.png) · [tablet](23-insurance-insights/risk-cohort-insights/tablet.png) · [desktop](23-insurance-insights/risk-cohort-insights/desktop.png))
+- **Anonymised trends** — `23-insurance-insights/anonymised-trends/` ([mobile](23-insurance-insights/anonymised-trends/mobile.png) · [tablet](23-insurance-insights/anonymised-trends/tablet.png) · [desktop](23-insurance-insights/anonymised-trends/desktop.png))
 
 ## Regenerate
 

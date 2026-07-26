@@ -3,7 +3,7 @@
 Page shells for maximum reuse across consumer surfaces and data-feeder modules.
 Pick a layout, then drop in shared components.
 
-**15 layouts** × mobile / tablet / desktop.
+**17 layouts** × mobile / tablet / desktop.
 
 | Layout | Purpose | Composes | Specimens |
 | --- | --- | --- | --- |
@@ -22,6 +22,8 @@ Pick a layout, then drop in shared components.
 | **Dual-pane desktop** (`dual-pane-desktop`) | Two-column lists / dashboards on wide screens | `side-nav-desktop`, `list-row-card`, `stat-card-row` | [m](dual-pane-desktop/mobile.png) · [t](dual-pane-desktop/tablet.png) · [d](dual-pane-desktop/desktop.png) |
 | **Upload / batch** (`upload-batch`) | File upload + validation + push to ingest | `file-upload-field`, `error-inline`, `success-toast`, `primary-cta`, … | [m](upload-batch/mobile.png) · [t](upload-batch/tablet.png) · [d](upload-batch/desktop.png) |
 | **Connector status** (`connector-status`) | External system health (EMR, HMIS, climate) | `stat-card-row`, `list-row-card`, `feeder-health-pill`, `warn-banner` | [m](connector-status/mobile.png) · [t](connector-status/tablet.png) · [d](connector-status/desktop.png) |
+| **Empty state shell** (`empty-state-shell`) | Happy-path layout with empty body (worklist / queue) | `section-header`, `status-chip`, `empty-state`, `primary-cta` | [m](empty-state-shell/mobile.png) · [t](empty-state-shell/tablet.png) · [d](empty-state-shell/desktop.png) |
+| **Insurance prevention** (`insurance-prevention`) | §7 prevention population insights — not claims / not CHIS identity | `stat-card-row`, `list-row-card`, `note-banner`, `primary-cta` | [m](insurance-prevention/mobile.png) · [t](insurance-prevention/tablet.png) · [d](insurance-prevention/desktop.png) |
 
 ## When to use which
 

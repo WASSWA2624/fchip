@@ -3,5 +3,7 @@
   "subtitle": "Which climate feeds may enter the pipeline",
   "kind": "settings",
   "nav": "climate",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -3,5 +3,7 @@
   "subtitle": "EMR/HMS systems feeding FCHIP in real time",
   "kind": "list",
   "nav": "admin",
+  "layout": "list-worklist",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -3,5 +3,7 @@
   "subtitle": "Respond to district medicine demand actions",
   "kind": "form",
   "nav": "pharmacy",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

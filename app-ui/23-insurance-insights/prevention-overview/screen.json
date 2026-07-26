@@ -1,0 +1,9 @@
+{
+  "title": "Prevention overview",
+  "subtitle": "Insurance partners \u2014 population prevention insights",
+  "kind": "dashboard",
+  "nav": "insurance",
+  "layout": "dashboard-metrics",
+  "state": "default",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

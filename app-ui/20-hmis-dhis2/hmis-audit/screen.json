@@ -3,5 +3,7 @@
   "subtitle": "What public aggregates entered the pipeline",
   "kind": "list",
   "nav": "hmis",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

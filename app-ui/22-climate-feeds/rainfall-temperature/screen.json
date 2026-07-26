@@ -3,5 +3,7 @@
   "subtitle": "Weather signals fused with health",
   "kind": "detail",
   "nav": "climate",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

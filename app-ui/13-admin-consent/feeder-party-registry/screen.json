@@ -3,5 +3,7 @@
   "subtitle": "Register every source that may push into ingest",
   "kind": "settings",
   "nav": "admin",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -3,5 +3,7 @@
   "subtitle": "Needs & priorities from community conversations",
   "kind": "form",
   "nav": "community",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -3,5 +3,7 @@
   "subtitle": "Village hotspots + climate overlay",
   "kind": "map",
   "nav": "facility",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

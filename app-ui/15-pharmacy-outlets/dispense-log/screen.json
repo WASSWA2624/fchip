@@ -3,5 +3,7 @@
   "subtitle": "Dispensing patterns into multi-source ingest",
   "kind": "form",
   "nav": "pharmacy",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

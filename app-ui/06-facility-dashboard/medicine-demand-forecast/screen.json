@@ -1,0 +1,9 @@
+{
+  "title": "Medicine demand forecast",
+  "subtitle": "\u00a76.5 demand by facility / community (Phase 3 depth)",
+  "kind": "dashboard",
+  "nav": "facility",
+  "layout": "dashboard-metrics",
+  "state": "default",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

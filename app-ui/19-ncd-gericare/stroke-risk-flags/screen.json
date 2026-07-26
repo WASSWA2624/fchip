@@ -3,5 +3,7 @@
   "subtitle": "Signals that feed NCD predictions",
   "kind": "list",
   "nav": "ncd",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

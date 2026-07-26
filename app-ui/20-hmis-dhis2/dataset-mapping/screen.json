@@ -3,5 +3,7 @@
   "subtitle": "Map HMIS/DHIS2 elements to cascade indicators",
   "kind": "settings",
   "nav": "hmis",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

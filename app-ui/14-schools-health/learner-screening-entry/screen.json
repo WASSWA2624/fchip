@@ -1,7 +1,9 @@
 {
   "title": "Learner screening entry",
-  "subtitle": "School screening camp results → ingest",
+  "subtitle": "School screening camp results \u2192 ingest",
   "kind": "form",
   "nav": "school",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

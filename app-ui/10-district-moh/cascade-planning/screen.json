@@ -3,5 +3,7 @@
   "subtitle": "Plan from gaps and metrics",
   "kind": "dashboard",
   "nav": "district",
+  "layout": "dashboard-metrics",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

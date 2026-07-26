@@ -1,7 +1,9 @@
 {
-  "title": "Org · catchment · facilities",
+  "title": "Org \u00b7 catchment \u00b7 facilities",
   "subtitle": "Where FCHIP is deployed",
   "kind": "settings",
   "nav": "admin",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -3,5 +3,7 @@
   "subtitle": "Outreach teams feed camp outcomes into ingest",
   "kind": "form",
   "nav": "field",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

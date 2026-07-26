@@ -1,7 +1,9 @@
 {
   "title": "AI / predictive",
-  "subtitle": "Risk scores · explainable alerts",
+  "subtitle": "Shared risk scores \u00b7 explainable alerts",
   "kind": "dashboard",
-  "nav": "district",
+  "nav": "intel",
+  "layout": "dashboard-metrics",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

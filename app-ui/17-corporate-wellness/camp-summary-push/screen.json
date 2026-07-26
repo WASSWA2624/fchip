@@ -3,5 +3,7 @@
   "subtitle": "Aggregate wellness signals to NCD intelligence",
   "kind": "form",
   "nav": "corporate",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -1,7 +1,9 @@
 {
   "title": "Impact evidence",
-  "subtitle": "Optimisation · donor-ready proof",
+  "subtitle": "Optimisation \u00b7 donor-ready proof",
   "kind": "list",
   "nav": "partner",
+  "layout": "list-worklist",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -1,7 +1,9 @@
 {
-  "title": "Extremes · flood · heat",
+  "title": "Extremes \u00b7 flood \u00b7 heat",
   "subtitle": "Short-term climate risks for early warning",
   "kind": "list",
   "nav": "climate",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

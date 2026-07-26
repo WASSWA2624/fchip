@@ -1,0 +1,20 @@
+{
+  "title": "Empty state shell",
+  "slug": "empty-state-shell",
+  "purpose": "Happy-path layout with empty body (worklist / queue)",
+  "composes": [
+    "section-header",
+    "status-chip",
+    "empty-state",
+    "primary-cta"
+  ],
+  "surfaces": [
+    "01 worklist-empty",
+    "07 referral-queue-empty"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

@@ -1,7 +1,9 @@
 {
   "title": "GIS maps",
-  "subtitle": "Disease distribution · hotspots · gaps",
+  "subtitle": "Disease distribution \u00b7 hotspots \u00b7 gaps",
   "kind": "map",
-  "nav": "district",
+  "nav": "intel",
+  "layout": "map-explorer",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

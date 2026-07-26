@@ -1,0 +1,9 @@
+{
+  "title": "Today\u2019s worklist",
+  "subtitle": "No open visits or alert tasks",
+  "kind": "empty",
+  "nav": "field",
+  "layout": "list-worklist",
+  "state": "empty",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

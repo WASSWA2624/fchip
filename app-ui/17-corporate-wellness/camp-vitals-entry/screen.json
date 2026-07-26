@@ -1,7 +1,9 @@
 {
   "title": "Camp vitals entry",
-  "subtitle": "BP · BMI · glucose from corporate / school wellness",
+  "subtitle": "BP \u00b7 BMI \u00b7 glucose from corporate / school wellness",
   "kind": "form",
   "nav": "corporate",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

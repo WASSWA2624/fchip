@@ -3,5 +3,7 @@
   "subtitle": "What clinical data may flow in",
   "kind": "settings",
   "nav": "admin",
+  "layout": "settings-admin",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

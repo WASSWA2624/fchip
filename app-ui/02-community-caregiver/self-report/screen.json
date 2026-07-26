@@ -1,7 +1,9 @@
 {
   "title": "Self-report",
-  "subtitle": "Symptoms · needs · concerns",
+  "subtitle": "Symptoms \u00b7 needs \u00b7 concerns",
   "kind": "form",
-  "nav": "field",
+  "nav": "caregiver",
+  "layout": "form-capture",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

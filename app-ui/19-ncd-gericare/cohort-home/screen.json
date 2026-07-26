@@ -3,5 +3,7 @@
   "subtitle": "Chronic and elderly cohorts feed longitudinal signals",
   "kind": "dashboard",
   "nav": "ncd",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

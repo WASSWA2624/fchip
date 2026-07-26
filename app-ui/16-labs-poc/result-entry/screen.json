@@ -1,7 +1,9 @@
 {
   "title": "Result entry",
-  "subtitle": "Point-of-care / lab result → ingest",
+  "subtitle": "Point-of-care / lab result \u2192 ingest",
   "kind": "form",
   "nav": "lab",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

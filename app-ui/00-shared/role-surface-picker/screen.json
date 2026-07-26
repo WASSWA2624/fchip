@@ -1,7 +1,9 @@
 {
   "title": "Choose your workspace",
-  "subtitle": "Consumers · data feeders · admin",
+  "subtitle": "Consumers \u00b7 data feeders \u00b7 admin",
   "kind": "list",
   "nav": "auth",
+  "layout": "list-worklist",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

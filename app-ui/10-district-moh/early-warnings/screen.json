@@ -3,5 +3,7 @@
   "subtitle": "Explainable outbreak & risk notices",
   "kind": "list",
   "nav": "district",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

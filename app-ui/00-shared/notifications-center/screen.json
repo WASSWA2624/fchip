@@ -3,5 +3,7 @@
   "subtitle": "Alerts across your surfaces",
   "kind": "list",
   "nav": "field",
+  "layout": "list-worklist",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

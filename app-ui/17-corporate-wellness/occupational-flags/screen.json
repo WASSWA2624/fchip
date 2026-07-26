@@ -3,5 +3,7 @@
   "subtitle": "Workplace health risk patterns",
   "kind": "list",
   "nav": "corporate",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

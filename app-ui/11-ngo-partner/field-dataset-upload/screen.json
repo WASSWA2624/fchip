@@ -3,5 +3,7 @@
   "subtitle": "NGO M&E teams feed anonymised programme data",
   "kind": "form",
   "nav": "partner",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

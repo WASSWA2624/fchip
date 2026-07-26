@@ -3,5 +3,7 @@
   "subtitle": "Consumers and data-feeder roles",
   "kind": "settings",
   "nav": "admin",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

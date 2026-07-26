@@ -3,5 +3,7 @@
   "subtitle": "Medicine availability signals for demand forecasts",
   "kind": "form",
   "nav": "pharmacy",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

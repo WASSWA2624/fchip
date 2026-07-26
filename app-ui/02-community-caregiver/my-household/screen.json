@@ -2,6 +2,8 @@
   "title": "My household",
   "subtitle": "Optional caregiver self-view",
   "kind": "dashboard",
-  "nav": "field",
+  "nav": "caregiver",
+  "layout": "feeder-home",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -1,7 +1,9 @@
 {
   "title": "Maternal / child",
-  "subtitle": "ANC · growth · immunisation",
+  "subtitle": "ANC \u00b7 growth \u00b7 immunisation",
   "kind": "form",
   "nav": "field",
+  "layout": "form-capture",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

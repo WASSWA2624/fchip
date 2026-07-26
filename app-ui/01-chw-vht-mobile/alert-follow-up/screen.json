@@ -3,5 +3,7 @@
   "subtitle": "Explainable next steps",
   "kind": "detail",
   "nav": "field",
+  "layout": "detail-action",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

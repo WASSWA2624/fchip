@@ -4,7 +4,7 @@ Reusable building blocks for every `app-ui` screen. Compose screens from these �
 
 Brand: teal health system · slogan **Your health, our mission.**
 
-**39 components** × mobile / tablet / desktop.
+**42 components** × mobile / tablet / desktop.
 
 ## brand
 
@@ -59,8 +59,11 @@ Brand: teal health system · slogan **Your health, our mission.**
 | Component | Purpose | Specimens |
 | --- | --- | --- |
 | **Top app bar** (`top-app-bar`) | Brand + slogan / screen title | [m](navigation/top-app-bar/mobile.png) · [t](navigation/top-app-bar/tablet.png) · [d](navigation/top-app-bar/desktop.png) |
-| **Bottom nav · field** (`bottom-nav-field`) | CHW / caregiver tabs | [m](navigation/bottom-nav-field/mobile.png) · [t](navigation/bottom-nav-field/tablet.png) · [d](navigation/bottom-nav-field/desktop.png) |
+| **Bottom nav · field** (`bottom-nav-field`) | CHW tabs | [m](navigation/bottom-nav-field/mobile.png) · [t](navigation/bottom-nav-field/tablet.png) · [d](navigation/bottom-nav-field/desktop.png) |
+| **Bottom nav · caregiver** (`bottom-nav-caregiver`) | Home · Report · Guidance · More | [m](navigation/bottom-nav-caregiver/mobile.png) · [t](navigation/bottom-nav-caregiver/tablet.png) · [d](navigation/bottom-nav-caregiver/desktop.png) |
 | **Bottom nav · feeder** (`bottom-nav-feeder`) | School / pharmacy / lab / MCH tabs | [m](navigation/bottom-nav-feeder/mobile.png) · [t](navigation/bottom-nav-feeder/tablet.png) · [d](navigation/bottom-nav-feeder/desktop.png) |
+| **Bottom nav · intelligence** (`bottom-nav-intel`) | Ingest · AI · GIS · Guidance | [m](navigation/bottom-nav-intel/mobile.png) · [t](navigation/bottom-nav-intel/tablet.png) · [d](navigation/bottom-nav-intel/desktop.png) |
+| **Bottom nav · insurance** (`bottom-nav-insurance`) | Prevent · Cohorts · Trends | [m](navigation/bottom-nav-insurance/mobile.png) · [t](navigation/bottom-nav-insurance/tablet.png) · [d](navigation/bottom-nav-insurance/desktop.png) |
 | **Side nav · desktop** (`side-nav-desktop`) | Desktop chrome navigation | [m](navigation/side-nav-desktop/mobile.png) · [t](navigation/side-nav-desktop/tablet.png) · [d](navigation/side-nav-desktop/desktop.png) |
 | **Role picker row** (`role-picker-row`) | Workspace choice row | [m](navigation/role-picker-row/mobile.png) · [t](navigation/role-picker-row/tablet.png) · [d](navigation/role-picker-row/desktop.png) |
 | **Section header** (`section-header`) | Title + subtitle block | [m](navigation/section-header/mobile.png) · [t](navigation/section-header/tablet.png) · [d](navigation/section-header/desktop.png) |

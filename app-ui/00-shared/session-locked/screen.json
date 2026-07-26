@@ -1,0 +1,9 @@
+{
+  "title": "Session locked",
+  "subtitle": "Idle timeout \u00b7 re-authenticate",
+  "kind": "auth",
+  "nav": "auth",
+  "layout": "auth-centered-card",
+  "state": "default",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

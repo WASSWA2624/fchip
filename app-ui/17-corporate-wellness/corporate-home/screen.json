@@ -1,7 +1,9 @@
 {
   "title": "Corporate wellness home",
-  "subtitle": "Workplace programmes feed BP · BMI · glucose",
+  "subtitle": "Workplace programmes feed BP \u00b7 BMI \u00b7 glucose",
   "kind": "dashboard",
   "nav": "corporate",
+  "layout": "",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

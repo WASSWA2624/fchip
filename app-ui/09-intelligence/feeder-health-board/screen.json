@@ -2,6 +2,8 @@
   "title": "Feeder health board",
   "subtitle": "Which data parties are sending clean signals",
   "kind": "dashboard",
-  "nav": "admin",
+  "nav": "intel",
+  "layout": "connector-status",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

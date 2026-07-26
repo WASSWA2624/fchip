@@ -1,7 +1,9 @@
 {
   "title": "Climate fusion",
-  "subtitle": "Rainfall · heat · floods × health",
+  "subtitle": "Rainfall \u00b7 heat \u00b7 floods \u00d7 health",
   "kind": "dashboard",
-  "nav": "district",
+  "nav": "intel",
+  "layout": "dashboard-metrics",
+  "state": "default",
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

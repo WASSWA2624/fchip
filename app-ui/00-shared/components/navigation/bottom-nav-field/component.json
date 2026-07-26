@@ -2,10 +2,9 @@
   "title": "Bottom nav \u00b7 field",
   "category": "navigation",
   "slug": "bottom-nav-field",
-  "purpose": "CHW / caregiver tabs",
+  "purpose": "CHW tabs",
   "used_by": [
-    "01",
-    "02"
+    "01"
   ],
   "breakpoints": [
     "mobile",

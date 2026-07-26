@@ -142,7 +142,23 @@ SCREENS: list[Screen] = [
         "Your health, our mission.",
         "auth",
         note="Community Health Intelligence Platform",
-        primary_cta="Continue",
+        primary_cta="Get started",
+        nav="auth",
+        layout="auth-centered-card",
+    ),
+    Screen(
+        "00-shared",
+        "create-account",
+        "Create account",
+        "Phone number + password only — no other auth",
+        "auth",
+        rows=[
+            ("Phone number", "+256 700 000 000"),
+            ("Password", "••••••••"),
+            ("Confirm password", "••••••••"),
+        ],
+        note="No email · no OTP · no biometric required to register",
+        primary_cta="Create account",
         nav="auth",
         layout="auth-centered-card",
     ),
@@ -150,9 +166,10 @@ SCREENS: list[Screen] = [
         "00-shared",
         "login",
         "Sign in",
-        "Consumers · feeders · admin — one platform",
+        "Phone number + password only",
         "auth",
-        rows=[("Email / phone", "chw@fchip.ug"), ("Password", "••••••••")],
+        rows=[("Phone number", "+256 700 000 000"), ("Password", "••••••••")],
+        note="Same credentials as create account — no other auth steps",
         primary_cta="Sign in",
         nav="auth",
         layout="auth-centered-card",
@@ -160,11 +177,16 @@ SCREENS: list[Screen] = [
     Screen(
         "00-shared",
         "forgot-password",
-        "Reset access",
-        "Recover account for field and console users",
+        "Reset password",
+        "Phone number + new password only",
         "auth",
-        rows=[("Email / phone", "chw@fchip.ug"), ("Channel", "SMS · email")],
-        primary_cta="Send reset link",
+        rows=[
+            ("Phone number", "+256 700 000 000"),
+            ("New password", "••••••••"),
+            ("Confirm password", "••••••••"),
+        ],
+        note="No email · no SMS OTP · no alternate channels",
+        primary_cta="Save new password",
         nav="auth",
         layout="auth-centered-card",
     ),
@@ -179,7 +201,7 @@ SCREENS: list[Screen] = [
             ("Clinical share (EMR)", "Facility scopes only"),
             ("Research exports", "Anonymised only"),
         ],
-        note="Required before first field or caregiver capture",
+        note="Data consent after account exists — not an auth factor",
         primary_cta="I understand · continue",
         nav="auth",
         layout="auth-centered-card",
@@ -188,10 +210,10 @@ SCREENS: list[Screen] = [
         "00-shared",
         "offline-pin-lock",
         "Offline PIN",
-        "Protect device when network is down",
+        "Local device lock only — not account auth",
         "auth",
-        rows=[("PIN", "••••"), ("Biometric", "Optional")],
-        note="Field literacy-friendly · short PIN · local only",
+        rows=[("Device PIN", "••••")],
+        note="Optional local lock after phone+password sign-in · no biometric",
         primary_cta="Unlock",
         nav="auth",
         layout="auth-centered-card",
@@ -201,9 +223,12 @@ SCREENS: list[Screen] = [
         "00-shared",
         "session-locked",
         "Session locked",
-        "Idle timeout · re-authenticate",
+        "Idle timeout · sign in with phone + password",
         "auth",
-        rows=[("User", "Namuli · CHW"), ("Reason", "Idle 15 minutes")],
+        rows=[
+            ("Phone number", "+256 700 000 000"),
+            ("Password", "••••••••"),
+        ],
         primary_cta="Sign in again",
         nav="auth",
         layout="auth-centered-card",
@@ -2136,49 +2161,59 @@ def render_screen(screen: Screen, breakpoint: str) -> Image.Image:
     y = top + 18
 
     if screen.kind == "auth":
-        # centered card
+        # centered card — phone + password only (create / sign-in / reset)
         card_w = min(420, max_w)
         card_x = left + (w - left - card_w) / 2
-        y = top + (80 if breakpoint != "mobile" else 40)
-        round_rect(draw, (card_x, y, card_x + card_w, y + 420), C["surface"], radius=20, outline=C["line"])
-        text(draw, (card_x + card_w / 2, y + 48), screen.title, size=28, bold=True, fill=C["primary"], anchor="mm")
-        text(draw, (card_x + card_w / 2, y + 84), screen.subtitle, size=13, fill=C["muted"], anchor="mm")
-        if screen.note:
-            for i, line in enumerate(wrap(draw, screen.note, int(card_w - 48), 12)):
-                text(draw, (card_x + card_w / 2, y + 120 + i * 18), line, size=12, fill=C["ink"], anchor="mm")
-        fy = y + 160
+        y = top + (48 if breakpoint != "mobile" else 28)
+        n_fields = len(screen.rows)
+        note_lines = wrap(draw, screen.note, int(card_w - 48), 11) if screen.note else []
+        card_h = 280 + n_fields * 70 + (28 if note_lines else 0)
+        card_h = max(card_h, 420)
+        card_h = min(card_h, h - y - 24)
+        round_rect(draw, (card_x, y, card_x + card_w, y + card_h), C["surface"], radius=20, outline=C["line"])
+        text(draw, (card_x + card_w / 2, y + 40), screen.title, size=26, bold=True, fill=C["primary"], anchor="mm")
+        for i, line in enumerate(wrap(draw, screen.subtitle, int(card_w - 48), 12)[:2]):
+            text(draw, (card_x + card_w / 2, y + 72 + i * 16), line, size=12, fill=C["muted"], anchor="mm")
+        fy = y + 110
+        if screen.note and screen.slug != "splash":
+            for i, line in enumerate(note_lines[:2]):
+                text(draw, (card_x + card_w / 2, fy + i * 16), line, size=11, fill=C["warn"], anchor="mm")
+            fy += 16 * min(len(note_lines), 2) + 12
         if screen.rows:
             for label, value in screen.rows:
+                if fy + 60 > y + card_h - 90:
+                    break
                 text(draw, (card_x + 28, fy), label, size=11, fill=C["muted"])
                 round_rect(
                     draw,
-                    (card_x + 24, fy + 18, card_x + card_w - 24, fy + 56),
+                    (card_x + 24, fy + 16, card_x + card_w - 24, fy + 52),
                     C["bg"],
                     radius=10,
                     outline=C["line"],
                 )
-                text(draw, (card_x + 36, fy + 37), value, size=13, anchor="lm")
-                fy += 70
-        elif screen.kind == "auth" and screen.slug == "splash":
+                text(draw, (card_x + 36, fy + 34), value, size=13, anchor="lm")
+                fy += 66
+        elif screen.slug == "splash":
             round_rect(
                 draw,
-                (card_x + 40, y + 150, card_x + card_w - 40, y + 260),
+                (card_x + 40, fy, card_x + card_w - 40, fy + 100),
                 C["primary_soft"],
                 radius=16,
             )
             text(
                 draw,
-                (card_x + card_w / 2, y + 205),
+                (card_x + card_w / 2, fy + 50),
                 "CAPTURE → FUSE → PREDICT\nALERT → ACT → LEARN",
                 size=12,
                 fill=C["primary"],
                 anchor="mm",
             )
-            fy = y + 290
-        draw_cta(draw, card_x + 24, min(fy + 10, y + 350), card_w - 48, screen.primary_cta or "Continue")
+            fy += 120
+        cta_y = min(fy + 8, y + card_h - 88)
+        draw_cta(draw, card_x + 24, cta_y, card_w - 48, screen.primary_cta or "Continue")
         text(
             draw,
-            (card_x + card_w / 2, y + 392),
+            (card_x + card_w / 2, y + card_h - 36),
             "Health for All",
             size=11,
             fill=C["muted"],
@@ -2186,7 +2221,7 @@ def render_screen(screen: Screen, breakpoint: str) -> Image.Image:
         )
         text(
             draw,
-            (card_x + card_w / 2, y + 410),
+            (card_x + card_w / 2, y + card_h - 18),
             "Obulamu eri Bonna · Afya kwa Wote · Oburamu bwa Boona",
             size=9,
             fill=C["muted"],

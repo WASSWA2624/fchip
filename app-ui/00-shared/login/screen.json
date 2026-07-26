@@ -1,6 +1,6 @@
 {
   "title": "Sign in",
-  "subtitle": "Consumers \u00b7 feeders \u00b7 admin \u2014 one platform",
+  "subtitle": "Phone number + password only",
   "kind": "auth",
   "nav": "auth",
   "layout": "auth-centered-card",

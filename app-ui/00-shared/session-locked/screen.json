@@ -1,6 +1,6 @@
 {
   "title": "Session locked",
-  "subtitle": "Idle timeout \u00b7 re-authenticate",
+  "subtitle": "Idle timeout \u00b7 sign in with phone + password",
   "kind": "auth",
   "nav": "auth",
   "layout": "auth-centered-card",

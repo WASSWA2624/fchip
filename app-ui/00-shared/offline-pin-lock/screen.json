@@ -1,6 +1,6 @@
 {
   "title": "Offline PIN",
-  "subtitle": "Protect device when network is down",
+  "subtitle": "Local device lock only \u2014 not account auth",
   "kind": "auth",
   "nav": "auth",
   "layout": "auth-centered-card",

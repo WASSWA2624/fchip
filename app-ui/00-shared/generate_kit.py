@@ -406,7 +406,7 @@ LAYOUTS_CATALOG: list[Layout] = [
     Layout(
         "auth-centered-card",
         "Auth centered card",
-        "Splash · login · role picker on a centered card",
+        "Create account / sign in — phone number + password only",
         ["logo-lockup", "slogan-line", "labeled-field", "primary-cta", "master-loop-badge"],
         ["00-shared"],
     ),
@@ -600,8 +600,9 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
             fill=C["primary"],
             anchor="mm",
         )
-        draw_field(draw, cx + 28, cy + 230, card_w - 56, "Email / phone", "chw@fchip.ug")
-        draw_cta(draw, cx + 28, cy + 320, card_w - 56, "Continue")
+        draw_field(draw, cx + 28, cy + 220, card_w - 56, "Phone number", "+256 700 000 000")
+        draw_field(draw, cx + 28, cy + 290, card_w - 56, "Password", "••••••••")
+        draw_cta(draw, cx + 28, cy + 370, card_w - 56, "Sign in")
         return img
 
     if bp != "desktop":

@@ -1,6 +1,6 @@
 {
-  "title": "Reset password",
-  "subtitle": "Phone number + new password only",
+  "title": "Create account",
+  "subtitle": "Phone number + password only \u2014 no other auth",
   "kind": "auth",
   "nav": "auth",
   "layout": "auth-centered-card",

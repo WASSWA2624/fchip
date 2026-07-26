@@ -1,139 +1,72 @@
-# 01 — Overview
+# 01 — Proposed overview
 
-How the app is put together at the highest level.
+SoT: §1, §4.1, §4.4.
 
-## Two shells
+## What FCHIP is
 
-```mermaid
-flowchart LR
-  subgraph authShell [Auth shell]
-    L[/login]
-    R[/register]
-    V[/verify-email]
-    F[/forgot-password]
-    X[/reset-password]
-  end
+**FCHIP** turns fragmented community and facility health signals into **predictive, climate-aware intelligence**. It powers the cascade **Data & Feedback** loop.
 
-  subgraph appShell [App shell — ResponsiveAppShell]
-    SB[Sidebar / rail / drawer]
-    HD[Header · account · connectivity · subscription]
-    WS[Active workspace page]
-  end
-
-  subgraph status [Status pages — no shell]
-    SR[/session-restoring]
-    AR[/auth-required]
-    FB[/forbidden]
-  end
-
-  authShell -->|success| appShell
-  status --> authShell
-  status --> appShell
-```
-
-| Piece | Path / widget |
+| Is | Is not |
 | --- | --- |
-| App shell | `ResponsiveAppShell` |
-| Auth shell | `AuthShellLayout` |
-| Router | `app_router.dart` + `AppRouteGuards` |
+| Intelligence platform on the cascade | A hospital / EMR product |
+| Connects CHWs, facilities, districts, partners | A replacement for clinic software |
+| AI + GIS + climate fusion | Single-purpose booking or SMS tool |
 
-## Navigation groups (sidebar)
-
-Same order as the running app:
+## Proposed big picture
 
 ```mermaid
 flowchart TB
-  O[Overview] --> H[Home /]
-  PA[Patient access] --> R[Reception]
-  PA --> P[Patients]
-  PA --> OPD[OPD]
-  PA --> ED[Emergency]
-  IP[Inpatient care] --> IPD[IPD]
-  IP --> RB[Rooms & beds]
-  IP --> ICU[ICU]
-  IP --> NUR[Nursing]
-  CS[Clinical services] --> CLI[Clinical]
-  CS --> PHY[Physiotherapy]
-  CS --> TH[Theater]
-  CS --> DIS[Discharge]
-  DX[Diagnostics & medication] --> LAB[Lab]
-  DX --> RAD[Radiology]
-  DX --> PH[Pharmacy]
-  RV[Revenue cycle] --> BIL[Billing]
-  RV --> CLM[Claims]
-  RV --> SUB[Subscriptions]
-  FO[Facility operations] --> OPS[Operations]
-  FO --> HK[Housekeeping]
-  FO --> BIO[Biomedical]
-  FO --> MOR[Mortuary]
-  AD[Administration] --> HR[HR]
-  AD --> COM[Communications]
-  AD --> INT[Integrations]
-  AD --> REP[Reports]
-  AD --> SET[Settings]
-  AD --> SUP[Setup]
+  subgraph field [Last mile]
+    COM[Community members]
+    CHW[CHWs / VHTs]
+    OUT[Outreach programmes]
+    SCH[Schools · pharmacies · labs · MCH]
+  end
+
+  subgraph clinical [Clinical feeds — external]
+    FAC[Clinics · hospitals]
+    EMR[Existing EMR / HMS]
+  end
+
+  subgraph climate [Place & climate]
+    GIS[GIS layers]
+    CLI[Climate APIs]
+  end
+
+  subgraph fchip [Proposed FCHIP app]
+    CAP[Capture & sync]
+    CORE[AI/ML · Predictive · GIS · Climate fusion · Clinical support]
+    OUT_UI[CHW app · Facility dashboard · District / partner console]
+  end
+
+  subgraph action [Action]
+    REF[Referrals]
+    CAMP[Outreach · testing · stock]
+    LEARN[Learn · improve · serve again]
+  end
+
+  field --> CAP
+  clinical --> CAP
+  climate --> CORE
+  CAP --> CORE --> OUT_UI --> action --> LEARN
+  LEARN -.-> field
 ```
 
-**Also routed (not a sidebar item):** `/admin/access` (Access admin). `/profile` redirects into Settings.
-
-## How pieces interconnect
-
-```mermaid
-flowchart TB
-  TEN[Tenant] --> FAC[Facility]
-  FAC --> USR[User · roles · permissions · modules]
-  USR --> SHELL[Visible workspaces]
-
-  PAT[Patient registry] --> REC[Reception · appointments · queue]
-  REC --> ENC[Encounter]
-  ENC --> OPD[OPD]
-  ENC --> ED[Emergency]
-  ENC --> IPD[IPD / ICU / Nursing]
-  ENC --> TH[Theater]
-  ENC --> CLI[Clinical notes]
-
-  ENC --> LAB[Lab orders]
-  ENC --> RAD[Radiology orders]
-  ENC --> PH[Pharmacy orders]
-
-  IPD --> DIS[Discharge]
-  OPD --> DIS
-  DIS --> BIL[Billing]
-  BIL --> CLM[Claims]
-
-  ENC -.-> COM[Communications]
-  ENC -.-> REP[Reports]
-  FAC -.-> OPS[Ops · HK · Biomed · Mortuary]
-  TEN -.-> SUB[Subscriptions · Setup · Access admin]
-```
-
-## Monorepo split
+## Who uses which surface
 
 ```mermaid
 flowchart LR
-  FE[Flutter frontend<br/>workspaces · UI · offline UI]
-  BE[Express backend<br/>/api/v1 · Prisma · WS]
-  FE <-->|HTTP + WebSocket| BE
-  BE --> DB[(MySQL)]
+  CHW[CHW / VHT] --> MOB[Mobile app<br/>capture · worklists · alerts]
+  FAC[Facility teams] --> FD[Facility dashboard<br/>trends · referrals · maps]
+  DIST[District · NGO · MoH] --> DC[District / partner console<br/>early warning · M&E]
+  RES[Research] --> EV[Anonymised evidence exports]
+  EMR[External EMR/HMS] --> API[Secure FCHIP data APIs]
 ```
 
-| Layer | Owns |
-| --- | --- |
-| Frontend feature | Screen + Riverpod + repository DTO |
-| Backend module | Routes → controllers → services → Prisma |
-| Shared frontend | Shell, dialogs, workflow openers, design system |
-| Core frontend | Auth session, permissions, realtime, sync, network |
+## Theory of change FCHIP supports
 
-## Role overlay (simplified)
+```text
+Participation → Prevention → Access → Earlier care → Better health → Livelihoods → Learning → Better services
+```
 
-Nav is filtered by **role ∪ permission ∪ active subscription module**.
-
-| Focused role | Typical visible set |
-| --- | --- |
-| Lab tech | Home · Patients · Lab · Comms · Settings |
-| Pharmacist | Home · Patients · Pharmacy · Comms · Settings |
-| Receptionist | Home · Reception · Patients · OPD · Emergency · Comms · Settings |
-| Billing | Home · Patients · Billing · Claims · Comms · Reports · Settings |
-| Clinician / admin | Broader groups (see access policy) |
-
-Next: [02 Startup, auth & access](02-startup-auth-access.md)
+Next: [02 Cascade](02-cascade.md)

@@ -1,47 +1,41 @@
-# FCHIP app flows
+# FCHIP proposed app flows
 
-Flow charts of **how the running app works** — screens, modules, and how they connect.
+**Proposed** product flows for the FCHIP app — derived only from [`.cursor/app-write-up.mdc`](../.cursor/app-write-up.mdc).
 
-Built from the Flutter shell (`frontend/lib/app/router/`) and facility modules (`frontend/lib/features/`). Product narrative SoT remains [`.cursor/app-write-up.mdc`](../.cursor/app-write-up.mdc).
+These diagrams describe **what FCHIP should be**, not the current `backend/` / `frontend/` hospital HIS code. If a diagram and the SoT disagree, **the SoT wins**.
 
-## Start here
+## Master loop
+
+```text
+CAPTURE → FUSE → PREDICT → ALERT → ACT → LEARN
+```
 
 ```mermaid
-flowchart TB
-  BOOT[Boot · session restore] --> AUTH{Signed in?}
-  AUTH -->|No| LOGIN[Auth shell<br/>login · register · reset]
-  AUTH -->|Yes| SHELL[App shell<br/>sidebar · header · badges]
-  LOGIN --> SHELL
-  SHELL --> HOME[Home dashboard]
-  HOME --> GROUPS[Workspace groups]
-  GROUPS --> PA[Patient access]
-  GROUPS --> IP[Inpatient care]
-  GROUPS --> CS[Clinical services]
-  GROUPS --> DX[Diagnostics & medication]
-  GROUPS --> RV[Revenue cycle]
-  GROUPS --> FO[Facility operations]
-  GROUPS --> AD[Administration]
+flowchart LR
+  S[Field · EMR/HMS · Climate] --> C[Capture]
+  C --> I[FCHIP intelligence<br/>AI · GIS · climate fusion]
+  I --> A[Alerts · dashboards · worklists]
+  A --> X[Action in community]
+  X --> L[Learn · improve]
+  L --> S
 ```
 
 ## Read order
 
-| # | Doc | What you’ll see |
+| # | Doc | Shows |
 | --- | --- | --- |
-| 1 | [01-overview.md](01-overview.md) | Shells, nav map, how everything interconnects |
-| 2 | [02-startup-auth-access.md](02-startup-auth-access.md) | Boot → login → roles → route gates |
-| 3 | [03-care-spine.md](03-care-spine.md) | Patient journey across modules |
-| 4 | [04-workspaces.md](04-workspaces.md) | Each workspace: route, job, neighbours |
-| 5 | [05-platform.md](05-platform.md) | Backend domains + realtime / offline / shared glue |
+| 1 | [01-overview.md](01-overview.md) | Proposed product overview and interconnection |
+| 2 | [02-cascade.md](02-cascade.md) | Community health cascade FCHIP serves |
+| 3 | [03-architecture.md](03-architecture.md) | Capture → core → consumers |
+| 4 | [04-modules.md](04-modules.md) | Proposed modules / screens and how they connect |
+| 5 | [05-use-cases.md](05-use-cases.md) | Signal → prediction → action flows |
+| 6 | [06-mvp-phases.md](06-mvp-phases.md) | MVP pieces and roadmap phasing |
 
-## One-line care spine
+## Positioning guards (from SoT)
 
-```text
-Patient → Reception / Queue → Encounter (OPD · ED · IPD · ICU · Theatre)
-  → Lab / Radiology / Pharmacy → Discharge → Billing / Claims
-```
+- FCHIP = Community Health Intelligence Platform  
+- **Not** a hospital brand or generic EMR/HMS — it **interoperates** with EMR/HMS via secure APIs  
+- Cascade order is fixed: communities → CHWs/VHTs → outreach programmes → facilities → research/partners → empowerment  
+- CHIS is an **optional** data domain, not core product identity  
 
-## Source files
-
-- Routes: `frontend/lib/app/router/app_routes.dart`, `app_router.dart`
-- Features: `frontend/lib/features/*`
-- API modules: `backend/src/modules/*`
+Slogan: **Your health, our mission.**

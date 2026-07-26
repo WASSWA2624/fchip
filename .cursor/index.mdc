@@ -13,25 +13,22 @@ FCHIP is the FairBanks Community Health Intelligence Platform monorepo (`backend
 
 ## Source of truth
 
-1. [`.cursor/app-write-up.mdc`](app-write-up.mdc) — FairBanks / FCHIP product narrative (always apply).
-2. [`.cursor/rules/fairbanks-community-reach.mdc`](rules/fairbanks-community-reach.mdc) — Community Reach cascade and visuals.
-3. Concept images in `.cursor/` (`concept_improved.jpeg`, `concept_simple.jpeg`, `concept.jpeg`).
+1. [`.cursor/app-write-up.mdc`](app-write-up.mdc) — FairBanks / FCHIP product narrative, including the full Community Reach operating model (always apply).
 
 ## Conflict order
 
 When rules conflict, apply this order:
 
 1. Security, privacy, safety, and compliance.
-2. `.cursor/app-write-up.mdc` for product identity and scope.
-3. `.cursor/rules/fairbanks-community-reach.mdc` for cascade and programme naming.
-4. `frontend/.cursor/index.mdc` or `backend/.cursor/index.mdc` for stack guidance.
-5. `dev-plan/` steps for chronology only.
+2. `.cursor/app-write-up.mdc` for product identity, cascade, and scope.
+3. `frontend/.cursor/index.mdc` or `backend/.cursor/index.mdc` for stack guidance.
+4. `dev-plan/` steps for chronology only.
 
 ## Keep / do not invent
 
 - Frame FCHIP as FairBanks' intelligence layer on Community Reach — not a generic hospital brand.
 - Keep EMR/HMS wording only for **external** facility systems FCHIP interoperates with.
-- Do not invent alternate cascade order or programme names.
+- Do not invent alternate cascade order or programme names — follow section 2 of the SoT.
 
 ## Stack indexes
 

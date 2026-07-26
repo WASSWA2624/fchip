@@ -29,14 +29,11 @@ Every project under `applications/` uses this layout. Shared application rules l
 | `folder_structure.mdc` | This layout |
 | `documents.mdc` | Sync + elegant PowerPoint / cover standards |
 | `instructions.mdc` | Writing style, .mdc word limit, deck quality pointer |
-| `fairbanks-community-reach.mdc` | Operating model / cascade |
-| `fairbanks_raw_project_idea.mdc` | Original FCHIP vision (do not edit) |
-| `fairBanks_refined_project_idea.mdc` | Pointer to product SoT |
 
-**Product SoT (not under `rules/`):** [`.cursor/app-write-up.mdc`](../app-write-up.mdc)
+**Product SoT (not under `rules/`):** [`.cursor/app-write-up.mdc`](../app-write-up.mdc) — includes the full Community Reach operating model.
 
 ## Assets & temp
 
-- Prefer real photos and the three concept visuals in `.cursor/`.
+- Prefer real photos from `assets/` (or a project `assets/` folder). Draw cascade story from the product SoT section 2.
 - Final edited docs live only in `documents/`.
 - Temporary build artifacts go in repo `tmp/` (gitignored).

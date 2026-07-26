@@ -29,7 +29,7 @@ Examples: `awief_pdf.pdf`, `fid_ppt.pptx`, `awief_word.docx`.
 
 ## PowerPoint — `{project}_ppt.pptx` (elegant by default)
 
-Treat every deck as a polished visual product, not a text dump. Prefer real photos and concept visuals from `.cursor/` (`concept_improved.jpeg`, `concept_simple.jpeg`, `concept.jpeg`).
+Treat every deck as a polished visual product, not a text dump. Prefer real photos from `assets/`. Build Community Reach cascade slides from [`.cursor/app-write-up.mdc`](../app-write-up.mdc) section 2.
 
 1. **Balance & type:** Size text for the space. No tiny type in empty space; no crowding or overlap.
 2. **Pictures first:** One clear image idea per slide.
@@ -39,6 +39,5 @@ Treat every deck as a polished visual product, not a text dump. Prefer real phot
 
 ## Sources of truth
 
-- Product narrative: [`.cursor/app-write-up.mdc`](../app-write-up.mdc)
-- Cascade model: [`fairbanks-community-reach.mdc`](fairbanks-community-reach.mdc)
+- Product narrative + cascade: [`.cursor/app-write-up.mdc`](../app-write-up.mdc)
 - Call rules: `applications/{project}/rules/source_of_truth.mdc`

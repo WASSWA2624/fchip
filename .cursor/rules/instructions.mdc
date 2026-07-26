@@ -5,9 +5,8 @@ alwaysApply: true
 - Always be human when writing text.
 - Use layman's grammar and vocabularies.
 - Explain in the simplest possible way.
-- All `.mdc` files should be under 501 words except [app-write-up.mdc](../app-write-up.mdc) and [fairbanks_raw_project_idea.mdc](fairbanks_raw_project_idea.mdc).
-- Never modify [fairbanks_raw_project_idea.mdc](fairbanks_raw_project_idea.mdc).
-- Product SoT is [app-write-up.mdc](../app-write-up.mdc). [fairBanks_refined_project_idea.mdc](fairBanks_refined_project_idea.mdc) is only a pointer to it.
+- All `.mdc` files should be under 501 words except the product SoT [app-write-up.mdc](../app-write-up.mdc).
+- Product SoT is [app-write-up.mdc](../app-write-up.mdc) — cascade, CHIS, FCHIP framing, and funding copy live there.
 - Shared rules live only in root `.cursor/rules/`. Call SoTs live only under each project's `rules/` and must use globs, not `alwaysApply: true`.
 - Application packs: one **project-specific** generator per call. Do not auto-stamp many projects from one shared template or SPECS file.
 - Decks (`{project}_ppt.pptx`) must follow the elegant PowerPoint standard in [documents.mdc](documents.mdc): balanced type, pictures first, clean visual design, light purposeful animations.

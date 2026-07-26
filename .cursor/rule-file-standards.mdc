@@ -25,7 +25,7 @@ Apply these standards when creating or editing `.mdc` rule files.
 
 ## Quality requirements
 
-- Stay under 501 words (frontmatter included), except the product SoT [app-write-up.mdc](app-write-up.mdc) and [fairbanks_raw_project_idea.mdc](rules/fairbanks_raw_project_idea.mdc).
+- Stay under 501 words (frontmatter included), except the product SoT [app-write-up.mdc](app-write-up.mdc).
 - Do not duplicate [app-write-up.mdc](app-write-up.mdc); point to it instead.
 - Make each instruction actionable and testable.
 - Prefer concise bullets; one primary concern per rule.

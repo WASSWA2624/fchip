@@ -239,10 +239,10 @@ FCHIP sits between **field and climate capture** and **decision-makers**, on top
 ┌─────────────────────────────────────────────────────────────────┐
 │              FCHIP — COMMUNITY HEALTH INTELLIGENCE              │
 │                                                                 │
-│  ┌────────┐ ┌────────────┐ ┌─────────┐ ┌──────────┐ ┌────────┐ │
+│  ┌────────┐ ┌────────────┐ ┌─────────┐ ┌──────────┐ ┌─────────┐ │
 │  │ AI/ML  │ │ Predictive │ │ GIS     │ │ Climate  │ │ Clinical│ │
 │  │ Engine │ │ Analytics  │ │ Maps    │ │ Fusion   │ │ Support │ │
-│  └────────┘ └────────────┘ └─────────┘ └──────────┘ └────────┘ │
+│  └────────┘ └────────────┘ └─────────┘ └──────────┘ └─────────┘ │
 │     Risk scores · climate-aware early warnings · hotspots       │
 └───────────┬─────────────────┬─────────────────┬─────────────────┘
             │                 │                 │

@@ -1,0 +1,67 @@
+{
+  "title": "Result queue",
+  "subtitle": "Results waiting to sync or link to referrals",
+  "kind": "queue",
+  "nav": "lab",
+  "layout": "queue-desk",
+  "body_layouts": {
+    "mobile": "queue-desk",
+    "tablet": "queue-desk",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden",
+    "success",
+    "conflict",
+    "offline"
+  ],
+  "route": "/17-labs-poc/04-result-queue",
+  "parent_route": "/17-labs-poc/04-result-queue",
+  "roles": [
+    "lab-worker"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "phase-2",
+  "l10n_key_prefix": "17_labs_poc.04_result_queue",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Home",
+        "to": "/17-labs-poc/01-lab-home"
+      },
+      {
+        "label": "Results",
+        "to": "/17-labs-poc/02-result-entry"
+      },
+      {
+        "label": "Queue",
+        "to": "/17-labs-poc/04-result-queue"
+      },
+      {
+        "label": "Sync",
+        "to": "/17-labs-poc/03-batch-results-upload"
+      }
+    ],
+    "primary_action": {
+      "label": "Sync queue",
+      "to": "/17-labs-poc/04-result-queue"
+    },
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

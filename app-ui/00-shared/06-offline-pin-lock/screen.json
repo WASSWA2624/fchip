@@ -1,0 +1,45 @@
+{
+  "title": "Offline PIN",
+  "subtitle": "Local device lock only \u2014 not account auth",
+  "kind": "auth",
+  "nav": "auth",
+  "layout": "auth-centered-card",
+  "body_layouts": {
+    "mobile": "auth-centered-card",
+    "tablet": "auth-centered-card",
+    "desktop": "auth-centered-card"
+  },
+  "shells": {
+    "mobile": "auth-centered-card",
+    "tablet": "auth-centered-card",
+    "desktop": "auth-centered-card"
+  },
+  "state": "offline",
+  "supported_states": [
+    "default",
+    "loading",
+    "error"
+  ],
+  "route": "/00-shared/06-offline-pin-lock",
+  "parent_route": "/00-shared/08-role-surface-picker",
+  "roles": [
+    "authenticated-user"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "shared",
+  "l10n_key_prefix": "00_shared.06_offline_pin_lock",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [],
+    "primary_action": {
+      "label": "Unlock",
+      "to": "/01-chw-vht-mobile/01-worklist-home"
+    },
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

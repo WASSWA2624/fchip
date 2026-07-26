@@ -1,0 +1,62 @@
+{
+  "title": "Evidence catalog",
+  "subtitle": "Anonymised datasets \u00b7 no raw PHI dumps",
+  "kind": "list",
+  "nav": "partner",
+  "layout": "list-worklist",
+  "body_layouts": {
+    "mobile": "list-worklist",
+    "tablet": "list-worklist",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/23-research-exports/01-evidence-catalog",
+  "parent_route": "/23-research-exports/01-evidence-catalog",
+  "roles": [
+    "ngo-partner",
+    "researcher"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "phase-4",
+  "l10n_key_prefix": "23_research_exports.01_evidence_catalog",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Monitor",
+        "to": "/14-ngo-partner/01-programme-monitoring"
+      },
+      {
+        "label": "Evidence",
+        "to": "/14-ngo-partner/02-impact-evidence"
+      },
+      {
+        "label": "Training",
+        "to": "/14-ngo-partner/03-training-skills-analytics"
+      },
+      {
+        "label": "More",
+        "to": "/23-research-exports/01-evidence-catalog"
+      }
+    ],
+    "primary_action": null,
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

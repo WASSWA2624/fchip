@@ -1,0 +1,65 @@
+{
+  "title": "Feeder health board",
+  "subtitle": "Which data parties are sending clean signals",
+  "kind": "dashboard",
+  "nav": "intel",
+  "layout": "connector-status",
+  "body_layouts": {
+    "mobile": "connector-status",
+    "tablet": "connector-status",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/02-intelligence/02-feeder-health-board",
+  "parent_route": "/02-intelligence/01-ingest-pipeline",
+  "roles": [
+    "intelligence-analyst",
+    "platform-operator"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "mvp",
+  "l10n_key_prefix": "02_intelligence.02_feeder_health_board",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Ingest",
+        "to": "/02-intelligence/01-ingest-pipeline"
+      },
+      {
+        "label": "AI",
+        "to": "/02-intelligence/05-ai-risk-scores"
+      },
+      {
+        "label": "GIS",
+        "to": "/02-intelligence/03-gis-explorer"
+      },
+      {
+        "label": "Guidance",
+        "to": "/02-intelligence/07-clinical-support-guidance"
+      }
+    ],
+    "primary_action": {
+      "label": "Open silent feeders",
+      "to": "/02-intelligence/01-ingest-pipeline"
+    },
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

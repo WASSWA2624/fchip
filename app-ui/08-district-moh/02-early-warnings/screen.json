@@ -1,0 +1,65 @@
+{
+  "title": "Early warnings",
+  "subtitle": "Explainable outbreak & risk notices",
+  "kind": "list",
+  "nav": "district",
+  "layout": "list-worklist",
+  "body_layouts": {
+    "mobile": "list-worklist",
+    "tablet": "list-worklist",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/08-district-moh/02-early-warnings",
+  "parent_route": "/08-district-moh/02-early-warnings",
+  "roles": [
+    "district-health-officer",
+    "moh"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "mvp",
+  "l10n_key_prefix": "08_district_moh.02_early_warnings",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Map",
+        "to": "/08-district-moh/01-population-map"
+      },
+      {
+        "label": "Warnings",
+        "to": "/08-district-moh/02-early-warnings"
+      },
+      {
+        "label": "Metrics",
+        "to": "/03-cascade-metrics/01-indicators-overview"
+      },
+      {
+        "label": "Plan",
+        "to": "/08-district-moh/04-cascade-planning"
+      }
+    ],
+    "primary_action": {
+      "label": "Deploy response",
+      "to": "/08-district-moh/03-action-deploy"
+    },
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

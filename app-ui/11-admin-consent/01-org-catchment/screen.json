@@ -1,0 +1,65 @@
+{
+  "title": "Org \u00b7 catchment \u00b7 facilities",
+  "subtitle": "Where FCHIP is deployed",
+  "kind": "settings",
+  "nav": "admin",
+  "layout": "settings-admin",
+  "body_layouts": {
+    "mobile": "settings-admin",
+    "tablet": "settings-admin",
+    "desktop": "settings-admin"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/11-admin-consent/01-org-catchment",
+  "parent_route": "/11-admin-consent/01-org-catchment",
+  "roles": [
+    "organisation-admin",
+    "privacy-admin"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "mvp",
+  "l10n_key_prefix": "11_admin_consent.01_org_catchment",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Org",
+        "to": "/11-admin-consent/01-org-catchment"
+      },
+      {
+        "label": "Users",
+        "to": "/11-admin-consent/02-users-roles"
+      },
+      {
+        "label": "Consent",
+        "to": "/11-admin-consent/03-consent-privacy"
+      },
+      {
+        "label": "APIs",
+        "to": "/06-emr-connector/01-connector-status"
+      }
+    ],
+    "primary_action": {
+      "label": "Save org",
+      "to": "/11-admin-consent/01-org-catchment?state=success"
+    },
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

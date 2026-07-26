@@ -1,0 +1,66 @@
+{
+  "title": "Field dataset upload",
+  "subtitle": "NGO M&E teams feed anonymised programme data",
+  "kind": "form",
+  "nav": "partner",
+  "layout": "upload-batch",
+  "body_layouts": {
+    "mobile": "upload-batch",
+    "tablet": "upload-batch",
+    "desktop": "upload-batch"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "error",
+    "success",
+    "offline",
+    "forbidden"
+  ],
+  "route": "/14-ngo-partner/04-field-dataset-upload",
+  "parent_route": "/14-ngo-partner/01-programme-monitoring",
+  "roles": [
+    "ngo-partner",
+    "researcher"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "phase-2",
+  "l10n_key_prefix": "14_ngo_partner.04_field_dataset_upload",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Monitor",
+        "to": "/14-ngo-partner/01-programme-monitoring"
+      },
+      {
+        "label": "Evidence",
+        "to": "/14-ngo-partner/02-impact-evidence"
+      },
+      {
+        "label": "Training",
+        "to": "/14-ngo-partner/03-training-skills-analytics"
+      },
+      {
+        "label": "More",
+        "to": "/23-research-exports/01-evidence-catalog"
+      }
+    ],
+    "primary_action": {
+      "label": "Upload to ingest",
+      "to": "/14-ngo-partner/04-field-dataset-upload?state=success"
+    },
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

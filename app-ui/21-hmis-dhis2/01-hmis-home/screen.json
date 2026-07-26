@@ -1,0 +1,64 @@
+{
+  "title": "HMIS / DHIS2 home",
+  "subtitle": "Approved public-health aggregates into FCHIP",
+  "kind": "dashboard",
+  "nav": "hmis",
+  "layout": "feeder-home",
+  "body_layouts": {
+    "mobile": "feeder-home",
+    "tablet": "feeder-home",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/21-hmis-dhis2/01-hmis-home",
+  "parent_route": "/21-hmis-dhis2/01-hmis-home",
+  "roles": [
+    "hmis-operator"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "phase-2",
+  "l10n_key_prefix": "21_hmis_dhis2.01_hmis_home",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Home",
+        "to": "/21-hmis-dhis2/01-hmis-home"
+      },
+      {
+        "label": "Map",
+        "to": "/21-hmis-dhis2/02-dataset-mapping"
+      },
+      {
+        "label": "Exchange",
+        "to": "/21-hmis-dhis2/03-aggregate-push-pull"
+      },
+      {
+        "label": "Audit",
+        "to": "/21-hmis-dhis2/04-hmis-audit"
+      }
+    ],
+    "primary_action": {
+      "label": "Run sync",
+      "to": "/21-hmis-dhis2/01-hmis-home"
+    },
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

@@ -15,7 +15,7 @@ policy:
 screens:
   - seq: S-001
     module: 00-shared
-    screen: splash
+    screen: 01-splash
     slice: VS-00
     wave: 0
     deferred: false
@@ -23,7 +23,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-002
     module: 00-shared
-    screen: create-account
+    screen: 02-create-account
     slice: VS-00
     wave: 0
     deferred: false
@@ -31,7 +31,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-003
     module: 00-shared
-    screen: login
+    screen: 03-login
     slice: VS-00
     wave: 0
     deferred: false
@@ -39,7 +39,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-004
     module: 00-shared
-    screen: forgot-password
+    screen: 04-forgot-password
     slice: VS-00
     wave: 0
     deferred: false
@@ -47,7 +47,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-005
     module: 00-shared
-    screen: consent-first-onboarding
+    screen: 05-consent-first-onboarding
     slice: VS-00
     wave: 0
     deferred: false
@@ -55,7 +55,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-006
     module: 00-shared
-    screen: offline-pin-lock
+    screen: 06-offline-pin-lock
     slice: VS-00
     wave: 0
     deferred: false
@@ -63,7 +63,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-007
     module: 00-shared
-    screen: session-locked
+    screen: 07-session-locked
     slice: VS-00
     wave: 0
     deferred: false
@@ -71,7 +71,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-008
     module: 00-shared
-    screen: role-surface-picker
+    screen: 08-role-surface-picker
     slice: VS-00
     wave: 0
     deferred: false
@@ -79,7 +79,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-009
     module: 00-shared
-    screen: notifications-center
+    screen: 09-notifications-center
     slice: VS-00
     wave: 0
     deferred: false
@@ -87,7 +87,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-010
     module: 00-shared
-    screen: access-denied
+    screen: 10-access-denied
     slice: VS-00
     wave: 0
     deferred: false
@@ -95,7 +95,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-011
     module: 00-shared
-    screen: not-found
+    screen: 11-not-found
     slice: VS-00
     wave: 0
     deferred: false
@@ -103,7 +103,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-012
     module: 00-shared
-    screen: preferences
+    screen: 12-preferences
     slice: VS-00
     wave: 0
     deferred: false
@@ -111,7 +111,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-013
     module: 01-chw-vht-mobile
-    screen: worklist-home
+    screen: 01-worklist-home
     slice: VS-01
     wave: 1
     deferred: false
@@ -119,7 +119,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-014
     module: 01-chw-vht-mobile
-    screen: worklist-empty
+    screen: 02-worklist-empty
     slice: VS-01
     wave: 1
     deferred: false
@@ -127,7 +127,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-015
     module: 01-chw-vht-mobile
-    screen: worklist-loading
+    screen: 03-worklist-loading
     slice: VS-01
     wave: 1
     deferred: false
@@ -135,7 +135,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-016
     module: 01-chw-vht-mobile
-    screen: household-visit-form
+    screen: 04-household-visit-form
     slice: VS-01
     wave: 1
     deferred: false
@@ -143,7 +143,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-017
     module: 01-chw-vht-mobile
-    screen: symptoms-vitals
+    screen: 05-symptoms-vitals
     slice: VS-01
     wave: 1
     deferred: false
@@ -151,7 +151,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-018
     module: 01-chw-vht-mobile
-    screen: maternal-child-indicators
+    screen: 06-maternal-child-indicators
     slice: VS-01
     wave: 1
     deferred: false
@@ -159,7 +159,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-019
     module: 01-chw-vht-mobile
-    screen: visit-saved
+    screen: 07-visit-saved
     slice: VS-01
     wave: 1
     deferred: false
@@ -167,7 +167,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-020
     module: 01-chw-vht-mobile
-    screen: create-referral
+    screen: 08-create-referral
     slice: VS-01
     wave: 1
     deferred: false
@@ -175,7 +175,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-021
     module: 01-chw-vht-mobile
-    screen: referral-status
+    screen: 09-referral-status
     slice: VS-01
     wave: 1
     deferred: false
@@ -183,7 +183,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-022
     module: 01-chw-vht-mobile
-    screen: alerts-inbox
+    screen: 10-alerts-inbox
     slice: VS-01
     wave: 1
     deferred: false
@@ -191,7 +191,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-023
     module: 01-chw-vht-mobile
-    screen: alert-follow-up
+    screen: 11-alert-follow-up
     slice: VS-01
     wave: 1
     deferred: false
@@ -199,7 +199,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-024
     module: 01-chw-vht-mobile
-    screen: sync-status
+    screen: 12-sync-status
     slice: VS-01
     wave: 1
     deferred: false
@@ -207,7 +207,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-025
     module: 01-chw-vht-mobile
-    screen: sync-failed
+    screen: 13-sync-failed
     slice: VS-01
     wave: 1
     deferred: false
@@ -215,7 +215,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-026
     module: 01-chw-vht-mobile
-    screen: sync-conflict
+    screen: 14-sync-conflict
     slice: VS-01
     wave: 1
     deferred: false
@@ -223,7 +223,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-027
     module: 02-intelligence
-    screen: ingest-pipeline
+    screen: 01-ingest-pipeline
     slice: VS-02
     wave: 1
     deferred: false
@@ -231,7 +231,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-028
     module: 02-intelligence
-    screen: feeder-health-board
+    screen: 02-feeder-health-board
     slice: VS-02
     wave: 1
     deferred: false
@@ -239,7 +239,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-029
     module: 03-cascade-metrics
-    screen: indicators-overview
+    screen: 01-indicators-overview
     slice: VS-03
     wave: 1
     deferred: false
@@ -247,7 +247,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-030
     module: 03-cascade-metrics
-    screen: gap-detection
+    screen: 02-gap-detection
     slice: VS-03
     wave: 1
     deferred: false
@@ -255,7 +255,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-031
     module: 03-cascade-metrics
-    screen: partner-reports
+    screen: 03-partner-reports
     slice: VS-03
     wave: 1
     deferred: false
@@ -263,7 +263,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-032
     module: 04-facility-dashboard
-    screen: overview
+    screen: 01-overview
     slice: VS-04
     wave: 1
     deferred: false
@@ -271,7 +271,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-033
     module: 04-facility-dashboard
-    screen: catchment-map
+    screen: 02-catchment-map
     slice: VS-04
     wave: 1
     deferred: false
@@ -279,7 +279,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-034
     module: 04-facility-dashboard
-    screen: open-referrals
+    screen: 03-open-referrals
     slice: VS-04
     wave: 1
     deferred: false
@@ -287,7 +287,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-035
     module: 04-facility-dashboard
-    screen: stock-signal
+    screen: 04-stock-signal
     slice: VS-04
     wave: 1
     deferred: false
@@ -295,7 +295,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-036
     module: 04-facility-dashboard
-    screen: outreach-priorities
+    screen: 05-outreach-priorities
     slice: VS-04
     wave: 1
     deferred: false
@@ -303,7 +303,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-037
     module: 04-facility-dashboard
-    screen: clinical-share-confirm
+    screen: 06-clinical-share-confirm
     slice: VS-04
     wave: 1
     deferred: false
@@ -311,7 +311,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-038
     module: 04-facility-dashboard
-    screen: manual-case-signal
+    screen: 07-manual-case-signal
     slice: VS-04
     wave: 1
     deferred: false
@@ -319,7 +319,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-039
     module: 05-referrals-desk
-    screen: referral-queue
+    screen: 01-referral-queue
     slice: VS-05
     wave: 1
     deferred: false
@@ -327,7 +327,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-040
     module: 05-referrals-desk
-    screen: referral-queue-empty
+    screen: 02-referral-queue-empty
     slice: VS-05
     wave: 1
     deferred: false
@@ -335,7 +335,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-041
     module: 05-referrals-desk
-    screen: referral-detail
+    screen: 03-referral-detail
     slice: VS-05
     wave: 1
     deferred: false
@@ -343,7 +343,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-042
     module: 05-referrals-desk
-    screen: outcome-feedback
+    screen: 04-outcome-feedback
     slice: VS-05
     wave: 1
     deferred: false
@@ -351,7 +351,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-043
     module: 06-emr-connector
-    screen: connector-status
+    screen: 01-connector-status
     slice: VS-06
     wave: 1
     deferred: false
@@ -359,7 +359,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-044
     module: 06-emr-connector
-    screen: connector-degraded
+    screen: 02-connector-degraded
     slice: VS-06
     wave: 1
     deferred: false
@@ -367,7 +367,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-045
     module: 06-emr-connector
-    screen: api-scopes-setup
+    screen: 03-api-scopes-setup
     slice: VS-06
     wave: 1
     deferred: false
@@ -375,7 +375,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-046
     module: 06-emr-connector
-    screen: push-event-log
+    screen: 04-push-event-log
     slice: VS-06
     wave: 1
     deferred: false
@@ -383,7 +383,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-047
     module: 06-emr-connector
-    screen: facility-onboarding
+    screen: 05-facility-onboarding
     slice: VS-06
     wave: 1
     deferred: false
@@ -391,7 +391,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-048
     module: 07-climate-feeds
-    screen: climate-home
+    screen: 01-climate-home
     slice: VS-07
     wave: 1
     deferred: false
@@ -399,7 +399,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-049
     module: 07-climate-feeds
-    screen: rainfall-temperature
+    screen: 02-rainfall-temperature
     slice: VS-07
     wave: 1
     deferred: false
@@ -407,7 +407,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-050
     module: 07-climate-feeds
-    screen: extremes-flood-heat
+    screen: 03-extremes-flood-heat
     slice: VS-07
     wave: 1
     deferred: false
@@ -415,7 +415,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-051
     module: 07-climate-feeds
-    screen: feed-config-audit
+    screen: 04-feed-config-audit
     slice: VS-07
     wave: 1
     deferred: false
@@ -423,7 +423,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-052
     module: 02-intelligence
-    screen: gis-explorer
+    screen: 03-gis-explorer
     slice: VS-02
     wave: 1
     deferred: false
@@ -431,7 +431,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-053
     module: 02-intelligence
-    screen: climate-fusion
+    screen: 04-climate-fusion
     slice: VS-02
     wave: 1
     deferred: false
@@ -439,7 +439,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-054
     module: 02-intelligence
-    screen: ai-risk-scores
+    screen: 05-ai-risk-scores
     slice: VS-02
     wave: 1
     deferred: false
@@ -447,7 +447,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-055
     module: 02-intelligence
-    screen: alerts-worklists-engine
+    screen: 06-alerts-worklists-engine
     slice: VS-02
     wave: 1
     deferred: false
@@ -455,7 +455,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-056
     module: 02-intelligence
-    screen: clinical-support-guidance
+    screen: 07-clinical-support-guidance
     slice: VS-02
     wave: 1
     deferred: false
@@ -463,7 +463,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-057
     module: 08-district-moh
-    screen: population-map
+    screen: 01-population-map
     slice: VS-08
     wave: 1
     deferred: false
@@ -471,7 +471,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-058
     module: 08-district-moh
-    screen: early-warnings
+    screen: 02-early-warnings
     slice: VS-08
     wave: 1
     deferred: false
@@ -479,7 +479,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-059
     module: 08-district-moh
-    screen: action-deploy
+    screen: 03-action-deploy
     slice: VS-08
     wave: 1
     deferred: false
@@ -487,7 +487,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-060
     module: 08-district-moh
-    screen: cascade-planning
+    screen: 04-cascade-planning
     slice: VS-08
     wave: 1
     deferred: false
@@ -495,7 +495,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-061
     module: 09-community-caregiver
-    screen: my-household
+    screen: 01-my-household
     slice: VS-09
     wave: 2
     deferred: false
@@ -503,7 +503,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-062
     module: 09-community-caregiver
-    screen: self-report
+    screen: 02-self-report
     slice: VS-09
     wave: 2
     deferred: false
@@ -511,7 +511,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-063
     module: 09-community-caregiver
-    screen: guidance-hints
+    screen: 03-guidance-hints
     slice: VS-09
     wave: 2
     deferred: false
@@ -519,7 +519,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-064
     module: 09-community-caregiver
-    screen: household-needs-capture
+    screen: 04-household-needs-capture
     slice: VS-09
     wave: 2
     deferred: false
@@ -527,7 +527,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-065
     module: 10-outreach-school-health
-    screen: campaign-planner
+    screen: 01-campaign-planner
     slice: VS-10
     wave: 2
     deferred: false
@@ -535,7 +535,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-066
     module: 10-outreach-school-health
-    screen: session-log
+    screen: 02-session-log
     slice: VS-10
     wave: 2
     deferred: false
@@ -543,7 +543,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-067
     module: 10-outreach-school-health
-    screen: coverage-map
+    screen: 03-coverage-map
     slice: VS-10
     wave: 2
     deferred: false
@@ -551,7 +551,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-068
     module: 10-outreach-school-health
-    screen: screening-results-entry
+    screen: 04-screening-results-entry
     slice: VS-10
     wave: 2
     deferred: false
@@ -559,7 +559,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-069
     module: 10-outreach-school-health
-    screen: home-visit-batch-upload
+    screen: 05-home-visit-batch-upload
     slice: VS-10
     wave: 2
     deferred: false
@@ -567,7 +567,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-070
     module: 11-admin-consent
-    screen: org-catchment
+    screen: 01-org-catchment
     slice: VS-11
     wave: 2
     deferred: false
@@ -575,7 +575,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-071
     module: 11-admin-consent
-    screen: users-roles
+    screen: 02-users-roles
     slice: VS-11
     wave: 2
     deferred: false
@@ -583,7 +583,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-072
     module: 11-admin-consent
-    screen: consent-privacy
+    screen: 03-consent-privacy
     slice: VS-11
     wave: 2
     deferred: false
@@ -591,7 +591,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-073
     module: 11-admin-consent
-    screen: emr-api-access
+    screen: 04-emr-api-access
     slice: VS-11
     wave: 2
     deferred: false
@@ -599,7 +599,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-074
     module: 11-admin-consent
-    screen: feeder-party-registry
+    screen: 05-feeder-party-registry
     slice: VS-11
     wave: 2
     deferred: false
@@ -607,7 +607,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-075
     module: 12-insurance-insights
-    screen: prevention-overview
+    screen: 01-prevention-overview
     slice: VS-12
     wave: 2
     deferred: false
@@ -615,7 +615,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-076
     module: 12-insurance-insights
-    screen: risk-cohort-insights
+    screen: 02-risk-cohort-insights
     slice: VS-12
     wave: 2
     deferred: false
@@ -623,7 +623,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-077
     module: 12-insurance-insights
-    screen: anonymised-trends
+    screen: 03-anonymised-trends
     slice: VS-12
     wave: 2
     deferred: false
@@ -631,7 +631,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-078
     module: 13-chis-livelihoods
-    screen: enrolment
+    screen: 01-enrolment
     slice: VS-13
     wave: 3
     deferred: false
@@ -639,7 +639,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-079
     module: 13-chis-livelihoods
-    screen: contributions
+    screen: 02-contributions
     slice: VS-13
     wave: 3
     deferred: false
@@ -647,7 +647,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-080
     module: 13-chis-livelihoods
-    screen: claims-access
+    screen: 03-claims-access
     slice: VS-13
     wave: 3
     deferred: false
@@ -655,7 +655,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-081
     module: 13-chis-livelihoods
-    screen: iga-participation-entry
+    screen: 04-iga-participation-entry
     slice: VS-13
     wave: 3
     deferred: false
@@ -663,7 +663,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-082
     module: 14-ngo-partner
-    screen: programme-monitoring
+    screen: 01-programme-monitoring
     slice: VS-14
     wave: 3
     deferred: false
@@ -671,7 +671,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-083
     module: 14-ngo-partner
-    screen: impact-evidence
+    screen: 02-impact-evidence
     slice: VS-14
     wave: 3
     deferred: false
@@ -679,7 +679,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-084
     module: 14-ngo-partner
-    screen: training-skills-analytics
+    screen: 03-training-skills-analytics
     slice: VS-14
     wave: 3
     deferred: false
@@ -687,7 +687,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-085
     module: 14-ngo-partner
-    screen: field-dataset-upload
+    screen: 04-field-dataset-upload
     slice: VS-14
     wave: 3
     deferred: false
@@ -695,7 +695,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-086
     module: 14-ngo-partner
-    screen: partner-indicator-entry
+    screen: 05-partner-indicator-entry
     slice: VS-14
     wave: 3
     deferred: false
@@ -703,7 +703,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-087
     module: 15-schools-health
-    screen: school-home
+    screen: 01-school-home
     slice: VS-15
     wave: 3
     deferred: false
@@ -711,7 +711,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-088
     module: 15-schools-health
-    screen: health-education-session
+    screen: 02-health-education-session
     slice: VS-15
     wave: 3
     deferred: false
@@ -719,7 +719,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-089
     module: 15-schools-health
-    screen: learner-screening-entry
+    screen: 03-learner-screening-entry
     slice: VS-15
     wave: 3
     deferred: false
@@ -727,7 +727,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-090
     module: 15-schools-health
-    screen: absenteeism-wellness
+    screen: 04-absenteeism-wellness
     slice: VS-15
     wave: 3
     deferred: false
@@ -735,7 +735,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-091
     module: 15-schools-health
-    screen: school-sync-status
+    screen: 05-school-sync-status
     slice: VS-15
     wave: 3
     deferred: false
@@ -743,7 +743,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-092
     module: 16-pharmacy-outlets
-    screen: pharmacy-home
+    screen: 01-pharmacy-home
     slice: VS-16
     wave: 3
     deferred: false
@@ -751,7 +751,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-093
     module: 16-pharmacy-outlets
-    screen: stock-levels-entry
+    screen: 02-stock-levels-entry
     slice: VS-16
     wave: 3
     deferred: false
@@ -759,7 +759,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-094
     module: 16-pharmacy-outlets
-    screen: dispense-log
+    screen: 03-dispense-log
     slice: VS-16
     wave: 3
     deferred: false
@@ -767,7 +767,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-095
     module: 16-pharmacy-outlets
-    screen: common-complaints
+    screen: 04-common-complaints
     slice: VS-16
     wave: 3
     deferred: false
@@ -775,7 +775,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-096
     module: 16-pharmacy-outlets
-    screen: prestock-ack
+    screen: 05-prestock-ack
     slice: VS-16
     wave: 3
     deferred: false
@@ -783,7 +783,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-097
     module: 17-labs-poc
-    screen: lab-home
+    screen: 01-lab-home
     slice: VS-17
     wave: 3
     deferred: false
@@ -791,7 +791,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-098
     module: 17-labs-poc
-    screen: result-entry
+    screen: 02-result-entry
     slice: VS-17
     wave: 3
     deferred: false
@@ -799,7 +799,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-099
     module: 17-labs-poc
-    screen: batch-results-upload
+    screen: 03-batch-results-upload
     slice: VS-17
     wave: 3
     deferred: false
@@ -807,7 +807,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-100
     module: 17-labs-poc
-    screen: result-queue
+    screen: 04-result-queue
     slice: VS-17
     wave: 3
     deferred: false
@@ -815,7 +815,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-101
     module: 18-corporate-wellness
-    screen: corporate-home
+    screen: 01-corporate-home
     slice: VS-18
     wave: 3
     deferred: false
@@ -823,7 +823,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-102
     module: 18-corporate-wellness
-    screen: camp-vitals-entry
+    screen: 02-camp-vitals-entry
     slice: VS-18
     wave: 3
     deferred: false
@@ -831,7 +831,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-103
     module: 18-corporate-wellness
-    screen: camp-summary-push
+    screen: 03-camp-summary-push
     slice: VS-18
     wave: 3
     deferred: false
@@ -839,7 +839,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-104
     module: 18-corporate-wellness
-    screen: occupational-flags
+    screen: 04-occupational-flags
     slice: VS-18
     wave: 3
     deferred: false
@@ -847,7 +847,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-105
     module: 19-mch-touchpoints
-    screen: mch-home
+    screen: 01-mch-home
     slice: VS-19
     wave: 3
     deferred: false
@@ -855,7 +855,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-106
     module: 19-mch-touchpoints
-    screen: anc-visit-entry
+    screen: 02-anc-visit-entry
     slice: VS-19
     wave: 3
     deferred: false
@@ -863,7 +863,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-107
     module: 19-mch-touchpoints
-    screen: pnc-visit-entry
+    screen: 03-pnc-visit-entry
     slice: VS-19
     wave: 3
     deferred: false
@@ -871,7 +871,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-108
     module: 19-mch-touchpoints
-    screen: immunisation-entry
+    screen: 04-immunisation-entry
     slice: VS-19
     wave: 3
     deferred: false
@@ -879,7 +879,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-109
     module: 19-mch-touchpoints
-    screen: nutrition-monitoring
+    screen: 05-nutrition-monitoring
     slice: VS-19
     wave: 3
     deferred: false
@@ -887,7 +887,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-110
     module: 20-ncd-gericare
-    screen: cohort-home
+    screen: 01-cohort-home
     slice: VS-20
     wave: 3
     deferred: false
@@ -895,7 +895,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-111
     module: 20-ncd-gericare
-    screen: cohort-visit-entry
+    screen: 02-cohort-visit-entry
     slice: VS-20
     wave: 3
     deferred: false
@@ -903,7 +903,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-112
     module: 20-ncd-gericare
-    screen: bp-screening-batch
+    screen: 03-bp-screening-batch
     slice: VS-20
     wave: 3
     deferred: false
@@ -911,7 +911,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-113
     module: 20-ncd-gericare
-    screen: stroke-risk-flags
+    screen: 04-stroke-risk-flags
     slice: VS-20
     wave: 3
     deferred: false
@@ -919,7 +919,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-114
     module: 21-hmis-dhis2
-    screen: hmis-home
+    screen: 01-hmis-home
     slice: VS-21
     wave: 3
     deferred: false
@@ -927,7 +927,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-115
     module: 21-hmis-dhis2
-    screen: dataset-mapping
+    screen: 02-dataset-mapping
     slice: VS-21
     wave: 3
     deferred: false
@@ -935,7 +935,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-116
     module: 21-hmis-dhis2
-    screen: aggregate-push-pull
+    screen: 03-aggregate-push-pull
     slice: VS-21
     wave: 3
     deferred: false
@@ -943,7 +943,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-117
     module: 21-hmis-dhis2
-    screen: hmis-audit
+    screen: 04-hmis-audit
     slice: VS-21
     wave: 3
     deferred: false
@@ -951,7 +951,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-118
     module: 22-community-events
-    screen: events-home
+    screen: 01-events-home
     slice: VS-22
     wave: 3
     deferred: false
@@ -959,7 +959,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-119
     module: 22-community-events
-    screen: outreach-event-log
+    screen: 02-outreach-event-log
     slice: VS-22
     wave: 3
     deferred: false
@@ -967,7 +967,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-120
     module: 22-community-events
-    screen: community-dialogue
+    screen: 03-community-dialogue
     slice: VS-22
     wave: 3
     deferred: false
@@ -975,7 +975,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-121
     module: 22-community-events
-    screen: participation-register
+    screen: 04-participation-register
     slice: VS-22
     wave: 3
     deferred: false
@@ -983,7 +983,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-122
     module: 04-facility-dashboard
-    screen: medicine-demand-forecast
+    screen: 08-medicine-demand-forecast
     slice: VS-04
     wave: 4
     deferred: true
@@ -991,7 +991,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-123
     module: 08-district-moh
-    screen: national-roll-up
+    screen: 05-national-roll-up
     slice: VS-08
     wave: 4
     deferred: true
@@ -999,7 +999,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-124
     module: 23-research-exports
-    screen: evidence-catalog
+    screen: 01-evidence-catalog
     slice: VS-23
     wave: 4
     deferred: false
@@ -1007,7 +1007,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-125
     module: 23-research-exports
-    screen: export-request
+    screen: 02-export-request
     slice: VS-23
     wave: 4
     deferred: false
@@ -1015,7 +1015,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-126
     module: 23-research-exports
-    screen: research-contribution-upload
+    screen: 03-research-contribution-upload
     slice: VS-23
     wave: 4
     deferred: false
@@ -1023,7 +1023,7 @@ screens:
     backend: pending  # pending | paired | none
   - seq: S-127
     module: 23-research-exports
-    screen: export-pending
+    screen: 04-export-pending
     slice: VS-23
     wave: 4
     deferred: false

@@ -1,0 +1,62 @@
+{
+  "title": "EMR / HMS connector",
+  "subtitle": "Secure ingest \u2014 does not replace EMR",
+  "kind": "dashboard",
+  "nav": "admin",
+  "layout": "connector-status",
+  "body_layouts": {
+    "mobile": "connector-status",
+    "tablet": "connector-status",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/06-emr-connector/01-connector-status",
+  "parent_route": "/06-emr-connector/01-connector-status",
+  "roles": [
+    "organisation-admin",
+    "privacy-admin"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "mvp",
+  "l10n_key_prefix": "06_emr_connector.01_connector_status",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Org",
+        "to": "/11-admin-consent/01-org-catchment"
+      },
+      {
+        "label": "Users",
+        "to": "/11-admin-consent/02-users-roles"
+      },
+      {
+        "label": "Consent",
+        "to": "/11-admin-consent/03-consent-privacy"
+      },
+      {
+        "label": "APIs",
+        "to": "/06-emr-connector/01-connector-status"
+      }
+    ],
+    "primary_action": null,
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

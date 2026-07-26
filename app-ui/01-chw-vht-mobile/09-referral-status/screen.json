@@ -1,0 +1,68 @@
+{
+  "title": "Referral sent",
+  "subtitle": "Track the household through facility care",
+  "kind": "detail",
+  "nav": "field",
+  "layout": "detail-action",
+  "body_layouts": {
+    "mobile": "detail-action",
+    "tablet": "detail-action",
+    "desktop": "detail-action"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "success",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden",
+    "success",
+    "conflict",
+    "offline"
+  ],
+  "route": "/01-chw-vht-mobile/09-referral-status",
+  "parent_route": "/01-chw-vht-mobile/01-worklist-home",
+  "roles": [
+    "chw",
+    "vht"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "mvp",
+  "l10n_key_prefix": "01_chw_vht_mobile.09_referral_status",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Worklist",
+        "to": "/01-chw-vht-mobile/01-worklist-home"
+      },
+      {
+        "label": "Alerts",
+        "to": "/01-chw-vht-mobile/10-alerts-inbox"
+      },
+      {
+        "label": "Sync",
+        "to": "/01-chw-vht-mobile/12-sync-status"
+      },
+      {
+        "label": "More",
+        "to": "/00-shared/09-notifications-center"
+      }
+    ],
+    "primary_action": {
+      "label": "Return to worklist",
+      "to": "/01-chw-vht-mobile/01-worklist-home"
+    },
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

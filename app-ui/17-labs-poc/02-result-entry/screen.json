@@ -1,0 +1,65 @@
+{
+  "title": "Result entry",
+  "subtitle": "Point-of-care / lab result \u2192 ingest",
+  "kind": "form",
+  "nav": "lab",
+  "layout": "form-capture",
+  "body_layouts": {
+    "mobile": "form-capture",
+    "tablet": "form-capture",
+    "desktop": "form-capture"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "error",
+    "success",
+    "offline",
+    "forbidden"
+  ],
+  "route": "/17-labs-poc/02-result-entry",
+  "parent_route": "/17-labs-poc/02-result-entry",
+  "roles": [
+    "lab-worker"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "phase-2",
+  "l10n_key_prefix": "17_labs_poc.02_result_entry",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Home",
+        "to": "/17-labs-poc/01-lab-home"
+      },
+      {
+        "label": "Results",
+        "to": "/17-labs-poc/02-result-entry"
+      },
+      {
+        "label": "Queue",
+        "to": "/17-labs-poc/04-result-queue"
+      },
+      {
+        "label": "Sync",
+        "to": "/17-labs-poc/03-batch-results-upload"
+      }
+    ],
+    "primary_action": {
+      "label": "Submit result",
+      "to": "/17-labs-poc/02-result-entry?state=success"
+    },
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

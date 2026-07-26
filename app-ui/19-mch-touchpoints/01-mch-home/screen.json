@@ -1,0 +1,64 @@
+{
+  "title": "MCH touchpoints home",
+  "subtitle": "ANC / PNC \u00b7 immunisation \u00b7 nutrition posts feed care signals",
+  "kind": "dashboard",
+  "nav": "mch",
+  "layout": "feeder-home",
+  "body_layouts": {
+    "mobile": "feeder-home",
+    "tablet": "feeder-home",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/19-mch-touchpoints/01-mch-home",
+  "parent_route": "/19-mch-touchpoints/01-mch-home",
+  "roles": [
+    "mch-worker"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "phase-2",
+  "l10n_key_prefix": "19_mch_touchpoints.01_mch_home",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Home",
+        "to": "/19-mch-touchpoints/01-mch-home"
+      },
+      {
+        "label": "ANC",
+        "to": "/19-mch-touchpoints/02-anc-visit-entry"
+      },
+      {
+        "label": "Immunise",
+        "to": "/19-mch-touchpoints/04-immunisation-entry"
+      },
+      {
+        "label": "Nutrition",
+        "to": "/19-mch-touchpoints/05-nutrition-monitoring"
+      }
+    ],
+    "primary_action": {
+      "label": "Open ANC register",
+      "to": "/19-mch-touchpoints/01-mch-home"
+    },
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

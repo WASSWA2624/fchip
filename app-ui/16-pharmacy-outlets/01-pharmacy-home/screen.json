@@ -1,0 +1,64 @@
+{
+  "title": "Pharmacy outlet home",
+  "subtitle": "Drug shops feed stock \u00b7 dispense \u00b7 complaints",
+  "kind": "dashboard",
+  "nav": "pharmacy",
+  "layout": "feeder-home",
+  "body_layouts": {
+    "mobile": "feeder-home",
+    "tablet": "feeder-home",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/16-pharmacy-outlets/01-pharmacy-home",
+  "parent_route": "/16-pharmacy-outlets/02-stock-levels-entry",
+  "roles": [
+    "pharmacy-outlet-worker"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "phase-2",
+  "l10n_key_prefix": "16_pharmacy_outlets.01_pharmacy_home",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Stock",
+        "to": "/16-pharmacy-outlets/02-stock-levels-entry"
+      },
+      {
+        "label": "Dispense",
+        "to": "/16-pharmacy-outlets/03-dispense-log"
+      },
+      {
+        "label": "Complaints",
+        "to": "/16-pharmacy-outlets/04-common-complaints"
+      },
+      {
+        "label": "Sync",
+        "to": "/16-pharmacy-outlets/05-prestock-ack"
+      }
+    ],
+    "primary_action": {
+      "label": "Update stock",
+      "to": "/16-pharmacy-outlets/02-stock-levels-entry"
+    },
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

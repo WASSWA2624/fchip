@@ -1,0 +1,64 @@
+{
+  "title": "School health home",
+  "subtitle": "Schools feed sessions \u00b7 screening \u00b7 absenteeism",
+  "kind": "dashboard",
+  "nav": "school",
+  "layout": "feeder-home",
+  "body_layouts": {
+    "mobile": "feeder-home",
+    "tablet": "feeder-home",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/15-schools-health/01-school-home",
+  "parent_route": "/15-schools-health/01-school-home",
+  "roles": [
+    "school-health-worker"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "phase-2",
+  "l10n_key_prefix": "15_schools_health.01_school_home",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Home",
+        "to": "/15-schools-health/01-school-home"
+      },
+      {
+        "label": "Session",
+        "to": "/15-schools-health/02-health-education-session"
+      },
+      {
+        "label": "Screen",
+        "to": "/15-schools-health/03-learner-screening-entry"
+      },
+      {
+        "label": "Sync",
+        "to": "/15-schools-health/05-school-sync-status"
+      }
+    ],
+    "primary_action": {
+      "label": "Log today\u2019s session",
+      "to": "/15-schools-health/01-school-home"
+    },
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

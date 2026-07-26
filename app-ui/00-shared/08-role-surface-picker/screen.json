@@ -1,0 +1,138 @@
+{
+  "title": "Choose your workspace",
+  "subtitle": "Consumers \u00b7 data feeders \u00b7 admin",
+  "kind": "list",
+  "nav": "auth",
+  "layout": "list-worklist",
+  "body_layouts": {
+    "mobile": "list-worklist",
+    "tablet": "list-worklist",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "auth-centered-card",
+    "tablet": "auth-centered-card",
+    "desktop": "auth-centered-card"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/00-shared/08-role-surface-picker",
+  "parent_route": "/00-shared/08-role-surface-picker",
+  "roles": [
+    "authenticated-user"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "shared",
+  "l10n_key_prefix": "00_shared.08_role_surface_picker",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [],
+    "primary_action": null,
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc",
+  "workspace_destinations": [
+    {
+      "workspace": "CHW / VHT mobile",
+      "to": "/01-chw-vht-mobile/01-worklist-home"
+    },
+    {
+      "workspace": "Caregiver mobile",
+      "to": "/09-community-caregiver/01-my-household"
+    },
+    {
+      "workspace": "Outreach planning",
+      "to": "/10-outreach-school-health/01-campaign-planner"
+    },
+    {
+      "workspace": "Cascade metrics",
+      "to": "/03-cascade-metrics/01-indicators-overview"
+    },
+    {
+      "workspace": "CHIS / livelihoods",
+      "to": "/13-chis-livelihoods/01-enrolment"
+    },
+    {
+      "workspace": "Facility dashboard",
+      "to": "/04-facility-dashboard/01-overview"
+    },
+    {
+      "workspace": "Referrals desk",
+      "to": "/05-referrals-desk/01-referral-queue"
+    },
+    {
+      "workspace": "EMR / HMS connector",
+      "to": "/06-emr-connector/01-connector-status"
+    },
+    {
+      "workspace": "Intelligence operations",
+      "to": "/02-intelligence/01-ingest-pipeline"
+    },
+    {
+      "workspace": "District / MoH",
+      "to": "/08-district-moh/01-population-map"
+    },
+    {
+      "workspace": "NGO / partner M&E",
+      "to": "/14-ngo-partner/01-programme-monitoring"
+    },
+    {
+      "workspace": "Research exports",
+      "to": "/23-research-exports/01-evidence-catalog"
+    },
+    {
+      "workspace": "Admin \u00b7 consent \u00b7 access",
+      "to": "/11-admin-consent/01-org-catchment"
+    },
+    {
+      "workspace": "School health",
+      "to": "/15-schools-health/01-school-home"
+    },
+    {
+      "workspace": "Pharmacy outlet",
+      "to": "/16-pharmacy-outlets/02-stock-levels-entry"
+    },
+    {
+      "workspace": "Lab / PoC",
+      "to": "/17-labs-poc/01-lab-home"
+    },
+    {
+      "workspace": "Corporate wellness",
+      "to": "/18-corporate-wellness/01-corporate-home"
+    },
+    {
+      "workspace": "MCH touchpoints",
+      "to": "/19-mch-touchpoints/01-mch-home"
+    },
+    {
+      "workspace": "NCD / Gericare",
+      "to": "/20-ncd-gericare/01-cohort-home"
+    },
+    {
+      "workspace": "HMIS / DHIS2",
+      "to": "/21-hmis-dhis2/01-hmis-home"
+    },
+    {
+      "workspace": "Community events",
+      "to": "/22-community-events/01-events-home"
+    },
+    {
+      "workspace": "Climate feeds",
+      "to": "/07-climate-feeds/01-climate-home"
+    },
+    {
+      "workspace": "Insurance insights",
+      "to": "/12-insurance-insights/01-prevention-overview"
+    }
+  ]
+}

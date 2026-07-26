@@ -341,8 +341,8 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `{seq}`:
 7. Map navigation:
    - Tabs: {tabs_txt}
    - Primary action: {primary_txt}
-   - Access denied → `{nav.get("access_denied", "/00-shared/access-denied")}`
-   - Not found → `{nav.get("not_found", "/00-shared/not-found")}`
+   - Access denied → `{nav.get("access_denied", "/00-shared/10-access-denied")}`
+   - Not found → `{nav.get("not_found", "/00-shared/11-not-found")}`
 
 ### Phase 2 — Flutter UI on fixtures (maximum reuse)
 

@@ -1,0 +1,65 @@
+{
+  "title": "Alerts inbox",
+  "subtitle": "Risk flags from intelligence core",
+  "kind": "list",
+  "nav": "field",
+  "layout": "list-worklist",
+  "body_layouts": {
+    "mobile": "list-worklist",
+    "tablet": "list-worklist",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/01-chw-vht-mobile/10-alerts-inbox",
+  "parent_route": "/01-chw-vht-mobile/10-alerts-inbox",
+  "roles": [
+    "chw",
+    "vht"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "mvp",
+  "l10n_key_prefix": "01_chw_vht_mobile.10_alerts_inbox",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Worklist",
+        "to": "/01-chw-vht-mobile/01-worklist-home"
+      },
+      {
+        "label": "Alerts",
+        "to": "/01-chw-vht-mobile/10-alerts-inbox"
+      },
+      {
+        "label": "Sync",
+        "to": "/01-chw-vht-mobile/12-sync-status"
+      },
+      {
+        "label": "More",
+        "to": "/00-shared/09-notifications-center"
+      }
+    ],
+    "primary_action": {
+      "label": "Open top alert",
+      "to": "/01-chw-vht-mobile/11-alert-follow-up"
+    },
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

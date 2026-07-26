@@ -1,0 +1,61 @@
+{
+  "title": "Notifications",
+  "subtitle": "Alerts across your surfaces",
+  "kind": "list",
+  "nav": "shared",
+  "layout": "list-worklist",
+  "body_layouts": {
+    "mobile": "list-worklist",
+    "tablet": "list-worklist",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/00-shared/09-notifications-center",
+  "parent_route": "/00-shared/09-notifications-center",
+  "roles": [
+    "authenticated-user"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "shared",
+  "l10n_key_prefix": "00_shared.09_notifications_center",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Workspaces",
+        "to": "/00-shared/08-role-surface-picker"
+      },
+      {
+        "label": "Notifications",
+        "to": "/00-shared/09-notifications-center"
+      },
+      {
+        "label": "Preferences",
+        "to": "/00-shared/12-preferences"
+      },
+      {
+        "label": "Sign out",
+        "to": "/00-shared/03-login"
+      }
+    ],
+    "primary_action": null,
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

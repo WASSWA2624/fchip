@@ -1,0 +1,45 @@
+{
+  "title": "Create account",
+  "subtitle": "Phone number + password only \u2014 no other auth",
+  "kind": "auth",
+  "nav": "auth",
+  "layout": "auth-centered-card",
+  "body_layouts": {
+    "mobile": "auth-centered-card",
+    "tablet": "auth-centered-card",
+    "desktop": "auth-centered-card"
+  },
+  "shells": {
+    "mobile": "auth-centered-card",
+    "tablet": "auth-centered-card",
+    "desktop": "auth-centered-card"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "error"
+  ],
+  "route": "/00-shared/02-create-account",
+  "parent_route": "/00-shared/08-role-surface-picker",
+  "roles": [
+    "authenticated-user"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "shared",
+  "l10n_key_prefix": "00_shared.02_create_account",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [],
+    "primary_action": {
+      "label": "Create account",
+      "to": "/00-shared/05-consent-first-onboarding"
+    },
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

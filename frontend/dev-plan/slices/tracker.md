@@ -39,7 +39,7 @@ Legacy HIS workspaces do **not** count as FCHIP delivery.
 | Field | Value |
 | --- | --- |
 | Next `seq` | `S-001` |
-| Screen | `00-shared/splash` |
+| Screen | `00-shared/01-splash` |
 | Slice | `VS-00` |
 | Active now | _(none)_ |
 
@@ -76,7 +76,7 @@ Update this table whenever a screen opens or closes.
 
 **Total:** 0 of 127 screens delivered.
 
-Wave 4 also covers deferred screens inside earlier slices: `04-facility-dashboard/medicine-demand-forecast` (`S-122`) and `08-district-moh/national-roll-up` (`S-123`). Keep them feature-gated until unlocked.
+Wave 4 also covers deferred screens inside earlier slices: `04-facility-dashboard/08-medicine-demand-forecast` (`S-122`) and `08-district-moh/05-national-roll-up` (`S-123`). Keep them feature-gated until unlocked.
 
 ## Journey proofs
 
@@ -89,4 +89,4 @@ Both MVP journeys must pass end to end before delivery moves past Wave 1.
 
 ## Screen records
 
-No screen records yet. Copy blocks from [`TEMPLATE.md`](./TEMPLATE.md) as screens open. Prefix each heading with the chronology `seq` (for example `### S-001 · VS-00 · 00-shared/splash`).
+No screen records yet. Copy blocks from [`TEMPLATE.md`](./TEMPLATE.md) as screens open. Prefix each heading with the chronology `seq` (for example `### S-001 · VS-00 · 00-shared/01-splash`).

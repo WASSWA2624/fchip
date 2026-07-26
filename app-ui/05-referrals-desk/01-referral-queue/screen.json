@@ -1,0 +1,68 @@
+{
+  "title": "Referrals desk",
+  "subtitle": "Facility referral queue (working desk)",
+  "kind": "queue",
+  "nav": "facility",
+  "layout": "queue-desk",
+  "body_layouts": {
+    "mobile": "queue-desk",
+    "tablet": "queue-desk",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden",
+    "success",
+    "conflict",
+    "offline"
+  ],
+  "route": "/05-referrals-desk/01-referral-queue",
+  "parent_route": "/05-referrals-desk/01-referral-queue",
+  "roles": [
+    "facility-clinician",
+    "facility-manager"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "mvp",
+  "l10n_key_prefix": "05_referrals_desk.01_referral_queue",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Overview",
+        "to": "/04-facility-dashboard/01-overview"
+      },
+      {
+        "label": "Map",
+        "to": "/04-facility-dashboard/02-catchment-map"
+      },
+      {
+        "label": "Referrals",
+        "to": "/05-referrals-desk/01-referral-queue"
+      },
+      {
+        "label": "Stock",
+        "to": "/04-facility-dashboard/04-stock-signal"
+      }
+    ],
+    "primary_action": {
+      "label": "Claim next",
+      "to": "/05-referrals-desk/03-referral-detail"
+    },
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

@@ -1,0 +1,68 @@
+{
+  "title": "Referral detail",
+  "subtitle": "Track completion \u00b7 link EMR outcome",
+  "kind": "detail",
+  "nav": "facility",
+  "layout": "detail-action",
+  "body_layouts": {
+    "mobile": "detail-action",
+    "tablet": "detail-action",
+    "desktop": "detail-action"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden",
+    "success",
+    "conflict",
+    "offline"
+  ],
+  "route": "/05-referrals-desk/03-referral-detail",
+  "parent_route": "/05-referrals-desk/01-referral-queue",
+  "roles": [
+    "facility-clinician",
+    "facility-manager"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "mvp",
+  "l10n_key_prefix": "05_referrals_desk.03_referral_detail",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Overview",
+        "to": "/04-facility-dashboard/01-overview"
+      },
+      {
+        "label": "Map",
+        "to": "/04-facility-dashboard/02-catchment-map"
+      },
+      {
+        "label": "Referrals",
+        "to": "/05-referrals-desk/01-referral-queue"
+      },
+      {
+        "label": "Stock",
+        "to": "/04-facility-dashboard/04-stock-signal"
+      }
+    ],
+    "primary_action": {
+      "label": "Mark completed",
+      "to": "/05-referrals-desk/04-outcome-feedback"
+    },
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

@@ -25,7 +25,7 @@ slices:
     backend_slice: VS-00
     status: not-started
     backend_paired: 0
-    screens: [splash, create-account, login, forgot-password, consent-first-onboarding, offline-pin-lock, session-locked, role-surface-picker, notifications-center, access-denied, not-found, preferences]
+    screens: [01-splash, 02-create-account, 03-login, 04-forgot-password, 05-consent-first-onboarding, 06-offline-pin-lock, 07-session-locked, 08-role-surface-picker, 09-notifications-center, 10-access-denied, 11-not-found, 12-preferences]
   - id: VS-01
     module: 01-chw-vht-mobile
     phase: mvp
@@ -33,7 +33,7 @@ slices:
     backend_slice: VS-01
     status: not-started
     backend_paired: 0
-    screens: [worklist-home, worklist-empty, worklist-loading, household-visit-form, symptoms-vitals, maternal-child-indicators, visit-saved, create-referral, referral-status, alerts-inbox, alert-follow-up, sync-status, sync-failed, sync-conflict]
+    screens: [01-worklist-home, 02-worklist-empty, 03-worklist-loading, 04-household-visit-form, 05-symptoms-vitals, 06-maternal-child-indicators, 07-visit-saved, 08-create-referral, 09-referral-status, 10-alerts-inbox, 11-alert-follow-up, 12-sync-status, 13-sync-failed, 14-sync-conflict]
   - id: VS-02
     module: 02-intelligence
     phase: mvp
@@ -41,7 +41,7 @@ slices:
     backend_slice: VS-02
     status: not-started
     backend_paired: 0
-    screens: [ingest-pipeline, feeder-health-board, gis-explorer, climate-fusion, ai-risk-scores, alerts-worklists-engine, clinical-support-guidance]
+    screens: [01-ingest-pipeline, 02-feeder-health-board, 03-gis-explorer, 04-climate-fusion, 05-ai-risk-scores, 06-alerts-worklists-engine, 07-clinical-support-guidance]
   - id: VS-03
     module: 03-cascade-metrics
     phase: mvp
@@ -49,7 +49,7 @@ slices:
     backend_slice: VS-03
     status: not-started
     backend_paired: 0
-    screens: [indicators-overview, gap-detection, partner-reports]
+    screens: [01-indicators-overview, 02-gap-detection, 03-partner-reports]
   - id: VS-04
     module: 04-facility-dashboard
     phase: mixed
@@ -57,8 +57,8 @@ slices:
     backend_slice: VS-04
     status: not-started
     backend_paired: 0
-    screens: [overview, catchment-map, open-referrals, stock-signal, outreach-priorities, clinical-share-confirm, manual-case-signal, medicine-demand-forecast]
-    deferred_screens: [medicine-demand-forecast]
+    screens: [01-overview, 02-catchment-map, 03-open-referrals, 04-stock-signal, 05-outreach-priorities, 06-clinical-share-confirm, 07-manual-case-signal, 08-medicine-demand-forecast]
+    deferred_screens: [08-medicine-demand-forecast]
   - id: VS-05
     module: 05-referrals-desk
     phase: mvp
@@ -66,7 +66,7 @@ slices:
     backend_slice: VS-05
     status: not-started
     backend_paired: 0
-    screens: [referral-queue, referral-queue-empty, referral-detail, outcome-feedback]
+    screens: [01-referral-queue, 02-referral-queue-empty, 03-referral-detail, 04-outcome-feedback]
   - id: VS-06
     module: 06-emr-connector
     phase: mvp
@@ -74,7 +74,7 @@ slices:
     backend_slice: VS-06
     status: not-started
     backend_paired: 0
-    screens: [connector-status, connector-degraded, api-scopes-setup, push-event-log, facility-onboarding]
+    screens: [01-connector-status, 02-connector-degraded, 03-api-scopes-setup, 04-push-event-log, 05-facility-onboarding]
   - id: VS-07
     module: 07-climate-feeds
     phase: mvp
@@ -82,7 +82,7 @@ slices:
     backend_slice: VS-07
     status: not-started
     backend_paired: 0
-    screens: [climate-home, rainfall-temperature, extremes-flood-heat, feed-config-audit]
+    screens: [01-climate-home, 02-rainfall-temperature, 03-extremes-flood-heat, 04-feed-config-audit]
   - id: VS-08
     module: 08-district-moh
     phase: mixed
@@ -90,8 +90,8 @@ slices:
     backend_slice: VS-08
     status: not-started
     backend_paired: 0
-    screens: [population-map, early-warnings, action-deploy, cascade-planning, national-roll-up]
-    deferred_screens: [national-roll-up]
+    screens: [01-population-map, 02-early-warnings, 03-action-deploy, 04-cascade-planning, 05-national-roll-up]
+    deferred_screens: [05-national-roll-up]
   - id: VS-09
     module: 09-community-caregiver
     phase: mvp
@@ -99,7 +99,7 @@ slices:
     backend_slice: VS-09
     status: not-started
     backend_paired: 0
-    screens: [my-household, self-report, guidance-hints, household-needs-capture]
+    screens: [01-my-household, 02-self-report, 03-guidance-hints, 04-household-needs-capture]
   - id: VS-10
     module: 10-outreach-school-health
     phase: mvp
@@ -107,7 +107,7 @@ slices:
     backend_slice: VS-10
     status: not-started
     backend_paired: 0
-    screens: [campaign-planner, session-log, coverage-map, screening-results-entry, home-visit-batch-upload]
+    screens: [01-campaign-planner, 02-session-log, 03-coverage-map, 04-screening-results-entry, 05-home-visit-batch-upload]
   - id: VS-11
     module: 11-admin-consent
     phase: mvp
@@ -115,7 +115,7 @@ slices:
     backend_slice: VS-11
     status: not-started
     backend_paired: 0
-    screens: [org-catchment, users-roles, consent-privacy, emr-api-access, feeder-party-registry]
+    screens: [01-org-catchment, 02-users-roles, 03-consent-privacy, 04-emr-api-access, 05-feeder-party-registry]
   - id: VS-12
     module: 12-insurance-insights
     phase: mvp
@@ -123,7 +123,7 @@ slices:
     backend_slice: VS-12
     status: not-started
     backend_paired: 0
-    screens: [prevention-overview, risk-cohort-insights, anonymised-trends]
+    screens: [01-prevention-overview, 02-risk-cohort-insights, 03-anonymised-trends]
   - id: VS-13
     module: 13-chis-livelihoods
     phase: phase-2
@@ -131,7 +131,7 @@ slices:
     backend_slice: VS-13
     status: not-started
     backend_paired: 0
-    screens: [enrolment, contributions, claims-access, iga-participation-entry]
+    screens: [01-enrolment, 02-contributions, 03-claims-access, 04-iga-participation-entry]
   - id: VS-14
     module: 14-ngo-partner
     phase: phase-2
@@ -139,7 +139,7 @@ slices:
     backend_slice: VS-14
     status: not-started
     backend_paired: 0
-    screens: [programme-monitoring, impact-evidence, training-skills-analytics, field-dataset-upload, partner-indicator-entry]
+    screens: [01-programme-monitoring, 02-impact-evidence, 03-training-skills-analytics, 04-field-dataset-upload, 05-partner-indicator-entry]
   - id: VS-15
     module: 15-schools-health
     phase: phase-2
@@ -147,7 +147,7 @@ slices:
     backend_slice: VS-15
     status: not-started
     backend_paired: 0
-    screens: [school-home, health-education-session, learner-screening-entry, absenteeism-wellness, school-sync-status]
+    screens: [01-school-home, 02-health-education-session, 03-learner-screening-entry, 04-absenteeism-wellness, 05-school-sync-status]
   - id: VS-16
     module: 16-pharmacy-outlets
     phase: phase-2
@@ -155,7 +155,7 @@ slices:
     backend_slice: VS-16
     status: not-started
     backend_paired: 0
-    screens: [pharmacy-home, stock-levels-entry, dispense-log, common-complaints, prestock-ack]
+    screens: [01-pharmacy-home, 02-stock-levels-entry, 03-dispense-log, 04-common-complaints, 05-prestock-ack]
   - id: VS-17
     module: 17-labs-poc
     phase: phase-2
@@ -163,7 +163,7 @@ slices:
     backend_slice: VS-17
     status: not-started
     backend_paired: 0
-    screens: [lab-home, result-entry, batch-results-upload, result-queue]
+    screens: [01-lab-home, 02-result-entry, 03-batch-results-upload, 04-result-queue]
   - id: VS-18
     module: 18-corporate-wellness
     phase: phase-2
@@ -171,7 +171,7 @@ slices:
     backend_slice: VS-18
     status: not-started
     backend_paired: 0
-    screens: [corporate-home, camp-vitals-entry, camp-summary-push, occupational-flags]
+    screens: [01-corporate-home, 02-camp-vitals-entry, 03-camp-summary-push, 04-occupational-flags]
   - id: VS-19
     module: 19-mch-touchpoints
     phase: phase-2
@@ -179,7 +179,7 @@ slices:
     backend_slice: VS-19
     status: not-started
     backend_paired: 0
-    screens: [mch-home, anc-visit-entry, pnc-visit-entry, immunisation-entry, nutrition-monitoring]
+    screens: [01-mch-home, 02-anc-visit-entry, 03-pnc-visit-entry, 04-immunisation-entry, 05-nutrition-monitoring]
   - id: VS-20
     module: 20-ncd-gericare
     phase: phase-2
@@ -187,7 +187,7 @@ slices:
     backend_slice: VS-20
     status: not-started
     backend_paired: 0
-    screens: [cohort-home, cohort-visit-entry, bp-screening-batch, stroke-risk-flags]
+    screens: [01-cohort-home, 02-cohort-visit-entry, 03-bp-screening-batch, 04-stroke-risk-flags]
   - id: VS-21
     module: 21-hmis-dhis2
     phase: phase-2
@@ -195,7 +195,7 @@ slices:
     backend_slice: VS-21
     status: not-started
     backend_paired: 0
-    screens: [hmis-home, dataset-mapping, aggregate-push-pull, hmis-audit]
+    screens: [01-hmis-home, 02-dataset-mapping, 03-aggregate-push-pull, 04-hmis-audit]
   - id: VS-22
     module: 22-community-events
     phase: phase-2
@@ -203,7 +203,7 @@ slices:
     backend_slice: VS-22
     status: not-started
     backend_paired: 0
-    screens: [events-home, outreach-event-log, community-dialogue, participation-register]
+    screens: [01-events-home, 02-outreach-event-log, 03-community-dialogue, 04-participation-register]
   - id: VS-23
     module: 23-research-exports
     phase: phase-4
@@ -211,4 +211,4 @@ slices:
     backend_slice: VS-23
     status: not-started
     backend_paired: 0
-    screens: [evidence-catalog, export-request, research-contribution-upload, export-pending]
+    screens: [01-evidence-catalog, 02-export-request, 03-research-contribution-upload, 04-export-pending]

@@ -1,0 +1,65 @@
+{
+  "title": "Outreach event log",
+  "subtitle": "Community outreach events \u2192 ingest",
+  "kind": "form",
+  "nav": "community",
+  "layout": "form-capture",
+  "body_layouts": {
+    "mobile": "form-capture",
+    "tablet": "form-capture",
+    "desktop": "form-capture"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "error",
+    "success",
+    "offline",
+    "forbidden"
+  ],
+  "route": "/22-community-events/02-outreach-event-log",
+  "parent_route": "/22-community-events/02-outreach-event-log",
+  "roles": [
+    "community-programme-worker"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "phase-2",
+  "l10n_key_prefix": "22_community_events.02_outreach_event_log",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Home",
+        "to": "/22-community-events/01-events-home"
+      },
+      {
+        "label": "Events",
+        "to": "/22-community-events/02-outreach-event-log"
+      },
+      {
+        "label": "Dialogue",
+        "to": "/22-community-events/03-community-dialogue"
+      },
+      {
+        "label": "Register",
+        "to": "/22-community-events/04-participation-register"
+      }
+    ],
+    "primary_action": {
+      "label": "Save event",
+      "to": "/22-community-events/02-outreach-event-log?state=success"
+    },
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

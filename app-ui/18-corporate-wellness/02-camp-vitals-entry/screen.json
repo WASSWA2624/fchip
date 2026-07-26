@@ -1,0 +1,65 @@
+{
+  "title": "Camp vitals entry",
+  "subtitle": "BP \u00b7 BMI \u00b7 glucose from corporate / school wellness",
+  "kind": "form",
+  "nav": "corporate",
+  "layout": "form-capture",
+  "body_layouts": {
+    "mobile": "form-capture",
+    "tablet": "form-capture",
+    "desktop": "form-capture"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
+  "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "error",
+    "success",
+    "offline",
+    "forbidden"
+  ],
+  "route": "/18-corporate-wellness/02-camp-vitals-entry",
+  "parent_route": "/18-corporate-wellness/02-camp-vitals-entry",
+  "roles": [
+    "wellness-programme-worker"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "phase-2",
+  "l10n_key_prefix": "18_corporate_wellness.02_camp_vitals_entry",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Home",
+        "to": "/18-corporate-wellness/01-corporate-home"
+      },
+      {
+        "label": "Vitals",
+        "to": "/18-corporate-wellness/02-camp-vitals-entry"
+      },
+      {
+        "label": "Summary",
+        "to": "/18-corporate-wellness/03-camp-summary-push"
+      },
+      {
+        "label": "Flags",
+        "to": "/18-corporate-wellness/04-occupational-flags"
+      }
+    ],
+    "primary_action": {
+      "label": "Save vitals",
+      "to": "/18-corporate-wellness/02-camp-vitals-entry?state=success"
+    },
+    "access_denied": "/00-shared/10-access-denied",
+    "not_found": "/00-shared/11-not-found"
+  },
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

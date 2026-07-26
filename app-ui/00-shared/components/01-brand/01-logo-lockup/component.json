@@ -2,7 +2,7 @@
   "title": "Logo lockup",
   "category": "01-brand",
   "slug": "01-logo-lockup",
-  "purpose": "FCHIP mark from frontend/assets/logos for headers and auth",
+  "purpose": "Logo left \u00b7 FCHIP right \u00b7 slogan under FCHIP (space-aware)",
   "used_by": [
     "all shells",
     "splash",

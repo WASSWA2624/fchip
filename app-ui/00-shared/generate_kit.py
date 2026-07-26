@@ -20,7 +20,7 @@ COMPONENTS = ROOT / "components"
 LAYOUTS = ROOT / "layouts"
 
 sys.path.insert(0, str(ROOT.parent))
-from branding import LOGO_MARK, LOGO_SPLASH, paste_logo, paste_logo_centered
+from branding import LOGO_SPLASH, SLOGAN, draw_brand_lockup
 from ui_primitives import C, DARK_C, SIZES, font, rr, tx
 
 # Compact specimen canvas for isolated components
@@ -50,17 +50,28 @@ def specimen_frame(bp: str, title: str, subtitle: str) -> tuple[Image.Image, Ima
 # --- primitive drawers used by components & layouts ---
 
 
-def draw_app_bar(img, draw, x0, y0, x1, y1, title="FCHIP", right="Your health, our mission.", *, brand=False):
+def draw_app_bar(img, draw, x0, y0, x1, y1, title="FCHIP", *, brand=False):
     draw.rectangle([x0, y0, x1, y1], fill=C["primary"])
     mid_y = (y0 + y1) / 2
+    bar_h = int(y1 - y0)
+    bar_w = int(x1 - x0)
     if brand or title == "FCHIP":
-        mark_h = max(24, int(y1 - y0) - 16)
-        lw, _ = paste_logo(img, (x0 + 16, mid_y), max_w=mark_h, max_h=mark_h, tint=None, anchor="lm")
-        if title and title != "FCHIP":
-            tx(draw, (x0 + 24 + lw, mid_y), title, size=14, bold=True, fill=C["on_primary"], anchor="lm")
+        # App bar is short: logo + FCHIP; slogan only when height allows.
+        draw_brand_lockup(
+            img,
+            draw,
+            (x0 + 16, mid_y),
+            max_w=min(280, bar_w - 32),
+            max_h=bar_h - 12,
+            tint=None,
+            knockout_black=False,
+            title_fill=C["on_primary"],
+            slogan_fill=(210, 235, 236),
+            mode="full" if bar_h >= 60 else "wordmark",
+            anchor="lm",
+        )
     else:
         tx(draw, (x0 + 16, mid_y), title, size=14, bold=True, fill=C["on_primary"], anchor="lm")
-    tx(draw, (x1 - 16, mid_y), right, size=10, fill=(210, 235, 236), anchor="rm")
 
 
 def draw_bottom_nav(draw, x0, y0, x1, y1, items: list[str], active=0):
@@ -83,14 +94,39 @@ def draw_bottom_nav(draw, x0, y0, x1, y1, items: list[str], active=0):
 
 def draw_side_nav(img, draw, x0, y0, x1, y1, items: list[str], active=0):
     draw.rectangle([x0, y0, x1, y1], fill=C["chrome"])
-    compact = (x1 - x0) < 120
+    nav_w = int(x1 - x0)
+    compact = nav_w < 120
     if compact:
-        paste_logo_centered(img, (x0 + x1) / 2, y0 + 36, max_w=36, max_h=36, tint=None)
+        draw_brand_lockup(
+            img,
+            draw,
+            ((x0 + x1) / 2, y0 + 36),
+            max_w=nav_w - 16,
+            max_h=40,
+            tint=None,
+            knockout_black=False,
+            title_fill=C["white"],
+            slogan_fill=(160, 190, 194),
+            mode="mark",
+            anchor="mm",
+        )
+        brand_bottom = y0 + 90
     else:
-        paste_logo(img, (x0 + 20, y0 + 18), max_w=40, max_h=40, tint=None, anchor="lt")
-        tx(draw, (x0 + 68, y0 + 28), "FCHIP", size=14, bold=True, fill=C["white"], anchor="lm")
-        tx(draw, (x0 + 20, y0 + 68), "Community Health\nIntelligence Platform", size=10, fill=(160, 190, 194))
-    y = y0 + (90 if compact else 110)
+        _, bh, _ = draw_brand_lockup(
+            img,
+            draw,
+            (x0 + 16, y0 + 18),
+            max_w=nav_w - 32,
+            max_h=72,
+            tint=None,
+            knockout_black=False,
+            title_fill=C["white"],
+            slogan_fill=(160, 190, 194),
+            mode="full",
+            anchor="lt",
+        )
+        brand_bottom = y0 + 18 + bh + 20
+    y = brand_bottom
     for i, item in enumerate(items):
         fill = C["accent"] if i == active else (32, 54, 60)
         rr(draw, (x0 + 12, y, x1 - 12, y + 38), fill, radius=10)
@@ -163,10 +199,10 @@ COMPONENTS_CATALOG: list[Component] = [
         "01-brand",
         "01-logo-lockup",
         "Logo lockup",
-        "FCHIP mark from frontend/assets/logos for headers and auth",
+        "Logo left · FCHIP right · slogan under FCHIP (space-aware)",
         ["all shells", "splash", "login"],
     ),
-    Component("01-brand", "02-slogan-line", "Slogan line", "Your health, our mission.", ["top app bar", "auth", "cover"]),
+    Component("01-brand", "02-slogan-line", "Slogan line", SLOGAN, ["top app bar", "auth", "cover"]),
     Component("01-brand", "03-master-loop-badge", "Master loop badge", "CAPTURE → FUSE → PREDICT → ALERT → ACT → LEARN", ["splash", "onboarding"]),
     Component("01-brand", "04-cascade-footer", "Cascade footer", "Cascade Data & Feedback cue", ["desktop side nav"]),
     # 02-buttons
@@ -193,7 +229,7 @@ COMPONENTS_CATALOG: list[Component] = [
     Component("05-forms", "04-file-upload-field", "File upload field", "Batch / dataset upload cue", ["NGO", "lab batch", "HMIS"]),
     Component("05-forms", "05-select-field", "Select field", "Single-choice shell", ["urgency", "facility picker"]),
     # 06-navigation
-    Component("06-navigation", "01-top-app-bar", "Top app bar", "Brand + slogan / screen title", ["all surfaces"]),
+    Component("06-navigation", "01-top-app-bar", "Top app bar", "Brand lockup (logo · FCHIP · slogan by space)", ["all surfaces"]),
     Component("06-navigation", "02-bottom-nav-field", "Bottom nav · field", "CHW tabs", ["01"]),
     Component("06-navigation", "03-bottom-nav-caregiver", "Bottom nav · caregiver", "Home · Report · Guidance · More", ["02"]),
     Component("06-navigation", "04-bottom-nav-feeder", "Bottom nav · feeder", "School / pharmacy / lab / MCH tabs", ["14–19", "21"]),
@@ -223,11 +259,47 @@ def render_component(comp: Component, bp: str) -> Image.Image:
     slug = comp.slug
 
     if slug == "01-logo-lockup":
-        paste_logo(img, (x, y + 8), name=LOGO_MARK, max_w=72, max_h=72, tint=C["primary"], anchor="lt")
-        tx(draw, (x + 88, y + 28), "FCHIP", size=28, bold=True, fill=C["primary"], anchor="lm")
-        tx(draw, (x + 88, y + 58), "Community Health Intelligence Platform", size=12, fill=C["muted"], anchor="lm")
+        # Show full lockup, then compact variants so space rules are visible.
+        draw_brand_lockup(
+            img,
+            draw,
+            (x, y + 8),
+            max_w=min(w, 420),
+            max_h=88,
+            tint=C["primary"],
+            title_fill=C["primary"],
+            slogan_fill=C["muted"],
+            mode="full",
+            anchor="lt",
+        )
+        tx(draw, (x, y + 110), "Wordmark (tight height)", size=11, fill=C["muted"])
+        draw_brand_lockup(
+            img,
+            draw,
+            (x, y + 128),
+            max_w=min(w, 220),
+            max_h=40,
+            tint=C["primary"],
+            title_fill=C["primary"],
+            slogan_fill=C["muted"],
+            mode="wordmark",
+            anchor="lt",
+        )
+        tx(draw, (x, y + 180), "Mark only (narrow rail)", size=11, fill=C["muted"])
+        draw_brand_lockup(
+            img,
+            draw,
+            (x, y + 198),
+            max_w=48,
+            max_h=40,
+            tint=C["primary"],
+            title_fill=C["primary"],
+            slogan_fill=C["muted"],
+            mode="mark",
+            anchor="lt",
+        )
     elif slug == "02-slogan-line":
-        tx(draw, (x, y + 24), "Your health, our mission.", size=20, bold=True, fill=C["primary"])
+        tx(draw, (x, y + 24), SLOGAN, size=20, bold=True, fill=C["primary"])
         tx(draw, (x, y + 56), "Obulamu eri Bonna · Afya kwa Wote · Oburamu bwa Boona", size=11, fill=C["muted"])
     elif slug == "03-master-loop-badge":
         rr(draw, (x, y, x1, y + 90), C["primary_soft"], radius=16)
@@ -542,7 +614,19 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
         }.get(slug, ["Home", "Map", "Metrics", "More"])
         if bp == "tablet":
             draw.rectangle([0, 0, left, h], fill=C["chrome"])
-            paste_logo_centered(img, left / 2, 36, max_w=36, max_h=36, tint=None)
+            draw_brand_lockup(
+                img,
+                draw,
+                (left / 2, 36),
+                max_w=left - 16,
+                max_h=40,
+                tint=None,
+                knockout_black=False,
+                title_fill=C["white"],
+                slogan_fill=(160, 190, 194),
+                mode="mark",
+                anchor="mm",
+            )
             nav_y = 110
             for index, item in enumerate(items):
                 rr(
@@ -559,7 +643,7 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
     elif slug == "01-auth-centered-card":
         draw_app_bar(img, draw, 0, 0, w, top, brand=True)
     else:
-        draw_app_bar(img, draw, 0, 0, w, top)
+        draw_app_bar(img, draw, 0, 0, w, top, brand=True)
         if bp == "mobile":
             bottom_nav_h = 72
             nav_items = {
@@ -592,8 +676,19 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
         cx = left + (w - left - card_w) / 2
         cy = top + (60 if bp != "mobile" else 36)
         rr(draw, (cx, cy, cx + card_w, cy + 420), C["surface"], radius=20, outline=C["line"])
-        paste_logo_centered(img, cx + card_w / 2, cy + 56, name=LOGO_SPLASH, max_w=72, max_h=72, tint=C["primary"])
-        tx(draw, (cx + card_w / 2, cy + 108), "Your health, our mission.", size=13, fill=C["muted"], anchor="mm")
+        draw_brand_lockup(
+            img,
+            draw,
+            (cx + card_w / 2, cy + 72),
+            max_w=card_w - 48,
+            max_h=96,
+            name=LOGO_SPLASH,
+            tint=C["primary"],
+            title_fill=C["primary"],
+            slogan_fill=C["muted"],
+            mode="full",
+            anchor="mm",
+        )
         rr(draw, (cx + 36, cy + 140, cx + card_w - 36, cy + 230), C["primary_soft"], radius=14)
         tx(
             draw,

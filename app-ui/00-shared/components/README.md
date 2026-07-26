@@ -11,7 +11,7 @@ Dark specimens use the same filename with `-dark` before `.png`.
 
 | Component | Purpose | Specimens |
 | --- | --- | --- |
-| **Logo lockup** (`01-logo-lockup`) | FCHIP mark from frontend/assets/logos for headers and auth | [m](01-brand/01-logo-lockup/mobile.png) · [t](01-brand/01-logo-lockup/tablet.png) · [d](01-brand/01-logo-lockup/desktop.png) |
+| **Logo lockup** (`01-logo-lockup`) | Logo left · FCHIP right · slogan under FCHIP (space-aware) | [m](01-brand/01-logo-lockup/mobile.png) · [t](01-brand/01-logo-lockup/tablet.png) · [d](01-brand/01-logo-lockup/desktop.png) |
 | **Slogan line** (`02-slogan-line`) | Your health, our mission. | [m](01-brand/02-slogan-line/mobile.png) · [t](01-brand/02-slogan-line/tablet.png) · [d](01-brand/02-slogan-line/desktop.png) |
 | **Master loop badge** (`03-master-loop-badge`) | CAPTURE → FUSE → PREDICT → ALERT → ACT → LEARN | [m](01-brand/03-master-loop-badge/mobile.png) · [t](01-brand/03-master-loop-badge/tablet.png) · [d](01-brand/03-master-loop-badge/desktop.png) |
 | **Cascade footer** (`04-cascade-footer`) | Cascade Data & Feedback cue | [m](01-brand/04-cascade-footer/mobile.png) · [t](01-brand/04-cascade-footer/tablet.png) · [d](01-brand/04-cascade-footer/desktop.png) |
@@ -59,7 +59,7 @@ Dark specimens use the same filename with `-dark` before `.png`.
 
 | Component | Purpose | Specimens |
 | --- | --- | --- |
-| **Top app bar** (`01-top-app-bar`) | Brand + slogan / screen title | [m](06-navigation/01-top-app-bar/mobile.png) · [t](06-navigation/01-top-app-bar/tablet.png) · [d](06-navigation/01-top-app-bar/desktop.png) |
+| **Top app bar** (`01-top-app-bar`) | Brand lockup (logo · FCHIP · slogan by space) | [m](06-navigation/01-top-app-bar/mobile.png) · [t](06-navigation/01-top-app-bar/tablet.png) · [d](06-navigation/01-top-app-bar/desktop.png) |
 | **Bottom nav · field** (`02-bottom-nav-field`) | CHW tabs | [m](06-navigation/02-bottom-nav-field/mobile.png) · [t](06-navigation/02-bottom-nav-field/tablet.png) · [d](06-navigation/02-bottom-nav-field/desktop.png) |
 | **Bottom nav · caregiver** (`03-bottom-nav-caregiver`) | Home · Report · Guidance · More | [m](06-navigation/03-bottom-nav-caregiver/mobile.png) · [t](06-navigation/03-bottom-nav-caregiver/tablet.png) · [d](06-navigation/03-bottom-nav-caregiver/desktop.png) |
 | **Bottom nav · feeder** (`04-bottom-nav-feeder`) | School / pharmacy / lab / MCH tabs | [m](06-navigation/04-bottom-nav-feeder/mobile.png) · [t](06-navigation/04-bottom-nav-feeder/tablet.png) · [d](06-navigation/04-bottom-nav-feeder/desktop.png) |

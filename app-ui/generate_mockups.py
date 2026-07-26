@@ -14,7 +14,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
-from branding import LOGO_MARK, LOGO_SPLASH, paste_logo, paste_logo_centered
+from branding import LOGO_SPLASH, SLOGAN, draw_brand_lockup
 from ui_primitives import C, DARK_C, SIZES, font, rr as round_rect, tx as text, wrap
 
 ROOT = Path(__file__).resolve().parent
@@ -2330,26 +2330,25 @@ def draw_header(img, draw, w, h, screen: Screen, breakpoint: str, content_left: 
     bar_h = 56 if breakpoint != "desktop" else 64
     draw.rectangle([content_left, 0, w, bar_h], fill=C["primary"])
     mid_y = bar_h // 2
-    if content_left == 0 and screen.nav == "auth":
-        mark_h = bar_h - 16
-        paste_logo(img, (content_left + 16, mid_y), max_w=mark_h, max_h=mark_h, tint=None, anchor="lm")
+    bar_w = w - content_left
+    if content_left == 0:
+        # Full-width chrome: brand lockup (slogan under FCHIP when bar is tall enough).
+        draw_brand_lockup(
+            img,
+            draw,
+            (16, mid_y),
+            max_w=min(320, bar_w - 32),
+            max_h=bar_h - 12,
+            tint=None,
+            knockout_black=False,
+            title_fill=C["on_primary"],
+            slogan_fill=(210, 235, 236),
+            mode="full" if bar_h >= 60 else "wordmark",
+            anchor="lm",
+        )
     else:
-        label = screen.title if content_left else "FCHIP"
-        if not content_left:
-            mark_h = bar_h - 20
-            lw, _ = paste_logo(img, (16, mid_y), max_w=mark_h, max_h=mark_h, tint=None, anchor="lm")
-            text(draw, (24 + lw, mid_y), label, size=16, bold=True, fill=C["on_primary"], anchor="lm")
-        else:
-            text(draw, (content_left + 16, mid_y), label, size=16, bold=True, fill=C["on_primary"], anchor="lm")
-    right = "Your health, our mission."
-    text(
-        draw,
-        (w - 16, mid_y),
-        right,
-        size=11,
-        fill=(210, 235, 236),
-        anchor="rm",
-    )
+        # Side nav already carries the brand — show the screen title here.
+        text(draw, (content_left + 16, mid_y), screen.title, size=16, bold=True, fill=C["on_primary"], anchor="lm")
     return bar_h
 
 
@@ -2360,12 +2359,36 @@ def draw_side_nav(img, draw, screen: Screen, breakpoint: str) -> int:
     sw = 76 if compact else 220
     draw.rectangle([0, 0, sw, img.height], fill=C["chrome"])
     if compact:
-        paste_logo_centered(img, sw / 2, 36, max_w=36, max_h=36, tint=None)
+        draw_brand_lockup(
+            img,
+            draw,
+            (sw / 2, 36),
+            max_w=sw - 16,
+            max_h=40,
+            tint=None,
+            knockout_black=False,
+            title_fill=C["white"],
+            slogan_fill=(160, 190, 194),
+            mode="mark",
+            anchor="mm",
+        )
+        brand_bottom = 90
     else:
-        paste_logo(img, (20, 16), max_w=40, max_h=40, tint=None, anchor="lt")
-        text(draw, (68, 28), "FCHIP", size=14, bold=True, fill=C["white"], anchor="lm")
-        text(draw, (24, 68), "Community Health\nIntelligence Platform", size=11, fill=(160, 190, 194))
-    y = 110
+        _, bh, _ = draw_brand_lockup(
+            img,
+            draw,
+            (16, 18),
+            max_w=sw - 32,
+            max_h=72,
+            tint=None,
+            knockout_black=False,
+            title_fill=C["white"],
+            slogan_fill=(160, 190, 194),
+            mode="full",
+            anchor="lt",
+        )
+        brand_bottom = 18 + bh + 20
+    y = brand_bottom
     current_parent = parent_route(screen)
     routes = NAV_ROUTES.get(screen.nav, [])
     for index, item in enumerate(NAV.get(screen.nav, [])):
@@ -2536,23 +2559,29 @@ def render_screen(screen: Screen, breakpoint: str) -> Image.Image:
         card_h = min(card_h, h - y - 24)
         round_rect(draw, (card_x, y, card_x + card_w, y + card_h), C["surface"], radius=20, outline=C["line"])
         is_splash = screen.slug == "01-splash"
-        paste_logo_centered(
+        lockup_h = 96 if is_splash else 72
+        _, bh, _ = draw_brand_lockup(
             img,
-            card_x + card_w / 2,
-            y + (56 if is_splash else 44),
-            name=LOGO_SPLASH if is_splash else LOGO_MARK,
-            max_w=88 if is_splash else 48,
-            max_h=88 if is_splash else 48,
+            draw,
+            (card_x + card_w / 2, y + (56 if is_splash else 44)),
+            max_w=card_w - 48,
+            max_h=lockup_h,
+            name=LOGO_SPLASH if is_splash else "logo.png",
             tint=C["primary"],
+            title_fill=C["primary"],
+            slogan_fill=C["muted"],
+            mode="full",
+            anchor="mm",
         )
-        if is_splash or screen.title == "FCHIP":
-            title_y = y + 112
-        else:
-            text(draw, (card_x + card_w / 2, y + 84), screen.title, size=22, bold=True, fill=C["primary"], anchor="mm")
-            title_y = y + 112
-        for i, line in enumerate(wrap(draw, screen.subtitle, int(card_w - 48), 12)[:2]):
+        title_y = y + (56 if is_splash else 44) + bh / 2 + 16
+        if not (is_splash or screen.title == "FCHIP"):
+            text(draw, (card_x + card_w / 2, title_y), screen.title, size=22, bold=True, fill=C["primary"], anchor="mm")
+            title_y += 28
+        # Avoid repeating the slogan when the brand lockup already shows it.
+        subtitle = "" if screen.subtitle.strip().rstrip(".") == SLOGAN.rstrip(".") else screen.subtitle
+        for i, line in enumerate(wrap(draw, subtitle, int(card_w - 48), 12)[:2] if subtitle else []):
             text(draw, (card_x + card_w / 2, title_y + i * 16), line, size=12, fill=C["muted"], anchor="mm")
-        fy = title_y + 40
+        fy = title_y + (40 if subtitle else 20)
         if screen.note and not is_splash:
             for i, line in enumerate(note_lines[:2]):
                 text(draw, (card_x + card_w / 2, fy + i * 16), line, size=11, fill=C["warn"], anchor="mm")

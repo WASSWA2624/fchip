@@ -27,6 +27,8 @@ SLOGAN = "Your health, our mission."
 
 # Product primary teal — used when the mark sits on a light surface.
 PRIMARY_TINT = (0, 109, 119)
+# Light mark for dark chrome (app bar / side nav).
+CHROME_TINT = (255, 255, 255)
 
 
 @lru_cache(maxsize=8)
@@ -53,10 +55,27 @@ def _knockout_near_black(name: str, threshold: int = 28) -> Image.Image:
     return Image.merge("RGBA", (r, g, b, new_a))
 
 
+@lru_cache(maxsize=8)
+def _trimmed_logo(name: str, knockout_black: bool = True) -> Image.Image:
+    """Crop to the opaque content box so mark sizing matches visual weight."""
+    src = _knockout_near_black(name) if knockout_black else load_logo(name)
+    bbox = src.getbbox()
+    if not bbox:
+        return src
+    left, top, right, bottom = bbox
+    # Keep a slim breathing margin (~2%) so thin network lines are not clipped.
+    pad = max(2, int(max(right - left, bottom - top) * 0.02))
+    left = max(0, left - pad)
+    top = max(0, top - pad)
+    right = min(src.width, right + pad)
+    bottom = min(src.height, bottom + pad)
+    return src.crop((left, top, right, bottom))
+
+
 @lru_cache(maxsize=16)
 def tinted_logo(name: str = LOGO_MARK, color: tuple[int, int, int] = PRIMARY_TINT) -> Image.Image:
     """Recolor opaque logo pixels while keeping the alpha mask."""
-    src = _knockout_near_black(name)
+    src = _trimmed_logo(name, knockout_black=True)
     alpha = src.split()[3]
     solid = Image.new("RGBA", src.size, (*color, 255))
     solid.putalpha(alpha)
@@ -73,10 +92,8 @@ def fit_logo(
 ) -> Image.Image:
     if tint is not None:
         img = tinted_logo(name, tint).copy()
-    elif knockout_black:
-        img = _knockout_near_black(name).copy()
     else:
-        img = load_logo(name).copy()
+        img = _trimmed_logo(name, knockout_black=knockout_black).copy()
     img.thumbnail((max(1, max_w), max(1, max_h)), Image.Resampling.LANCZOS)
     return img
 
@@ -95,6 +112,7 @@ def paste_logo(
     """Paste a fitted logo onto `canvas`. Returns pasted size (w, h).
 
     Pass ``tint=None`` to keep the asset colors (for dark chrome).
+    Prefer a light tint on dark chrome so the lockup does not double-print FCHIP.
     """
     logo = fit_logo(name, max_w, max_h, tint=tint, knockout_black=knockout_black)
     lw, lh = logo.size
@@ -147,12 +165,21 @@ def _paste_rgba(canvas: Image.Image, layer: Image.Image, xy: tuple[int, int]) ->
 
 
 def resolve_lockup_mode(max_w: int, max_h: int, mode: str | None = None) -> str:
-    """Pick mark | wordmark | full from available space."""
+    """Pick mark | wordmark | full from available space.
+
+    Full (logo + FCHIP + slogan) needs enough height for a calm type stack.
+    Short chrome (app bars ~56–64px) stays on wordmark unless height is generous.
+    """
     if mode in {"mark", "wordmark", "full"}:
+        # Still demote an explicit "full" when the box is clearly too short.
+        if mode == "full" and max_h < 52:
+            return "wordmark" if max_w >= 96 else "mark"
+        if mode == "wordmark" and (max_h < 28 or max_w < 72):
+            return "mark"
         return mode
     if max_h < 36 or max_w < 48:
         return "mark"
-    if max_h < 54 or max_w < 168:
+    if max_h < 64 or max_w < 200:
         return "wordmark"
     return "full"
 
@@ -162,6 +189,24 @@ def measure_text(draw: ImageDraw.ImageDraw, value: str, size: int, bold: bool = 
 
     box = draw.textbbox((0, 0), value, font=font(size, bold))
     return box[2] - box[0], box[3] - box[1]
+
+
+def _lockup_metrics(used: str, max_w: int, max_h: int) -> tuple[int, int, int, int]:
+    """Return (mark_px, title_size, slogan_size, title_slogan_gap)."""
+    if used == "full":
+        # Leave vertical room for slogan under a calm wordmark.
+        mark = max(32, min(int(max_h * 0.78), int(max_w * 0.26), 88))
+        if mark >= 64:
+            return mark, 24, 12, 3
+        if mark >= 48:
+            return mark, 20, 12, 3
+        return mark, 16, 11, 2
+    if used == "wordmark":
+        mark = max(20, min(int(max_h * 0.70), int(max_w * 0.30), 44))
+        title_size = 17 if mark >= 32 else 14
+        return mark, title_size, 0, 0
+    mark = max(18, min(int(max_h * 0.85), int(max_w * 0.85), 44))
+    return mark, 0, 0, 0
 
 
 def draw_brand_lockup(
@@ -180,7 +225,7 @@ def draw_brand_lockup(
     slogan_fill: tuple[int, int, int] = (90, 110, 118),
     mode: str | None = None,
     anchor: str = "lt",
-    gap: int = 10,
+    gap: int | None = None,
 ) -> tuple[int, int, str]:
     """Draw logo left, wordmark right, slogan under the wordmark when space allows.
 
@@ -189,20 +234,8 @@ def draw_brand_lockup(
     from ui_primitives import font
 
     used = resolve_lockup_mode(max_w, max_h, mode)
-
-    # Mark size scales with available height; leave room for slogan in full mode.
-    if used == "full":
-        mark = max(28, min(int(max_h * 0.72), int(max_w * 0.28), 96))
-        title_size = 22 if mark >= 56 else (18 if mark >= 40 else 15)
-        slogan_size = 12 if mark >= 56 else 11
-    elif used == "wordmark":
-        mark = max(22, min(int(max_h * 0.78), int(max_w * 0.34), 56))
-        title_size = 16 if mark >= 36 else 14
-        slogan_size = 0
-    else:
-        mark = max(18, min(max_h, max_w, 48))
-        title_size = 0
-        slogan_size = 0
+    mark, title_size, slogan_size, stack_gap = _lockup_metrics(used, max_w, max_h)
+    resolved_gap = gap if gap is not None else max(8, min(14, mark // 4))
 
     logo = fit_logo(name, mark, mark, tint=tint, knockout_black=knockout_black)
     lw, lh = logo.size
@@ -215,8 +248,8 @@ def draw_brand_lockup(
         slogan_w, slogan_h = measure_text(draw, slogan, slogan_size, bold=False)
 
     text_w = max(title_w, slogan_w)
-    text_h = title_h + (4 + slogan_h if used == "full" and slogan else 0)
-    block_w = lw if used == "mark" else lw + gap + text_w
+    text_h = title_h + (stack_gap + slogan_h if used == "full" and slogan else 0)
+    block_w = lw if used == "mark" else lw + resolved_gap + text_w
     block_h = max(lh, text_h) if used != "mark" else lh
 
     # If full/wordmark overflows width, fall back.
@@ -260,23 +293,30 @@ def draw_brand_lockup(
     x, y = float(xy[0]), float(xy[1])
     h_anchor = anchor[0] if anchor else "l"
     v_anchor = anchor[1] if len(anchor) > 1 else "t"
-    if h_anchor == "m":
+
+    # For centered placements, align the logo+wordmark cluster (not the wider slogan).
+    if h_anchor == "m" and used == "full" and slogan_w > title_w:
+        cluster_w = lw + resolved_gap + title_w
+        x -= cluster_w / 2
+    elif h_anchor == "m":
         x -= block_w / 2
     elif h_anchor == "r":
         x -= block_w
+
     if v_anchor == "m":
         y -= block_h / 2
     elif v_anchor == "b":
         y -= block_h
 
     logo_y = y + (block_h - lh) / 2
-    _paste_rgba(canvas, logo, (int(x), int(logo_y)))
+    _paste_rgba(canvas, logo, (int(round(x)), int(round(logo_y))))
 
     if used != "mark":
-        text_x = x + lw + gap
-        # Vertically center the text stack against the logo.
-        stack_h = title_h + (4 + slogan_h if used == "full" and slogan else 0)
-        text_y = y + (block_h - stack_h) / 2
+        text_x = x + lw + resolved_gap
+        # Optical vertical center: bias the stack slightly up so caps align with the mark.
+        stack_h = title_h + (stack_gap + slogan_h if used == "full" and slogan else 0)
+        optical_nudge = max(0, (lh - stack_h) * 0.08) if used == "full" else 0
+        text_y = y + (block_h - stack_h) / 2 - optical_nudge
         draw.text(
             (text_x, text_y),
             title,
@@ -285,10 +325,10 @@ def draw_brand_lockup(
         )
         if used == "full" and slogan:
             draw.text(
-                (text_x, text_y + title_h + 4),
+                (text_x, text_y + title_h + stack_gap),
                 slogan,
                 font=font(slogan_size, False),
                 fill=slogan_fill,
             )
 
-    return int(block_w), int(block_h), used
+    return int(round(block_w)), int(round(block_h)), used

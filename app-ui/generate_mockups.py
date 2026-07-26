@@ -14,7 +14,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
-from branding import LOGO_SPLASH, SLOGAN, draw_brand_lockup
+from branding import CHROME_TINT, LOGO_SPLASH, SLOGAN, draw_brand_lockup
 from ui_primitives import C, DARK_C, SIZES, font, rr as round_rect, tx as text, wrap
 
 ROOT = Path(__file__).resolve().parent
@@ -2332,18 +2332,17 @@ def draw_header(img, draw, w, h, screen: Screen, breakpoint: str, content_left: 
     mid_y = bar_h // 2
     bar_w = w - content_left
     if content_left == 0:
-        # Full-width chrome: brand lockup (slogan under FCHIP when bar is tall enough).
+        # Short app bars stay wordmark so the lockup is calm and centered in the bar.
         draw_brand_lockup(
             img,
             draw,
             (16, mid_y),
-            max_w=min(320, bar_w - 32),
-            max_h=bar_h - 12,
-            tint=None,
-            knockout_black=False,
+            max_w=min(280, bar_w - 32),
+            max_h=bar_h - 16,
+            tint=CHROME_TINT,
             title_fill=C["on_primary"],
             slogan_fill=(210, 235, 236),
-            mode="full" if bar_h >= 60 else "wordmark",
+            mode="wordmark",
             anchor="lm",
         )
     else:
@@ -2362,32 +2361,30 @@ def draw_side_nav(img, draw, screen: Screen, breakpoint: str) -> int:
         draw_brand_lockup(
             img,
             draw,
-            (sw / 2, 36),
-            max_w=sw - 16,
-            max_h=40,
-            tint=None,
-            knockout_black=False,
+            (sw / 2, 40),
+            max_w=sw - 20,
+            max_h=36,
+            tint=CHROME_TINT,
             title_fill=C["white"],
             slogan_fill=(160, 190, 194),
             mode="mark",
             anchor="mm",
         )
-        brand_bottom = 90
+        brand_bottom = 88
     else:
         _, bh, _ = draw_brand_lockup(
             img,
             draw,
-            (16, 18),
-            max_w=sw - 32,
-            max_h=72,
-            tint=None,
-            knockout_black=False,
+            (18, 22),
+            max_w=sw - 36,
+            max_h=68,
+            tint=CHROME_TINT,
             title_fill=C["white"],
             slogan_fill=(160, 190, 194),
             mode="full",
             anchor="lt",
         )
-        brand_bottom = 18 + bh + 20
+        brand_bottom = 22 + bh + 24
     y = brand_bottom
     current_parent = parent_route(screen)
     routes = NAV_ROUTES.get(screen.nav, [])
@@ -2559,21 +2556,22 @@ def render_screen(screen: Screen, breakpoint: str) -> Image.Image:
         card_h = min(card_h, h - y - 24)
         round_rect(draw, (card_x, y, card_x + card_w, y + card_h), C["surface"], radius=20, outline=C["line"])
         is_splash = screen.slug == "01-splash"
-        lockup_h = 96 if is_splash else 72
+        lockup_h = 88 if is_splash else 72
+        brand_top = y + (32 if is_splash else 28)
         _, bh, _ = draw_brand_lockup(
             img,
             draw,
-            (card_x + card_w / 2, y + (56 if is_splash else 44)),
-            max_w=card_w - 48,
+            (card_x + card_w / 2, brand_top),
+            max_w=card_w - 56,
             max_h=lockup_h,
             name=LOGO_SPLASH if is_splash else "logo.png",
             tint=C["primary"],
             title_fill=C["primary"],
             slogan_fill=C["muted"],
             mode="full",
-            anchor="mm",
+            anchor="mt",
         )
-        title_y = y + (56 if is_splash else 44) + bh / 2 + 16
+        title_y = brand_top + bh + (20 if is_splash else 16)
         if not (is_splash or screen.title == "FCHIP"):
             text(draw, (card_x + card_w / 2, title_y), screen.title, size=22, bold=True, fill=C["primary"], anchor="mm")
             title_y += 28
@@ -2581,7 +2579,7 @@ def render_screen(screen: Screen, breakpoint: str) -> Image.Image:
         subtitle = "" if screen.subtitle.strip().rstrip(".") == SLOGAN.rstrip(".") else screen.subtitle
         for i, line in enumerate(wrap(draw, subtitle, int(card_w - 48), 12)[:2] if subtitle else []):
             text(draw, (card_x + card_w / 2, title_y + i * 16), line, size=12, fill=C["muted"], anchor="mm")
-        fy = title_y + (40 if subtitle else 20)
+        fy = title_y + (36 if subtitle else 18)
         if screen.note and not is_splash:
             for i, line in enumerate(note_lines[:2]):
                 text(draw, (card_x + card_w / 2, fy + i * 16), line, size=11, fill=C["warn"], anchor="mm")

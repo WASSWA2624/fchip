@@ -20,7 +20,7 @@ COMPONENTS = ROOT / "components"
 LAYOUTS = ROOT / "layouts"
 
 sys.path.insert(0, str(ROOT.parent))
-from branding import LOGO_SPLASH, SLOGAN, draw_brand_lockup
+from branding import CHROME_TINT, LOGO_SPLASH, SLOGAN, draw_brand_lockup
 from ui_primitives import C, DARK_C, SIZES, font, rr, tx
 
 # Compact specimen canvas for isolated components
@@ -56,18 +56,17 @@ def draw_app_bar(img, draw, x0, y0, x1, y1, title="FCHIP", *, brand=False):
     bar_h = int(y1 - y0)
     bar_w = int(x1 - x0)
     if brand or title == "FCHIP":
-        # App bar is short: logo + FCHIP; slogan only when height allows.
+        # Short app bars use wordmark so logo + FCHIP sit calmly in the bar.
         draw_brand_lockup(
             img,
             draw,
             (x0 + 16, mid_y),
             max_w=min(280, bar_w - 32),
-            max_h=bar_h - 12,
-            tint=None,
-            knockout_black=False,
+            max_h=bar_h - 16,
+            tint=CHROME_TINT,
             title_fill=C["on_primary"],
             slogan_fill=(210, 235, 236),
-            mode="full" if bar_h >= 60 else "wordmark",
+            mode="wordmark",
             anchor="lm",
         )
     else:
@@ -100,32 +99,30 @@ def draw_side_nav(img, draw, x0, y0, x1, y1, items: list[str], active=0):
         draw_brand_lockup(
             img,
             draw,
-            ((x0 + x1) / 2, y0 + 36),
-            max_w=nav_w - 16,
-            max_h=40,
-            tint=None,
-            knockout_black=False,
+            ((x0 + x1) / 2, y0 + 40),
+            max_w=nav_w - 20,
+            max_h=36,
+            tint=CHROME_TINT,
             title_fill=C["white"],
             slogan_fill=(160, 190, 194),
             mode="mark",
             anchor="mm",
         )
-        brand_bottom = y0 + 90
+        brand_bottom = y0 + 88
     else:
         _, bh, _ = draw_brand_lockup(
             img,
             draw,
-            (x0 + 16, y0 + 18),
-            max_w=nav_w - 32,
-            max_h=72,
-            tint=None,
-            knockout_black=False,
+            (x0 + 18, y0 + 22),
+            max_w=nav_w - 36,
+            max_h=68,
+            tint=CHROME_TINT,
             title_fill=C["white"],
             slogan_fill=(160, 190, 194),
             mode="full",
             anchor="lt",
         )
-        brand_bottom = y0 + 18 + bh + 20
+        brand_bottom = y0 + 22 + bh + 24
     y = brand_bottom
     for i, item in enumerate(items):
         fill = C["accent"] if i == active else (32, 54, 60)
@@ -264,7 +261,7 @@ def render_component(comp: Component, bp: str) -> Image.Image:
         draw_brand_lockup(
             img,
             draw,
-            (x, y + 8),
+            (x, y + 12),
             max_w=min(w, 420),
             max_h=88,
             tint=C["primary"],
@@ -273,11 +270,11 @@ def render_component(comp: Component, bp: str) -> Image.Image:
             mode="full",
             anchor="lt",
         )
-        tx(draw, (x, y + 110), "Wordmark (tight height)", size=11, fill=C["muted"])
+        tx(draw, (x, y + 118), "Wordmark (tight height)", size=11, fill=C["muted"])
         draw_brand_lockup(
             img,
             draw,
-            (x, y + 128),
+            (x, y + 138),
             max_w=min(w, 220),
             max_h=40,
             tint=C["primary"],
@@ -286,11 +283,11 @@ def render_component(comp: Component, bp: str) -> Image.Image:
             mode="wordmark",
             anchor="lt",
         )
-        tx(draw, (x, y + 180), "Mark only (narrow rail)", size=11, fill=C["muted"])
+        tx(draw, (x, y + 196), "Mark only (narrow rail)", size=11, fill=C["muted"])
         draw_brand_lockup(
             img,
             draw,
-            (x, y + 198),
+            (x, y + 216),
             max_w=48,
             max_h=40,
             tint=C["primary"],
@@ -619,17 +616,16 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
             draw_brand_lockup(
                 img,
                 draw,
-                (left / 2, 36),
-                max_w=left - 16,
-                max_h=40,
-                tint=None,
-                knockout_black=False,
+                (left / 2, 40),
+                max_w=left - 20,
+                max_h=36,
+                tint=CHROME_TINT,
                 title_fill=C["white"],
                 slogan_fill=(160, 190, 194),
                 mode="mark",
                 anchor="mm",
             )
-            nav_y = 110
+            nav_y = 88
             for index, item in enumerate(items):
                 rr(
                     draw,
@@ -678,31 +674,34 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
         cx = left + (w - left - card_w) / 2
         cy = top + (60 if bp != "mobile" else 36)
         rr(draw, (cx, cy, cx + card_w, cy + 420), C["surface"], radius=20, outline=C["line"])
-        draw_brand_lockup(
+        brand_top = cy + 32
+        _, bh, _ = draw_brand_lockup(
             img,
             draw,
-            (cx + card_w / 2, cy + 72),
-            max_w=card_w - 48,
-            max_h=96,
+            (cx + card_w / 2, brand_top),
+            max_w=card_w - 56,
+            max_h=88,
             name=LOGO_SPLASH,
             tint=C["primary"],
             title_fill=C["primary"],
             slogan_fill=C["muted"],
             mode="full",
-            anchor="mm",
+            anchor="mt",
         )
-        rr(draw, (cx + 36, cy + 140, cx + card_w - 36, cy + 230), C["primary_soft"], radius=14)
+        loop_top = brand_top + bh + 24
+        rr(draw, (cx + 36, loop_top, cx + card_w - 36, loop_top + 90), C["primary_soft"], radius=14)
         tx(
             draw,
-            (cx + card_w / 2, cy + 185),
+            (cx + card_w / 2, loop_top + 45),
             "CAPTURE → FUSE → PREDICT\nALERT → ACT → LEARN",
             size=12,
             fill=C["primary"],
             anchor="mm",
         )
-        draw_field(draw, cx + 28, cy + 250, card_w - 56, "Phone number", "+256 700 000 000")
-        draw_field(draw, cx + 28, cy + 320, card_w - 56, "Password", "••••••••")
-        draw_cta(draw, cx + 28, cy + 380, card_w - 56, "Sign in")
+        field_y = loop_top + 110
+        draw_field(draw, cx + 28, field_y, card_w - 56, "Phone number", "+256 700 000 000")
+        draw_field(draw, cx + 28, field_y + 70, card_w - 56, "Password", "••••••••")
+        draw_cta(draw, cx + 28, field_y + 140, card_w - 56, "Sign in")
         return img
 
     if bp != "desktop":

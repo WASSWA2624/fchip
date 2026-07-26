@@ -38,8 +38,8 @@ Also read:
 
 ## Composes (implement or reuse these first)
 
-- `02-stat-card-row` → `app-ui/00-shared/components/**/02-stat-card-row/` + `frontend/lib/shared/components/`
-- `03-list-row-card` → `app-ui/00-shared/components/**/03-list-row-card/` + `frontend/lib/shared/components/`
+- `03-stat-card-row` → `app-ui/00-shared/components/**/03-stat-card-row/` + `frontend/lib/shared/components/`
+- `01-list-row-card` → `app-ui/00-shared/components/**/01-list-row-card/` + `frontend/lib/shared/components/`
 - `04-note-banner` → `app-ui/00-shared/components/**/04-note-banner/` + `frontend/lib/shared/components/`
 - `01-primary-cta` → `app-ui/00-shared/components/**/01-primary-cta/` + `frontend/lib/shared/components/`
 

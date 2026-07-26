@@ -23,8 +23,8 @@ _Subtitle: Community symptom patterns from outlets_
 | Route | `/16-pharmacy-outlets/04-common-complaints` |
 | Parent route | `/16-pharmacy-outlets/04-common-complaints` |
 | Layout | `02-list-worklist` |
-| Body layouts | `mobile` → `02-list-worklist`, `tablet` → `02-list-worklist`, `desktop` → `03-dual-pane-desktop` |
-| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
+| Body layouts | `mobile` → `02-list-worklist`, `tablet` → `02-list-worklist`, `desktop` → `16-dual-pane-desktop` |
+| Shells | `mobile` → `03-field-mobile-shell`, `tablet` → `04-field-tablet-shell`, `desktop` → `05-desktop-sidebar-shell` |
 | Roles | `pharmacy-outlet-worker` |
 | Supported states | `default`, `loading`, `empty`, `error`, `forbidden` |
 | Localization prefix | `16_pharmacy_outlets.04_common_complaints` |

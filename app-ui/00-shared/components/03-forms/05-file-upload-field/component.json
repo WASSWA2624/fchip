@@ -1,0 +1,21 @@
+{
+  "title": "File upload field",
+  "category": "03-forms",
+  "slug": "05-file-upload-field",
+  "purpose": "Batch / dataset upload cue",
+  "used_by": [
+    "NGO",
+    "lab batch",
+    "HMIS"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

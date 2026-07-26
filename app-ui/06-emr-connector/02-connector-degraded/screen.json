@@ -3,16 +3,16 @@
   "subtitle": "Degraded feed \u2014 queue held \u00b7 no PHI dump",
   "kind": "dashboard",
   "nav": "admin",
-  "layout": "12-connector-status",
+  "layout": "11-connector-status",
   "body_layouts": {
-    "mobile": "12-connector-status",
-    "tablet": "12-connector-status",
-    "desktop": "03-dual-pane-desktop"
+    "mobile": "11-connector-status",
+    "tablet": "11-connector-status",
+    "desktop": "16-dual-pane-desktop"
   },
   "shells": {
-    "mobile": "04-field-mobile-shell",
-    "tablet": "05-field-tablet-shell",
-    "desktop": "06-desktop-sidebar-shell"
+    "mobile": "03-field-mobile-shell",
+    "tablet": "04-field-tablet-shell",
+    "desktop": "05-desktop-sidebar-shell"
   },
   "state": "error",
   "supported_states": [

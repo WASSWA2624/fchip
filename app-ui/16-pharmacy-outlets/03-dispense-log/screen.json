@@ -3,16 +3,16 @@
   "subtitle": "Dispensing patterns into multi-source ingest",
   "kind": "form",
   "nav": "pharmacy",
-  "layout": "09-form-capture",
+  "layout": "08-form-capture",
   "body_layouts": {
-    "mobile": "09-form-capture",
-    "tablet": "09-form-capture",
-    "desktop": "09-form-capture"
+    "mobile": "08-form-capture",
+    "tablet": "08-form-capture",
+    "desktop": "08-form-capture"
   },
   "shells": {
-    "mobile": "04-field-mobile-shell",
-    "tablet": "05-field-tablet-shell",
-    "desktop": "06-desktop-sidebar-shell"
+    "mobile": "03-field-mobile-shell",
+    "tablet": "04-field-tablet-shell",
+    "desktop": "05-desktop-sidebar-shell"
   },
   "state": "default",
   "supported_states": [

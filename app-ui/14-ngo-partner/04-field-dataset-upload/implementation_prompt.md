@@ -22,9 +22,9 @@ _Subtitle: NGO M&E teams feed anonymised programme data_
 | Chronology status | `not-started` |
 | Route | `/14-ngo-partner/04-field-dataset-upload` |
 | Parent route | `/14-ngo-partner/01-programme-monitoring` |
-| Layout | `16-upload-batch` |
-| Body layouts | `mobile` → `16-upload-batch`, `tablet` → `16-upload-batch`, `desktop` → `16-upload-batch` |
-| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
+| Layout | `15-upload-batch` |
+| Body layouts | `mobile` → `15-upload-batch`, `tablet` → `15-upload-batch`, `desktop` → `15-upload-batch` |
+| Shells | `mobile` → `03-field-mobile-shell`, `tablet` → `04-field-tablet-shell`, `desktop` → `05-desktop-sidebar-shell` |
 | Roles | `ngo-partner`, `researcher` |
 | Supported states | `default`, `loading`, `error`, `success`, `offline`, `forbidden` |
 | Localization prefix | `14_ngo_partner.04_field_dataset_upload` |
@@ -48,7 +48,7 @@ Also read:
 
 - `app-ui/14-ngo-partner/README.md`
 - `app-ui/00-shared/tokens.json`
-- Shared layout specimens for `16-upload-batch` under `app-ui/00-shared/layouts/16-upload-batch/`
+- Shared layout specimens for `15-upload-batch` under `app-ui/00-shared/layouts/15-upload-batch/`
 - Shared component specimens listed by that layout's `layout.json` `composes` array
 - Connected journeys under `app-flows/` (especially `07-navigation.md` and module journeys)
 
@@ -64,7 +64,7 @@ Also read:
 | Data / repository impl | `frontend/lib/features/ngo_partner/data/` |
 | Repository contract | `frontend/lib/features/ngo_partner/domain/repositories/ngo_partner_repository.dart` |
 | Router entry | `frontend/lib/app/router/` (route must equal `/14-ngo-partner/04-field-dataset-upload`) |
-| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `16-upload-batch`) |
+| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `15-upload-batch`) |
 | Shared components | `frontend/lib/shared/components/` |
 | Tests | `frontend/test/features/ngo_partner/` |
 | Backend module | `backend/src/modules/ngo_partner/` |
@@ -164,7 +164,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-085`:
 
 4. Treat `screen.json` in this folder as the contract for route, roles, access, layout, shells, states, navigation, and `l10n_key_prefix`.
 5. Open all six mockups (mobile/tablet/desktop × light/dark) and note hierarchy, spacing, CTAs, empty regions, and chrome.
-6. Resolve `16-upload-batch` and every composed component against `app-ui/00-shared/`.
+6. Resolve `15-upload-batch` and every composed component against `app-ui/00-shared/`.
 7. Map navigation:
    - Tabs: Monitor → `/14-ngo-partner/01-programme-monitoring`; Evidence → `/14-ngo-partner/02-impact-evidence`; Training → `/14-ngo-partner/03-training-skills-analytics`; More → `/23-research-exports/01-evidence-catalog`
    - Primary action: Upload to ingest → `/14-ngo-partner/04-field-dataset-upload?state=success`
@@ -174,7 +174,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-085`:
 ### Phase 2 — Flutter UI on fixtures (maximum reuse)
 
 8. Register route `/14-ngo-partner/04-field-dataset-upload` with the access guard for roles `ngo-partner`, `researcher`.
-9. Compose the page from shared shells + `16-upload-batch` + catalog components. Prefer:
+9. Compose the page from shared shells + `15-upload-batch` + catalog components. Prefer:
    - `AsyncStateScaffold`, `ResponsivePage`, `AppWorkspace`, `AppListTable`, `AppWorkspaceDetailPanel`, `AppActionPanel` when they fit `ui-workspace.mdc`.
 10. Implement **every** supported state: `default`, `loading`, `error`, `success`, `offline`, `forbidden`.
 11. Add ARB keys under `14_ngo_partner.04_field_dataset_upload` only — no hard-coded user strings.
@@ -204,7 +204,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-085`:
 ## Reusability checklist
 
 - [ ] No duplicate button, chip, banner, form field, nav, or feedback widget invented in the feature folder when a shared catalog item exists
-- [ ] Layout `16-upload-batch` is a shared layout implementation, not a one-off Scaffold tree
+- [ ] Layout `15-upload-batch` is a shared layout implementation, not a one-off Scaffold tree
 - [ ] Feature widgets accept data via typed props / providers — no embedded API clients in widgets
 - [ ] Repository is the only place that talks to the network / local DB for this screen's data
 - [ ] Permissions hide unauthorized actions rather than showing disabled dead ends when policy says omit

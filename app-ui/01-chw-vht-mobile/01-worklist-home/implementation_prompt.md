@@ -23,8 +23,8 @@ _Subtitle: Visits · follow-ups · alert tasks_
 | Route | `/01-chw-vht-mobile/01-worklist-home` |
 | Parent route | `/01-chw-vht-mobile/01-worklist-home` |
 | Layout | `02-list-worklist` |
-| Body layouts | `mobile` → `02-list-worklist`, `tablet` → `02-list-worklist`, `desktop` → `03-dual-pane-desktop` |
-| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
+| Body layouts | `mobile` → `02-list-worklist`, `tablet` → `02-list-worklist`, `desktop` → `16-dual-pane-desktop` |
+| Shells | `mobile` → `03-field-mobile-shell`, `tablet` → `04-field-tablet-shell`, `desktop` → `05-desktop-sidebar-shell` |
 | Roles | `chw`, `vht` |
 | Supported states | `default`, `loading`, `empty`, `error`, `forbidden` |
 | Localization prefix | `01_chw_vht_mobile.01_worklist_home` |

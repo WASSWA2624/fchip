@@ -23,7 +23,7 @@ _Subtitle: Consumers · data feeders · admin_
 | Route | `/00-shared/08-role-surface-picker` |
 | Parent route | `/00-shared/08-role-surface-picker` |
 | Layout | `02-list-worklist` |
-| Body layouts | `mobile` → `02-list-worklist`, `tablet` → `02-list-worklist`, `desktop` → `03-dual-pane-desktop` |
+| Body layouts | `mobile` → `02-list-worklist`, `tablet` → `02-list-worklist`, `desktop` → `16-dual-pane-desktop` |
 | Shells | `mobile` → `01-auth-centered-card`, `tablet` → `01-auth-centered-card`, `desktop` → `01-auth-centered-card` |
 | Roles | `authenticated-user` |
 | Supported states | `default`, `loading`, `empty`, `error`, `forbidden` |

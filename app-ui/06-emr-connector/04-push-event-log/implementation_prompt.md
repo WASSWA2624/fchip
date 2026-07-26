@@ -23,8 +23,8 @@ _Subtitle: EMR/HMS systems feeding FCHIP in real time_
 | Route | `/06-emr-connector/04-push-event-log` |
 | Parent route | `/06-emr-connector/01-connector-status` |
 | Layout | `02-list-worklist` |
-| Body layouts | `mobile` → `02-list-worklist`, `tablet` → `02-list-worklist`, `desktop` → `03-dual-pane-desktop` |
-| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
+| Body layouts | `mobile` → `02-list-worklist`, `tablet` → `02-list-worklist`, `desktop` → `16-dual-pane-desktop` |
+| Shells | `mobile` → `03-field-mobile-shell`, `tablet` → `04-field-tablet-shell`, `desktop` → `05-desktop-sidebar-shell` |
 | Roles | `organisation-admin`, `privacy-admin` |
 | Supported states | `default`, `loading`, `empty`, `error`, `forbidden` |
 | Localization prefix | `06_emr_connector.04_push_event_log` |

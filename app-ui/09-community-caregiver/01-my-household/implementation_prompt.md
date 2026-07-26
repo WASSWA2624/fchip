@@ -22,9 +22,9 @@ _Subtitle: Optional caregiver self-view_
 | Chronology status | `not-started` |
 | Route | `/09-community-caregiver/01-my-household` |
 | Parent route | `/09-community-caregiver/01-my-household` |
-| Layout | `15-feeder-home` |
-| Body layouts | `mobile` → `15-feeder-home`, `tablet` → `15-feeder-home`, `desktop` → `03-dual-pane-desktop` |
-| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
+| Layout | `14-feeder-home` |
+| Body layouts | `mobile` → `14-feeder-home`, `tablet` → `14-feeder-home`, `desktop` → `16-dual-pane-desktop` |
+| Shells | `mobile` → `03-field-mobile-shell`, `tablet` → `04-field-tablet-shell`, `desktop` → `05-desktop-sidebar-shell` |
 | Roles | `caregiver`, `community-member` |
 | Supported states | `default`, `loading`, `empty`, `error`, `forbidden` |
 | Localization prefix | `09_community_caregiver.01_my_household` |
@@ -48,7 +48,7 @@ Also read:
 
 - `app-ui/09-community-caregiver/README.md`
 - `app-ui/00-shared/tokens.json`
-- Shared layout specimens for `15-feeder-home` under `app-ui/00-shared/layouts/15-feeder-home/`
+- Shared layout specimens for `14-feeder-home` under `app-ui/00-shared/layouts/14-feeder-home/`
 - Shared component specimens listed by that layout's `layout.json` `composes` array
 - Connected journeys under `app-flows/` (especially `07-navigation.md` and module journeys)
 
@@ -64,7 +64,7 @@ Also read:
 | Data / repository impl | `frontend/lib/features/community_caregiver/data/` |
 | Repository contract | `frontend/lib/features/community_caregiver/domain/repositories/community_caregiver_repository.dart` |
 | Router entry | `frontend/lib/app/router/` (route must equal `/09-community-caregiver/01-my-household`) |
-| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `15-feeder-home`) |
+| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `14-feeder-home`) |
 | Shared components | `frontend/lib/shared/components/` |
 | Tests | `frontend/test/features/community_caregiver/` |
 | Backend module | `backend/src/modules/community_caregiver/` |
@@ -164,7 +164,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-061`:
 
 4. Treat `screen.json` in this folder as the contract for route, roles, access, layout, shells, states, navigation, and `l10n_key_prefix`.
 5. Open all six mockups (mobile/tablet/desktop × light/dark) and note hierarchy, spacing, CTAs, empty regions, and chrome.
-6. Resolve `15-feeder-home` and every composed component against `app-ui/00-shared/`.
+6. Resolve `14-feeder-home` and every composed component against `app-ui/00-shared/`.
 7. Map navigation:
    - Tabs: Home → `/09-community-caregiver/01-my-household`; Report → `/09-community-caregiver/02-self-report`; Guidance → `/09-community-caregiver/03-guidance-hints`; More → `/09-community-caregiver/04-household-needs-capture`
    - Primary action: (none declared)
@@ -174,7 +174,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-061`:
 ### Phase 2 — Flutter UI on fixtures (maximum reuse)
 
 8. Register route `/09-community-caregiver/01-my-household` with the access guard for roles `caregiver`, `community-member`.
-9. Compose the page from shared shells + `15-feeder-home` + catalog components. Prefer:
+9. Compose the page from shared shells + `14-feeder-home` + catalog components. Prefer:
    - `AsyncStateScaffold`, `ResponsivePage`, `AppWorkspace`, `AppListTable`, `AppWorkspaceDetailPanel`, `AppActionPanel` when they fit `ui-workspace.mdc`.
 10. Implement **every** supported state: `default`, `loading`, `empty`, `error`, `forbidden`.
 11. Add ARB keys under `09_community_caregiver.01_my_household` only — no hard-coded user strings.
@@ -204,7 +204,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-061`:
 ## Reusability checklist
 
 - [ ] No duplicate button, chip, banner, form field, nav, or feedback widget invented in the feature folder when a shared catalog item exists
-- [ ] Layout `15-feeder-home` is a shared layout implementation, not a one-off Scaffold tree
+- [ ] Layout `14-feeder-home` is a shared layout implementation, not a one-off Scaffold tree
 - [ ] Feature widgets accept data via typed props / providers — no embedded API clients in widgets
 - [ ] Repository is the only place that talks to the network / local DB for this screen's data
 - [ ] Permissions hide unauthorized actions rather than showing disabled dead ends when policy says omit

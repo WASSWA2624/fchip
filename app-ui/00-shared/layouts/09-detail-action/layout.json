@@ -1,0 +1,27 @@
+{
+  "title": "Detail + action",
+  "slug": "09-detail-action",
+  "purpose": "Explainable alert / referral detail with CTA",
+  "composes": [
+    "03-stat-card-row",
+    "05-explainability-block",
+    "01-list-row-card",
+    "01-primary-cta",
+    "04-danger-cta"
+  ],
+  "surfaces": [
+    "alert follow-up",
+    "referral detail",
+    "deploy action"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

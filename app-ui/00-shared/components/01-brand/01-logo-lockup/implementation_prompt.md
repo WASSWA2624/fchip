@@ -36,17 +36,6 @@ Also read:
 - `app-ui/00-shared/components/README.md`
 - `app-ui/00-shared/tokens.json`
 - `component.json` in this folder
-- Brand assets: `frontend/assets/logos/` (`logo.png`, `splash.png`, `favicon.png`)
-
-## Brand layout rules
-
-1. **Logo** on the left (from `frontend/assets/logos`).
-2. **FCHIP** wordmark to the right of the logo.
-3. **Slogan** (`Your health, our mission.`) directly under **FCHIP**, left-aligned with the wordmark.
-4. **Space-aware modes:**
-   - `full` — logo + FCHIP + slogan (auth cards, wide side nav, specimens)
-   - `wordmark` — logo + FCHIP (short app bars)
-   - `mark` — logo only (narrow tablet rail)
 
 ## Target code locations
 

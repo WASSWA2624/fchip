@@ -24,7 +24,7 @@ _Subtitle: Loading visits and alert tasks_
 | Parent route | `/01-chw-vht-mobile/01-worklist-home` |
 | Layout | `02-list-worklist` |
 | Body layouts | `mobile` → `02-list-worklist`, `tablet` → `02-list-worklist`, `desktop` → `02-list-worklist` |
-| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
+| Shells | `mobile` → `03-field-mobile-shell`, `tablet` → `04-field-tablet-shell`, `desktop` → `05-desktop-sidebar-shell` |
 | Roles | `chw`, `vht` |
 | Supported states | `default`, `loading`, `empty`, `error`, `forbidden` |
 | Localization prefix | `01_chw_vht_mobile.03_worklist_loading` |

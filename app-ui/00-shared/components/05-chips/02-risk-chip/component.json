@@ -1,0 +1,20 @@
+{
+  "title": "Risk chip",
+  "category": "05-chips",
+  "slug": "02-risk-chip",
+  "purpose": "High / elevated risk flag",
+  "used_by": [
+    "alerts",
+    "facility"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

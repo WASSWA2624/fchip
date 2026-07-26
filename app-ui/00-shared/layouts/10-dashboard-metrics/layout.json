@@ -1,0 +1,27 @@
+{
+  "title": "Dashboard metrics",
+  "slug": "10-dashboard-metrics",
+  "purpose": "Overview with stats + list + CTA",
+  "composes": [
+    "03-stat-card-row",
+    "01-list-row-card",
+    "03-filter-chip-row",
+    "01-primary-cta"
+  ],
+  "surfaces": [
+    "facility",
+    "district",
+    "NGO",
+    "feeder homes"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

@@ -7,7 +7,7 @@
   "body_layouts": {
     "mobile": "02-list-worklist",
     "tablet": "02-list-worklist",
-    "desktop": "03-dual-pane-desktop"
+    "desktop": "16-dual-pane-desktop"
   },
   "shells": {
     "mobile": "01-auth-centered-card",

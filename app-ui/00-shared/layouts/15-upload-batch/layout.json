@@ -1,0 +1,28 @@
+{
+  "title": "Upload / batch",
+  "slug": "15-upload-batch",
+  "purpose": "File upload + validation + push to ingest",
+  "composes": [
+    "05-file-upload-field",
+    "05-error-inline",
+    "03-success-toast",
+    "01-primary-cta",
+    "04-note-banner"
+  ],
+  "surfaces": [
+    "NGO upload",
+    "lab batch",
+    "outreach batch",
+    "HMIS exchange"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

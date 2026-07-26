@@ -22,9 +22,9 @@ _Subtitle: Which data parties are sending clean signals_
 | Chronology status | `not-started` |
 | Route | `/02-intelligence/02-feeder-health-board` |
 | Parent route | `/02-intelligence/01-ingest-pipeline` |
-| Layout | `12-connector-status` |
-| Body layouts | `mobile` → `12-connector-status`, `tablet` → `12-connector-status`, `desktop` → `03-dual-pane-desktop` |
-| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
+| Layout | `11-connector-status` |
+| Body layouts | `mobile` → `11-connector-status`, `tablet` → `11-connector-status`, `desktop` → `16-dual-pane-desktop` |
+| Shells | `mobile` → `03-field-mobile-shell`, `tablet` → `04-field-tablet-shell`, `desktop` → `05-desktop-sidebar-shell` |
 | Roles | `intelligence-analyst`, `platform-operator` |
 | Supported states | `default`, `loading`, `empty`, `error`, `forbidden` |
 | Localization prefix | `02_intelligence.02_feeder_health_board` |
@@ -48,7 +48,7 @@ Also read:
 
 - `app-ui/02-intelligence/README.md`
 - `app-ui/00-shared/tokens.json`
-- Shared layout specimens for `12-connector-status` under `app-ui/00-shared/layouts/12-connector-status/`
+- Shared layout specimens for `11-connector-status` under `app-ui/00-shared/layouts/11-connector-status/`
 - Shared component specimens listed by that layout's `layout.json` `composes` array
 - Connected journeys under `app-flows/` (especially `07-navigation.md` and module journeys)
 
@@ -64,7 +64,7 @@ Also read:
 | Data / repository impl | `frontend/lib/features/intelligence/data/` |
 | Repository contract | `frontend/lib/features/intelligence/domain/repositories/intelligence_repository.dart` |
 | Router entry | `frontend/lib/app/router/` (route must equal `/02-intelligence/02-feeder-health-board`) |
-| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `12-connector-status`) |
+| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `11-connector-status`) |
 | Shared components | `frontend/lib/shared/components/` |
 | Tests | `frontend/test/features/intelligence/` |
 | Backend module | `backend/src/modules/intelligence/` |
@@ -164,7 +164,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-028`:
 
 4. Treat `screen.json` in this folder as the contract for route, roles, access, layout, shells, states, navigation, and `l10n_key_prefix`.
 5. Open all six mockups (mobile/tablet/desktop × light/dark) and note hierarchy, spacing, CTAs, empty regions, and chrome.
-6. Resolve `12-connector-status` and every composed component against `app-ui/00-shared/`.
+6. Resolve `11-connector-status` and every composed component against `app-ui/00-shared/`.
 7. Map navigation:
    - Tabs: Ingest → `/02-intelligence/01-ingest-pipeline`; AI → `/02-intelligence/05-ai-risk-scores`; GIS → `/02-intelligence/03-gis-explorer`; Guidance → `/02-intelligence/07-clinical-support-guidance`
    - Primary action: Open silent feeders → `/02-intelligence/01-ingest-pipeline`
@@ -174,7 +174,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-028`:
 ### Phase 2 — Flutter UI on fixtures (maximum reuse)
 
 8. Register route `/02-intelligence/02-feeder-health-board` with the access guard for roles `intelligence-analyst`, `platform-operator`.
-9. Compose the page from shared shells + `12-connector-status` + catalog components. Prefer:
+9. Compose the page from shared shells + `11-connector-status` + catalog components. Prefer:
    - `AsyncStateScaffold`, `ResponsivePage`, `AppWorkspace`, `AppListTable`, `AppWorkspaceDetailPanel`, `AppActionPanel` when they fit `ui-workspace.mdc`.
 10. Implement **every** supported state: `default`, `loading`, `empty`, `error`, `forbidden`.
 11. Add ARB keys under `02_intelligence.02_feeder_health_board` only — no hard-coded user strings.
@@ -204,7 +204,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-028`:
 ## Reusability checklist
 
 - [ ] No duplicate button, chip, banner, form field, nav, or feedback widget invented in the feature folder when a shared catalog item exists
-- [ ] Layout `12-connector-status` is a shared layout implementation, not a one-off Scaffold tree
+- [ ] Layout `11-connector-status` is a shared layout implementation, not a one-off Scaffold tree
 - [ ] Feature widgets accept data via typed props / providers — no embedded API clients in widgets
 - [ ] Repository is the only place that talks to the network / local DB for this screen's data
 - [ ] Permissions hide unauthorized actions rather than showing disabled dead ends when policy says omit

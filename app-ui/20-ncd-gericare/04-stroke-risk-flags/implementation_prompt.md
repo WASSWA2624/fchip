@@ -23,8 +23,8 @@ _Subtitle: Signals that feed NCD predictions_
 | Route | `/20-ncd-gericare/04-stroke-risk-flags` |
 | Parent route | `/20-ncd-gericare/04-stroke-risk-flags` |
 | Layout | `02-list-worklist` |
-| Body layouts | `mobile` → `02-list-worklist`, `tablet` → `02-list-worklist`, `desktop` → `03-dual-pane-desktop` |
-| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
+| Body layouts | `mobile` → `02-list-worklist`, `tablet` → `02-list-worklist`, `desktop` → `16-dual-pane-desktop` |
+| Shells | `mobile` → `03-field-mobile-shell`, `tablet` → `04-field-tablet-shell`, `desktop` → `05-desktop-sidebar-shell` |
 | Roles | `ncd-care-worker` |
 | Supported states | `default`, `loading`, `empty`, `error`, `forbidden` |
 | Localization prefix | `20_ncd_gericare.04_stroke_risk_flags` |

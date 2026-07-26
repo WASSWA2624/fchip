@@ -22,9 +22,9 @@ _Subtitle: Alerts · caseload risk · cascade gaps_
 | Chronology status | `not-started` |
 | Route | `/04-facility-dashboard/01-overview` |
 | Parent route | `/04-facility-dashboard/01-overview` |
-| Layout | `11-dashboard-metrics` |
-| Body layouts | `mobile` → `11-dashboard-metrics`, `tablet` → `11-dashboard-metrics`, `desktop` → `03-dual-pane-desktop` |
-| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
+| Layout | `10-dashboard-metrics` |
+| Body layouts | `mobile` → `10-dashboard-metrics`, `tablet` → `10-dashboard-metrics`, `desktop` → `16-dual-pane-desktop` |
+| Shells | `mobile` → `03-field-mobile-shell`, `tablet` → `04-field-tablet-shell`, `desktop` → `05-desktop-sidebar-shell` |
 | Roles | `facility-clinician`, `facility-manager` |
 | Supported states | `default`, `loading`, `empty`, `error`, `forbidden` |
 | Localization prefix | `04_facility_dashboard.01_overview` |
@@ -48,7 +48,7 @@ Also read:
 
 - `app-ui/04-facility-dashboard/README.md`
 - `app-ui/00-shared/tokens.json`
-- Shared layout specimens for `11-dashboard-metrics` under `app-ui/00-shared/layouts/11-dashboard-metrics/`
+- Shared layout specimens for `10-dashboard-metrics` under `app-ui/00-shared/layouts/10-dashboard-metrics/`
 - Shared component specimens listed by that layout's `layout.json` `composes` array
 - Connected journeys under `app-flows/` (especially `07-navigation.md` and module journeys)
 
@@ -64,7 +64,7 @@ Also read:
 | Data / repository impl | `frontend/lib/features/facility_dashboard/data/` |
 | Repository contract | `frontend/lib/features/facility_dashboard/domain/repositories/facility_dashboard_repository.dart` |
 | Router entry | `frontend/lib/app/router/` (route must equal `/04-facility-dashboard/01-overview`) |
-| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `11-dashboard-metrics`) |
+| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `10-dashboard-metrics`) |
 | Shared components | `frontend/lib/shared/components/` |
 | Tests | `frontend/test/features/facility_dashboard/` |
 | Backend module | `backend/src/modules/facility_dashboard/` |
@@ -164,7 +164,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-032`:
 
 4. Treat `screen.json` in this folder as the contract for route, roles, access, layout, shells, states, navigation, and `l10n_key_prefix`.
 5. Open all six mockups (mobile/tablet/desktop × light/dark) and note hierarchy, spacing, CTAs, empty regions, and chrome.
-6. Resolve `11-dashboard-metrics` and every composed component against `app-ui/00-shared/`.
+6. Resolve `10-dashboard-metrics` and every composed component against `app-ui/00-shared/`.
 7. Map navigation:
    - Tabs: Overview → `/04-facility-dashboard/01-overview`; Map → `/04-facility-dashboard/02-catchment-map`; Referrals → `/05-referrals-desk/01-referral-queue`; Stock → `/04-facility-dashboard/04-stock-signal`
    - Primary action: (none declared)
@@ -174,7 +174,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-032`:
 ### Phase 2 — Flutter UI on fixtures (maximum reuse)
 
 8. Register route `/04-facility-dashboard/01-overview` with the access guard for roles `facility-clinician`, `facility-manager`.
-9. Compose the page from shared shells + `11-dashboard-metrics` + catalog components. Prefer:
+9. Compose the page from shared shells + `10-dashboard-metrics` + catalog components. Prefer:
    - `AsyncStateScaffold`, `ResponsivePage`, `AppWorkspace`, `AppListTable`, `AppWorkspaceDetailPanel`, `AppActionPanel` when they fit `ui-workspace.mdc`.
 10. Implement **every** supported state: `default`, `loading`, `empty`, `error`, `forbidden`.
 11. Add ARB keys under `04_facility_dashboard.01_overview` only — no hard-coded user strings.
@@ -204,7 +204,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-032`:
 ## Reusability checklist
 
 - [ ] No duplicate button, chip, banner, form field, nav, or feedback widget invented in the feature folder when a shared catalog item exists
-- [ ] Layout `11-dashboard-metrics` is a shared layout implementation, not a one-off Scaffold tree
+- [ ] Layout `10-dashboard-metrics` is a shared layout implementation, not a one-off Scaffold tree
 - [ ] Feature widgets accept data via typed props / providers — no embedded API clients in widgets
 - [ ] Repository is the only place that talks to the network / local DB for this screen's data
 - [ ] Permissions hide unauthorized actions rather than showing disabled dead ends when policy says omit

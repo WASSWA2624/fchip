@@ -3,16 +3,16 @@
   "subtitle": "Insurance partners \u2014 population prevention insights",
   "kind": "dashboard",
   "nav": "insurance",
-  "layout": "11-dashboard-metrics",
+  "layout": "17-insurance-prevention",
   "body_layouts": {
-    "mobile": "11-dashboard-metrics",
-    "tablet": "11-dashboard-metrics",
-    "desktop": "03-dual-pane-desktop"
+    "mobile": "17-insurance-prevention",
+    "tablet": "17-insurance-prevention",
+    "desktop": "16-dual-pane-desktop"
   },
   "shells": {
-    "mobile": "04-field-mobile-shell",
-    "tablet": "05-field-tablet-shell",
-    "desktop": "06-desktop-sidebar-shell"
+    "mobile": "03-field-mobile-shell",
+    "tablet": "04-field-tablet-shell",
+    "desktop": "05-desktop-sidebar-shell"
   },
   "state": "default",
   "supported_states": [

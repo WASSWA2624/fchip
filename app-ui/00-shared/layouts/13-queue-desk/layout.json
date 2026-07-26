@@ -1,0 +1,25 @@
+{
+  "title": "Queue desk",
+  "slug": "13-queue-desk",
+  "purpose": "Referral / lab / result queues",
+  "composes": [
+    "03-filter-chip-row",
+    "05-queue-item",
+    "01-primary-cta",
+    "04-sync-status-strip"
+  ],
+  "surfaces": [
+    "07",
+    "16"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

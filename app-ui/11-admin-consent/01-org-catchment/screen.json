@@ -3,16 +3,16 @@
   "subtitle": "Where FCHIP is deployed",
   "kind": "settings",
   "nav": "admin",
-  "layout": "08-settings-admin",
+  "layout": "07-settings-admin",
   "body_layouts": {
-    "mobile": "08-settings-admin",
-    "tablet": "08-settings-admin",
-    "desktop": "08-settings-admin"
+    "mobile": "07-settings-admin",
+    "tablet": "07-settings-admin",
+    "desktop": "07-settings-admin"
   },
   "shells": {
-    "mobile": "04-field-mobile-shell",
-    "tablet": "05-field-tablet-shell",
-    "desktop": "06-desktop-sidebar-shell"
+    "mobile": "03-field-mobile-shell",
+    "tablet": "04-field-tablet-shell",
+    "desktop": "05-desktop-sidebar-shell"
   },
   "state": "default",
   "supported_states": [

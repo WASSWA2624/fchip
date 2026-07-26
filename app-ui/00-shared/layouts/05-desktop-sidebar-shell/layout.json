@@ -1,0 +1,24 @@
+{
+  "title": "Desktop sidebar shell",
+  "slug": "05-desktop-sidebar-shell",
+  "purpose": "Facility \u00b7 district \u00b7 admin \u00b7 feeder desktop chrome",
+  "composes": [
+    "05-side-nav-desktop",
+    "03-top-app-bar",
+    "04-cascade-footer"
+  ],
+  "surfaces": [
+    "06\u201313",
+    "14\u201322 desktop"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

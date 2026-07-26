@@ -3,16 +3,16 @@
   "subtitle": "Track completion \u00b7 link EMR outcome",
   "kind": "detail",
   "nav": "facility",
-  "layout": "10-detail-action",
+  "layout": "09-detail-action",
   "body_layouts": {
-    "mobile": "10-detail-action",
-    "tablet": "10-detail-action",
-    "desktop": "10-detail-action"
+    "mobile": "09-detail-action",
+    "tablet": "09-detail-action",
+    "desktop": "09-detail-action"
   },
   "shells": {
-    "mobile": "04-field-mobile-shell",
-    "tablet": "05-field-tablet-shell",
-    "desktop": "06-desktop-sidebar-shell"
+    "mobile": "03-field-mobile-shell",
+    "tablet": "04-field-tablet-shell",
+    "desktop": "05-desktop-sidebar-shell"
   },
   "state": "default",
   "supported_states": [

@@ -3,11 +3,11 @@
   "subtitle": "This link is unavailable or has moved",
   "kind": "empty",
   "nav": "auth",
-  "layout": "07-empty-state-shell",
+  "layout": "06-empty-state-shell",
   "body_layouts": {
-    "mobile": "07-empty-state-shell",
-    "tablet": "07-empty-state-shell",
-    "desktop": "07-empty-state-shell"
+    "mobile": "06-empty-state-shell",
+    "tablet": "06-empty-state-shell",
+    "desktop": "06-empty-state-shell"
   },
   "shells": {
     "mobile": "01-auth-centered-card",

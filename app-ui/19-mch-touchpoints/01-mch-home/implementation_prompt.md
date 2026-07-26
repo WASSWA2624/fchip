@@ -22,9 +22,9 @@ _Subtitle: ANC / PNC · immunisation · nutrition posts feed care signals_
 | Chronology status | `not-started` |
 | Route | `/19-mch-touchpoints/01-mch-home` |
 | Parent route | `/19-mch-touchpoints/01-mch-home` |
-| Layout | `15-feeder-home` |
-| Body layouts | `mobile` → `15-feeder-home`, `tablet` → `15-feeder-home`, `desktop` → `03-dual-pane-desktop` |
-| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
+| Layout | `14-feeder-home` |
+| Body layouts | `mobile` → `14-feeder-home`, `tablet` → `14-feeder-home`, `desktop` → `16-dual-pane-desktop` |
+| Shells | `mobile` → `03-field-mobile-shell`, `tablet` → `04-field-tablet-shell`, `desktop` → `05-desktop-sidebar-shell` |
 | Roles | `mch-worker` |
 | Supported states | `default`, `loading`, `empty`, `error`, `forbidden` |
 | Localization prefix | `19_mch_touchpoints.01_mch_home` |
@@ -48,7 +48,7 @@ Also read:
 
 - `app-ui/19-mch-touchpoints/README.md`
 - `app-ui/00-shared/tokens.json`
-- Shared layout specimens for `15-feeder-home` under `app-ui/00-shared/layouts/15-feeder-home/`
+- Shared layout specimens for `14-feeder-home` under `app-ui/00-shared/layouts/14-feeder-home/`
 - Shared component specimens listed by that layout's `layout.json` `composes` array
 - Connected journeys under `app-flows/` (especially `07-navigation.md` and module journeys)
 
@@ -64,7 +64,7 @@ Also read:
 | Data / repository impl | `frontend/lib/features/mch_touchpoints/data/` |
 | Repository contract | `frontend/lib/features/mch_touchpoints/domain/repositories/mch_touchpoints_repository.dart` |
 | Router entry | `frontend/lib/app/router/` (route must equal `/19-mch-touchpoints/01-mch-home`) |
-| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `15-feeder-home`) |
+| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `14-feeder-home`) |
 | Shared components | `frontend/lib/shared/components/` |
 | Tests | `frontend/test/features/mch_touchpoints/` |
 | Backend module | `backend/src/modules/mch_touchpoints/` |
@@ -164,7 +164,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-105`:
 
 4. Treat `screen.json` in this folder as the contract for route, roles, access, layout, shells, states, navigation, and `l10n_key_prefix`.
 5. Open all six mockups (mobile/tablet/desktop × light/dark) and note hierarchy, spacing, CTAs, empty regions, and chrome.
-6. Resolve `15-feeder-home` and every composed component against `app-ui/00-shared/`.
+6. Resolve `14-feeder-home` and every composed component against `app-ui/00-shared/`.
 7. Map navigation:
    - Tabs: Home → `/19-mch-touchpoints/01-mch-home`; ANC → `/19-mch-touchpoints/02-anc-visit-entry`; Immunise → `/19-mch-touchpoints/04-immunisation-entry`; Nutrition → `/19-mch-touchpoints/05-nutrition-monitoring`
    - Primary action: Open ANC register → `/19-mch-touchpoints/01-mch-home`
@@ -174,7 +174,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-105`:
 ### Phase 2 — Flutter UI on fixtures (maximum reuse)
 
 8. Register route `/19-mch-touchpoints/01-mch-home` with the access guard for roles `mch-worker`.
-9. Compose the page from shared shells + `15-feeder-home` + catalog components. Prefer:
+9. Compose the page from shared shells + `14-feeder-home` + catalog components. Prefer:
    - `AsyncStateScaffold`, `ResponsivePage`, `AppWorkspace`, `AppListTable`, `AppWorkspaceDetailPanel`, `AppActionPanel` when they fit `ui-workspace.mdc`.
 10. Implement **every** supported state: `default`, `loading`, `empty`, `error`, `forbidden`.
 11. Add ARB keys under `19_mch_touchpoints.01_mch_home` only — no hard-coded user strings.
@@ -204,7 +204,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-105`:
 ## Reusability checklist
 
 - [ ] No duplicate button, chip, banner, form field, nav, or feedback widget invented in the feature folder when a shared catalog item exists
-- [ ] Layout `15-feeder-home` is a shared layout implementation, not a one-off Scaffold tree
+- [ ] Layout `14-feeder-home` is a shared layout implementation, not a one-off Scaffold tree
 - [ ] Feature widgets accept data via typed props / providers — no embedded API clients in widgets
 - [ ] Repository is the only place that talks to the network / local DB for this screen's data
 - [ ] Permissions hide unauthorized actions rather than showing disabled dead ends when policy says omit

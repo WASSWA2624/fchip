@@ -1,0 +1,27 @@
+{
+  "title": "Connector status",
+  "slug": "11-connector-status",
+  "purpose": "External system health (EMR, HMIS, climate)",
+  "composes": [
+    "03-stat-card-row",
+    "01-list-row-card",
+    "03-feeder-health-pill",
+    "06-warn-banner"
+  ],
+  "surfaces": [
+    "08",
+    "20",
+    "22",
+    "09 feeder board"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "title": "Side nav \u00b7 desktop",
+  "category": "04-navigation",
+  "slug": "05-side-nav-desktop",
+  "purpose": "Desktop chrome navigation",
+  "used_by": [
+    "facility",
+    "district",
+    "admin",
+    "feeders"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

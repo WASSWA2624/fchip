@@ -1,0 +1,20 @@
+{
+  "title": "Secondary CTA",
+  "category": "02-buttons",
+  "slug": "03-secondary-cta",
+  "purpose": "Alternate / cancel action",
+  "used_by": [
+    "forms",
+    "dialogs"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

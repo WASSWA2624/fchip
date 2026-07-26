@@ -3,16 +3,16 @@
   "subtitle": "No open inbound referrals",
   "kind": "empty",
   "nav": "facility",
-  "layout": "14-queue-desk",
+  "layout": "13-queue-desk",
   "body_layouts": {
-    "mobile": "14-queue-desk",
-    "tablet": "14-queue-desk",
-    "desktop": "14-queue-desk"
+    "mobile": "13-queue-desk",
+    "tablet": "13-queue-desk",
+    "desktop": "13-queue-desk"
   },
   "shells": {
-    "mobile": "04-field-mobile-shell",
-    "tablet": "05-field-tablet-shell",
-    "desktop": "06-desktop-sidebar-shell"
+    "mobile": "03-field-mobile-shell",
+    "tablet": "04-field-tablet-shell",
+    "desktop": "05-desktop-sidebar-shell"
   },
   "state": "empty",
   "supported_states": [

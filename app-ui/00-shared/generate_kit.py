@@ -196,61 +196,62 @@ class Component:
 COMPONENTS_CATALOG: list[Component] = [
     # 01-brand
     Component(
-        "01-brand",
-        "01-logo-lockup",
-        "Logo lockup",
-        "Logo left · FCHIP right · slogan under FCHIP (space-aware)",
-        ["all shells", "splash", "login"],
+        '01-brand',
+        '01-logo-lockup',
+        'Logo lockup',
+        'Logo left · FCHIP right · slogan under FCHIP (space-aware)',
+        ['all shells', 'splash', 'login'],
     ),
-    Component("01-brand", "02-slogan-line", "Slogan line", SLOGAN, ["top app bar", "auth", "cover"]),
-    Component("01-brand", "03-master-loop-badge", "Master loop badge", "CAPTURE → FUSE → PREDICT → ALERT → ACT → LEARN", ["splash", "onboarding"]),
-    Component("01-brand", "04-cascade-footer", "Cascade footer", "Cascade Data & Feedback cue", ["desktop side nav"]),
+    Component('01-brand', '02-slogan-line', 'Slogan line', SLOGAN, ['top app bar', 'auth', 'cover']),
+    Component('01-brand', '03-master-loop-badge', 'Master loop badge', 'CAPTURE → FUSE → PREDICT → ALERT → ACT → LEARN', ['splash', 'onboarding']),
+    Component('01-brand', '04-cascade-footer', 'Cascade footer', 'Cascade Data & Feedback cue', ['desktop side nav']),
     # 02-buttons
-    Component("02-buttons", "01-primary-cta", "Primary CTA", "Main action on a screen", ["forms", "lists", "dashboards"]),
-    Component("02-buttons", "02-secondary-cta", "Secondary CTA", "Alternate / cancel action", ["forms", "dialogs"]),
-    Component("02-buttons", "03-danger-cta", "Danger CTA", "Destructive or high-urgency action", ["alerts", "revoke access"]),
-    Component("02-buttons", "04-text-link", "Text link", "Inline navigation without button chrome", ["lists", "auth"]),
-    # 03-chips
-    Component("03-chips", "01-status-chip", "Status chip", "Compact status or count", ["worklists", "queues"]),
-    Component("03-chips", "02-filter-chip-row", "Filter chip row", "Horizontal chip group", ["maps", "lists"]),
-    Component("03-chips", "03-offline-ready-chip", "Offline-ready chip", "Field offline readiness", ["CHW", "feeders"]),
-    Component("03-chips", "04-risk-chip", "Risk chip", "High / elevated risk flag", ["alerts", "facility"]),
-    # 04-cards
-    Component("04-cards", "01-stat-card", "Stat card", "Single metric tile", ["dashboards"]),
-    Component("04-cards", "02-stat-card-row", "Stat card row", "2–4 metrics in a row", ["dashboards", "feeder homes"]),
-    Component("04-cards", "03-list-row-card", "List row card", "Tappable title + subtitle row", ["worklists", "inboxes"]),
-    Component("04-cards", "04-note-banner", "Note banner", "Calm info / positioning note", ["optional CHIS", "EMR note"]),
-    Component("04-cards", "05-warn-banner", "Warn banner", "Attention callout", ["gaps", "consent"]),
-    Component("04-cards", "06-explainability-block", "Explainability block", "Why an alert fired", ["alert follow-up", "district warnings"]),
-    # 05-forms
-    Component("05-forms", "01-labeled-field", "Labeled field", "Label + value input shell", ["all forms"]),
-    Component("05-forms", "02-form-stack", "Form stack", "Vertical stack of labeled fields", ["visit", "referral", "feeder entry"]),
-    Component("05-forms", "03-consent-toggle", "Consent toggle", "Consent / privacy affirmation", ["capture", "self-report", "EMR share"]),
-    Component("05-forms", "04-file-upload-field", "File upload field", "Batch / dataset upload cue", ["NGO", "lab batch", "HMIS"]),
-    Component("05-forms", "05-select-field", "Select field", "Single-choice shell", ["urgency", "facility picker"]),
-    # 06-navigation
-    Component("06-navigation", "01-top-app-bar", "Top app bar", "Brand lockup (logo · FCHIP · slogan by space)", ["all surfaces"]),
-    Component("06-navigation", "02-bottom-nav-field", "Bottom nav · field", "CHW tabs", ["01"]),
-    Component("06-navigation", "03-bottom-nav-caregiver", "Bottom nav · caregiver", "Home · Report · Guidance · More", ["02"]),
-    Component("06-navigation", "04-bottom-nav-feeder", "Bottom nav · feeder", "School / pharmacy / lab / MCH tabs", ["14–19", "21"]),
-    Component("06-navigation", "05-bottom-nav-intel", "Bottom nav · intelligence", "Ingest · AI · GIS · Guidance", ["09"]),
-    Component("06-navigation", "06-bottom-nav-insurance", "Bottom nav · insurance", "Prevent · Cohorts · Trends", ["23"]),
-    Component("06-navigation", "07-side-nav-desktop", "Side nav · desktop", "Desktop chrome navigation", ["facility", "district", "admin", "feeders"]),
-    Component("06-navigation", "08-role-picker-row", "Role picker row", "Workspace choice row", ["role-surface-picker"]),
-    Component("06-navigation", "09-section-header", "Section header", "Title + subtitle block", ["mobile/tablet screens"]),
+    Component('02-buttons', '01-primary-cta', 'Primary CTA', 'Main action on a screen', ['forms', 'lists', 'dashboards']),
+    Component('02-buttons', '02-text-link', 'Text link', 'Inline navigation without button chrome', ['lists', 'auth']),
+    Component('02-buttons', '03-secondary-cta', 'Secondary CTA', 'Alternate / cancel action', ['forms', 'dialogs']),
+    Component('02-buttons', '04-danger-cta', 'Danger CTA', 'Destructive or high-urgency action', ['alerts', 'revoke access']),
+    # 03-forms
+    Component('03-forms', '01-labeled-field', 'Labeled field', 'Label + value input shell', ['all forms']),
+    Component('03-forms', '02-form-stack', 'Form stack', 'Vertical stack of labeled fields', ['visit', 'referral', 'feeder entry']),
+    Component('03-forms', '03-consent-toggle', 'Consent toggle', 'Consent / privacy affirmation', ['capture', 'self-report', 'EMR share']),
+    Component('03-forms', '04-select-field', 'Select field', 'Single-choice shell', ['urgency', 'facility picker']),
+    Component('03-forms', '05-file-upload-field', 'File upload field', 'Batch / dataset upload cue', ['NGO', 'lab batch', 'HMIS']),
+    # 04-navigation
+    Component('04-navigation', '01-role-picker-row', 'Role picker row', 'Workspace choice row', ['role-surface-picker']),
+    Component('04-navigation', '02-section-header', 'Section header', 'Title + subtitle block', ['mobile/tablet screens']),
+    Component('04-navigation', '03-top-app-bar', 'Top app bar', 'Brand lockup (logo · FCHIP · slogan by space)', ['all surfaces']),
+    Component('04-navigation', '04-bottom-nav-field', 'Bottom nav · field', 'CHW tabs', ['01']),
+    Component('04-navigation', '05-side-nav-desktop', 'Side nav · desktop', 'Desktop chrome navigation', ['facility', 'district', 'admin', 'feeders']),
+    Component('04-navigation', '06-bottom-nav-intel', 'Bottom nav · intelligence', 'Ingest · AI · GIS · Guidance', ['09']),
+    Component('04-navigation', '07-bottom-nav-caregiver', 'Bottom nav · caregiver', 'Home · Report · Guidance · More', ['02']),
+    Component('04-navigation', '08-bottom-nav-feeder', 'Bottom nav · feeder', 'School / pharmacy / lab / MCH tabs', ['14–19', '21']),
+    Component('04-navigation', '09-bottom-nav-insurance', 'Bottom nav · insurance', 'Prevent · Cohorts · Trends', ['23']),
+    # 05-chips
+    Component('05-chips', '01-status-chip', 'Status chip', 'Compact status or count', ['worklists', 'queues']),
+    Component('05-chips', '02-risk-chip', 'Risk chip', 'High / elevated risk flag', ['alerts', 'facility']),
+    Component('05-chips', '03-filter-chip-row', 'Filter chip row', 'Horizontal chip group', ['maps', 'lists']),
+    Component('05-chips', '04-offline-ready-chip', 'Offline-ready chip', 'Field offline readiness', ['CHW', 'feeders']),
+    # 06-cards
+    Component('06-cards', '01-list-row-card', 'List row card', 'Tappable title + subtitle row', ['worklists', 'inboxes']),
+    Component('06-cards', '02-stat-card', 'Stat card', 'Single metric tile', ['dashboards']),
+    Component('06-cards', '03-stat-card-row', 'Stat card row', '2–4 metrics in a row', ['dashboards', 'feeder homes']),
+    Component('06-cards', '04-note-banner', 'Note banner', 'Calm info / positioning note', ['optional CHIS', 'EMR note']),
+    Component('06-cards', '05-explainability-block', 'Explainability block', 'Why an alert fired', ['alert follow-up', 'district warnings']),
+    Component('06-cards', '06-warn-banner', 'Warn banner', 'Attention callout', ['gaps', 'consent']),
     # 07-feedback
-    Component("07-feedback", "01-empty-state", "Empty state", "No items yet", ["queues", "inboxes"]),
-    Component("07-feedback", "02-sync-status-strip", "Sync status strip", "Queue · last sync · errors", ["sync screens", "feeder sync"]),
-    Component("07-feedback", "03-success-toast", "Success toast", "Saved / synced confirmation", ["forms"]),
-    Component("07-feedback", "04-error-inline", "Error inline", "Validation / feed error", ["forms", "connectors"]),
-    Component("07-feedback", "05-loading-skeleton", "Loading skeleton", "Placeholder while data loads", ["dashboards"]),
-    # data display
-    Component("08-data-display", "01-hotspot-map", "Hotspot map", "GIS + climate overlay block", ["facility", "district", "coverage"]),
-    Component("08-data-display", "02-queue-item", "Queue item", "Desk / referral / lab queue row", ["07", "16"]),
-    Component("08-data-display", "03-feeder-health-pill", "Feeder health pill", "Healthy / degraded / silent", ["09 feeder board", "admin"]),
-    Component("08-data-display", "04-metrics-spark-row", "Metrics spark row", "Compact trend labels", ["facility", "NGO"]),
-    Component("08-data-display", "05-timeline-step", "Timeline step", "Signal → prediction → action", ["use-case detail"]),
+    Component('07-feedback', '01-empty-state', 'Empty state', 'No items yet', ['queues', 'inboxes']),
+    Component('07-feedback', '02-loading-skeleton', 'Loading skeleton', 'Placeholder while data loads', ['dashboards']),
+    Component('07-feedback', '03-success-toast', 'Success toast', 'Saved / synced confirmation', ['forms']),
+    Component('07-feedback', '04-sync-status-strip', 'Sync status strip', 'Queue · last sync · errors', ['sync screens', 'feeder sync']),
+    Component('07-feedback', '05-error-inline', 'Error inline', 'Validation / feed error', ['forms', 'connectors']),
+    # 08-data-display
+    Component('08-data-display', '01-metrics-spark-row', 'Metrics spark row', 'Compact trend labels', ['facility', 'NGO']),
+    Component('08-data-display', '02-timeline-step', 'Timeline step', 'Signal → prediction → action', ['use-case detail']),
+    Component('08-data-display', '03-feeder-health-pill', 'Feeder health pill', 'Healthy / degraded / silent', ['09 feeder board', 'admin']),
+    Component('08-data-display', '04-hotspot-map', 'Hotspot map', 'GIS + climate overlay block', ['facility', 'district', 'coverage']),
+    Component('08-data-display', '05-queue-item', 'Queue item', 'Desk / referral / lab queue row', ['07', '16']),
 ]
+
 
 
 def render_component(comp: Component, bp: str) -> Image.Image:
@@ -316,45 +317,45 @@ def render_component(comp: Component, bp: str) -> Image.Image:
         tx(draw, (x + 16, y + 24), "Cascade Data & Feedback", size=12, fill=(180, 205, 208), anchor="lm")
     elif slug == "01-primary-cta":
         draw_cta(draw, x, y + 10, w, "Primary action")
-    elif slug == "02-secondary-cta":
+    elif slug == "03-secondary-cta":
         rr(draw, (x, y + 10, x1, y + 58), C["surface"], radius=14, outline=C["primary"], width=2)
         tx(draw, ((x + x1) / 2, y + 34), "Secondary action", size=14, bold=True, fill=C["primary"], anchor="mm")
-    elif slug == "03-danger-cta":
+    elif slug == "04-danger-cta":
         draw_cta(draw, x, y + 10, w, "Urgent / revoke", fill=C["warn"])
-    elif slug == "04-text-link":
+    elif slug == "02-text-link":
         tx(draw, (x, y + 24), "View all alerts ›", size=14, bold=True, fill=C["accent"])
     elif slug == "01-status-chip":
         cx = x
         for label in ("12 visits", "3 alerts", "Offline ready"):
             cx += draw_chip(draw, cx, y + 16, label)
-    elif slug == "02-filter-chip-row":
+    elif slug == "03-filter-chip-row":
         cx = x
         for label in ("District", "Climate", "GIS", "Cases"):
             cx += draw_chip(draw, cx, y + 16, label)
-    elif slug == "03-offline-ready-chip":
+    elif slug == "04-offline-ready-chip":
         draw_chip(draw, x, y + 16, "Offline ready")
         tx(draw, (x, y + 56), "Use on CHW and feeder capture shells", size=11, fill=C["muted"])
-    elif slug == "04-risk-chip":
+    elif slug == "02-risk-chip":
         rr(draw, (x, y + 16, x + 90, y + 40), C["warn_soft"], radius=12)
         tx(draw, (x + 14, y + 28), "High risk", size=11, fill=C["warn"], anchor="lm")
-    elif slug == "01-stat-card":
+    elif slug == "02-stat-card":
         draw_stat(draw, x, y, min(180, w), 72, "Open alerts", "5")
-    elif slug == "02-stat-card-row":
+    elif slug == "03-stat-card-row":
         cols = 2 if bp == "mobile" else 4
         gap = 10
         cw = (w - gap * (cols - 1)) / cols
         labels = [("CHWs", "48"), ("Referrals", "71%"), ("Outreach", "12"), ("Flags", "4")]
         for i, (lab, val) in enumerate(labels[:cols]):
             draw_stat(draw, x + i * (cw + gap), y, cw, 72, lab, val)
-    elif slug == "03-list-row-card":
+    elif slug == "01-list-row-card":
         draw_list_row(draw, x, y, w, "Household visit · Nakato", "Kyebando · due 09:30")
     elif slug == "04-note-banner":
         rr(draw, (x, y, x1, y + 52), C["primary_soft"], radius=12)
         tx(draw, (x + 14, y + 26), "Not core product identity — programme intelligence only", size=11, fill=C["primary"], anchor="lm")
-    elif slug == "05-warn-banner":
+    elif slug == "06-warn-banner":
         rr(draw, (x, y, x1, y + 52), C["warn_soft"], radius=12)
         tx(draw, (x + 14, y + 26), "High outreach / low completed referrals — rebalance", size=11, fill=C["warn"], anchor="lm")
-    elif slug == "06-explainability-block":
+    elif slug == "05-explainability-block":
         rr(draw, (x, y, x1, y + 110), C["surface"], radius=14, outline=C["line"])
         tx(draw, (x + 14, y + 18), "Why flagged", size=11, fill=C["muted"])
         tx(draw, (x + 14, y + 42), "Fever reports + heavy rain + GIS cluster", size=13, bold=True)
@@ -374,52 +375,52 @@ def render_component(comp: Component, bp: str) -> Image.Image:
         tx(draw, (x + 16, y + 28), "Consent recorded", size=13, bold=True, anchor="lm")
         rr(draw, (x1 - 64, y + 14, x1 - 16, y + 42), C["ok"], radius=14)
         tx(draw, (x1 - 40, y + 28), "ON", size=11, bold=True, fill=C["on_primary"], anchor="mm")
-    elif slug == "04-file-upload-field":
+    elif slug == "05-file-upload-field":
         rr(draw, (x, y, x1, y + 88), C["surface"], radius=14, outline=C["line"])
         tx(draw, ((x + x1) / 2, y + 34), "Drop CSV / choose file", size=13, bold=True, fill=C["primary"], anchor="mm")
         tx(draw, ((x + x1) / 2, y + 58), "visits_2026-07-26.csv · 48 records", size=11, fill=C["muted"], anchor="mm")
-    elif slug == "05-select-field":
+    elif slug == "04-select-field":
         draw_field(draw, x, y, w, "Urgency", "Within 48 hours ▾")
-    elif slug == "01-top-app-bar":
+    elif slug == "03-top-app-bar":
         draw_app_bar(img, draw, x, y, x1, y + 52, brand=True)
-    elif slug == "02-bottom-nav-field":
+    elif slug == "04-bottom-nav-field":
         draw_bottom_nav(draw, x, y, x1, y + 64, ["Worklist", "Alerts", "Sync", "More"])
-    elif slug == "03-bottom-nav-caregiver":
+    elif slug == "07-bottom-nav-caregiver":
         draw_bottom_nav(draw, x, y, x1, y + 64, ["Home", "Report", "Guidance", "More"])
-    elif slug == "04-bottom-nav-feeder":
+    elif slug == "08-bottom-nav-feeder":
         draw_bottom_nav(draw, x, y, x1, y + 64, ["Home", "Session", "Screen", "Sync"])
-    elif slug == "05-bottom-nav-intel":
+    elif slug == "06-bottom-nav-intel":
         draw_bottom_nav(draw, x, y, x1, y + 64, ["Ingest", "AI", "GIS", "Guidance"])
-    elif slug == "06-bottom-nav-insurance":
+    elif slug == "09-bottom-nav-insurance":
         draw_bottom_nav(draw, x, y, x1, y + 64, ["Prevent", "Cohorts", "Trends", "More"])
-    elif slug == "07-side-nav-desktop":
+    elif slug == "05-side-nav-desktop":
         side_w = min(220, w)
         draw_side_nav(img, draw, x, y, x + side_w, y + 280, ["Overview", "Map", "Referrals", "Stock"])
-    elif slug == "08-role-picker-row":
+    elif slug == "01-role-picker-row":
         draw_list_row(draw, x, y, w, "CHW / VHT mobile", "Worklists · visits · alerts")
         draw_list_row(draw, x, y + 66, w, "School health feed", "Sessions · screening · absenteeism")
-    elif slug == "09-section-header":
+    elif slug == "02-section-header":
         tx(draw, (x, y + 8), "Today’s worklist", size=22, bold=True)
         tx(draw, (x, y + 40), "Visits · follow-ups · alert tasks", size=12, fill=C["muted"])
     elif slug == "01-empty-state":
         rr(draw, (x, y, x1, y + 120), C["surface"], radius=14, outline=C["line"])
         tx(draw, ((x + x1) / 2, y + 44), "No open items", size=16, bold=True, fill=C["muted"], anchor="mm")
         tx(draw, ((x + x1) / 2, y + 72), "New referrals and alerts will show here", size=12, fill=C["muted"], anchor="mm")
-    elif slug == "02-sync-status-strip":
+    elif slug == "04-sync-status-strip":
         for i, (lab, val) in enumerate([("Queued", "7"), ("Failed", "0"), ("Last sync", "14:22")]):
             draw_stat(draw, x + i * ((w - 20) / 3 + 10), y, (w - 20) / 3, 70, lab, val)
     elif slug == "03-success-toast":
         rr(draw, (x, y, x1, y + 48), C["ok_soft"], radius=12)
         tx(draw, (x + 16, y + 24), "Saved locally · will sync when online", size=12, fill=C["ok"], anchor="lm")
-    elif slug == "04-error-inline":
+    elif slug == "05-error-inline":
         rr(draw, (x, y, x1, y + 48), C["warn_soft"], radius=12)
         tx(draw, (x + 16, y + 24), "Validation failed · 2 rows need review", size=12, fill=C["warn"], anchor="lm")
-    elif slug == "05-loading-skeleton":
+    elif slug == "02-loading-skeleton":
         for i in range(3):
             rr(draw, (x, y + i * 40, x1, y + 28 + i * 40), C["line"], radius=8)
-    elif slug == "01-hotspot-map":
+    elif slug == "04-hotspot-map":
         draw_map_block(draw, x, y, w, 160, "GIS · climate overlay")
-    elif slug == "02-queue-item":
+    elif slug == "05-queue-item":
         draw_list_row(draw, x, y, w, "New · maternal", "Arrive by 16:00")
     elif slug == "03-feeder-health-pill":
         cx = x
@@ -430,9 +431,9 @@ def render_component(comp: Component, bp: str) -> Image.Image:
             rr(draw, (cx, y + 16, cx + tw, y + 40), fill, radius=12)
             tx(draw, (cx + 10, y + 28), label, size=11, fill=color, anchor="lm")
             cx += tw + 8
-    elif slug == "04-metrics-spark-row":
+    elif slug == "01-metrics-spark-row":
         tx(draw, (x, y + 12), "ACT  +28%   ·   ORS  +12%   ·   ANC kit  Stable", size=13, fill=C["primary"])
-    elif slug == "05-timeline-step":
+    elif slug == "02-timeline-step":
         steps = ["Signal", "Predict", "Action", "Learn"]
         for i, s in enumerate(steps):
             cx = x + i * (w / 4) + (w / 8)
@@ -463,125 +464,126 @@ class Layout:
 
 LAYOUTS_CATALOG: list[Layout] = [
     Layout(
-        "01-auth-centered-card",
-        "Auth centered card",
-        "Create account / sign in — phone number + password only",
-        ["01-logo-lockup", "02-slogan-line", "01-labeled-field", "01-primary-cta", "03-master-loop-badge"],
-        ["00-shared"],
+        '01-auth-centered-card',
+        'Auth centered card',
+        'Create account / sign in — phone number + password only',
+        ['01-logo-lockup', '02-slogan-line', '01-labeled-field', '01-primary-cta', '03-master-loop-badge'],
+        ['00-shared'],
     ),
     Layout(
-        "04-field-mobile-shell",
-        "Field mobile shell",
-        "CHW / caregiver / feeder capture on phone",
-        ["01-top-app-bar", "09-section-header", "02-bottom-nav-field", "01-status-chip", "01-primary-cta"],
-        ["01", "02", "14–19", "21"],
+        '02-list-worklist',
+        'List / worklist',
+        'Today’s tasks, alerts, notifications',
+        ['02-section-header', '01-status-chip', '01-list-row-card', '01-primary-cta', '01-empty-state'],
+        ['CHW worklist', 'alerts inbox', 'notifications'],
     ),
     Layout(
-        "05-field-tablet-shell",
-        "Field tablet shell",
-        "Adaptive field IA with a compact navigation rail and wider content column",
-        ["01-top-app-bar", "07-side-nav-desktop", "09-section-header", "02-stat-card-row", "03-list-row-card"],
-        ["01", "02", "feeders"],
+        '03-field-mobile-shell',
+        'Field mobile shell',
+        'CHW / caregiver / feeder capture on phone',
+        ['03-top-app-bar', '02-section-header', '04-bottom-nav-field', '01-status-chip', '01-primary-cta'],
+        ['01', '02', '14–19', '21'],
     ),
     Layout(
-        "06-desktop-sidebar-shell",
-        "Desktop sidebar shell",
-        "Facility · district · admin · feeder desktop chrome",
-        ["07-side-nav-desktop", "01-top-app-bar", "04-cascade-footer"],
-        ["06–13", "14–22 desktop"],
+        '04-field-tablet-shell',
+        'Field tablet shell',
+        'Adaptive field IA with a compact navigation rail and wider content column',
+        ['03-top-app-bar', '05-side-nav-desktop', '02-section-header', '03-stat-card-row', '01-list-row-card'],
+        ['01', '02', 'feeders'],
     ),
     Layout(
-        "11-dashboard-metrics",
-        "Dashboard metrics",
-        "Overview with stats + list + CTA",
-        ["02-stat-card-row", "03-list-row-card", "02-filter-chip-row", "01-primary-cta"],
-        ["facility", "district", "NGO", "feeder homes"],
+        '05-desktop-sidebar-shell',
+        'Desktop sidebar shell',
+        'Facility · district · admin · feeder desktop chrome',
+        ['05-side-nav-desktop', '03-top-app-bar', '04-cascade-footer'],
+        ['06–13', '14–22 desktop'],
     ),
     Layout(
-        "09-form-capture",
-        "Form capture",
-        "Structured offline / online data entry",
-        ["09-section-header", "02-form-stack", "03-consent-toggle", "01-primary-cta", "03-success-toast"],
-        ["visits", "referrals", "all feeder entry"],
+        '06-empty-state-shell',
+        'Empty state shell',
+        'Happy-path layout with empty body (worklist / queue)',
+        ['02-section-header', '01-status-chip', '01-empty-state', '01-primary-cta'],
+        ['01 worklist-empty', '07 referral-queue-empty'],
     ),
     Layout(
-        "02-list-worklist",
-        "List / worklist",
-        "Today’s tasks, alerts, notifications",
-        ["09-section-header", "01-status-chip", "03-list-row-card", "01-primary-cta", "01-empty-state"],
-        ["CHW worklist", "alerts inbox", "notifications"],
+        '07-settings-admin',
+        'Settings / admin',
+        'Org · roles · consent · API scopes · feeder registry',
+        ['02-section-header', '01-list-row-card', '04-note-banner', '01-primary-cta'],
+        ['13', '08 scopes', '20 mapping', '22 config'],
     ),
     Layout(
-        "14-queue-desk",
-        "Queue desk",
-        "Referral / lab / result queues",
-        ["02-filter-chip-row", "02-queue-item", "01-primary-cta", "02-sync-status-strip"],
-        ["07", "16"],
+        '08-form-capture',
+        'Form capture',
+        'Structured offline / online data entry',
+        ['02-section-header', '02-form-stack', '03-consent-toggle', '01-primary-cta', '03-success-toast'],
+        ['visits', 'referrals', 'all feeder entry'],
     ),
     Layout(
-        "13-map-explorer",
-        "Map explorer",
-        "GIS hotspot + climate legend",
-        ["02-filter-chip-row", "01-hotspot-map", "09-section-header"],
-        ["facility map", "district map", "coverage", "population"],
+        '09-detail-action',
+        'Detail + action',
+        'Explainable alert / referral detail with CTA',
+        ['03-stat-card-row', '05-explainability-block', '01-list-row-card', '01-primary-cta', '04-danger-cta'],
+        ['alert follow-up', 'referral detail', 'deploy action'],
     ),
     Layout(
-        "10-detail-action",
-        "Detail + action",
-        "Explainable alert / referral detail with CTA",
-        ["02-stat-card-row", "06-explainability-block", "03-list-row-card", "01-primary-cta", "03-danger-cta"],
-        ["alert follow-up", "referral detail", "deploy action"],
+        '10-dashboard-metrics',
+        'Dashboard metrics',
+        'Overview with stats + list + CTA',
+        ['03-stat-card-row', '01-list-row-card', '03-filter-chip-row', '01-primary-cta'],
+        ['facility', 'district', 'NGO', 'feeder homes'],
     ),
     Layout(
-        "08-settings-admin",
-        "Settings / admin",
-        "Org · roles · consent · API scopes · feeder registry",
-        ["09-section-header", "03-list-row-card", "04-note-banner", "01-primary-cta"],
-        ["13", "08 scopes", "20 mapping", "22 config"],
+        '11-connector-status',
+        'Connector status',
+        'External system health (EMR, HMIS, climate)',
+        ['03-stat-card-row', '01-list-row-card', '03-feeder-health-pill', '06-warn-banner'],
+        ['08', '20', '22', '09 feeder board'],
     ),
     Layout(
-        "15-feeder-home",
-        "Feeder home",
-        "Home for schools, pharmacy, lab, MCH, corporate, NCD, community, climate",
-        ["02-stat-card-row", "03-list-row-card", "03-offline-ready-chip", "01-primary-cta", "04-bottom-nav-feeder"],
-        ["14–22"],
+        '12-map-explorer',
+        'Map explorer',
+        'GIS hotspot + climate legend',
+        ['03-filter-chip-row', '04-hotspot-map', '02-section-header'],
+        ['facility map', 'district map', 'coverage', 'population'],
     ),
     Layout(
-        "03-dual-pane-desktop",
-        "Dual-pane desktop",
-        "Two-column lists / dashboards on wide screens",
-        ["07-side-nav-desktop", "03-list-row-card", "02-stat-card-row"],
-        ["facility overview", "cascade metrics", "NGO monitor"],
+        '13-queue-desk',
+        'Queue desk',
+        'Referral / lab / result queues',
+        ['03-filter-chip-row', '05-queue-item', '01-primary-cta', '04-sync-status-strip'],
+        ['07', '16'],
     ),
     Layout(
-        "16-upload-batch",
-        "Upload / batch",
-        "File upload + validation + push to ingest",
-        ["04-file-upload-field", "04-error-inline", "03-success-toast", "01-primary-cta", "04-note-banner"],
-        ["NGO upload", "lab batch", "outreach batch", "HMIS exchange"],
+        '14-feeder-home',
+        'Feeder home',
+        'Home for schools, pharmacy, lab, MCH, corporate, NCD, community, climate',
+        ['03-stat-card-row', '01-list-row-card', '04-offline-ready-chip', '01-primary-cta', '08-bottom-nav-feeder'],
+        ['14–22'],
     ),
     Layout(
-        "12-connector-status",
-        "Connector status",
-        "External system health (EMR, HMIS, climate)",
-        ["02-stat-card-row", "03-list-row-card", "03-feeder-health-pill", "05-warn-banner"],
-        ["08", "20", "22", "09 feeder board"],
+        '15-upload-batch',
+        'Upload / batch',
+        'File upload + validation + push to ingest',
+        ['05-file-upload-field', '05-error-inline', '03-success-toast', '01-primary-cta', '04-note-banner'],
+        ['NGO upload', 'lab batch', 'outreach batch', 'HMIS exchange'],
     ),
     Layout(
-        "07-empty-state-shell",
-        "Empty state shell",
-        "Happy-path layout with empty body (worklist / queue)",
-        ["09-section-header", "01-status-chip", "01-empty-state", "01-primary-cta"],
-        ["01 worklist-empty", "07 referral-queue-empty"],
+        '16-dual-pane-desktop',
+        'Dual-pane desktop',
+        'Two-column lists / dashboards on wide screens',
+        ['05-side-nav-desktop', '01-list-row-card', '03-stat-card-row'],
+        ['facility overview', 'cascade metrics', 'NGO monitor'],
     ),
     Layout(
-        "17-insurance-prevention",
-        "Insurance prevention",
-        "§7 prevention population insights — not claims / not CHIS identity",
-        ["02-stat-card-row", "03-list-row-card", "04-note-banner", "01-primary-cta"],
-        ["12-insurance-insights"],
+        '17-insurance-prevention',
+        'Insurance prevention',
+        '§7 prevention population insights — not claims / not CHIS identity',
+        ['03-stat-card-row', '01-list-row-card', '04-note-banner', '01-primary-cta'],
+        ['12-insurance-insights'],
     ),
 ]
+
 
 
 def render_layout(layout: Layout, bp: str) -> Image.Image:
@@ -597,20 +599,20 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
     if bp in {"tablet", "desktop"} and slug not in {"01-auth-centered-card"}:
         left = 76 if bp == "tablet" else 220
         items = {
-            "06-desktop-sidebar-shell": ["Overview", "Map", "Referrals", "Stock"],
-            "11-dashboard-metrics": ["Overview", "Map", "Referrals", "Stock"],
-            "03-dual-pane-desktop": ["Overview", "Map", "Metrics", "Plan"],
-            "08-settings-admin": ["Org", "Users", "Consent", "APIs"],
-            "12-connector-status": ["Status", "Scopes", "Log", "Onboard"],
-            "15-feeder-home": ["Home", "Session", "Screen", "Sync"],
-            "13-map-explorer": ["Map", "Warnings", "Metrics", "Plan"],
-            "09-form-capture": ["Home", "Capture", "Queue", "Sync"],
+            "05-desktop-sidebar-shell": ["Overview", "Map", "Referrals", "Stock"],
+            "10-dashboard-metrics": ["Overview", "Map", "Referrals", "Stock"],
+            "16-dual-pane-desktop": ["Overview", "Map", "Metrics", "Plan"],
+            "07-settings-admin": ["Org", "Users", "Consent", "APIs"],
+            "11-connector-status": ["Status", "Scopes", "Log", "Onboard"],
+            "14-feeder-home": ["Home", "Session", "Screen", "Sync"],
+            "12-map-explorer": ["Map", "Warnings", "Metrics", "Plan"],
+            "08-form-capture": ["Home", "Capture", "Queue", "Sync"],
             "02-list-worklist": ["Worklist", "Alerts", "Sync", "More"],
-            "14-queue-desk": ["Queue", "Detail", "Outcomes", "Sync"],
-            "10-detail-action": ["Inbox", "Detail", "Act", "More"],
-            "16-upload-batch": ["Upload", "Validate", "Push", "Audit"],
-            "04-field-mobile-shell": ["Worklist", "Alerts", "Sync", "More"],
-            "05-field-tablet-shell": ["Worklist", "Alerts", "Sync", "More"],
+            "13-queue-desk": ["Queue", "Detail", "Outcomes", "Sync"],
+            "09-detail-action": ["Inbox", "Detail", "Act", "More"],
+            "15-upload-batch": ["Upload", "Validate", "Push", "Audit"],
+            "03-field-mobile-shell": ["Worklist", "Alerts", "Sync", "More"],
+            "04-field-tablet-shell": ["Worklist", "Alerts", "Sync", "More"],
         }.get(slug, ["Home", "Map", "Metrics", "More"])
         if bp == "tablet":
             draw.rectangle([0, 0, left, h], fill=C["chrome"])
@@ -647,25 +649,25 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
         if bp == "mobile":
             bottom_nav_h = 72
             nav_items = {
-                "04-field-mobile-shell": ["Worklist", "Alerts", "Sync", "More"],
-                "05-field-tablet-shell": ["Worklist", "Alerts", "Sync", "More"],
-                "15-feeder-home": ["Home", "Session", "Screen", "Sync"],
+                "03-field-mobile-shell": ["Worklist", "Alerts", "Sync", "More"],
+                "04-field-tablet-shell": ["Worklist", "Alerts", "Sync", "More"],
+                "14-feeder-home": ["Home", "Session", "Screen", "Sync"],
                 "02-list-worklist": ["Worklist", "Alerts", "Sync", "More"],
-                "09-form-capture": ["Home", "Form", "Sync", "More"],
-                "14-queue-desk": ["Queue", "Open", "Done", "More"],
-                "13-map-explorer": ["Map", "Warnings", "Metrics", "Plan"],
-                "11-dashboard-metrics": ["Overview", "Map", "Referrals", "Stock"],
-                "10-detail-action": ["Inbox", "Act", "Sync", "More"],
-                "16-upload-batch": ["Upload", "Queue", "Sync", "More"],
-                "08-settings-admin": ["Org", "Users", "Consent", "More"],
-                "12-connector-status": ["Status", "Log", "Scopes", "More"],
-                "03-dual-pane-desktop": ["Overview", "Map", "Metrics", "More"],
+                "08-form-capture": ["Home", "Form", "Sync", "More"],
+                "13-queue-desk": ["Queue", "Open", "Done", "More"],
+                "12-map-explorer": ["Map", "Warnings", "Metrics", "Plan"],
+                "10-dashboard-metrics": ["Overview", "Map", "Referrals", "Stock"],
+                "09-detail-action": ["Inbox", "Act", "Sync", "More"],
+                "15-upload-batch": ["Upload", "Queue", "Sync", "More"],
+                "07-settings-admin": ["Org", "Users", "Consent", "More"],
+                "11-connector-status": ["Status", "Log", "Scopes", "More"],
+                "16-dual-pane-desktop": ["Overview", "Map", "Metrics", "More"],
             }.get(slug, ["Home", "List", "Sync", "More"])
             draw_bottom_nav(draw, 0, h - bottom_nav_h, w, h, nav_items)
 
     pad = 16 if bp == "mobile" else (24 if bp == "tablet" else 32)
     available_w = w - left - pad * 2
-    content_cap = 720 if slug in {"09-form-capture", "08-settings-admin", "16-upload-batch"} else 1200
+    content_cap = 720 if slug in {"08-form-capture", "07-settings-admin", "15-upload-batch"} else 1200
     max_w = min(available_w, content_cap)
     x = left + pad + max(0, (available_w - max_w) / 2)
     y = top + 18
@@ -712,7 +714,7 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
         tx(draw, (x, y), layout.purpose, size=12, fill=C["muted"])
         y += 26
 
-    if slug in {"11-dashboard-metrics", "15-feeder-home", "12-connector-status", "10-detail-action", "03-dual-pane-desktop", "05-field-tablet-shell"}:
+    if slug in {"10-dashboard-metrics", "14-feeder-home", "11-connector-status", "09-detail-action", "16-dual-pane-desktop", "04-field-tablet-shell"}:
         cols = 2 if bp == "mobile" else 4
         gap = 10
         cw = (max_w - gap * (cols - 1)) / cols
@@ -721,13 +723,13 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
             draw_stat(draw, x + i * (cw + gap), y, cw, 70, lab, val)
         y += 86
 
-    if slug in {"02-list-worklist", "04-field-mobile-shell", "15-feeder-home", "14-queue-desk"}:
+    if slug in {"02-list-worklist", "03-field-mobile-shell", "14-feeder-home", "13-queue-desk"}:
         cx = x
         for chip in ("Today", "3 alerts", "Offline ready"):
             cx += draw_chip(draw, cx, y, chip)
         y += 40
 
-    if slug == "13-map-explorer":
+    if slug == "12-map-explorer":
         cx = x
         for chip in ("GIS", "Climate", "Cases"):
             cx += draw_chip(draw, cx, y, chip)
@@ -736,7 +738,7 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
         draw_map_block(draw, x, y, max_w, map_h, "Hotspots + climate overlay")
         y += map_h + 12
 
-    if slug == "09-form-capture":
+    if slug == "08-form-capture":
         for lab, val in [("Household ID", "HH-4821"), ("Village", "Kyebando"), ("Consent", "Recorded")]:
             if y + 70 > content_bottom - 60:
                 break
@@ -747,7 +749,7 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
         y += 60
         draw_cta(draw, x, min(y, content_bottom - 56), max_w, "Save locally")
 
-    elif slug == "16-upload-batch":
+    elif slug == "15-upload-batch":
         rr(draw, (x, y, x + max_w, y + 90), C["surface"], radius=14, outline=C["line"])
         tx(draw, (x + max_w / 2, y + 36), "Drop CSV / choose file", size=13, bold=True, fill=C["primary"], anchor="mm")
         tx(draw, (x + max_w / 2, y + 60), "48 records · 2 warnings", size=11, fill=C["muted"], anchor="mm")
@@ -757,7 +759,7 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
         y += 56
         draw_cta(draw, x, y, max_w, "Upload to ingest")
 
-    elif slug == "08-settings-admin":
+    elif slug == "07-settings-admin":
         for title, sub in [
             ("Org · catchment · facilities", "Pilot peri-urban catchments"),
             ("Users & roles", "Consumers + feeder parties"),
@@ -770,7 +772,7 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
             y += 66
         draw_cta(draw, x, min(y + 4, content_bottom - 56), max_w, "Save")
 
-    elif slug == "10-detail-action":
+    elif slug == "09-detail-action":
         rr(draw, (x, y, x + max_w, y + 100), C["surface"], radius=14, outline=C["line"])
         tx(draw, (x + 14, y + 18), "Why flagged", size=11, fill=C["muted"])
         tx(draw, (x + 14, y + 42), "Fever + rainfall + GIS cluster", size=13, bold=True)
@@ -778,7 +780,7 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
         y += 116
         draw_cta(draw, x, y, max_w, "Mark follow-up done")
 
-    elif slug == "07-empty-state-shell":
+    elif slug == "06-empty-state-shell":
         rr(draw, (x, y, x + max_w, y + 156), C["surface"], radius=16, outline=C["line"])
         tx(draw, (x + max_w / 2, y + 52), "No open items", size=16, bold=True, fill=C["muted"], anchor="mm")
         tx(
@@ -791,7 +793,7 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
         )
         draw_cta(draw, x, y + 172, max_w, "Refresh")
 
-    elif slug == "06-desktop-sidebar-shell":
+    elif slug == "05-desktop-sidebar-shell":
         tx(draw, (x, y), "Content region", size=16, bold=True)
         y += 28
         rr(draw, (x, y, x + max_w, content_bottom - 20), C["surface"], radius=16, outline=C["line"])
@@ -804,7 +806,7 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
             anchor="mm",
         )
 
-    elif slug == "03-dual-pane-desktop" and bp == "desktop":
+    elif slug == "16-dual-pane-desktop" and bp == "desktop":
         col = (max_w - 16) / 2
         rows = [("Fever cluster", "3 villages"), ("Maternal risk", "4 open"), ("Stock hint", "ACT +28%"), ("Gap", "Referrals")]
         for i, (t, s) in enumerate(rows):
@@ -816,16 +818,16 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
             ("Secondary item", "Subtitle · context"),
             ("Tertiary item", "Subtitle · context"),
         ]
-        if slug == "14-queue-desk":
+        if slug == "13-queue-desk":
             rows = [("New · maternal", "Arrive by 16:00"), ("In progress · fever", "Lab pending"), ("Completed · BP", "Outcome synced")]
         if slug == "02-list-worklist":
             rows = [("Household visit · Nakato", "Kyebando · due 09:30"), ("Follow-up · high BP", "Alert task"), ("ANC check · Achieng", "Due today")]
-        if slug == "12-connector-status":
+        if slug == "11-connector-status":
             rows = [("Clinic A", "Healthy · real-time"), ("Climate API", "Healthy"), ("School · Kikaaya", "Session overdue")]
-        if slug == "15-feeder-home":
+        if slug == "14-feeder-home":
             rows = [("Next task", "Log today’s session"), ("Pending sync", "2 forms"), ("Open flags", "Absenteeism + fever")]
 
-        if bp == "desktop" and slug in {"11-dashboard-metrics", "02-list-worklist", "15-feeder-home"} and len(rows) >= 3:
+        if bp == "desktop" and slug in {"10-dashboard-metrics", "02-list-worklist", "14-feeder-home"} and len(rows) >= 3:
             col = (max_w - 16) / 2
             for i, (t, s) in enumerate(rows):
                 draw_list_row(draw, x if i % 2 == 0 else x + col + 16, y + (i // 2) * 66, col, t, s)
@@ -836,7 +838,7 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
                     break
                 draw_list_row(draw, x, y, max_w, t, s)
                 y += 66
-            if slug not in {"13-map-explorer", "06-desktop-sidebar-shell"}:
+            if slug not in {"12-map-explorer", "05-desktop-sidebar-shell"}:
                 draw_cta(draw, x, min(y + 4, content_bottom - 56), max_w, "Primary action")
 
     return img
@@ -906,17 +908,17 @@ def write_layouts_readme(layouts: list[Layout]):
         "| Need | Layout |",
         "| --- | --- |",
         "| Splash / login / role pick | `01-auth-centered-card` |",
-        "| CHW phone capture | `04-field-mobile-shell` + `09-form-capture` / `02-list-worklist` |",
-        "| Tablet field work | `05-field-tablet-shell` |",
-        "| Desktop consoles | `06-desktop-sidebar-shell` + body layout |",
-        "| Overview dashboards | `11-dashboard-metrics` or `03-dual-pane-desktop` |",
-        "| Feeder party home | `15-feeder-home` |",
-        "| Maps | `13-map-explorer` |",
-        "| Queues | `14-queue-desk` |",
-        "| Alert / referral detail | `10-detail-action` |",
-        "| Admin / scopes / registry | `08-settings-admin` |",
-        "| CSV / API batches | `16-upload-batch` |",
-        "| EMR / HMIS / climate health | `12-connector-status` |",
+        "| CHW phone capture | `03-field-mobile-shell` + `08-form-capture` / `02-list-worklist` |",
+        "| Tablet field work | `04-field-tablet-shell` |",
+        "| Desktop consoles | `05-desktop-sidebar-shell` + body layout |",
+        "| Overview dashboards | `10-dashboard-metrics` or `16-dual-pane-desktop` |",
+        "| Feeder party home | `14-feeder-home` |",
+        "| Maps | `12-map-explorer` |",
+        "| Queues | `13-queue-desk` |",
+        "| Alert / referral detail | `09-detail-action` |",
+        "| Admin / scopes / registry | `07-settings-admin` |",
+        "| CSV / API batches | `15-upload-batch` |",
+        "| EMR / HMIS / climate health | `11-connector-status` |",
         "",
         "## Regenerate",
         "",

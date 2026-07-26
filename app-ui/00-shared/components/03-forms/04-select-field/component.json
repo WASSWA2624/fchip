@@ -1,0 +1,20 @@
+{
+  "title": "Select field",
+  "category": "03-forms",
+  "slug": "04-select-field",
+  "purpose": "Single-choice shell",
+  "used_by": [
+    "urgency",
+    "facility picker"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

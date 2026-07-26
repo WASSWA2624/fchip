@@ -3,16 +3,16 @@
   "subtitle": "Disease distribution \u00b7 hotspots \u00b7 gaps",
   "kind": "map",
   "nav": "intel",
-  "layout": "13-map-explorer",
+  "layout": "12-map-explorer",
   "body_layouts": {
-    "mobile": "13-map-explorer",
-    "tablet": "13-map-explorer",
-    "desktop": "13-map-explorer"
+    "mobile": "12-map-explorer",
+    "tablet": "12-map-explorer",
+    "desktop": "12-map-explorer"
   },
   "shells": {
-    "mobile": "04-field-mobile-shell",
-    "tablet": "05-field-tablet-shell",
-    "desktop": "06-desktop-sidebar-shell"
+    "mobile": "03-field-mobile-shell",
+    "tablet": "04-field-tablet-shell",
+    "desktop": "05-desktop-sidebar-shell"
   },
   "state": "default",
   "supported_states": [

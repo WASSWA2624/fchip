@@ -1,0 +1,19 @@
+{
+  "title": "Top app bar",
+  "category": "04-navigation",
+  "slug": "03-top-app-bar",
+  "purpose": "Brand lockup (logo \u00b7 FCHIP \u00b7 slogan by space)",
+  "used_by": [
+    "all surfaces"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

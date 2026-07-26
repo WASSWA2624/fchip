@@ -22,9 +22,9 @@ _Subtitle: Offline school forms → cloud_
 | Chronology status | `not-started` |
 | Route | `/15-schools-health/05-school-sync-status` |
 | Parent route | `/15-schools-health/05-school-sync-status` |
-| Layout | `10-detail-action` |
-| Body layouts | `mobile` → `10-detail-action`, `tablet` → `10-detail-action`, `desktop` → `10-detail-action` |
-| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
+| Layout | `09-detail-action` |
+| Body layouts | `mobile` → `09-detail-action`, `tablet` → `09-detail-action`, `desktop` → `09-detail-action` |
+| Shells | `mobile` → `03-field-mobile-shell`, `tablet` → `04-field-tablet-shell`, `desktop` → `05-desktop-sidebar-shell` |
 | Roles | `school-health-worker` |
 | Supported states | `default`, `loading`, `empty`, `error`, `forbidden`, `success`, `conflict`, `offline` |
 | Localization prefix | `15_schools_health.05_school_sync_status` |
@@ -48,7 +48,7 @@ Also read:
 
 - `app-ui/15-schools-health/README.md`
 - `app-ui/00-shared/tokens.json`
-- Shared layout specimens for `10-detail-action` under `app-ui/00-shared/layouts/10-detail-action/`
+- Shared layout specimens for `09-detail-action` under `app-ui/00-shared/layouts/09-detail-action/`
 - Shared component specimens listed by that layout's `layout.json` `composes` array
 - Connected journeys under `app-flows/` (especially `07-navigation.md` and module journeys)
 
@@ -64,7 +64,7 @@ Also read:
 | Data / repository impl | `frontend/lib/features/schools_health/data/` |
 | Repository contract | `frontend/lib/features/schools_health/domain/repositories/schools_health_repository.dart` |
 | Router entry | `frontend/lib/app/router/` (route must equal `/15-schools-health/05-school-sync-status`) |
-| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `10-detail-action`) |
+| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `09-detail-action`) |
 | Shared components | `frontend/lib/shared/components/` |
 | Tests | `frontend/test/features/schools_health/` |
 | Backend module | `backend/src/modules/schools_health/` |
@@ -164,7 +164,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-091`:
 
 4. Treat `screen.json` in this folder as the contract for route, roles, access, layout, shells, states, navigation, and `l10n_key_prefix`.
 5. Open all six mockups (mobile/tablet/desktop × light/dark) and note hierarchy, spacing, CTAs, empty regions, and chrome.
-6. Resolve `10-detail-action` and every composed component against `app-ui/00-shared/`.
+6. Resolve `09-detail-action` and every composed component against `app-ui/00-shared/`.
 7. Map navigation:
    - Tabs: Home → `/15-schools-health/01-school-home`; Session → `/15-schools-health/02-health-education-session`; Screen → `/15-schools-health/03-learner-screening-entry`; Sync → `/15-schools-health/05-school-sync-status`
    - Primary action: Sync now → `/15-schools-health/05-school-sync-status`
@@ -174,7 +174,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-091`:
 ### Phase 2 — Flutter UI on fixtures (maximum reuse)
 
 8. Register route `/15-schools-health/05-school-sync-status` with the access guard for roles `school-health-worker`.
-9. Compose the page from shared shells + `10-detail-action` + catalog components. Prefer:
+9. Compose the page from shared shells + `09-detail-action` + catalog components. Prefer:
    - `AsyncStateScaffold`, `ResponsivePage`, `AppWorkspace`, `AppListTable`, `AppWorkspaceDetailPanel`, `AppActionPanel` when they fit `ui-workspace.mdc`.
 10. Implement **every** supported state: `default`, `loading`, `empty`, `error`, `forbidden`, `success`, `conflict`, `offline`.
 11. Add ARB keys under `15_schools_health.05_school_sync_status` only — no hard-coded user strings.
@@ -204,7 +204,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-091`:
 ## Reusability checklist
 
 - [ ] No duplicate button, chip, banner, form field, nav, or feedback widget invented in the feature folder when a shared catalog item exists
-- [ ] Layout `10-detail-action` is a shared layout implementation, not a one-off Scaffold tree
+- [ ] Layout `09-detail-action` is a shared layout implementation, not a one-off Scaffold tree
 - [ ] Feature widgets accept data via typed props / providers — no embedded API clients in widgets
 - [ ] Repository is the only place that talks to the network / local DB for this screen's data
 - [ ] Permissions hide unauthorized actions rather than showing disabled dead ends when policy says omit

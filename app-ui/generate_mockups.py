@@ -262,7 +262,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Save locally",
         nav="field",
-        layout="09-form-capture",
+        layout="08-form-capture",
     ),
     Screen(
         "01-chw-vht-mobile",
@@ -279,7 +279,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Continue to MCH",
         nav="field",
-        layout="09-form-capture",
+        layout="08-form-capture",
     ),
     Screen(
         "01-chw-vht-mobile",
@@ -296,7 +296,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Save indicators",
         nav="field",
-        layout="09-form-capture",
+        layout="08-form-capture",
     ),
     Screen(
         "01-chw-vht-mobile",
@@ -313,7 +313,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Submit referral",
         nav="field",
-        layout="09-form-capture",
+        layout="08-form-capture",
     ),
     Screen(
         "01-chw-vht-mobile",
@@ -345,7 +345,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Mark follow-up done",
         nav="field",
-        layout="10-detail-action",
+        layout="09-detail-action",
     ),
     Screen(
         "01-chw-vht-mobile",
@@ -361,7 +361,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Sync now",
         nav="field",
-        layout="10-detail-action",
+        layout="09-detail-action",
     ),
     Screen(
         "01-chw-vht-mobile",
@@ -378,7 +378,7 @@ SCREENS: list[Screen] = [
         note="Do not invent a new product — same sync surface, error state",
         primary_cta="Retry now",
         nav="field",
-        layout="10-detail-action",
+        layout="09-detail-action",
         state="error",
     ),
     # 02 community / caregiver
@@ -395,7 +395,7 @@ SCREENS: list[Screen] = [
             ("Guidance", "Hydration · heat advice"),
         ],
         nav="caregiver",
-        layout="15-feeder-home",
+        layout="14-feeder-home",
     ),
     Screen(
         "09-community-caregiver",
@@ -411,7 +411,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Send to CHW worklist",
         nav="caregiver",
-        layout="09-form-capture",
+        layout="08-form-capture",
     ),
     Screen(
         "09-community-caregiver",
@@ -441,7 +441,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Submit needs signal",
         nav="caregiver",
-        layout="09-form-capture",
+        layout="08-form-capture",
     ),
     # 03 outreach
     Screen(
@@ -667,7 +667,7 @@ SCREENS: list[Screen] = [
             ("Horizon", "Next 14 days"),
         ],
         nav="facility",
-        layout="11-dashboard-metrics",
+        layout="10-dashboard-metrics",
     ),
     Screen(
         "04-facility-dashboard",
@@ -686,7 +686,7 @@ SCREENS: list[Screen] = [
         note="Not an EMR pharmacy module — population demand intelligence",
         primary_cta="Share with district / pharmacy",
         nav="facility",
-        layout="11-dashboard-metrics",
+        layout="10-dashboard-metrics",
     ),
     Screen(
         "04-facility-dashboard",
@@ -747,7 +747,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Claim next",
         nav="facility",
-        layout="14-queue-desk",
+        layout="13-queue-desk",
     ),
     Screen(
         "05-referrals-desk",
@@ -759,7 +759,7 @@ SCREENS: list[Screen] = [
         note="Empty state — new CHW referrals will appear here",
         primary_cta="Refresh queue",
         nav="facility",
-        layout="14-queue-desk",
+        layout="13-queue-desk",
         state="empty",
     ),
     Screen(
@@ -777,7 +777,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Mark completed",
         nav="facility",
-        layout="10-detail-action",
+        layout="09-detail-action",
     ),
     Screen(
         "05-referrals-desk",
@@ -793,7 +793,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Sync outcome",
         nav="facility",
-        layout="09-form-capture",
+        layout="08-form-capture",
     ),
     # 08 EMR connector
     Screen(
@@ -810,7 +810,7 @@ SCREENS: list[Screen] = [
         ],
         note="Authenticated · consent-aware · least privilege",
         nav="admin",
-        layout="12-connector-status",
+        layout="11-connector-status",
     ),
     Screen(
         "06-emr-connector",
@@ -827,7 +827,7 @@ SCREENS: list[Screen] = [
         note="Error state of the same connector — not a new product",
         primary_cta="Retry failed pushes",
         nav="admin",
-        layout="12-connector-status",
+        layout="11-connector-status",
         state="error",
     ),
     Screen(
@@ -844,7 +844,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Save scopes",
         nav="admin",
-        layout="08-settings-admin",
+        layout="07-settings-admin",
     ),
     Screen(
         "06-emr-connector",
@@ -876,7 +876,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Issue feeder credentials",
         nav="admin",
-        layout="09-form-capture",
+        layout="08-form-capture",
     ),
     # 09 intelligence (shared stack — not district-owned chrome)
     Screen(
@@ -893,7 +893,7 @@ SCREENS: list[Screen] = [
             ("EMR APIs · climate API", "Real-time"),
         ],
         nav="intel",
-        layout="11-dashboard-metrics",
+        layout="10-dashboard-metrics",
     ),
     Screen(
         "02-intelligence",
@@ -909,7 +909,7 @@ SCREENS: list[Screen] = [
             ("NCD", "BP hotspot · parish 3"),
         ],
         nav="intel",
-        layout="11-dashboard-metrics",
+        layout="10-dashboard-metrics",
     ),
     Screen(
         "02-intelligence",
@@ -920,7 +920,7 @@ SCREENS: list[Screen] = [
         chips=["Cases", "Resources"],
         note="Village/parish geography for early warning",
         nav="intel",
-        layout="13-map-explorer",
+        layout="12-map-explorer",
     ),
     Screen(
         "02-intelligence",
@@ -935,7 +935,7 @@ SCREENS: list[Screen] = [
             ("Action window", "Deploy testing / nets"),
         ],
         nav="intel",
-        layout="11-dashboard-metrics",
+        layout="10-dashboard-metrics",
     ),
     Screen(
         "02-intelligence",
@@ -953,7 +953,7 @@ SCREENS: list[Screen] = [
         note="Architecture clinical-support box (§4.4 / §5) — guidance only",
         primary_cta="Push to CHW worklist",
         nav="intel",
-        layout="10-detail-action",
+        layout="09-detail-action",
     ),
     Screen(
         "02-intelligence",
@@ -969,7 +969,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Save routing",
         nav="intel",
-        layout="08-settings-admin",
+        layout="07-settings-admin",
     ),
     Screen(
         "02-intelligence",
@@ -985,7 +985,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Open silent feeders",
         nav="intel",
-        layout="12-connector-status",
+        layout="11-connector-status",
     ),
     # 10 district
     Screen(
@@ -1041,7 +1041,7 @@ SCREENS: list[Screen] = [
             ("School health push", "2 sessions"),
         ],
         nav="district",
-        layout="11-dashboard-metrics",
+        layout="10-dashboard-metrics",
     ),
     Screen(
         "08-district-moh",
@@ -1060,7 +1060,7 @@ SCREENS: list[Screen] = [
         note="§7 ministries — national/sub-national; not a separate product identity",
         primary_cta="Open district drill-down",
         nav="district",
-        layout="11-dashboard-metrics",
+        layout="10-dashboard-metrics",
     ),
     # 11 NGO
     Screen(
@@ -1076,7 +1076,7 @@ SCREENS: list[Screen] = [
             ("Risk flag", "Referral completion dip"),
         ],
         nav="partner",
-        layout="11-dashboard-metrics",
+        layout="10-dashboard-metrics",
     ),
     Screen(
         "14-ngo-partner",
@@ -1107,7 +1107,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Export training brief",
         nav="partner",
-        layout="11-dashboard-metrics",
+        layout="10-dashboard-metrics",
     ),
     Screen(
         "14-ngo-partner",
@@ -1854,7 +1854,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Submit IGA signal",
         nav="partner",
-        layout="09-form-capture",
+        layout="08-form-capture",
     ),
     # 23 insurance insights (§7 — prevention population views only)
     Screen(
@@ -1873,7 +1873,7 @@ SCREENS: list[Screen] = [
         note="Not claims admin · not CHIS product identity",
         primary_cta="Open risk cohorts",
         nav="insurance",
-        layout="11-dashboard-metrics",
+        layout="17-insurance-prevention",
     ),
     Screen(
         "12-insurance-insights",
@@ -1905,7 +1905,7 @@ SCREENS: list[Screen] = [
         note="*Illustrative intelligence metric — not a claims ledger",
         primary_cta="Schedule partner report",
         nav="insurance",
-        layout="11-dashboard-metrics",
+        layout="10-dashboard-metrics",
     ),
     # Shared production states and completion steps.
     Screen(
@@ -1917,7 +1917,7 @@ SCREENS: list[Screen] = [
         note="Ask an administrator if your role or catchment assignment has changed.",
         primary_cta="Return to workspaces",
         nav="auth",
-        layout="07-empty-state-shell",
+        layout="06-empty-state-shell",
         state="forbidden",
     ),
     Screen(
@@ -1929,7 +1929,7 @@ SCREENS: list[Screen] = [
         note="Return to a workspace you can access.",
         primary_cta="Return to workspaces",
         nav="auth",
-        layout="07-empty-state-shell",
+        layout="06-empty-state-shell",
         state="error",
     ),
     Screen(
@@ -1946,7 +1946,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Save preferences",
         nav="shared",
-        layout="08-settings-admin",
+        layout="07-settings-admin",
     ),
     Screen(
         "01-chw-vht-mobile",
@@ -1972,7 +1972,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Create referral",
         nav="field",
-        layout="10-detail-action",
+        layout="09-detail-action",
         state="success",
     ),
     Screen(
@@ -1989,7 +1989,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Return to worklist",
         nav="field",
-        layout="10-detail-action",
+        layout="09-detail-action",
         state="success",
     ),
     Screen(
@@ -2006,7 +2006,7 @@ SCREENS: list[Screen] = [
         note="Nothing will be discarded until you choose which update to keep.",
         primary_cta="Review versions",
         nav="field",
-        layout="10-detail-action",
+        layout="09-detail-action",
         state="conflict",
     ),
     Screen(
@@ -2022,7 +2022,7 @@ SCREENS: list[Screen] = [
         ],
         primary_cta="Return to evidence catalog",
         nav="partner",
-        layout="10-detail-action",
+        layout="09-detail-action",
         state="loading",
     ),
 ]
@@ -2251,23 +2251,23 @@ def infer_layout(screen: Screen) -> str:
     if screen.kind == "auth":
         return "01-auth-centered-card"
     if screen.kind == "map":
-        return "13-map-explorer"
+        return "12-map-explorer"
     if screen.kind == "queue":
-        return "14-queue-desk"
+        return "13-queue-desk"
     if screen.kind == "empty":
-        return "07-empty-state-shell"
+        return "06-empty-state-shell"
     if screen.kind == "settings":
-        return "08-settings-admin"
+        return "07-settings-admin"
     if screen.kind == "detail":
-        return "12-connector-status" if "connector" in screen.slug else "10-detail-action"
+        return "11-connector-status" if "connector" in screen.slug else "09-detail-action"
     if screen.kind == "form":
-        return "16-upload-batch" if "upload" in screen.slug else "09-form-capture"
+        return "15-upload-batch" if "upload" in screen.slug else "08-form-capture"
     if screen.kind == "dashboard":
         if screen.module == "12-insurance-insights":
             return "17-insurance-prevention"
         if screen.module[:2].isdigit() and 14 <= int(screen.module[:2]) <= 22:
-            return "15-feeder-home"
-        return "11-dashboard-metrics"
+            return "14-feeder-home"
+        return "10-dashboard-metrics"
     return "02-list-worklist"
 
 
@@ -2275,10 +2275,10 @@ def infer_shell_layout(screen: Screen, breakpoint: str) -> str:
     if screen.nav == "auth":
         return "01-auth-centered-card"
     if breakpoint == "mobile":
-        return "04-field-mobile-shell"
+        return "03-field-mobile-shell"
     if breakpoint == "tablet":
-        return "05-field-tablet-shell"
-    return "06-desktop-sidebar-shell"
+        return "04-field-tablet-shell"
+    return "05-desktop-sidebar-shell"
 
 
 def infer_phase(screen: Screen) -> str:
@@ -2777,7 +2777,7 @@ def main():
             "body_layouts": {
                 "mobile": screen.layout,
                 "tablet": screen.layout,
-                "desktop": "03-dual-pane-desktop"
+                "desktop": "16-dual-pane-desktop"
                 if screen.kind in {"dashboard", "list", "queue"} and len(screen.rows) >= 3
                 else screen.layout,
             },

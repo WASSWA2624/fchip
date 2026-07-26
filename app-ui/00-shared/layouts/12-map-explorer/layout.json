@@ -1,0 +1,26 @@
+{
+  "title": "Map explorer",
+  "slug": "12-map-explorer",
+  "purpose": "GIS hotspot + climate legend",
+  "composes": [
+    "03-filter-chip-row",
+    "04-hotspot-map",
+    "02-section-header"
+  ],
+  "surfaces": [
+    "facility map",
+    "district map",
+    "coverage",
+    "population"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

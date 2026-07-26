@@ -22,9 +22,9 @@ _Subtitle: Results waiting to sync or link to referrals_
 | Chronology status | `not-started` |
 | Route | `/17-labs-poc/04-result-queue` |
 | Parent route | `/17-labs-poc/04-result-queue` |
-| Layout | `14-queue-desk` |
-| Body layouts | `mobile` → `14-queue-desk`, `tablet` → `14-queue-desk`, `desktop` → `03-dual-pane-desktop` |
-| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
+| Layout | `13-queue-desk` |
+| Body layouts | `mobile` → `13-queue-desk`, `tablet` → `13-queue-desk`, `desktop` → `16-dual-pane-desktop` |
+| Shells | `mobile` → `03-field-mobile-shell`, `tablet` → `04-field-tablet-shell`, `desktop` → `05-desktop-sidebar-shell` |
 | Roles | `lab-worker` |
 | Supported states | `default`, `loading`, `empty`, `error`, `forbidden`, `success`, `conflict`, `offline` |
 | Localization prefix | `17_labs_poc.04_result_queue` |
@@ -48,7 +48,7 @@ Also read:
 
 - `app-ui/17-labs-poc/README.md`
 - `app-ui/00-shared/tokens.json`
-- Shared layout specimens for `14-queue-desk` under `app-ui/00-shared/layouts/14-queue-desk/`
+- Shared layout specimens for `13-queue-desk` under `app-ui/00-shared/layouts/13-queue-desk/`
 - Shared component specimens listed by that layout's `layout.json` `composes` array
 - Connected journeys under `app-flows/` (especially `07-navigation.md` and module journeys)
 
@@ -64,7 +64,7 @@ Also read:
 | Data / repository impl | `frontend/lib/features/labs_poc/data/` |
 | Repository contract | `frontend/lib/features/labs_poc/domain/repositories/labs_poc_repository.dart` |
 | Router entry | `frontend/lib/app/router/` (route must equal `/17-labs-poc/04-result-queue`) |
-| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `14-queue-desk`) |
+| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `13-queue-desk`) |
 | Shared components | `frontend/lib/shared/components/` |
 | Tests | `frontend/test/features/labs_poc/` |
 | Backend module | `backend/src/modules/labs_poc/` |
@@ -164,7 +164,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-100`:
 
 4. Treat `screen.json` in this folder as the contract for route, roles, access, layout, shells, states, navigation, and `l10n_key_prefix`.
 5. Open all six mockups (mobile/tablet/desktop × light/dark) and note hierarchy, spacing, CTAs, empty regions, and chrome.
-6. Resolve `14-queue-desk` and every composed component against `app-ui/00-shared/`.
+6. Resolve `13-queue-desk` and every composed component against `app-ui/00-shared/`.
 7. Map navigation:
    - Tabs: Home → `/17-labs-poc/01-lab-home`; Results → `/17-labs-poc/02-result-entry`; Queue → `/17-labs-poc/04-result-queue`; Sync → `/17-labs-poc/03-batch-results-upload`
    - Primary action: Sync queue → `/17-labs-poc/04-result-queue`
@@ -174,7 +174,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-100`:
 ### Phase 2 — Flutter UI on fixtures (maximum reuse)
 
 8. Register route `/17-labs-poc/04-result-queue` with the access guard for roles `lab-worker`.
-9. Compose the page from shared shells + `14-queue-desk` + catalog components. Prefer:
+9. Compose the page from shared shells + `13-queue-desk` + catalog components. Prefer:
    - `AsyncStateScaffold`, `ResponsivePage`, `AppWorkspace`, `AppListTable`, `AppWorkspaceDetailPanel`, `AppActionPanel` when they fit `ui-workspace.mdc`.
 10. Implement **every** supported state: `default`, `loading`, `empty`, `error`, `forbidden`, `success`, `conflict`, `offline`.
 11. Add ARB keys under `17_labs_poc.04_result_queue` only — no hard-coded user strings.
@@ -204,7 +204,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-100`:
 ## Reusability checklist
 
 - [ ] No duplicate button, chip, banner, form field, nav, or feedback widget invented in the feature folder when a shared catalog item exists
-- [ ] Layout `14-queue-desk` is a shared layout implementation, not a one-off Scaffold tree
+- [ ] Layout `13-queue-desk` is a shared layout implementation, not a one-off Scaffold tree
 - [ ] Feature widgets accept data via typed props / providers — no embedded API clients in widgets
 - [ ] Repository is the only place that talks to the network / local DB for this screen's data
 - [ ] Permissions hide unauthorized actions rather than showing disabled dead ends when policy says omit

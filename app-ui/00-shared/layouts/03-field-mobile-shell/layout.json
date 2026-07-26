@@ -1,0 +1,28 @@
+{
+  "title": "Field mobile shell",
+  "slug": "03-field-mobile-shell",
+  "purpose": "CHW / caregiver / feeder capture on phone",
+  "composes": [
+    "03-top-app-bar",
+    "02-section-header",
+    "04-bottom-nav-field",
+    "01-status-chip",
+    "01-primary-cta"
+  ],
+  "surfaces": [
+    "01",
+    "02",
+    "14\u201319",
+    "21"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

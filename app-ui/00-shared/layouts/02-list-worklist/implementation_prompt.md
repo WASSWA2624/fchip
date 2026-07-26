@@ -38,9 +38,9 @@ Also read:
 
 ## Composes (implement or reuse these first)
 
-- `09-section-header` → `app-ui/00-shared/components/**/09-section-header/` + `frontend/lib/shared/components/`
+- `02-section-header` → `app-ui/00-shared/components/**/02-section-header/` + `frontend/lib/shared/components/`
 - `01-status-chip` → `app-ui/00-shared/components/**/01-status-chip/` + `frontend/lib/shared/components/`
-- `03-list-row-card` → `app-ui/00-shared/components/**/03-list-row-card/` + `frontend/lib/shared/components/`
+- `01-list-row-card` → `app-ui/00-shared/components/**/01-list-row-card/` + `frontend/lib/shared/components/`
 - `01-primary-cta` → `app-ui/00-shared/components/**/01-primary-cta/` + `frontend/lib/shared/components/`
 - `01-empty-state` → `app-ui/00-shared/components/**/01-empty-state/` + `frontend/lib/shared/components/`
 

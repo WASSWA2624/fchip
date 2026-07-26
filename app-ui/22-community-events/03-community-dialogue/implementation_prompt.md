@@ -17,14 +17,14 @@ _Subtitle: Needs & priorities from community conversations_
 | Screen slug | `03-community-dialogue` |
 | Chronology | `S-120` |
 | Slice | `VS-22` |
-| Phase | `phase-2` |
+| Phase | `mvp` |
 | Deferred | `false` |
 | Chronology status | `not-started` |
 | Route | `/22-community-events/03-community-dialogue` |
 | Parent route | `/22-community-events/03-community-dialogue` |
-| Layout | `09-form-capture` |
-| Body layouts | `mobile` → `09-form-capture`, `tablet` → `09-form-capture`, `desktop` → `09-form-capture` |
-| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
+| Layout | `08-form-capture` |
+| Body layouts | `mobile` → `08-form-capture`, `tablet` → `08-form-capture`, `desktop` → `08-form-capture` |
+| Shells | `mobile` → `03-field-mobile-shell`, `tablet` → `04-field-tablet-shell`, `desktop` → `05-desktop-sidebar-shell` |
 | Roles | `community-programme-worker` |
 | Supported states | `default`, `loading`, `error`, `success`, `offline`, `forbidden` |
 | Localization prefix | `22_community_events.03_community_dialogue` |
@@ -48,7 +48,7 @@ Also read:
 
 - `app-ui/22-community-events/README.md`
 - `app-ui/00-shared/tokens.json`
-- Shared layout specimens for `09-form-capture` under `app-ui/00-shared/layouts/09-form-capture/`
+- Shared layout specimens for `08-form-capture` under `app-ui/00-shared/layouts/08-form-capture/`
 - Shared component specimens listed by that layout's `layout.json` `composes` array
 - Connected journeys under `app-flows/` (especially `07-navigation.md` and module journeys)
 
@@ -64,7 +64,7 @@ Also read:
 | Data / repository impl | `frontend/lib/features/community_events/data/` |
 | Repository contract | `frontend/lib/features/community_events/domain/repositories/community_events_repository.dart` |
 | Router entry | `frontend/lib/app/router/` (route must equal `/22-community-events/03-community-dialogue`) |
-| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `09-form-capture`) |
+| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `08-form-capture`) |
 | Shared components | `frontend/lib/shared/components/` |
 | Tests | `frontend/test/features/community_events/` |
 | Backend module | `backend/src/modules/community_events/` |
@@ -164,7 +164,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-120`:
 
 4. Treat `screen.json` in this folder as the contract for route, roles, access, layout, shells, states, navigation, and `l10n_key_prefix`.
 5. Open all six mockups (mobile/tablet/desktop × light/dark) and note hierarchy, spacing, CTAs, empty regions, and chrome.
-6. Resolve `09-form-capture` and every composed component against `app-ui/00-shared/`.
+6. Resolve `08-form-capture` and every composed component against `app-ui/00-shared/`.
 7. Map navigation:
    - Tabs: Home → `/22-community-events/01-events-home`; Events → `/22-community-events/02-outreach-event-log`; Dialogue → `/22-community-events/03-community-dialogue`; Register → `/22-community-events/04-participation-register`
    - Primary action: Submit dialogue notes → `/22-community-events/03-community-dialogue?state=success`
@@ -174,7 +174,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-120`:
 ### Phase 2 — Flutter UI on fixtures (maximum reuse)
 
 8. Register route `/22-community-events/03-community-dialogue` with the access guard for roles `community-programme-worker`.
-9. Compose the page from shared shells + `09-form-capture` + catalog components. Prefer:
+9. Compose the page from shared shells + `08-form-capture` + catalog components. Prefer:
    - `AsyncStateScaffold`, `ResponsivePage`, `AppWorkspace`, `AppListTable`, `AppWorkspaceDetailPanel`, `AppActionPanel` when they fit `ui-workspace.mdc`.
 10. Implement **every** supported state: `default`, `loading`, `error`, `success`, `offline`, `forbidden`.
 11. Add ARB keys under `22_community_events.03_community_dialogue` only — no hard-coded user strings.
@@ -204,7 +204,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-120`:
 ## Reusability checklist
 
 - [ ] No duplicate button, chip, banner, form field, nav, or feedback widget invented in the feature folder when a shared catalog item exists
-- [ ] Layout `09-form-capture` is a shared layout implementation, not a one-off Scaffold tree
+- [ ] Layout `08-form-capture` is a shared layout implementation, not a one-off Scaffold tree
 - [ ] Feature widgets accept data via typed props / providers — no embedded API clients in widgets
 - [ ] Repository is the only place that talks to the network / local DB for this screen's data
 - [ ] Permissions hide unauthorized actions rather than showing disabled dead ends when policy says omit

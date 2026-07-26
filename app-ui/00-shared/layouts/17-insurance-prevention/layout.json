@@ -3,8 +3,8 @@
   "slug": "17-insurance-prevention",
   "purpose": "\u00a77 prevention population insights \u2014 not claims / not CHIS identity",
   "composes": [
-    "02-stat-card-row",
-    "03-list-row-card",
+    "03-stat-card-row",
+    "01-list-row-card",
     "04-note-banner",
     "01-primary-cta"
   ],

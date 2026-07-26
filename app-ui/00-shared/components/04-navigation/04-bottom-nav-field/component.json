@@ -1,0 +1,19 @@
+{
+  "title": "Bottom nav \u00b7 field",
+  "category": "04-navigation",
+  "slug": "04-bottom-nav-field",
+  "purpose": "CHW tabs",
+  "used_by": [
+    "01"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

@@ -17,7 +17,15 @@ alwaysApply: true
 
 ### Canonical terms (use exactly)
 
-TermMeaning**FCHIP**Community Health Intelligence Platform — the deep-tech**product** this monorepo builds; not a hospital brand and not a generic EMR/HMS**Community health cascade**The field system FCHIP serves (six layers + continuous**Data & Feedback** loop) — communities → CHWs/VHTs → outreach programmes → facilities → research/partners → empowerment**Outreach programmes**Cascade layer 3 — outreach, education, screening, maternal & child, adolescent, chronic care, home visits**CHIS**Community Health Insurance Scheme (or equivalent financial-protection schemes) — optional data domain FCHIP can monitor when partners capture enrolment, contributions, and claims**CHW / VHT**Community Health Worker / Village Health Team — "the bridge" between households and care**EMR / HMS**External electronic medical records / hospital management systems that FCHIP**interoperates with** via secure data APIs — FCHIP does not replace them**GIS + climate APIs**Place and climate signals fused with community/facility data for early detection
+| Term | Meaning |
+| --- | --- |
+| **FCHIP** | Community Health Intelligence Platform — the deep-tech **product** this monorepo builds; not a hospital brand and not a generic EMR/HMS |
+| **Community health cascade** | The field system FCHIP serves (six layers + continuous **Data & Feedback** loop) — communities → CHWs/VHTs → outreach programmes → facilities → research/partners → empowerment |
+| **Outreach programmes** | Cascade layer 3 — outreach, education, screening, maternal & child, adolescent, chronic care, home visits |
+| **CHIS** | Community Health Insurance Scheme (or equivalent financial-protection schemes) — optional data domain FCHIP can monitor when partners capture enrolment, contributions, and claims |
+| **CHW / VHT** | Community Health Worker / Village Health Team — "the bridge" between households and care |
+| **EMR / HMS** | External electronic medical records / hospital management systems that FCHIP **interoperates with** via secure data APIs — FCHIP does not replace them |
+| **GIS + climate APIs** | Place and climate signals fused with community/facility data for early detection |
 
 Do **not** invent alternate product names, reorder the cascade, or describe FCHIP as a stand-alone hospital or EMR brand. Do **not** frame this product as a company ecosystem write-up — this SoT is **FCHIP only**.
 

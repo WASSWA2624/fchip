@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:fchip/app/theme/app_theme_extensions.dart';
 import 'package:fchip/core/responsive/app_breakpoints.dart';
 import 'package:fchip/l10n/app_localizations_x.dart';
-import 'package:fchip/shared/components/app_logo.dart';
+import 'package:fchip/shared/components/app_logo_lockup.dart';
+import 'package:flutter/material.dart';
 
 class AuthShellLayout extends StatelessWidget {
   const AuthShellLayout({required this.child, super.key});
@@ -14,9 +14,6 @@ class AuthShellLayout extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
     final AppBreakpoint breakpoint = AppBreakpoints.of(context);
-    final bool isLarge = breakpoint.index >= AppBreakpoint.lg.index;
-    final l10n = context.l10n;
-    final String displayName = isLarge ? l10n.appTitle : l10n.appShortTitle;
 
     return Scaffold(
       body: DecoratedBox(
@@ -61,10 +58,7 @@ class AuthShellLayout extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: <Widget>[
-                            _AuthBrandHeader(
-                              isLarge: isLarge,
-                              displayName: displayName,
-                            ),
+                            const _AuthBrandHeader(),
                             SizedBox(
                               height: switch (breakpoint) {
                                 AppBreakpoint.xs ||
@@ -89,77 +83,38 @@ class AuthShellLayout extends StatelessWidget {
 }
 
 class _AuthBrandHeader extends StatelessWidget {
-  const _AuthBrandHeader({required this.isLarge, required this.displayName});
-
-  final bool isLarge;
-  final String displayName;
+  const _AuthBrandHeader();
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final ColorScheme colorScheme = theme.colorScheme;
+    final l10n = context.l10n;
+    final AppBreakpoint breakpoint = AppBreakpoints.of(context);
+    final bool isLarge = breakpoint.index >= AppBreakpoint.lg.index;
     final double logoSize = isLarge ? 56 : 48;
 
-    final Widget logo = DecoratedBox(
-      decoration: BoxDecoration(
-        color: colorScheme.primaryContainer.withValues(alpha: 0.55),
-        borderRadius: BorderRadius.circular(
-          context.responsiveRadius(theme.radius.md),
-        ),
-        border: Border.all(
-          color: colorScheme.outlineVariant.withValues(alpha: 0.35),
-        ),
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: colorScheme.shadow.withValues(alpha: 0.06),
-            blurRadius: 16,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(theme.spacing.sm),
-        child: AppLogo(size: logoSize - theme.spacing.sm * 2),
-      ),
-    );
-
-    if (isLarge) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          logo,
-          SizedBox(width: theme.spacing.md),
-          Flexible(
-            child: Text(
-              displayName,
-              style: theme.textTheme.titleMedium?.copyWith(
-                color: colorScheme.onSurface,
-                fontWeight: FontWeight.w700,
-                fontSize: 22,
-                height: 1.2,
-                letterSpacing: -0.2,
-              ),
-            ),
-          ),
-        ],
-      );
-    }
-
-    return Column(
-      children: <Widget>[
-        logo,
-        SizedBox(height: theme.spacing.md),
-        Text(
-          displayName,
-          textAlign: TextAlign.center,
-          style: theme.textTheme.titleSmall?.copyWith(
-            color: colorScheme.onSurface,
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 360, minHeight: 72),
+        child: AppLogoLockup(
+          mode: AppLogoLockupMode.full,
+          logoSize: logoSize,
+          wordmark: l10n.appShortTitle,
+          slogan: l10n.appSlogan,
+          wordmarkStyle: theme.textTheme.titleMedium?.copyWith(
+            color: colorScheme.primary,
             fontWeight: FontWeight.w700,
-            fontSize: 16,
-            letterSpacing: -0.1,
+            fontSize: isLarge ? 24 : 20,
+            height: 1.1,
+            letterSpacing: -0.2,
+          ),
+          sloganStyle: theme.textTheme.bodySmall?.copyWith(
+            color: colorScheme.onSurfaceVariant,
+            height: 1.25,
           ),
         ),
-      ],
+      ),
     );
   }
 }

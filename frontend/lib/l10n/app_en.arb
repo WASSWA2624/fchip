@@ -8,6 +8,10 @@
   "@appShortTitle": {
     "description": "Short application title shown in compact headers."
   },
+  "appSlogan": "Your health, our mission.",
+  "@appSlogan": {
+    "description": "Brand slogan shown under the FCHIP wordmark in the logo lockup when space allows."
+  },
   "startupLoadingTitle": "Starting FCHIP",
   "@startupLoadingTitle": {
     "description": "Title shown while startup dependencies initialize."

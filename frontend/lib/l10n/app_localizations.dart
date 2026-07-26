@@ -106,6 +106,12 @@ abstract class AppLocalizations {
   /// **'FCHIP'**
   String get appShortTitle;
 
+  /// Brand slogan shown under the FCHIP wordmark in the logo lockup when space allows.
+  ///
+  /// In en, this message translates to:
+  /// **'Your health, our mission.'**
+  String get appSlogan;
+
   /// Title shown while startup dependencies initialize.
   ///
   /// In en, this message translates to:

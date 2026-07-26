@@ -29,6 +29,7 @@ export 'app_list_table_column_layout_memory.dart';
 export 'app_list_table_column_visibility_memory.dart';
 export 'app_loading_indicator.dart';
 export 'app_logo.dart';
+export 'app_logo_lockup.dart';
 export 'app_menu_item_label.dart';
 export 'app_nursing_components.dart';
 export 'app_patient_detail_dialog.dart';

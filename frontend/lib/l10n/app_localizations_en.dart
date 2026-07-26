@@ -15,6 +15,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appShortTitle => 'FCHIP';
 
   @override
+  String get appSlogan => 'Your health, our mission.';
+
+  @override
   String get startupLoadingTitle => 'Starting FCHIP';
 
   @override

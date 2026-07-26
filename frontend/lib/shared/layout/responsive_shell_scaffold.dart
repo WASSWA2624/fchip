@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:fchip/app/theme/app_theme_extensions.dart';
 import 'package:fchip/core/network/app_connectivity_status.dart';
 import 'package:fchip/core/responsive/app_breakpoints.dart';
@@ -8,6 +6,8 @@ import 'package:fchip/shared/layout/app_connectivity_indicator.dart';
 import 'package:fchip/shared/layout/app_fullscreen_toggle.dart';
 import 'package:fchip/shared/layout/app_shell_layout.dart';
 import 'package:fchip/shared/layout/shell_navigation_loading.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 final class ResponsiveShellDestination {
   const ResponsiveShellDestination({
@@ -521,20 +521,36 @@ class AppMenuBar extends StatelessWidget {
                 onPressed: onToggleNavigation,
               ),
               SizedBox(width: theme.spacing.xs),
-              AppLogo(size: logoSize),
-              if (!hideTitle) SizedBox(width: theme.spacing.sm),
-              Expanded(
-                child: hideTitle
-                    ? const SizedBox.shrink()
-                    : Text(
-                        effectiveTitle,
-                        overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.titleMedium?.copyWith(
-                          color: colorScheme.onSurface,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-              ),
+              if (hideTitle)
+                Flexible(
+                  child: AppLogoLockup(
+                    mode: AppLogoLockupMode.wordmark,
+                    logoSize: logoSize,
+                    wordmark: effectiveTitle,
+                    wordmarkStyle: theme.textTheme.titleMedium?.copyWith(
+                      color: colorScheme.onSurface,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                )
+              else ...<Widget>[
+                AppLogoLockup(
+                  mode: AppLogoLockupMode.mark,
+                  logoSize: logoSize,
+                  wordmark: effectiveTitle,
+                ),
+                SizedBox(width: theme.spacing.sm),
+                Expanded(
+                  child: Text(
+                    effectiveTitle,
+                    overflow: TextOverflow.ellipsis,
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      color: colorScheme.onSurface,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+              ],
               if (!isMobile && systemIndicators.isNotEmpty) ...<Widget>[
                 SizedBox(width: theme.spacing.xs),
                 _SystemIndicatorsBar(indicators: systemIndicators),
@@ -1101,13 +1117,12 @@ class _MobileShellDrawer extends StatelessWidget {
                 ),
                 child: Row(
                   children: <Widget>[
-                    const AppLogo(size: _drawerLogoSize),
-                    SizedBox(width: theme.spacing.sm),
                     Expanded(
-                      child: Text(
-                        title,
-                        overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.titleMedium?.copyWith(
+                      child: AppLogoLockup(
+                        mode: AppLogoLockupMode.wordmark,
+                        logoSize: _drawerLogoSize,
+                        wordmark: title,
+                        wordmarkStyle: theme.textTheme.titleMedium?.copyWith(
                           color: colorScheme.onSurface,
                           fontWeight: FontWeight.w700,
                         ),

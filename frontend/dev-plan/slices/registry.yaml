@@ -3,12 +3,14 @@ source:
   product: .cursor/app-write-up.mdc
   flows: app-flows
   screens: app-ui
+chronology: frontend/dev-plan/slices/chronology.yaml
 tracker: frontend/dev-plan/slices/tracker.md
 backend_registry: backend/dev-plan/slices/registry.yaml
 coverage_check: tool/check_slice_coverage.py
 policy:
-  delivery: frontend_ui_then_matching_backend_in_same_slice
-  one_active_product_slice: true
+  delivery: frontend_ui_then_matching_backend_per_chronology_screen
+  atomic_unit: one_app_ui_screen
+  one_active_screen: true
   close_requires_real_backend: true
   static_backend_disposition: explicit_none_with_evidence
 # status: not-started | in-progress | blocked | done

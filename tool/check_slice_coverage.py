@@ -1,7 +1,8 @@
-"""Verify that every app-ui screen is owned by a slice and paired with a backend.
+"""Verify that every app-ui screen is owned, ordered, and backend-paired.
 
 Enforces the pairing law in .cursor/mandatories.mdc across:
   app-ui/**/screen.json
+  frontend/dev-plan/slices/chronology.yaml
   frontend/dev-plan/slices/registry.yaml
   backend/dev-plan/slices/registry.yaml
   frontend/dev-plan/slices/tracker.md
@@ -21,12 +22,22 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 APP_UI = REPO_ROOT / "app-ui"
+CHRONOLOGY = REPO_ROOT / "frontend" / "dev-plan" / "slices" / "chronology.yaml"
 FRONTEND_REGISTRY = REPO_ROOT / "frontend" / "dev-plan" / "slices" / "registry.yaml"
 BACKEND_REGISTRY = REPO_ROOT / "backend" / "dev-plan" / "slices" / "registry.yaml"
 TRACKER = REPO_ROOT / "frontend" / "dev-plan" / "slices" / "tracker.md"
 
 MODULE_DIR = re.compile(r"^\d{2}-[a-z0-9-]+$")
-VALID_STATUS = {"not-started", "in-progress", "blocked", "done"}
+VALID_SLICE_STATUS = {"not-started", "in-progress", "blocked", "done"}
+VALID_SCREEN_STATUS = {
+    "not-started",
+    "ui-fixtures",
+    "contract-defined",
+    "backend-in-progress",
+    "wired",
+    "done",
+}
+VALID_BACKEND_DISP = {"pending", "paired", "none"}
 REQUIRED_SCREEN_KEYS = ("route", "roles", "supported_states", "l10n_key_prefix", "phase")
 
 errors: list[str] = []
@@ -41,50 +52,52 @@ def warn(message: str) -> None:
     warnings.append(message)
 
 
-def parse_slices(path: Path) -> list[dict]:
-    """Read the `slices:` block of a registry.
+def parse_yaml_sequence(path: Path, key: str) -> list[dict]:
+    """Read a top-level YAML sequence block without PyYAML.
 
-    Supports the subset of YAML these registries use: a top-level `slices:`
-    sequence whose items hold `key: scalar` and `key: [a, b, c]` pairs.
-    Avoids a PyYAML dependency so the check runs on a bare Python install.
+    Supports `key:` followed by items with `key: scalar` and `key: [a, b, c]`.
+    Inline comments after values are stripped.
     """
-    slices: list[dict] = []
+    items: list[dict] = []
     current: dict | None = None
-    in_slices = False
+    in_block = False
+    target = f"{key}:"
 
     for raw in path.read_text(encoding="utf-8").splitlines():
         if not raw.strip() or raw.lstrip().startswith("#"):
             continue
 
         if not raw.startswith((" ", "\t")):
-            in_slices = raw.strip() == "slices:"
-            if not in_slices:
+            in_block = raw.strip() == target
+            if not in_block:
                 current = None
             continue
 
-        if not in_slices:
+        if not in_block:
             continue
 
         line = raw.strip()
         if line.startswith("- "):
             current = {}
-            slices.append(current)
+            items.append(current)
             line = line[2:].strip()
 
         if current is None or ":" not in line:
             continue
 
-        key, _, value = line.partition(":")
-        key = key.strip()
+        field, _, value = line.partition(":")
+        field = field.strip()
         value = value.strip()
+        if " #" in value:
+            value = value.split(" #", 1)[0].rstrip()
 
         if value.startswith("[") and value.endswith("]"):
             inner = value[1:-1].strip()
-            current[key] = [v.strip().strip("'\"") for v in inner.split(",") if v.strip()]
+            current[field] = [v.strip().strip("'\"") for v in inner.split(",") if v.strip()]
         else:
-            current[key] = value.strip("'\"")
+            current[field] = value.strip("'\"")
 
-    return slices
+    return items
 
 
 def discover_screens() -> dict[str, list[str]]:
@@ -129,16 +142,84 @@ def check_screen_json(module: str, screen: str) -> None:
         )
 
 
-def check_registries(disk: dict[str, list[str]]) -> None:
-    frontend = parse_slices(FRONTEND_REGISTRY)
-    backend = parse_slices(BACKEND_REGISTRY)
+def check_chronology(disk: dict[str, list[str]], owners: dict[tuple[str, str], str]) -> None:
+    if not CHRONOLOGY.is_file():
+        fail(f"missing chronology: {CHRONOLOGY}")
+        return
+
+    rows = parse_yaml_sequence(CHRONOLOGY, "screens")
+    if not rows:
+        fail(f"no screens parsed from {CHRONOLOGY}")
+        return
+
+    seen: dict[tuple[str, str], str] = {}
+    seen_seq: set[str] = set()
+    active = 0
+
+    for index, row in enumerate(rows, 1):
+        seq = row.get("seq", "")
+        module = row.get("module", "")
+        screen = row.get("screen", "")
+        slice_id = row.get("slice", "")
+        status = row.get("status", "")
+        backend = row.get("backend", "")
+        expected_seq = f"S-{index:03d}"
+
+        if seq != expected_seq:
+            fail(f"chronology row {index}: seq is {seq!r}, expected {expected_seq!r}")
+        if seq in seen_seq:
+            fail(f"chronology duplicate seq {seq}")
+        seen_seq.add(seq)
+
+        if status not in VALID_SCREEN_STATUS:
+            fail(f"{seq}: status {status!r} is not one of {sorted(VALID_SCREEN_STATUS)}")
+        if backend not in VALID_BACKEND_DISP:
+            fail(f"{seq}: backend {backend!r} is not one of {sorted(VALID_BACKEND_DISP)}")
+
+        key = (module, screen)
+        if module not in disk or screen not in disk.get(module, []):
+            fail(f"{seq}: lists {module}/{screen}, which has no screen.json")
+        elif key in seen:
+            fail(f"{module}/{screen} appears twice in chronology ({seen[key]} and {seq})")
+        else:
+            seen[key] = seq
+
+        owner = owners.get(key)
+        if owner is None:
+            fail(f"{seq}: {module}/{screen} has no owning slice in the frontend registry")
+        elif owner != slice_id:
+            fail(f"{seq}: slice is {slice_id!r}, registry owner is {owner!r}")
+
+        if status in {
+            "ui-fixtures",
+            "contract-defined",
+            "backend-in-progress",
+            "wired",
+        }:
+            active += 1
+
+        if status == "done" and backend not in {"paired", "none"}:
+            fail(f"{seq}: status is done but backend is {backend!r} (need paired or none)")
+
+    if active > 1:
+        fail(f"chronology has {active} active screens; only one may be in progress")
+
+    for module, screens in disk.items():
+        for screen in screens:
+            if (module, screen) not in seen:
+                fail(f"{module}/{screen} missing from chronology.yaml")
+
+
+def check_registries(disk: dict[str, list[str]]) -> dict[tuple[str, str], str]:
+    frontend = parse_yaml_sequence(FRONTEND_REGISTRY, "slices")
+    backend = parse_yaml_sequence(BACKEND_REGISTRY, "slices")
 
     if not frontend:
         fail(f"no slices parsed from {FRONTEND_REGISTRY}")
-        return
+        return {}
     if not backend:
         fail(f"no slices parsed from {BACKEND_REGISTRY}")
-        return
+        return {}
 
     backend_by_id = {item.get("id"): item for item in backend}
     frontend_ids = {item.get("id") for item in frontend}
@@ -162,8 +243,8 @@ def check_registries(disk: dict[str, list[str]]) -> None:
         screens = item.get("screens", [])
         status = item.get("status", "")
 
-        if status not in VALID_STATUS:
-            fail(f"{slice_id}: status {status!r} is not one of {sorted(VALID_STATUS)}")
+        if status not in VALID_SLICE_STATUS:
+            fail(f"{slice_id}: status {status!r} is not one of {sorted(VALID_SLICE_STATUS)}")
 
         if module not in disk:
             fail(f"{slice_id}: module directory app-ui/{module} does not exist")
@@ -213,13 +294,15 @@ def check_registries(disk: dict[str, list[str]]) -> None:
     for item in backend:
         slice_id = item.get("id", "<unknown>")
         status = item.get("status", "")
-        if status not in VALID_STATUS:
-            fail(f"backend {slice_id}: status {status!r} is not one of {sorted(VALID_STATUS)}")
+        if status not in VALID_SLICE_STATUS:
+            fail(f"backend {slice_id}: status {status!r} is not one of {sorted(VALID_SLICE_STATUS)}")
 
     for module, screens in disk.items():
         for screen in screens:
             if (module, screen) not in owners:
                 fail(f"{module}/{screen} has no owning slice in the frontend registry")
+
+    return owners
 
 
 def main() -> int:
@@ -234,7 +317,8 @@ def main() -> int:
         for screen in screens:
             check_screen_json(module, screen)
 
-    check_registries(disk)
+    owners = check_registries(disk)
+    check_chronology(disk, owners)
 
     for message in warnings:
         print(f"warning: {message}")
@@ -245,7 +329,10 @@ def main() -> int:
             print(f"  - {message}", file=sys.stderr)
         return 1
 
-    print(f"slice coverage OK: {total} screens across {len(disk)} modules, all paired.")
+    print(
+        f"slice coverage OK: {total} screens across {len(disk)} modules, "
+        "chronology and registries aligned."
+    )
     return 0
 
 

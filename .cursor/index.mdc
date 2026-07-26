@@ -32,7 +32,13 @@ Slogan: **Your health, our mission.** Mission: Connecting Care, Empowering Commu
 
 ## Delivery model
 
-Product work is frontend-first and paired: build the Flutter screen from `app-ui/`, then ship its backend in the same vertical slice. Order lives in `frontend/dev-plan/24-product-vertical-slices.md`, the per-screen loop in `25-slice-execution-playbook.md`, and status in `frontend/dev-plan/slices/tracker.md`. Verify with `python tool/check_slice_coverage.py`.
+Product work is frontend-first and paired:
+
+1. Build the next Flutter screen from `app-ui/` in `frontend/dev-plan/slices/chronology.yaml` order.
+2. Implement the matching backend and database in the same atomic unit.
+3. Prove the journey, then move to the next screen.
+
+Order: `frontend/dev-plan/24-product-vertical-slices.md`. Loop: `25-slice-execution-playbook.md`. Status: `frontend/dev-plan/slices/tracker.md`. Verify: `python tool/check_slice_coverage.py`.
 
 ## Keep / do not invent
 

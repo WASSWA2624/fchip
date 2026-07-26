@@ -1,9 +1,10 @@
 # P011 Backend Modules
-Implement one backend capability at a time behind the active frontend screen or journey.
+
+Implement one backend capability at a time behind the active frontend chronology screen.
 
 ## Delivery Source
 
-Module order is owned by `frontend/dev-plan/24-product-vertical-slices.md`:
+Screen order is owned by `frontend/dev-plan/slices/chronology.yaml` (`S-001` … `S-127`). Waves are summarised in `frontend/dev-plan/24-product-vertical-slices.md`:
 
 1. shared entry, identity, consent, access, notifications, and preferences;
 2. CHW offline capture and referral loop;
@@ -14,9 +15,9 @@ Module order is owned by `frontend/dev-plan/24-product-vertical-slices.md`:
 
 ## Module Gate
 
-- Each active slice must follow `backend/.cursor/vertical-slice-delivery.mdc` and `backend/.cursor/module-creation.mdc`.
+- Each active screen must follow `backend/.cursor/vertical-slice-delivery.mdc` and `backend/.cursor/module-creation.mdc`.
 - Workflows must remain inside their subscription and assigned-module boundaries while sharing the canonical ingest, metrics, alert, identity, and audit spines.
 - Permission keys, route families, entitlements, and models must stay aligned with documentation.
 - Frontend, tests, documentation, migration, and seed changes must be completed together.
-- A later screen must not begin while the active screen has an undocumented backend gap.
+- A later chronology screen must not begin while the active screen has an undocumented backend gap.
 - FCHIP integrates with external EMR/HMS; it must not grow generic inpatient, theatre, payroll, mortuary, or other unrelated HIS modules.

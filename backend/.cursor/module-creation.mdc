@@ -10,7 +10,7 @@ Define the mandatory build sequence for every backend module.
 
 ## Required sequence
 
-0. A frontend screen or connected journey must be active in `frontend/dev-plan/24-product-vertical-slices.md`.
+0. A frontend chronology screen (`S-NNN`) must be active in `frontend/dev-plan/slices/chronology.yaml`.
 1. Read the implemented UI/repository contract, its `screen.json`, mockups, and `app-flows/` journey; derive the smallest backend capability with `backend/dev-plan/P016_slice_pairing.md`.
 2. Declare roles in `src/config/roles.js`, permissions in `src/config/permissions.js`, subscription/module mapping in `src/lib/subscriptions/plan-module-matrix.js`, and the applicable ABAC scope.
 3. Define API/problem/event contracts, then create module and mirrored test folders.
@@ -19,7 +19,7 @@ Define the mandatory build sequence for every backend module.
 6. Services enforce consent, RBAC, ABAC, entitlements, workflow rules, audit, idempotency/conflicts, and scoped events as applicable.
 7. Controllers use response helpers; routes include validation, auth, authorization, rate limits, and OpenAPI docs.
 8. Add deterministic seeds for every UI state, mount the module, and wire the real frontend repository.
-9. Backend tests and cross-stack integration tests must pass before declaring the slice done.
+9. Backend tests and cross-stack integration tests must pass before declaring the screen done.
 
 ## Done gate
 

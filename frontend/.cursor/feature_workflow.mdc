@@ -11,9 +11,10 @@ Repeatable process for adding a feature to the FCHIP frontend.
 
 ## Requirements
 
-- Follow [`product_delivery.mdc`](./product_delivery.mdc): begin with the screen's `screen.json`, six visual references, and connected `app-flows/` journey.
+- Follow [`product_delivery.mdc`](./product_delivery.mdc): begin with the next unfinished chronology screen in `frontend/dev-plan/slices/chronology.yaml`, then its `screen.json`, six visual references, and connected `app-flows/` journey.
 - Start by identifying route, declared states, roles, access, actions, data needs, validation, localization, responsive behavior, offline/realtime needs, and tests.
-- Implement the responsive Flutter UI with typed fixtures first; then define and deliver the smallest matching backend in the same slice, using the derivation table in `frontend/dev-plan/25-slice-execution-playbook.md`.
+- Implement the responsive Flutter UI with typed fixtures first; then define and deliver the smallest matching backend in the same atomic unit, using the derivation table in `frontend/dev-plan/25-slice-execution-playbook.md`.
+- Do not open the next chronology screen while this one has an undocumented backend gap.
 - Create the feature folder with the standard `data/domain/presentation` structure.
 - Define domain models and repository contracts before wiring UI to real data when non-trivial.
 - Add localization keys before adding user-facing text.

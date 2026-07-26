@@ -7,15 +7,15 @@ alwaysApply: false
 
 # Frontend-Led Backend Delivery
 
-Backend foundation may be prepared first, but product modules are implemented only as part of a frontend-led slice from `frontend/dev-plan/24-product-vertical-slices.md`.
+Backend foundation may be prepared first, but product modules are implemented only as part of a frontend-led chronology screen from `frontend/dev-plan/slices/chronology.yaml`.
 
 ## Required input
 
-Before backend domain work, inspect the slice's implemented Flutter UI, typed repository contract, `app-ui/<module>/<screen>/screen.json`, visual references, and relevant `app-flows/` journey. The backend must serve that user job without turning FCHIP into an EMR/HMS.
+Before backend domain work, inspect the active chronology screen's Flutter UI, typed repository contract, `app-ui/<module>/<screen>/screen.json`, visual references, and relevant `app-flows/` journey. The backend must serve that user job without turning FCHIP into an EMR/HMS.
 
 ## Smallest complete backend
 
-Derive the work with `backend/dev-plan/P016_slice_pairing.md`, whose table maps each UI fact to one backend obligation. For each slice:
+Derive the work with `backend/dev-plan/P016_slice_pairing.md`, whose table maps each UI fact to one backend obligation. For each screen:
 
 1. Confirm data ownership, roles, ABAC scope, subscription/module gate, consent, retention, offline, and realtime needs.
 2. Define request, response, problem, pagination, idempotency, conflict, and event contracts.
@@ -23,7 +23,7 @@ Derive the work with `backend/dev-plan/P016_slice_pairing.md`, whose table maps 
 4. Implement schema, repository, service, controller, route, audit, and scoped event publishing.
 5. Add deterministic seed/fixture data that matches frontend states.
 6. Add schema, authorization, service, route, contract, and workflow tests.
-7. Wire the frontend real repository and prove the whole slice.
+7. Wire the frontend real repository and prove the whole screen.
 
 Do not build speculative hospital, billing, payroll, inpatient, theatre, mortuary, or other generic HIS domains unless a current FCHIP screen/flow and product SoT explicitly require them.
 
@@ -37,6 +37,6 @@ Do not build speculative hospital, billing, payroll, inpatient, theatre, mortuar
 
 ## Done gate
 
-A backend slice is not done until its frontend route uses the real contract and cross-stack tests cover success plus declared loading/error/forbidden/offline/conflict behavior as applicable.
+A backend screen is not done until its frontend route uses the real contract and cross-stack tests cover success plus declared loading/error/forbidden/offline/conflict behavior as applicable.
 
-The slice ID must match `frontend/dev-plan/slices/registry.yaml`, the pairing must be recorded in `frontend/dev-plan/slices/tracker.md`, and `python tool/check_slice_coverage.py` must pass.
+The chronology row must show `backend: paired` (or proven `none`), the tracker must record the proof, slice IDs must match both registries, and `python tool/check_slice_coverage.py` must pass.

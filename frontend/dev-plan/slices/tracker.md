@@ -1,28 +1,51 @@
 # Slice tracker
 
-Live status of FCHIP product delivery. Every slice listed here must pair a frontend screen with the backend that serves it, per [`.cursor/mandatories.mdc`](../../../.cursor/mandatories.mdc).
+Live status of FCHIP product delivery. Every screen listed here must pair Flutter UI with the backend that serves it, per [`.cursor/mandatories.mdc`](../../../.cursor/mandatories.mdc).
 
-Order comes from [`24-product-vertical-slices.md`](../24-product-vertical-slices.md). The loop for a single screen is [`25-slice-execution-playbook.md`](../25-slice-execution-playbook.md). Add per-screen records using [`TEMPLATE.md`](./TEMPLATE.md).
+**Build order:** [`chronology.yaml`](./chronology.yaml) (`S-001` … `S-127`).  
+**Loop:** [`25-slice-execution-playbook.md`](../25-slice-execution-playbook.md).  
+**Module ownership:** [`registry.yaml`](./registry.yaml).  
+**Per-screen record:** [`TEMPLATE.md`](./TEMPLATE.md).
 
 ## How to use this file
 
-1. Only **one** product slice may be `in-progress` at a time.
-2. When you start a slice, add its per-screen records from `TEMPLATE.md` under [Slice records](#slice-records).
-3. Update the status column as the slice moves; never mark `done` without cross-stack proof.
-4. Run `python tool/check_slice_coverage.py` before closing a slice.
+1. Only **one** chronology screen may be active at a time.
+2. When you start a screen, copy a block from `TEMPLATE.md` under [Screen records](#screen-records) and set its chronology `status`.
+3. Never mark a screen `done` without cross-stack proof (or proven `backend: none`).
+4. Run `python tool/check_slice_coverage.py` before closing a screen.
 
 ## Status vocabulary
 
-| Status | Meaning |
+| Chronology `status` | Meaning |
 | --- | --- |
-| `not-started` | No FCHIP frontend or backend work exists for this module |
-| `in-progress` | Screens are being delivered; see per-screen records |
-| `blocked` | Waiting on a decision, dependency, or SoT clarification |
-| `done` | Every screen wired to real backend with cross-stack proof |
+| `not-started` | No FCHIP work for this screen |
+| `ui-fixtures` | Flutter UI exists on fixtures |
+| `contract-defined` | Typed repository/API contract written |
+| `backend-in-progress` | Matching backend being built |
+| `wired` | Real repository connected |
+| `done` | Cross-stack proof recorded |
 
-Legacy HIS workspaces in `frontend/lib/features/` and `backend/src/modules/` do **not** count as FCHIP delivery. Reuse their primitives, but a slice stays `not-started` until its `app-ui` screens exist as FCHIP routes.
+| Slice status | Meaning |
+| --- | --- |
+| `not-started` | No FCHIP screens delivered in the module |
+| `in-progress` | At least one screen active or done |
+| `blocked` | Waiting on a decision or dependency |
+| `done` | Every owned screen (including deferred when unlocked) is done |
 
-## Delivery status
+Legacy HIS workspaces do **not** count as FCHIP delivery.
+
+## Next screen
+
+| Field | Value |
+| --- | --- |
+| Next `seq` | `S-001` |
+| Screen | `00-shared/splash` |
+| Slice | `VS-00` |
+| Active now | _(none)_ |
+
+Update this table whenever a screen opens or closes.
+
+## Module status
 
 | Wave | Slice | Module | Screens | Status | Backend paired |
 | --- | --- | --- | --- | --- | --- |
@@ -53,17 +76,17 @@ Legacy HIS workspaces in `frontend/lib/features/` and `backend/src/modules/` do 
 
 **Total:** 0 of 127 screens delivered.
 
-Wave 4 also covers two deferred screens inside earlier slices: `06-facility-dashboard/medicine-demand-forecast` (phase 3) and `10-district-moh/national-roll-up` (phase 3). Keep them feature-gated and do not report them as implemented while deferred.
+Wave 4 also covers deferred screens inside earlier slices: `06-facility-dashboard/medicine-demand-forecast` (`S-122`) and `10-district-moh/national-roll-up` (`S-123`). Keep them feature-gated until unlocked.
 
 ## Journey proofs
 
 Both MVP journeys must pass end to end before delivery moves past Wave 1.
 
-| Journey | Slices involved | Proof |
+| Journey | Screens involved | Proof |
 | --- | --- | --- |
-| CHW visit → sync → referral → facility queue/detail → outcome → CHW status → cascade metric | VS-00, VS-01, VS-07, VS-04 | pending |
-| Fever signal → ingest → climate/GIS/risk → district warning → deployed response → result → metric | VS-01, VS-09, VS-22, VS-10 | pending |
+| CHW visit → sync → referral → facility queue/detail → outcome → CHW status → cascade metric | `S-013`–`S-042`, cascade metrics | pending |
+| Fever signal → ingest → climate/GIS/risk → district warning → deployed response → result → metric | `S-027`–`S-060` (intelligence, climate, district) | pending |
 
-## Slice records
+## Screen records
 
-No slice records yet. Copy blocks from [`TEMPLATE.md`](./TEMPLATE.md) as slices open.
+No screen records yet. Copy blocks from [`TEMPLATE.md`](./TEMPLATE.md) as screens open. Prefix each heading with the chronology `seq` (for example `### S-001 · VS-00 · 00-shared/splash`).

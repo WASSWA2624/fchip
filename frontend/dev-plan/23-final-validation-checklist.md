@@ -26,4 +26,4 @@ You must follow [`00-execution-policy.md`](./00-execution-policy.md), [`checklis
 - The result must be a working reusable foundation.
 - Architecture, UI behavior, conventions, and validation results must be deterministic.
 - The coverage check must pass so product slices start from an accurate screen inventory.
-- This gate does not mean the product is complete; product completion is tracked screen by screen in steps `24` and `25`, and every screen must ship with its backend.
+- This gate does not mean the product is complete; product completion is tracked screen by screen in `slices/chronology.yaml` via steps `24` and `25`, and every screen must ship with its backend.

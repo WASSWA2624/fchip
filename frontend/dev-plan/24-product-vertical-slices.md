@@ -1,111 +1,94 @@
 # 24 - Product Vertical Slices
 
-Build the real FCHIP product from `app-ui/` and `app-flows/`. This plan starts product development after the shared foundation in steps `01`–`23`.
+Build the real FCHIP product from `app-ui/` and `app-flows/`, **one screen at a time**, after the shared foundation in steps `01`–`23`.
 
-This step owns **what to build and in what order**. [`25-slice-execution-playbook.md`](./25-slice-execution-playbook.md) owns **how to build one screen** and its backend. Status lives in [`slices/tracker.md`](./slices/tracker.md).
+This step owns **what to build and in what order**. The machine-readable order is [`slices/chronology.yaml`](./slices/chronology.yaml) (`S-001` … `S-127`). [`25-slice-execution-playbook.md`](./25-slice-execution-playbook.md) owns **how to build one screen** and its backend. Status lives in [`slices/tracker.md`](./slices/tracker.md).
 
-## Starting Baseline
+## Atomic unit
 
-The current frontend/backend contain broad hospital HIS workspaces. Reuse suitable platform primitives such as auth, tenancy, consent, repositories, responsive shells, sync, integrations, and tests, but do not rename an HIS page and count it as a FCHIP screen. Add FCHIP feature folders and routes from `screen.json`; retire unrelated HIS surfaces through explicit migration/feature-gate decisions.
+One atomic delivery unit = **one** `app-ui/<module>/<screen>/` folder:
 
-## Non-Negotiable Delivery Loop
+1. Flutter UI from `screen.json` + six mockups.
+2. Matching backend (models, migration, API, authz, audit, seeds, tests) — or explicit `backend: none`.
+3. Real repository wired and cross-stack proof.
+4. Only then open the next `S-NNN`.
 
-Do not build all Flutter screens and postpone the backend. For each screen, or the smallest connected journey:
+Do not batch an entire module's UI and postpone its backends. State specimens (`*-empty`, `*-loading`) may share a parent endpoint, but each still needs its own widget/golden assertion and a chronology row.
 
-1. Read its `screen.json`, six mockups, module README, shared component/layout references, and connected app flow.
+## Starting baseline
+
+The current frontend/backend contain broad hospital HIS workspaces. Reuse suitable platform primitives (auth, tenancy, consent, repositories, shells, sync, tests). Do not rename an HIS page and count it as a FCHIP screen. Add FCHIP feature folders and routes from `screen.json`; retire unrelated HIS surfaces through explicit migration/feature-gate decisions.
+
+## Non-negotiable delivery loop
+
+For the next unfinished, non-deferred row in `chronology.yaml`:
+
+1. Read its `screen.json`, six mockups, module README, shared layout/components, and connected `app-flows/` journey.
 2. Implement the responsive Flutter route first using typed fixtures.
 3. Record every visible field, filter, action, state, access rule, data source, offline rule, and realtime need.
 4. Define the smallest repository/API contract needed by that UI.
-5. Immediately implement the matching backend schema, migration, seed data, authorization, validation, repository, service, endpoint, audit, sync/event behavior, and tests.
+5. Immediately implement the matching backend schema, migration, seed data, authorization, validation, repository, service, endpoint, audit, sync/event behavior, and tests (`backend/dev-plan/P016_slice_pairing.md`).
 6. Wire the real repository and prove the journey end to end.
-7. Close the slice only after frontend, backend, and cross-stack gates pass.
+7. Close the screen only after frontend, backend, and cross-stack gates pass.
+8. Update chronology `status` / `backend`, tracker record, and both registries' `backend_paired` counts.
 
-Follow `frontend/.cursor/product_delivery.mdc` and `backend/.cursor/vertical-slice-delivery.mdc`. A state specimen such as loading or empty may share the parent screen's endpoint, but it must still have its own widget/golden assertion.
+Follow `frontend/.cursor/product_delivery.mdc` and `backend/.cursor/vertical-slice-delivery.mdc`.
 
-## Slice Record
+## Chronological waves
 
-For each screen keep: route; phase; roles/ABAC scope; visual references; supported states; frontend files/tests; repository methods; API routes/events; models/migration; permissions/consent/audit; offline/idempotency/conflict policy; seeds; and validation evidence. Mark `backend: none` only for a proven static screen.
+Order inside each wave matches `chronology.yaml`. Do not reorder without updating that file and the coverage check.
 
-Keep the machine-readable registry at [`slices/registry.yaml`](./slices/registry.yaml) in step with its mirror at [`backend/dev-plan/slices/registry.yaml`](../../backend/dev-plan/slices/registry.yaml). Record each screen using [`slices/TEMPLATE.md`](./slices/TEMPLATE.md) in [`slices/tracker.md`](./slices/tracker.md).
+### Wave 0 — Entry, identity, access (`S-001`–`S-012`)
 
-Enforce coverage with:
+`00-shared`: splash → create-account → login → forgot-password → consent-first-onboarding → offline-pin-lock → session-locked → role-surface-picker → notifications-center → access-denied → not-found → preferences.
 
-```bash
-python tool/check_slice_coverage.py
-```
+Backend in tandem: identity/session recovery, consent, offline device unlock boundary, effective-access/workspace, notifications, preferences, localization/theme preference, audit.
 
-It reads every `app-ui/**/screen.json` and fails when a screen has no owning slice, a registry lists a screen that does not exist, a route or localization prefix does not match, the two registries disagree, or a slice claims `done` without a backend paired to each screen.
+### Wave 1 — MVP capture-to-action (`S-013`–`S-060`)
 
-## Delivery Order
+1. `01-chw-vht-mobile` (`S-013`–`S-026`): worklist → visit → referral → alerts → sync states.
+2. `09-intelligence` foundation (`S-027`–`S-028`): ingest-pipeline, feeder-health-board.
+3. `04-cascade-metrics` (`S-029`–`S-031`).
+4. `06-facility-dashboard` MVP (`S-032`–`S-038`) — defer `medicine-demand-forecast`.
+5. `07-referrals-desk` (`S-039`–`S-042`).
+6. `08-emr-connector` (`S-043`–`S-047`).
+7. `22-climate-feeds` (`S-048`–`S-051`).
+8. `09-intelligence` decision (`S-052`–`S-056`).
+9. `10-district-moh` MVP (`S-057`–`S-060`) — defer `national-roll-up`.
 
-Within a module, follow the screen order below unless a listed journey requires two screens to land together.
+Prove both MVP journeys before Wave 2:
 
-### Wave 0 - Entry, identity, access, and shared shell
+- CHW visit → sync → referral → facility queue/detail → outcome → CHW status → cascade metric.
+- Fever/case signal → ingest → climate/GIS/risk → warning → deployed response → follow-up → metric/learning.
 
-- `00-shared`: `splash`, `create-account`, `login`, `forgot-password`, `consent-first-onboarding`, `offline-pin-lock`, `session-locked`, `role-surface-picker`, `notifications-center`, `access-denied`, `not-found`, `preferences`.
-- Backend in tandem: identity/session recovery, consent, offline device unlock boundary, effective-access/workspace response, notifications, user preferences, localization/theme preference, and audit.
+### Wave 2 — Remaining MVP (`S-061`–`S-077`)
 
-### Wave 1 - MVP capture-to-action loop
-
-1. `01-chw-vht-mobile`: `worklist-home`, `worklist-empty`, `worklist-loading`, `household-visit-form`, `symptoms-vitals`, `maternal-child-indicators`, `visit-saved`, `create-referral`, `referral-status`, `alerts-inbox`, `alert-follow-up`, `sync-status`, `sync-failed`, `sync-conflict`.
-2. `09-intelligence` foundation: `ingest-pipeline`, `feeder-health-board`.
-3. `04-cascade-metrics`: `indicators-overview`, `gap-detection`, `partner-reports`.
-4. `06-facility-dashboard` MVP: `overview`, `catchment-map`, `open-referrals`, `stock-signal`, `outreach-priorities`, `clinical-share-confirm`, `manual-case-signal`.
-5. `07-referrals-desk`: `referral-queue`, `referral-queue-empty`, `referral-detail`, `outcome-feedback`.
-6. `08-emr-connector`: `connector-status`, `connector-degraded`, `api-scopes-setup`, `push-event-log`, `facility-onboarding`.
-7. `22-climate-feeds`: `climate-home`, `rainfall-temperature`, `extremes-flood-heat`, `feed-config-audit`.
-8. `09-intelligence` decision loop: `gis-explorer`, `climate-fusion`, `ai-risk-scores`, `alerts-worklists-engine`, `clinical-support-guidance`.
-9. `10-district-moh` MVP: `population-map`, `early-warnings`, `action-deploy`, `cascade-planning`.
-
-Prove both complete MVP journeys before continuing:
-
-- CHW visit → local save/sync → referral → facility queue/detail → outcome → CHW status → cascade metric.
-- Fever/case signal → ingest → climate/GIS/risk → warning → deployed response → follow-up/result → metric/learning update.
-
-### Wave 2 - Remaining MVP surfaces
-
-- `02-community-caregiver`: `my-household`, `self-report`, `guidance-hints`, `household-needs-capture`.
-- `03-outreach-school-health`: `campaign-planner`, `session-log`, `coverage-map`, `screening-results-entry`, `home-visit-batch-upload`.
-- `13-admin-consent`: `org-catchment`, `users-roles`, `consent-privacy`, `emr-api-access`, `feeder-party-registry`.
-- `23-insurance-insights`: `prevention-overview`, `risk-cohort-insights`, `anonymised-trends`.
+`02-community-caregiver` → `03-outreach-school-health` → `13-admin-consent` → `23-insurance-insights`.
 
 Insurance responses must be prevention-focused, aggregated, anonymised, and unable to reveal raw PHI.
 
-### Wave 3 - Phase 2 feeder and partner expansion
+### Wave 3 — Phase 2 feeders (`S-078`–`S-121`)
 
-- `05-chis-livelihoods`: `enrolment`, `contributions`, `claims-access`, `iga-participation-entry`. Keep optional and do not make CHIS the product identity.
-- `11-ngo-partner`: `programme-monitoring`, `impact-evidence`, `training-skills-analytics`, `field-dataset-upload`, `partner-indicator-entry`.
-- `14-schools-health`: `school-home`, `health-education-session`, `learner-screening-entry`, `absenteeism-wellness`, `school-sync-status`.
-- `15-pharmacy-outlets`: `pharmacy-home`, `stock-levels-entry`, `dispense-log`, `common-complaints`, `prestock-ack`.
-- `16-labs-poc`: `lab-home`, `result-entry`, `batch-results-upload`, `result-queue`.
-- `17-corporate-wellness`: `corporate-home`, `camp-vitals-entry`, `camp-summary-push`, `occupational-flags`.
-- `18-mch-touchpoints`: `mch-home`, `anc-visit-entry`, `pnc-visit-entry`, `immunisation-entry`, `nutrition-monitoring`.
-- `19-ncd-gericare`: `cohort-home`, `cohort-visit-entry`, `bp-screening-batch`, `stroke-risk-flags`.
-- `20-hmis-dhis2`: `hmis-home`, `dataset-mapping`, `aggregate-push-pull`, `hmis-audit`.
-- `21-community-events`: `events-home`, `outreach-event-log`, `community-dialogue`, `participation-register`.
+`05-chis-livelihoods` → `11-ngo-partner` → `14-schools-health` → `15-pharmacy-outlets` → `16-labs-poc` → `17-corporate-wellness` → `18-mch-touchpoints` → `19-ncd-gericare` → `20-hmis-dhis2` → `21-community-events`.
 
-Each feeder must enter through the shared ingest/provenance spine and expose feed health; do not create a separate product core.
+Each feeder enters the shared ingest/provenance spine and exposes feed health. CHIS stays optional and must not become product identity.
 
-### Wave 4 - Later phase screens
+### Wave 4 — Later phase (`S-122`–`S-127`)
 
-- Phase 3: `06-facility-dashboard/medicine-demand-forecast`, then `10-district-moh/national-roll-up`.
-- Phase 4: `12-research-exports/evidence-catalog`, `export-request`, `research-contribution-upload`, `export-pending`.
+Deferred phase-3 screens, then research exports: `medicine-demand-forecast`, `national-roll-up`, then `12-research-exports` (ethics review, anonymisation, expiring download, immutable audit; no raw PHI).
 
-Research export delivery must include ethics/privacy review, pending/denied/approved states, anonymisation proof, expiring download authorization, and immutable audit evidence. Raw PHI export is forbidden.
+## Per-screen acceptance
 
-## Per-Slice Acceptance
-
-- The route, parent, tabs, primary action, roles, phase, layout, shells, localization prefix, and supported states match `screen.json`.
-- Mobile `390×844`, tablet `768×1024`, and desktop `1440×900` work in light and dark themes and reuse the shared kit.
+- Route, parent, tabs, primary action, roles, phase, layout, shells, localization prefix, and supported states match `screen.json`.
+- Mobile `390×844`, tablet `768×1024`, and desktop `1440×900` work in light and dark themes.
 - Frontend tests cover logic, repository mapping, widgets, and relevant goldens.
 - Backend tests cover schema, access, consent/audit, service, route, contract, and workflow behavior.
-- Offline-capable flows prove local save, idempotent retry, sync states, deterministic conflict handling, and current authorization.
-- Realtime-capable flows prove scoped delivery and targeted Riverpod reconciliation.
+- Offline flows prove local save, idempotent retry, sync states, conflict handling, and current authorization.
+- Realtime flows prove scoped delivery and targeted Riverpod reconciliation.
 - No public payload or UI exposes internal database IDs.
-- The real backend is wired and the connected journey passes before the next slice starts.
-- Frontend and backend slice registries agree, and `python tool/check_slice_coverage.py` passes.
-- The tracker record names the backend module, endpoints, models, migration, seeds, and cross-stack proof for every screen in the slice.
+- Real backend wired (or `backend: none` with evidence) before the next chronology screen.
+- `python tool/check_slice_coverage.py` passes.
 
 ## Completion
 
-The product is complete only when all 127 catalogued screens have a slice record and every `app-flows/07-navigation.md` journey has cross-stack proof. Phase gates may defer later waves, but deferred routes must remain clearly feature-gated and must not be reported as implemented.
+The product is complete only when all 127 chronology rows are `done` and every `app-flows/07-navigation.md` journey has cross-stack proof. Deferred routes stay feature-gated and must not be reported as implemented early.

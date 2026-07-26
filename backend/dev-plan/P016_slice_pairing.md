@@ -1,10 +1,15 @@
 # P016 — Screen-to-Backend Pairing
 
-Goal: turn one implemented frontend screen into the smallest correct backend, in the same slice. Run this before `P009_models` through `P015_offline`, which supply the detail.
+Goal: turn one implemented frontend chronology screen (`S-NNN`) into the smallest correct backend, in the same atomic unit. Run this before `P009_models` through `P015_offline`, which supply the detail.
 
 ## Entry condition
 
-Do not start until the slice's Flutter screen exists on fixtures and its typed repository contract is written. Read the screen's `app-ui/<module>/<screen>/screen.json`, its mockups, the module `README.md`, and the connected `app-flows/` journey. Confirm the slice ID in `backend/dev-plan/slices/registry.yaml` matches the frontend registry.
+Do not start until:
+
+1. The screen is the next unfinished, non-deferred row in `frontend/dev-plan/slices/chronology.yaml`.
+2. Its Flutter UI exists on fixtures and its typed repository contract is written.
+3. You have read `app-ui/<module>/<screen>/screen.json`, its mockups, the module `README.md`, and the connected `app-flows/` journey.
+4. The slice ID in `backend/dev-plan/slices/registry.yaml` matches the frontend registry and the chronology row's `slice`.
 
 ## Derivation table
 
@@ -34,6 +39,7 @@ If a row has no matching UI fact, do not build it. If a UI fact has no row, reco
 4. Add seeds that reproduce every declared state, including empty, forbidden, offline, and conflict.
 5. Add schema, authorization, service, route, contract, and workflow tests.
 6. Wire the real frontend repository and prove the journey across both stacks.
+7. Set chronology `backend: paired` (or `none` with evidence) and update the tracker.
 
 Follow `backend/.cursor/module-creation.mdc` for the per-module sequence and `backend/.cursor/vertical-slice-delivery.mdc` for the done gate.
 
@@ -48,3 +54,4 @@ Existing generic HIS modules and models may be reused only when they directly se
 - Public payloads expose `human_friendly_id` only.
 - `python tool/check_slice_coverage.py` passes.
 - The frontend route runs on the real contract and cross-stack tests cover the declared states.
+- The next chronology screen is not opened while this screen has an undocumented backend gap.

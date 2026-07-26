@@ -1,10 +1,12 @@
 version: 2
 frontend_registry: frontend/dev-plan/slices/registry.yaml
+chronology: frontend/dev-plan/slices/chronology.yaml
 tracker: frontend/dev-plan/slices/tracker.md
 pairing_guide: backend/dev-plan/P016_slice_pairing.md
 coverage_check: tool/check_slice_coverage.py
 policy:
   start_only_after_frontend_fixture_ui: true
+  atomic_unit: one_app_ui_screen_from_chronology
   implementation_unit: schema_contract_module_seed_tests_and_frontend_wiring
   speculative_his_domains: forbidden
 # Slice IDs must match the frontend registry exactly.

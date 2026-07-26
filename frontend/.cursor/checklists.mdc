@@ -30,10 +30,10 @@ Release and per-feature gates only; detailed standards live in owner files in [`
 - [ ] Shared-data mutations must follow [`instant_ui_sync.mdc`](./instant_ui_sync.mdc); cancel/failure must not patch or refresh.
 - [ ] Tests must cover controller logic and critical UI.
 
-## Product slice gate
+## Product screen gate
 
-- [ ] The matching backend must ship in the same slice; a fixture or fake repository must not close it.
-- [ ] `frontend/dev-plan/slices/tracker.md` must record routes, endpoints, models, migration, seeds, and cross-stack proof.
+- [ ] The matching backend must ship in the same atomic chronology unit; a fixture or fake repository must not close it.
+- [ ] `frontend/dev-plan/slices/chronology.yaml` and `tracker.md` must record the screen status, endpoints, models, migration, seeds, and cross-stack proof.
 - [ ] `python tool/check_slice_coverage.py` must pass.
 
 ## Related

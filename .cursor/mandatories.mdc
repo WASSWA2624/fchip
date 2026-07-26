@@ -1,5 +1,5 @@
 ---
-description: Always enforce product SoT framing, loading feedback, responsive UI, realtime sync, migrations, and access checks
+description: Always enforce frontend-first tandem delivery, product framing, loading, responsive UI, realtime, migrations, and access
 alwaysApply: true
 ---
 
@@ -9,41 +9,49 @@ Apply on every code change. Do not ship UI or API work that skips these.
 
 ## Frontend UI ships with its backend
 
-Product work is frontend-first and **paired**. Every frontend UI must land with the backend that serves it, inside the same vertical slice:
+Product work is **frontend-first** and **paired**. Start at the Flutter UI. For every `app-ui` screen you implement, ship the matching backend and database in the same atomic unit before the next screen.
 
-- Build the Flutter screen from `app-ui/<module>/<screen>/screen.json` and its mockups, then implement the matching Prisma model, migration, validation, authorization, endpoint, audit, events, seeds, and tests.
-- A slice closes only when the real repository is wired and the journey passes end to end. Fixtures or fake repositories must not close a slice.
-- Mark `backend: none` only for a screen proven static. Any data, auth, mutation, upload, export, sync, notification, map, or analytics behavior needs backend proof.
-- Record the pairing in `frontend/dev-plan/slices/tracker.md` and keep both slice registries in agreement.
-- Do not start the next slice while the active screen has an undocumented backend gap.
+1. Read `app-ui/<module>/<screen>/screen.json` and its six mockups.
+2. Build the Flutter screen (fixtures only while coding).
+3. Derive the smallest API/DB contract from that UI.
+4. Implement Prisma models, migration, validation, authorization, endpoints, audit, events, seeds, and tests.
+5. Wire the real repository and prove the journey end to end.
+
+Rules:
+
+- Close a screen only when the real repository is wired. Fixtures must not close it.
+- Mark `backend: none` only for a proven static screen. Data, auth, mutation, upload, export, sync, notification, map, or analytics needs backend proof.
+- Follow `frontend/dev-plan/slices/chronology.yaml` (`S-001` … `S-127`). One active screen at a time.
+- Record pairing in `frontend/dev-plan/slices/tracker.md`. Keep both registries and the chronology aligned.
+- Do not start the next screen while the active one has an undocumented backend gap.
 - Do not build backend domains no current FCHIP screen needs.
 
-Order and gates: `frontend/dev-plan/24-product-vertical-slices.md`.
+Loop: `frontend/dev-plan/25-slice-execution-playbook.md`.
 
 ## Product framing
 
 Align with [`.cursor/app-write-up.mdc`](app-write-up.mdc):
 
 - **FCHIP** is the Community Health Intelligence Platform.
-- Frame FCHIP as a **predictive intelligence platform** on the community health cascade Data & Feedback loop — not a company-ecosystem write-up and not a generic hospital/EMR brand.
-- EMR/HMS wording is only for **external** facility systems FCHIP connects to via secure data APIs.
-- Do not invent alternate cascade order, programme names, or a stand-alone hospital brand for FCHIP.
+- Frame FCHIP as a **predictive intelligence platform** on the cascade Data & Feedback loop — not a generic hospital/EMR brand.
+- EMR/HMS wording is only for **external** facility systems connected via secure data APIs.
+- Do not invent alternate cascade order, programme names, or a stand-alone hospital brand.
 
 ## Loading feedback
 
-- Any data load, save, panel switch, or content swap must show loading with a relevant localized message.
+- Any data load, save, panel switch, or content swap must show loading with a localized message.
 - Prefer logo-based `AppLoadingIndicator` for page, panel, table, and content-region loads.
-- For in-place actions (Save, Delete, submit), use `AppButton.isLoading` — not a full-region logo loader.
+- For in-place actions (Save, Delete, submit), use `AppButton.isLoading`.
 
 ## Responsive UI
 
-- Every new or changed UI surface must work across mobile, tablet, and desktop per `frontend/.cursor/layouts.mdc`.
-- Use shared responsive layout utilities; do not hard-code widths or duplicate screens per breakpoint unless the interaction model changes.
-- Verify no overflow, clipped actions, or unusable panels at narrow widths before shipping.
+- Every new or changed UI must work across mobile, tablet, and desktop per `frontend/.cursor/layouts.mdc`.
+- Use shared responsive layout utilities; do not hard-code widths unless the interaction model changes.
+- Verify no overflow or unusable panels at narrow widths before shipping.
 
 ## Realtime UI updates
 
-- Shared, multi-user data must update the acting user's UI immediately on successful save.
+- Shared multi-user data must update the acting user's UI immediately on successful save.
 - Workspaces showing shared data must subscribe via realtime helpers, scoped when tenant/facility-bound.
 - Prefer smallest patch over blanket invalidation; must not navigate, toast, or `setState` from realtime handlers.
 
@@ -61,5 +69,5 @@ Align with [`.cursor/app-write-up.mdc`](app-write-up.mdc):
 
 ## Related
 
-- `frontend/.cursor/product_delivery.mdc`, `ui-feedback.mdc`, `layouts.mdc`, `instant_ui_sync.mdc`, `realtime_sync.mdc`, `permissions.mdc`
+- `frontend/.cursor/product_delivery.mdc`, `layouts.mdc`, `instant_ui_sync.mdc`, `permissions.mdc`
 - `backend/.cursor/vertical-slice-delivery.mdc`, `prisma.mdc`

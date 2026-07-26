@@ -2536,20 +2536,20 @@ def render_screen(screen: Screen, breakpoint: str) -> Image.Image:
         card_h = min(card_h, h - y - 24)
         round_rect(draw, (card_x, y, card_x + card_w, y + card_h), C["surface"], radius=20, outline=C["line"])
         is_splash = screen.slug == "01-splash"
+        paste_logo_centered(
+            img,
+            card_x + card_w / 2,
+            y + (56 if is_splash else 44),
+            name=LOGO_SPLASH if is_splash else LOGO_MARK,
+            max_w=88 if is_splash else 48,
+            max_h=88 if is_splash else 48,
+            tint=C["primary"],
+        )
         if is_splash or screen.title == "FCHIP":
-            paste_logo_centered(
-                img,
-                card_x + card_w / 2,
-                y + 56,
-                name=LOGO_SPLASH if is_splash else LOGO_MARK,
-                max_w=88 if is_splash else 64,
-                max_h=88 if is_splash else 64,
-                tint=C["primary"],
-            )
             title_y = y + 112
         else:
-            text(draw, (card_x + card_w / 2, y + 40), screen.title, size=26, bold=True, fill=C["primary"], anchor="mm")
-            title_y = y + 72
+            text(draw, (card_x + card_w / 2, y + 84), screen.title, size=22, bold=True, fill=C["primary"], anchor="mm")
+            title_y = y + 112
         for i, line in enumerate(wrap(draw, screen.subtitle, int(card_w - 48), 12)[:2]):
             text(draw, (card_x + card_w / 2, title_y + i * 16), line, size=12, fill=C["muted"], anchor="mm")
         fy = title_y + 40

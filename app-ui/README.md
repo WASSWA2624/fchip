@@ -1,7 +1,8 @@
 # FCHIP app-ui
 
 Visual directory of **proposed** FCHIP screens from `.cursor/app-write-up.mdc` and `app-flows/`.
-Not generated from `frontend/` code.
+Screen content is not generated from Flutter code. Brand marks load from
+`frontend/assets/logos` via `app-ui/branding.py`.
 
 **127 screens** × mobile / tablet / desktop × light / dark = **762 mockups**.
 
@@ -122,7 +123,7 @@ Every screen also has a `*-dark.png` system-theme specimen.
 ### [05-referrals-desk](05-referrals-desk/README.md)
 
 - **Referrals desk** — `05-referrals-desk/01-referral-queue/` ([mobile](05-referrals-desk/01-referral-queue/mobile.png) · [tablet](05-referrals-desk/01-referral-queue/tablet.png) · [desktop](05-referrals-desk/01-referral-queue/desktop.png))
-- **Referrals desk** — `05-referrals-desk/01-referral-queue-empty/` ([mobile](05-referrals-desk/01-referral-queue-empty/mobile.png) · [tablet](05-referrals-desk/01-referral-queue-empty/tablet.png) · [desktop](05-referrals-desk/01-referral-queue-empty/desktop.png))
+- **Referrals desk** — `05-referrals-desk/02-referral-queue-empty/` ([mobile](05-referrals-desk/02-referral-queue-empty/mobile.png) · [tablet](05-referrals-desk/02-referral-queue-empty/tablet.png) · [desktop](05-referrals-desk/02-referral-queue-empty/desktop.png))
 - **Referral detail** — `05-referrals-desk/03-referral-detail/` ([mobile](05-referrals-desk/03-referral-detail/mobile.png) · [tablet](05-referrals-desk/03-referral-detail/tablet.png) · [desktop](05-referrals-desk/03-referral-detail/desktop.png))
 - **Outcome feedback** — `05-referrals-desk/04-outcome-feedback/` ([mobile](05-referrals-desk/04-outcome-feedback/mobile.png) · [tablet](05-referrals-desk/04-outcome-feedback/tablet.png) · [desktop](05-referrals-desk/04-outcome-feedback/desktop.png))
 
@@ -177,6 +178,7 @@ Every screen also has a `*-dark.png` system-theme specimen.
 - **Prevention overview** — `12-insurance-insights/01-prevention-overview/` ([mobile](12-insurance-insights/01-prevention-overview/mobile.png) · [tablet](12-insurance-insights/01-prevention-overview/tablet.png) · [desktop](12-insurance-insights/01-prevention-overview/desktop.png))
 - **Risk cohort insights** — `12-insurance-insights/02-risk-cohort-insights/` ([mobile](12-insurance-insights/02-risk-cohort-insights/mobile.png) · [tablet](12-insurance-insights/02-risk-cohort-insights/tablet.png) · [desktop](12-insurance-insights/02-risk-cohort-insights/desktop.png))
 - **Anonymised trends** — `12-insurance-insights/03-anonymised-trends/` ([mobile](12-insurance-insights/03-anonymised-trends/mobile.png) · [tablet](12-insurance-insights/03-anonymised-trends/tablet.png) · [desktop](12-insurance-insights/03-anonymised-trends/desktop.png))
+
 ### [13-chis-livelihoods](13-chis-livelihoods/README.md)
 
 - **CHIS enrolment** — `13-chis-livelihoods/01-enrolment/` ([mobile](13-chis-livelihoods/01-enrolment/mobile.png) · [tablet](13-chis-livelihoods/01-enrolment/tablet.png) · [desktop](13-chis-livelihoods/01-enrolment/desktop.png))
@@ -257,7 +259,6 @@ Every screen also has a `*-dark.png` system-theme specimen.
 - **Export request** — `23-research-exports/02-export-request/` ([mobile](23-research-exports/02-export-request/mobile.png) · [tablet](23-research-exports/02-export-request/tablet.png) · [desktop](23-research-exports/02-export-request/desktop.png))
 - **Research contribution upload** — `23-research-exports/03-research-contribution-upload/` ([mobile](23-research-exports/03-research-contribution-upload/mobile.png) · [tablet](23-research-exports/03-research-contribution-upload/tablet.png) · [desktop](23-research-exports/03-research-contribution-upload/desktop.png))
 - **Export under review** — `23-research-exports/04-export-pending/` ([mobile](23-research-exports/04-export-pending/mobile.png) · [tablet](23-research-exports/04-export-pending/tablet.png) · [desktop](23-research-exports/04-export-pending/desktop.png))
-
 
 ## Regenerate
 

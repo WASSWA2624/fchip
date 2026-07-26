@@ -32,7 +32,7 @@
     "policy": "RBAC + ABAC + subscription + assigned modules",
     "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
   },
-  "phase": "phase-3",
+  "phase": "mvp",
   "l10n_key_prefix": "04_facility_dashboard.08_medicine_demand_forecast",
   "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
   "navigation": {

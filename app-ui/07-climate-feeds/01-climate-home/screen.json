@@ -3,10 +3,10 @@
   "subtitle": "Climate API as a first-class data feeder",
   "kind": "dashboard",
   "nav": "climate",
-  "layout": "15-feeder-home",
+  "layout": "11-dashboard-metrics",
   "body_layouts": {
-    "mobile": "15-feeder-home",
-    "tablet": "15-feeder-home",
+    "mobile": "11-dashboard-metrics",
+    "tablet": "11-dashboard-metrics",
     "desktop": "03-dual-pane-desktop"
   },
   "shells": {

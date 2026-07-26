@@ -16,15 +16,30 @@ alwaysApply: true
 **Tagline:** Health for All — *Obulamu eri Bonna* · *Afya kwa Wote* · *Oburamu bwa Boona*  
 **Principles:** Health for All · Communities First · Empowerment for Sustainable Change
 
+### Canonical terms (use exactly)
+
+| Term | Meaning |
+| --- | --- |
+| **FairBanks** | The operating company and community health ecosystem (Community Reach + Medical Centre + CHIS + livelihoods + research) |
+| **FCHIP** | FairBanks Community Health Intelligence Platform — FairBanks' deep-tech **component** on the Data & Feedback loop; not a separate brand and not a generic hospital management system |
+| **FairBanks Community Reach** | The field operating model / cascade (six layers + continuous feedback loop) |
+| **Community Reach Programmes** | Cascade layer 3 — outreach, education, screening, maternal & child, adolescent, chronic care, home visits |
+| **CHIS** | Community Health Insurance Scheme — shared protection / affordable care under economic empowerment |
+| **CHW / VHT** | Community Health Worker / Village Health Team — "the bridge" |
+| **EMR / HMS** | External electronic medical records / hospital management systems that FCHIP **interoperates with** via secure data APIs — FCHIP does not replace them |
+| **GIS + climate APIs** | Place and climate signals fused with community/facility data for early detection |
+
+Do **not** invent alternate programme names, reorder the cascade, or describe FCHIP as a stand-alone hospital brand.
+
 ### Canonical Community Reach visuals (in scope)
 
 | Visual | Path | Use when |
 | --- | --- | --- |
 | Full partner / funder model | `.cursor/concept_improved.jpeg` | Cascade, theory of change, CHIS, indicators, partnership menu |
-| Community-facing journey | `.cursor/concept_simple.jpeg` | “How we care for your community” — simple six-step loop |
+| Community-facing journey | `.cursor/concept_simple.jpeg` | "How we care for your community" — simple six-step loop |
 | Classic cascade diagram | `.cursor/concept.jpeg` | Six-step model with needs, enablers, and continuous feedback loop |
 
-These three images define the FairBanks Community Reach operating model that FCHIP sits on. Do not invent a different cascade order or programme names. Detail also lives in `.cursor/rules/fairbanks-community-reach.mdc`.
+These three images define the FairBanks Community Reach operating model that FCHIP sits on. A short operating-model summary for agents also lives in `.cursor/rules/fairbanks-community-reach.mdc` — if anything conflicts, **this file wins**.
 
 ---
 
@@ -40,7 +55,7 @@ FairBanks is uniquely positioned to build and validate this. We already operate 
 
 **Vision:** To build Africa's leading Community Health Intelligence Company — FairBanks — whose FCHIP component harnesses artificial intelligence, community-generated data, GIS, climate signals, and predictive analytics to transform primary healthcare from reactive treatment to proactive prevention — while strengthening the Community Reach loop of care, learning, and empowerment.
 
-**Funding ask (indicative):** Support to validate and scale the working FCHIP MVP within FairBanks Community Reach—mobile data collection for CHWs/VHTs, cloud sync, secure EMR/HMS data APIs for real-time clinical ingest, GIS and climate API integration, predictive analytics engine, and facility/district dashboards—proven in FairBanks' live cascade (communities → CHWs → programmes → medical centre → research → empowerment) before district and regional scale-up.
+**Funding ask (indicative):** Support to validate and scale the working FCHIP MVP within FairBanks Community Reach — mobile data collection for CHWs/VHTs, cloud sync, secure EMR/HMS data APIs for real-time clinical ingest, GIS and climate API integration, predictive analytics engine, and facility/district dashboards — proven in FairBanks' live cascade (communities → CHWs → programmes → medical centre → research → empowerment) before district and regional scale-up.
 
 ---
 
@@ -57,7 +72,7 @@ This section is the **field operating system** for FairBanks. FCHIP does not rep
 5. **Research · Partnerships · Skills development** — Evidence, innovation, academic/institutional partners, training, capacity building (“We learn and improve”).
 6. **Economic empowerment & sustainable communities** — Livelihoods, financial inclusion, **CHIS**, IGAs, savings groups, resilient families, healthy communities, sustainable development (“Families grow stronger”).
 
-**Continuous feedback loop:** Community needs & priorities flow down the cascade; services & solutions flow back to communities. Loop actors: Communities · CHWs/VHTs · FBCR Programmes · Medical Centre · Research · Empowerment · **Data & Feedback** — learn, improve, and serve again (“And it all comes back to you”).
+**Continuous feedback loop:** Community needs & priorities flow down the cascade; services & solutions flow back to communities. Loop actors: Communities · CHWs/VHTs · Community Reach Programmes · Medical Centre · Research · Empowerment · **Data & Feedback** — learn, improve, and serve again ("And it all comes back to you").
 
 ### 2.2 Theory of change (from concept_improved)
 
@@ -116,22 +131,22 @@ Community-facing copy may follow `.cursor/concept_simple.jpeg`. Partner and fund
 
 Across underserved African communities, health systems face a structural information gap:
 
-| Current reality                                         | Consequence                                               |
-| ------------------------------------------------------- | --------------------------------------------------------- |
-| Facilities wait for patients to become sick             | Late detection of outbreaks and complications             |
-| Care ends when the patient leaves the facility          | No continuous view of community-level health trends       |
-| Outreach data sits in paper registers or siloed systems | District offices and NGOs lack real-time intelligence     |
-| Medicine ordering is based on historical guesswork      | Stock-outs during seasonal disease surges                 |
-| High-risk pregnancies and NCDs are identified late      | Preventable maternal morbidity and stroke/diabetes burden |
+| Current reality | Consequence |
+| --- | --- |
+| Facilities wait for patients to become sick | Late detection of outbreaks and complications |
+| Care ends when the patient leaves the facility | No continuous view of community-level health trends |
+| Outreach data sits in paper registers or siloed systems | District offices and NGOs lack real-time intelligence |
+| Medicine ordering is based on historical guesswork | Stock-outs during seasonal disease surges |
+| High-risk pregnancies and NCDs are identified late | Preventable maternal morbidity and stroke/diabetes burden |
 | Climate and weather signals stay separate from health data | Missed early warning when rainfall, heat, or floods raise disease risk |
 | Community Reach data (CHW visits, referrals, CHIS, school health) stays fragmented | The continuous feedback loop in the FairBanks model cannot learn and improve in real time |
 | Clinical data stays locked inside facility EMR/HMS systems | Community and facility intelligence cannot fuse in real time |
 
-Health facilities, district health offices, NGOs, and ministries of health are forced to **react** to visible crises rather than **predict and prevent** them—despite having community health workers, outreach programmes, clinics, schools, and mobile connectivity on the ground.
+Health facilities, district health offices, NGOs, and ministries of health are forced to **react** to visible crises rather than **predict and prevent** them — despite having community health workers, outreach programmes, clinics, schools, and mobile connectivity on the ground.
 
 ### 3.2 Why existing approaches fall short
 
-Many digital health tools in Africa focus on single use cases—appointment booking, EMR digitisation, or SMS reminders. These are valuable but do not constitute **deep technology** or population-level intelligence. They rarely combine:
+Many digital health tools in Africa focus on single use cases — appointment booking, EMR digitisation, or SMS reminders. These are valuable but do not constitute **deep technology** or population-level intelligence. They rarely combine:
 
 - The full Community Reach cascade (communities → CHWs/VHTs → programmes → medical centre → research → empowerment)
 - Multi-source community and facility data (CHWs/VHTs, schools, communities, hospitals, clinics, pharmacies, outreach, CHIS/IGA signals where available)
@@ -141,7 +156,7 @@ Many digital health tools in Africa focus on single use cases—appointment book
 - **Safe interoperability with existing EMR/HMS** so clinical data can flow in real time without ripping out systems facilities already use
 - Real-time decision support for frontline workers and policy makers — closing the **Data & Feedback** loop
 
-The result is fragmented data, delayed response, and missed opportunities for climate-aware prevention at the community level—exactly the gap FairBanks addresses with technology rooted in the Community Reach model (see `.cursor/concept_improved.jpeg`).
+The result is fragmented data, delayed response, and missed opportunities for climate-aware prevention at the community level — exactly the gap FairBanks addresses with technology rooted in the Community Reach model (see `.cursor/concept_improved.jpeg`).
 
 ---
 
@@ -149,12 +164,12 @@ The result is fragmented data, delayed response, and missed opportunities for cl
 
 ### 4.1 Venture positioning
 
-| Instead of                 | We present                                                                                                                                                             |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Instead of | We present |
+| --- | --- |
 | "A private medical centre" | **FairBanks — a Community Health Intelligence Company** using AI, predictive analytics, GIS, climate data, and community-generated signals to improve health outcomes in underserved African communities |
-| "Just an app"              | **FCHIP as a FairBanks component** — the digital nervous system on the FairBanks Community Reach cascade (communities → CHWs → programmes → medical centre → research → empowerment / CHIS) |
+| "Just an app" | **FCHIP as a FairBanks component** — the digital nervous system on the FairBanks Community Reach cascade (communities → CHWs → programmes → medical centre → research → empowerment / CHIS) |
 
-**FairBanks** is the operating company and community health ecosystem (Community Reach + Medical Centre + CHIS + livelihoods). **FCHIP** is FairBanks' deep-technology platform component—connecting communities, healthcare providers, governments, and development partners through one intelligent system that powers the continuous feedback loop.
+**FairBanks** is the operating company and community health ecosystem (Community Reach + Medical Centre + CHIS + livelihoods). **FCHIP** is FairBanks' deep-technology platform component — connecting communities, healthcare providers, governments, and development partners through one intelligent system that powers the continuous feedback loop.
 
 ### 4.2 What FCHIP analyses (existing and planned data sources)
 
@@ -183,10 +198,10 @@ A defining FairBanks / FCHIP capability is **combining place, climate, and commu
 | --- | --- |
 | **GIS mapping** | Maps disease distribution, risk hotspots, resource gaps, and alert geography by village/parish/facility catchment |
 | **Climate API integration** | Ingests weather and climate feeds (e.g. rainfall, temperature, humidity, extreme heat, flood-related signals) into the FCHIP pipeline |
-| **Climatic integration** | Links seasonal and short-term climate change patterns to known climate-sensitive conditions (e.g. malaria/fever clusters after rainfall, heat-related strain, diarrhoeal risk after floods) |
+| **Climate–health fusion** | Links seasonal and short-term climate patterns to climate-sensitive conditions (e.g. malaria/fever clusters after rainfall, heat-related strain, diarrhoeal risk after floods) |
 | **FCHIP multi-source analysis** | Fuses climate and GIS layers with CHW/VHT, school, community, hospital, and clinic data to score risk and trigger early warnings |
 | **Early detection** | Surfaces explainable alerts to CHWs, facilities, and district partners *before* caseloads spike — not only after people present sick |
-| **Secure EMR/HMS data APIs** | Safely expose authenticated APIs so existing electronic medical records and hospital management systems can send clinical data into FCHIP in real time — expanding facility coverage without replacing EMR/HMS |
+| **Secure EMR/HMS data APIs** | Safely expose authenticated APIs so existing EMR/HMS systems can send clinical data into FCHIP in real time — expanding facility coverage without replacing those systems |
 
 **Example:** Rising fever reports from VHTs in three neighbouring villages + above-normal rainfall from the climate API + GIS clustering → FCHIP flags elevated malaria/outbreak risk within a defined window → FairBanks outreach, testing, and pharmacy pre-stocking deploy early.
 
@@ -242,13 +257,13 @@ FCHIP sits between **field and climate capture** and **decision-makers**, on top
 | **FCHIP core**   | AI/ML, predictive analytics, **GIS maps**, climate fusion, clinical guidance |
 | **Consumers**    | CHWs (field), facilities (care), districts/partners (programmes)             |
 
-FCHIP becomes the **digital nervous system** for FairBanks community healthcare—moving data from the last mile, facility EMR/HMS feeds, and climate APIs to decision-makers in near real time, and closing the loop with actionable alerts back to the field.
+FCHIP becomes the **digital nervous system** for FairBanks community healthcare — moving data from the last mile, facility EMR/HMS feeds, and climate APIs to decision-makers in near real time, and closing the loop with actionable alerts back to the field.
 
 ---
 
 ## 5. Deep Technology Core
 
-Funders looking for substantial research and engineering—not lightweight digital services—will find FairBanks meets that bar through FCHIP's integrated deep-tech stack on the Community Reach model:
+Funders looking for substantial research and engineering — not lightweight digital services — will find FairBanks meets that bar through FCHIP's integrated deep-tech stack on the Community Reach model:
 
 | Technology                      | Function in FCHIP (FairBanks component)                                                                |
 | ------------------------------- | ------------------------------------------------------------------------------------------------------ |
@@ -256,13 +271,13 @@ Funders looking for substantial research and engineering—not lightweight digit
 | **Machine Learning**            | Pattern learning from historical community health data, seasonal/climate trends, and outreach outcomes |
 | **GIS Mapping**                 | Geospatial visualisation of disease distribution, climate-linked hotspots, and resource gaps         |
 | **Climate API integration**     | Live and forecast weather/climate feeds fused with health signals for early detection                |
-| **Secure EMR/HMS data APIs**    | Safely expose authenticated APIs so existing EMR and hospital management systems can share clinical data into FCHIP in real time |
+| **Secure EMR/HMS data APIs**    | Safely expose authenticated APIs so existing EMR/HMS systems can share clinical data into FCHIP in real time |
 | **Mobile Data Collection**      | Offline-capable CHW/VHT apps for structured capture at household and community level                 |
 | **Cloud Computing**             | Secure synchronisation across facilities, partners, and administrative levels                        |
 | **Analytics Dashboard**         | Real-time trend and map monitoring for clinicians, programme managers, and district officials        |
 | **Natural Language Processing** | Local-language symptom reporting and summarisation where appropriate                                 |
 
-This combination—AI + ML + **GIS** + **climate APIs** + **secure EMR/HMS interoperability** + edge/mobile capture + cloud orchestration—is the **deep technology core** that distinguishes FairBanks' FCHIP component from a simple health app or consumer website.
+This combination — AI + ML + **GIS** + **climate APIs** + **secure EMR/HMS interoperability** + edge/mobile capture + cloud orchestration — is the **deep technology core** that distinguishes FairBanks' FCHIP component from a simple health app or consumer website.
 
 ---
 
@@ -324,7 +339,7 @@ This combination—AI + ML + **GIS** + **climate APIs** + **secure EMR/HMS inter
 | **Ministries of health**            | National and sub-national planning, outbreak preparedness             |
 | **Research institutions**           | Ethical, anonymised datasets for community health research            |
 
-**Primary market (Phase 1):** Uganda—starting with FairBanks' established community catchment and Kampala metropolitan outreach zones.  
+**Primary market (Phase 1):** Uganda — starting with FairBanks' established community catchment and Kampala metropolitan outreach zones.  
 **Expansion markets (Phase 2–3):** East Africa, then additional African countries with similar primary healthcare and CHW/VHT infrastructure.
 
 ---
@@ -353,7 +368,7 @@ This multi-channel model reduces dependence on a single revenue stream and align
 
 FairBanks is not a concept-stage idea disconnected from the field. The Community Reach model (`.cursor/concept.jpeg` / `concept_improved.jpeg` / `concept_simple.jpeg`) is already the operating frame. Active programmes and assets include:
 
-- **FairBanks Community Reach Programme** (full six-step cascade + continuous feedback loop)
+- **FairBanks Community Reach** (full six-step cascade + continuous feedback loop)
 - **CHW and VHT engagement** in Bukoto, Kyebando, Kisaasi, Kamwokya, Kikaaya, and surrounding Kampala peri-urban communities
 - **Maternal and child health** initiatives and home visits
 - **School health** and community health education
@@ -375,7 +390,7 @@ FairBanks is not a concept-stage idea disconnected from the field. The Community
 | Imported solutions              | Manual, reactive workflows      | **Context-rooted** AI built from African community health realities   |
 | Pilot without validation site   | Data without intelligence layer | **Design → pilot → validate → refine** inside the live feedback loop  |
 
-FairBanks can **design, pilot, validate, and refine** FCHIP inside an operating Community Reach ecosystem—de-risking product-market fit for district and national deployment.
+FairBanks can **design, pilot, validate, and refine** FCHIP inside an operating Community Reach ecosystem — de-risking product-market fit for district and national deployment.
 
 ### 9.3 Venture stage (for funders)
 
@@ -391,7 +406,7 @@ FairBanks can **design, pilot, validate, and refine** FCHIP inside an operating 
 
 ### 10.1 Impact thesis
 
-Through FCHIP on the Community Reach cascade, FairBanks shifts primary healthcare from **sick-care** to **predictive, climate-aware, community-centred prevention**—and links better health to **livelihoods and CHIS financial protection**—directly benefiting underserved populations who depend on CHWs, outreach, schools, clinics, and under-resourced facilities.
+Through FCHIP on the Community Reach cascade, FairBanks shifts primary healthcare from **sick-care** to **predictive, climate-aware, community-centred prevention** — and links better health to **livelihoods and CHIS financial protection** — directly benefiting underserved populations who depend on CHWs, outreach, schools, clinics, and under-resourced facilities.
 
 ### 10.2 Expected outcomes
 
@@ -506,7 +521,7 @@ Only venture combining a **live medical centre, Community Reach cascade (incl. C
 4. **Solution (1:10–1:50):** CHW/clinic/school capture + secure EMR/HMS APIs → climate API → FCHIP (AI + GIS) → facility dashboard → district map.
 5. **Use case (1:50–2:25):** Rainfall + fever cluster or maternal risk alert triggered and acted upon.
 6. **Traction (2:25–2:45):** FairBanks communities, CHIS/livelihoods, programmes, validation environment.
-7. **Ask & vision (2:45–3:00):** Validation and scale support for the working MVP; vision for Africa's leading community health intelligence company.
+7. **Ask & vision (2:45–3:00):** Validation and scale support for the working MVP; vision for Africa's leading Community Health Intelligence Company.
 
 ### 13.7 Suggested pitch deck structure (10–12 slides)
 
@@ -534,7 +549,7 @@ Only venture combining a **live medical centre, Community Reach cascade (incl. C
 | Data quality from field capture | Structured mobile forms, validation rules, CHW training and certification                                        |
 | Climate / GIS data gaps         | Start with proven public climate APIs and simple overlays; validate against FairBanks clinical outcomes          |
 | Low CHW digital literacy        | Simple UX, offline mode, local-language support, supervised rollout through existing VHT networks                |
-| Privacy and consent             | Ethical data governance, anonymisation for analytics, Protection compliance; EMR/HMS APIs use authentication, consent, and least-privilege scopes |
+| Privacy and consent | Ethical data governance, anonymisation for analytics, data-protection compliance; EMR/HMS APIs use authentication, consent, and least-privilege scopes |
 | EMR/HMS integration friction    | Expose stable, well-documented data APIs; start with FairBanks facility systems; do not require replacing existing EMR/HMS                  |
 | Model accuracy in early phase   | Start with rule-based + limited ML scope; validate against FairBanks clinical outcomes before scaling algorithms |
 | Adoption by public sector       | Pilot evidence from FairBanks; NGO and district co-design; align with MoH community health strategy              |
@@ -544,9 +559,9 @@ Only venture combining a **live medical centre, Community Reach cascade (incl. C
 
 ## 15. Conclusion
 
-FairBanks represents a strategic evolution from community medical practice to **community health intelligence**, grounded in the Community Reach operating model shown in `.cursor/concept.jpeg`, `.cursor/concept_improved.jpeg`, and `.cursor/concept_simple.jpeg`. FCHIP is the FairBanks platform component that delivers women-led, deep-technology solutions rooted in African reality—ready to adapt to grants, accelerators, investors, and development partners.
+FairBanks represents a strategic evolution from community medical practice to **community health intelligence**, grounded in the Community Reach operating model shown in `.cursor/concept.jpeg`, `.cursor/concept_improved.jpeg`, and `.cursor/concept_simple.jpeg`. FCHIP is the FairBanks platform component that delivers women-led, deep-technology solutions rooted in African reality — ready to adapt to grants, accelerators, investors, and development partners.
 
-With an operating medical centre, established Community Reach across Kampala peri-urban communities, trusted CHW/VHT relationships, school and clinic programmes, CHIS and livelihood pathways, digital health foundations, and a **working FCHIP MVP**, FairBanks is ready to validate, refine, and scale the component that connects multi-source community data and climatic change signals to life-saving predictions — and closes the continuous loop: **learn, improve, and serve again**.
+With an operating medical centre, established Community Reach across Kampala peri-urban communities, trusted CHW/VHT relationships, school and clinic programmes, CHIS and livelihood pathways, digital health foundations, and a **working FCHIP MVP**, FairBanks is ready to validate, refine, and scale the component that connects multi-source community data and climate signals to life-saving predictions — and closes the continuous loop: **learn, improve, and serve again**.
 
 **Next immediate steps:**
 
@@ -557,4 +572,4 @@ With an operating medical centre, established Community Reach across Kampala per
 
 ---
 
-*Canonical FairBanks / FCHIP product source of truth. Path: `.cursor/app-write-up.mdc`. Community Reach visuals: `.cursor/concept.jpeg`, `.cursor/concept_improved.jpeg`, `.cursor/concept_simple.jpeg`.*
+*Canonical FairBanks / FCHIP product source of truth. Path: `.cursor/app-write-up.mdc`. If another rule conflicts on product framing, this file wins. Community Reach visuals: `.cursor/concept.jpeg`, `.cursor/concept_improved.jpeg`, `.cursor/concept_simple.jpeg`.*

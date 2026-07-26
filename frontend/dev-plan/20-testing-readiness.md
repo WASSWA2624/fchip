@@ -11,9 +11,11 @@ You must follow [`00-execution-policy.md`](./00-execution-policy.md), [`testing.
 4. Add a startup/navigation integration smoke test when host tooling supports it.
 5. Document test commands.
 6. Tests must not call production services.
+7. Provide a contract-fixture harness and integration-test pattern that each step `24` slice can run against its matching local/test backend.
 
 ## Acceptance Criteria
 - `flutter test` must pass.
 - Important shared UI and responsive behavior must have coverage.
 - Test helpers and baseline unit/widget tests must exist.
 - Integration tests may be host-dependent but must remain documented.
+- Every completed product slice must add widget/state coverage and cross-stack proof for its real repository contract.

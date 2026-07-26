@@ -1,5 +1,5 @@
 # P008 Performance
-Keep staff-critical operations responsive under realistic load.
+Keep field, sync, worklist, map, alert, dashboard, and export operations responsive under realistic load.
 
 ## Requirements
 
@@ -10,6 +10,6 @@ Keep staff-critical operations responsive under realistic load.
 
 ## Acceptance
 
-- Staff-critical reads and mutations must have measurable performance budgets.
+- User-critical reads, field saves, sync, and actions must have measurable performance budgets.
 - Readiness checks must reflect actual dependencies and bottlenecks.
 - Performance regressions must be resolved before release.

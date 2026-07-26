@@ -3,16 +3,16 @@
   "subtitle": "This link is unavailable or has moved",
   "kind": "empty",
   "nav": "auth",
-  "layout": "empty-state-shell",
+  "layout": "07-empty-state-shell",
   "body_layouts": {
-    "mobile": "empty-state-shell",
-    "tablet": "empty-state-shell",
-    "desktop": "empty-state-shell"
+    "mobile": "07-empty-state-shell",
+    "tablet": "07-empty-state-shell",
+    "desktop": "07-empty-state-shell"
   },
   "shells": {
-    "mobile": "auth-centered-card",
-    "tablet": "auth-centered-card",
-    "desktop": "auth-centered-card"
+    "mobile": "01-auth-centered-card",
+    "tablet": "01-auth-centered-card",
+    "desktop": "01-auth-centered-card"
   },
   "state": "error",
   "supported_states": [

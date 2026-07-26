@@ -1,0 +1,19 @@
+{
+  "title": "Bottom nav \u00b7 caregiver",
+  "category": "06-navigation",
+  "slug": "03-bottom-nav-caregiver",
+  "purpose": "Home \u00b7 Report \u00b7 Guidance \u00b7 More",
+  "used_by": [
+    "02"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

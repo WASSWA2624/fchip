@@ -3,16 +3,16 @@
   "subtitle": "Explainable next steps for CHW \u00b7 facility \u2014 not Phase-4 CDS/EMR",
   "kind": "detail",
   "nav": "intel",
-  "layout": "detail-action",
+  "layout": "10-detail-action",
   "body_layouts": {
-    "mobile": "detail-action",
-    "tablet": "detail-action",
-    "desktop": "detail-action"
+    "mobile": "10-detail-action",
+    "tablet": "10-detail-action",
+    "desktop": "10-detail-action"
   },
   "shells": {
-    "mobile": "field-mobile-shell",
-    "tablet": "field-tablet-shell",
-    "desktop": "desktop-sidebar-shell"
+    "mobile": "04-field-mobile-shell",
+    "tablet": "05-field-tablet-shell",
+    "desktop": "06-desktop-sidebar-shell"
   },
   "state": "default",
   "supported_states": [

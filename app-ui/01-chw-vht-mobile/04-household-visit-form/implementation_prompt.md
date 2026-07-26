@@ -22,9 +22,9 @@ _Subtitle: Offline structured capture_
 | Chronology status | `not-started` |
 | Route | `/01-chw-vht-mobile/04-household-visit-form` |
 | Parent route | `/01-chw-vht-mobile/01-worklist-home` |
-| Layout | `form-capture` |
-| Body layouts | `mobile` → `form-capture`, `tablet` → `form-capture`, `desktop` → `form-capture` |
-| Shells | `mobile` → `field-mobile-shell`, `tablet` → `field-tablet-shell`, `desktop` → `desktop-sidebar-shell` |
+| Layout | `09-form-capture` |
+| Body layouts | `mobile` → `09-form-capture`, `tablet` → `09-form-capture`, `desktop` → `09-form-capture` |
+| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
 | Roles | `chw`, `vht` |
 | Supported states | `default`, `loading`, `error`, `success`, `offline`, `forbidden` |
 | Localization prefix | `01_chw_vht_mobile.04_household_visit_form` |
@@ -48,7 +48,7 @@ Also read:
 
 - `app-ui/01-chw-vht-mobile/README.md`
 - `app-ui/00-shared/tokens.json`
-- Shared layout specimens for `form-capture` under `app-ui/00-shared/layouts/form-capture/`
+- Shared layout specimens for `09-form-capture` under `app-ui/00-shared/layouts/09-form-capture/`
 - Shared component specimens listed by that layout's `layout.json` `composes` array
 - Connected journeys under `app-flows/` (especially `07-navigation.md` and module journeys)
 
@@ -64,7 +64,7 @@ Also read:
 | Data / repository impl | `frontend/lib/features/chw_vht_mobile/data/` |
 | Repository contract | `frontend/lib/features/chw_vht_mobile/domain/repositories/chw_vht_mobile_repository.dart` |
 | Router entry | `frontend/lib/app/router/` (route must equal `/01-chw-vht-mobile/04-household-visit-form`) |
-| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `form-capture`) |
+| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `09-form-capture`) |
 | Shared components | `frontend/lib/shared/components/` |
 | Tests | `frontend/test/features/chw_vht_mobile/` |
 | Backend module | `backend/src/modules/chw_vht_mobile/` |
@@ -164,7 +164,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-016`:
 
 4. Treat `screen.json` in this folder as the contract for route, roles, access, layout, shells, states, navigation, and `l10n_key_prefix`.
 5. Open all six mockups (mobile/tablet/desktop × light/dark) and note hierarchy, spacing, CTAs, empty regions, and chrome.
-6. Resolve `form-capture` and every composed component against `app-ui/00-shared/`.
+6. Resolve `09-form-capture` and every composed component against `app-ui/00-shared/`.
 7. Map navigation:
    - Tabs: Worklist → `/01-chw-vht-mobile/01-worklist-home`; Alerts → `/01-chw-vht-mobile/10-alerts-inbox`; Sync → `/01-chw-vht-mobile/12-sync-status`; More → `/00-shared/09-notifications-center`
    - Primary action: Save locally → `/01-chw-vht-mobile/05-symptoms-vitals`
@@ -174,7 +174,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-016`:
 ### Phase 2 — Flutter UI on fixtures (maximum reuse)
 
 8. Register route `/01-chw-vht-mobile/04-household-visit-form` with the access guard for roles `chw`, `vht`.
-9. Compose the page from shared shells + `form-capture` + catalog components. Prefer:
+9. Compose the page from shared shells + `09-form-capture` + catalog components. Prefer:
    - `AsyncStateScaffold`, `ResponsivePage`, `AppWorkspace`, `AppListTable`, `AppWorkspaceDetailPanel`, `AppActionPanel` when they fit `ui-workspace.mdc`.
 10. Implement **every** supported state: `default`, `loading`, `error`, `success`, `offline`, `forbidden`.
 11. Add ARB keys under `01_chw_vht_mobile.04_household_visit_form` only — no hard-coded user strings.
@@ -204,7 +204,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-016`:
 ## Reusability checklist
 
 - [ ] No duplicate button, chip, banner, form field, nav, or feedback widget invented in the feature folder when a shared catalog item exists
-- [ ] Layout `form-capture` is a shared layout implementation, not a one-off Scaffold tree
+- [ ] Layout `09-form-capture` is a shared layout implementation, not a one-off Scaffold tree
 - [ ] Feature widgets accept data via typed props / providers — no embedded API clients in widgets
 - [ ] Repository is the only place that talks to the network / local DB for this screen's data
 - [ ] Permissions hide unauthorized actions rather than showing disabled dead ends when policy says omit

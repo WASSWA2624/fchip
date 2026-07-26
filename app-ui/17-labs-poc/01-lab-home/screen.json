@@ -3,16 +3,16 @@
   "subtitle": "Labs feed RDT \u00b7 Hb \u00b7 glucose and related results",
   "kind": "dashboard",
   "nav": "lab",
-  "layout": "feeder-home",
+  "layout": "15-feeder-home",
   "body_layouts": {
-    "mobile": "feeder-home",
-    "tablet": "feeder-home",
-    "desktop": "dual-pane-desktop"
+    "mobile": "15-feeder-home",
+    "tablet": "15-feeder-home",
+    "desktop": "03-dual-pane-desktop"
   },
   "shells": {
-    "mobile": "field-mobile-shell",
-    "tablet": "field-tablet-shell",
-    "desktop": "desktop-sidebar-shell"
+    "mobile": "04-field-mobile-shell",
+    "tablet": "05-field-tablet-shell",
+    "desktop": "06-desktop-sidebar-shell"
   },
   "state": "default",
   "supported_states": [

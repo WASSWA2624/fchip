@@ -1,0 +1,19 @@
+{
+  "title": "Timeline step",
+  "category": "08-data-display",
+  "slug": "05-timeline-step",
+  "purpose": "Signal \u2192 prediction \u2192 action",
+  "used_by": [
+    "use-case detail"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

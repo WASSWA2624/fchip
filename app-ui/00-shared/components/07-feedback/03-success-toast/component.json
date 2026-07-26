@@ -1,0 +1,19 @@
+{
+  "title": "Success toast",
+  "category": "07-feedback",
+  "slug": "03-success-toast",
+  "purpose": "Saved / synced confirmation",
+  "used_by": [
+    "forms"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "title": "Field tablet shell",
+  "slug": "05-field-tablet-shell",
+  "purpose": "Adaptive field IA with a compact navigation rail and wider content column",
+  "composes": [
+    "01-top-app-bar",
+    "07-side-nav-desktop",
+    "09-section-header",
+    "02-stat-card-row",
+    "03-list-row-card"
+  ],
+  "surfaces": [
+    "01",
+    "02",
+    "feeders"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

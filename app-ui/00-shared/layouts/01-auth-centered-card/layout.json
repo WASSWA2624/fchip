@@ -1,0 +1,25 @@
+{
+  "title": "Auth centered card",
+  "slug": "01-auth-centered-card",
+  "purpose": "Create account / sign in \u2014 phone number + password only",
+  "composes": [
+    "01-logo-lockup",
+    "02-slogan-line",
+    "01-labeled-field",
+    "01-primary-cta",
+    "03-master-loop-badge"
+  ],
+  "surfaces": [
+    "00-shared"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

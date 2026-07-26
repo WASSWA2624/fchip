@@ -1,0 +1,20 @@
+{
+  "title": "Danger CTA",
+  "category": "02-buttons",
+  "slug": "03-danger-cta",
+  "purpose": "Destructive or high-urgency action",
+  "used_by": [
+    "alerts",
+    "revoke access"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

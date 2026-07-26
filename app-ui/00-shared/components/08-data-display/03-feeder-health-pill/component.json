@@ -1,0 +1,20 @@
+{
+  "title": "Feeder health pill",
+  "category": "08-data-display",
+  "slug": "03-feeder-health-pill",
+  "purpose": "Healthy / degraded / silent",
+  "used_by": [
+    "09 feeder board",
+    "admin"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

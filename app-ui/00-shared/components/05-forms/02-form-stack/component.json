@@ -1,0 +1,21 @@
+{
+  "title": "Form stack",
+  "category": "05-forms",
+  "slug": "02-form-stack",
+  "purpose": "Vertical stack of labeled fields",
+  "used_by": [
+    "visit",
+    "referral",
+    "feeder entry"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

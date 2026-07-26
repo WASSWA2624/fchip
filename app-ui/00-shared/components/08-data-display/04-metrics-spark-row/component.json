@@ -1,0 +1,20 @@
+{
+  "title": "Metrics spark row",
+  "category": "08-data-display",
+  "slug": "04-metrics-spark-row",
+  "purpose": "Compact trend labels",
+  "used_by": [
+    "facility",
+    "NGO"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "title": "Filter chip row",
+  "category": "03-chips",
+  "slug": "02-filter-chip-row",
+  "purpose": "Horizontal chip group",
+  "used_by": [
+    "maps",
+    "lists"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

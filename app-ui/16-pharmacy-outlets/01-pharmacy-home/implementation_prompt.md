@@ -22,9 +22,9 @@ _Subtitle: Drug shops feed stock · dispense · complaints_
 | Chronology status | `not-started` |
 | Route | `/16-pharmacy-outlets/01-pharmacy-home` |
 | Parent route | `/16-pharmacy-outlets/02-stock-levels-entry` |
-| Layout | `feeder-home` |
-| Body layouts | `mobile` → `feeder-home`, `tablet` → `feeder-home`, `desktop` → `dual-pane-desktop` |
-| Shells | `mobile` → `field-mobile-shell`, `tablet` → `field-tablet-shell`, `desktop` → `desktop-sidebar-shell` |
+| Layout | `15-feeder-home` |
+| Body layouts | `mobile` → `15-feeder-home`, `tablet` → `15-feeder-home`, `desktop` → `03-dual-pane-desktop` |
+| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
 | Roles | `pharmacy-outlet-worker` |
 | Supported states | `default`, `loading`, `empty`, `error`, `forbidden` |
 | Localization prefix | `16_pharmacy_outlets.01_pharmacy_home` |
@@ -48,7 +48,7 @@ Also read:
 
 - `app-ui/16-pharmacy-outlets/README.md`
 - `app-ui/00-shared/tokens.json`
-- Shared layout specimens for `feeder-home` under `app-ui/00-shared/layouts/feeder-home/`
+- Shared layout specimens for `15-feeder-home` under `app-ui/00-shared/layouts/15-feeder-home/`
 - Shared component specimens listed by that layout's `layout.json` `composes` array
 - Connected journeys under `app-flows/` (especially `07-navigation.md` and module journeys)
 
@@ -64,7 +64,7 @@ Also read:
 | Data / repository impl | `frontend/lib/features/pharmacy_outlets/data/` |
 | Repository contract | `frontend/lib/features/pharmacy_outlets/domain/repositories/pharmacy_outlets_repository.dart` |
 | Router entry | `frontend/lib/app/router/` (route must equal `/16-pharmacy-outlets/01-pharmacy-home`) |
-| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `feeder-home`) |
+| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `15-feeder-home`) |
 | Shared components | `frontend/lib/shared/components/` |
 | Tests | `frontend/test/features/pharmacy_outlets/` |
 | Backend module | `backend/src/modules/pharmacy_outlets/` |
@@ -164,7 +164,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-092`:
 
 4. Treat `screen.json` in this folder as the contract for route, roles, access, layout, shells, states, navigation, and `l10n_key_prefix`.
 5. Open all six mockups (mobile/tablet/desktop × light/dark) and note hierarchy, spacing, CTAs, empty regions, and chrome.
-6. Resolve `feeder-home` and every composed component against `app-ui/00-shared/`.
+6. Resolve `15-feeder-home` and every composed component against `app-ui/00-shared/`.
 7. Map navigation:
    - Tabs: Stock → `/16-pharmacy-outlets/02-stock-levels-entry`; Dispense → `/16-pharmacy-outlets/03-dispense-log`; Complaints → `/16-pharmacy-outlets/04-common-complaints`; Sync → `/16-pharmacy-outlets/05-prestock-ack`
    - Primary action: Update stock → `/16-pharmacy-outlets/02-stock-levels-entry`
@@ -174,7 +174,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-092`:
 ### Phase 2 — Flutter UI on fixtures (maximum reuse)
 
 8. Register route `/16-pharmacy-outlets/01-pharmacy-home` with the access guard for roles `pharmacy-outlet-worker`.
-9. Compose the page from shared shells + `feeder-home` + catalog components. Prefer:
+9. Compose the page from shared shells + `15-feeder-home` + catalog components. Prefer:
    - `AsyncStateScaffold`, `ResponsivePage`, `AppWorkspace`, `AppListTable`, `AppWorkspaceDetailPanel`, `AppActionPanel` when they fit `ui-workspace.mdc`.
 10. Implement **every** supported state: `default`, `loading`, `empty`, `error`, `forbidden`.
 11. Add ARB keys under `16_pharmacy_outlets.01_pharmacy_home` only — no hard-coded user strings.
@@ -204,7 +204,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-092`:
 ## Reusability checklist
 
 - [ ] No duplicate button, chip, banner, form field, nav, or feedback widget invented in the feature folder when a shared catalog item exists
-- [ ] Layout `feeder-home` is a shared layout implementation, not a one-off Scaffold tree
+- [ ] Layout `15-feeder-home` is a shared layout implementation, not a one-off Scaffold tree
 - [ ] Feature widgets accept data via typed props / providers — no embedded API clients in widgets
 - [ ] Repository is the only place that talks to the network / local DB for this screen's data
 - [ ] Permissions hide unauthorized actions rather than showing disabled dead ends when policy says omit

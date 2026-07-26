@@ -1,0 +1,27 @@
+{
+  "title": "List / worklist",
+  "slug": "02-list-worklist",
+  "purpose": "Today\u2019s tasks, alerts, notifications",
+  "composes": [
+    "09-section-header",
+    "01-status-chip",
+    "03-list-row-card",
+    "01-primary-cta",
+    "01-empty-state"
+  ],
+  "surfaces": [
+    "CHW worklist",
+    "alerts inbox",
+    "notifications"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

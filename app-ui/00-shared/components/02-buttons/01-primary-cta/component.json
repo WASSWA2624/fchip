@@ -1,0 +1,21 @@
+{
+  "title": "Primary CTA",
+  "category": "02-buttons",
+  "slug": "01-primary-cta",
+  "purpose": "Main action on a screen",
+  "used_by": [
+    "forms",
+    "lists",
+    "dashboards"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "title": "Master loop badge",
+  "category": "01-brand",
+  "slug": "03-master-loop-badge",
+  "purpose": "CAPTURE \u2192 FUSE \u2192 PREDICT \u2192 ALERT \u2192 ACT \u2192 LEARN",
+  "used_by": [
+    "splash",
+    "onboarding"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

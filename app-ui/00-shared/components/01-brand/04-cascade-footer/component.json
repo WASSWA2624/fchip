@@ -1,0 +1,19 @@
+{
+  "title": "Cascade footer",
+  "category": "01-brand",
+  "slug": "04-cascade-footer",
+  "purpose": "Cascade Data & Feedback cue",
+  "used_by": [
+    "desktop side nav"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

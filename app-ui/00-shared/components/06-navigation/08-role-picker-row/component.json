@@ -1,0 +1,19 @@
+{
+  "title": "Role picker row",
+  "category": "06-navigation",
+  "slug": "08-role-picker-row",
+  "purpose": "Workspace choice row",
+  "used_by": [
+    "role-surface-picker"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

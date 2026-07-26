@@ -3,16 +3,16 @@
   "subtitle": "Livelihood groups feed participation where tracked",
   "kind": "form",
   "nav": "partner",
-  "layout": "form-capture",
+  "layout": "09-form-capture",
   "body_layouts": {
-    "mobile": "form-capture",
-    "tablet": "form-capture",
-    "desktop": "form-capture"
+    "mobile": "09-form-capture",
+    "tablet": "09-form-capture",
+    "desktop": "09-form-capture"
   },
   "shells": {
-    "mobile": "field-mobile-shell",
-    "tablet": "field-tablet-shell",
-    "desktop": "desktop-sidebar-shell"
+    "mobile": "04-field-mobile-shell",
+    "tablet": "05-field-tablet-shell",
+    "desktop": "06-desktop-sidebar-shell"
   },
   "state": "default",
   "supported_states": [

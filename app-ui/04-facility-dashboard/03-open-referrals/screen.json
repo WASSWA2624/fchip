@@ -3,16 +3,16 @@
   "subtitle": "Inbound volume and completion at a glance",
   "kind": "list",
   "nav": "facility",
-  "layout": "list-worklist",
+  "layout": "02-list-worklist",
   "body_layouts": {
-    "mobile": "list-worklist",
-    "tablet": "list-worklist",
-    "desktop": "dual-pane-desktop"
+    "mobile": "02-list-worklist",
+    "tablet": "02-list-worklist",
+    "desktop": "03-dual-pane-desktop"
   },
   "shells": {
-    "mobile": "field-mobile-shell",
-    "tablet": "field-tablet-shell",
-    "desktop": "desktop-sidebar-shell"
+    "mobile": "04-field-mobile-shell",
+    "tablet": "05-field-tablet-shell",
+    "desktop": "06-desktop-sidebar-shell"
   },
   "state": "default",
   "supported_states": [

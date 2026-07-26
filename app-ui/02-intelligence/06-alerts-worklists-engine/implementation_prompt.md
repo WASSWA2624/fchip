@@ -22,9 +22,9 @@ _Subtitle: Routes intelligence to surfaces_
 | Chronology status | `not-started` |
 | Route | `/02-intelligence/06-alerts-worklists-engine` |
 | Parent route | `/02-intelligence/01-ingest-pipeline` |
-| Layout | `settings-admin` |
-| Body layouts | `mobile` → `settings-admin`, `tablet` → `settings-admin`, `desktop` → `settings-admin` |
-| Shells | `mobile` → `field-mobile-shell`, `tablet` → `field-tablet-shell`, `desktop` → `desktop-sidebar-shell` |
+| Layout | `08-settings-admin` |
+| Body layouts | `mobile` → `08-settings-admin`, `tablet` → `08-settings-admin`, `desktop` → `08-settings-admin` |
+| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
 | Roles | `intelligence-analyst`, `platform-operator` |
 | Supported states | `default`, `loading`, `empty`, `error`, `forbidden` |
 | Localization prefix | `02_intelligence.06_alerts_worklists_engine` |
@@ -48,7 +48,7 @@ Also read:
 
 - `app-ui/02-intelligence/README.md`
 - `app-ui/00-shared/tokens.json`
-- Shared layout specimens for `settings-admin` under `app-ui/00-shared/layouts/settings-admin/`
+- Shared layout specimens for `08-settings-admin` under `app-ui/00-shared/layouts/08-settings-admin/`
 - Shared component specimens listed by that layout's `layout.json` `composes` array
 - Connected journeys under `app-flows/` (especially `07-navigation.md` and module journeys)
 
@@ -64,7 +64,7 @@ Also read:
 | Data / repository impl | `frontend/lib/features/intelligence/data/` |
 | Repository contract | `frontend/lib/features/intelligence/domain/repositories/intelligence_repository.dart` |
 | Router entry | `frontend/lib/app/router/` (route must equal `/02-intelligence/06-alerts-worklists-engine`) |
-| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `settings-admin`) |
+| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `08-settings-admin`) |
 | Shared components | `frontend/lib/shared/components/` |
 | Tests | `frontend/test/features/intelligence/` |
 | Backend module | `backend/src/modules/intelligence/` |
@@ -164,7 +164,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-055`:
 
 4. Treat `screen.json` in this folder as the contract for route, roles, access, layout, shells, states, navigation, and `l10n_key_prefix`.
 5. Open all six mockups (mobile/tablet/desktop × light/dark) and note hierarchy, spacing, CTAs, empty regions, and chrome.
-6. Resolve `settings-admin` and every composed component against `app-ui/00-shared/`.
+6. Resolve `08-settings-admin` and every composed component against `app-ui/00-shared/`.
 7. Map navigation:
    - Tabs: Ingest → `/02-intelligence/01-ingest-pipeline`; AI → `/02-intelligence/05-ai-risk-scores`; GIS → `/02-intelligence/03-gis-explorer`; Guidance → `/02-intelligence/07-clinical-support-guidance`
    - Primary action: Save routing → `/02-intelligence/06-alerts-worklists-engine?state=success`
@@ -174,7 +174,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-055`:
 ### Phase 2 — Flutter UI on fixtures (maximum reuse)
 
 8. Register route `/02-intelligence/06-alerts-worklists-engine` with the access guard for roles `intelligence-analyst`, `platform-operator`.
-9. Compose the page from shared shells + `settings-admin` + catalog components. Prefer:
+9. Compose the page from shared shells + `08-settings-admin` + catalog components. Prefer:
    - `AsyncStateScaffold`, `ResponsivePage`, `AppWorkspace`, `AppListTable`, `AppWorkspaceDetailPanel`, `AppActionPanel` when they fit `ui-workspace.mdc`.
 10. Implement **every** supported state: `default`, `loading`, `empty`, `error`, `forbidden`.
 11. Add ARB keys under `02_intelligence.06_alerts_worklists_engine` only — no hard-coded user strings.
@@ -204,7 +204,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-055`:
 ## Reusability checklist
 
 - [ ] No duplicate button, chip, banner, form field, nav, or feedback widget invented in the feature folder when a shared catalog item exists
-- [ ] Layout `settings-admin` is a shared layout implementation, not a one-off Scaffold tree
+- [ ] Layout `08-settings-admin` is a shared layout implementation, not a one-off Scaffold tree
 - [ ] Feature widgets accept data via typed props / providers — no embedded API clients in widgets
 - [ ] Repository is the only place that talks to the network / local DB for this screen's data
 - [ ] Permissions hide unauthorized actions rather than showing disabled dead ends when policy says omit

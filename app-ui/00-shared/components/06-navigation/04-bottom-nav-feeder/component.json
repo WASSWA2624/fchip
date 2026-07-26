@@ -1,0 +1,20 @@
+{
+  "title": "Bottom nav \u00b7 feeder",
+  "category": "06-navigation",
+  "slug": "04-bottom-nav-feeder",
+  "purpose": "School / pharmacy / lab / MCH tabs",
+  "used_by": [
+    "14\u201319",
+    "21"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

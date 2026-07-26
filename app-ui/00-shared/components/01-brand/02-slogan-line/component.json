@@ -1,0 +1,21 @@
+{
+  "title": "Slogan line",
+  "category": "01-brand",
+  "slug": "02-slogan-line",
+  "purpose": "Your health, our mission.",
+  "used_by": [
+    "top app bar",
+    "auth",
+    "cover"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

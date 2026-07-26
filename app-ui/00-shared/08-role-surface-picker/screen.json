@@ -3,16 +3,16 @@
   "subtitle": "Consumers \u00b7 data feeders \u00b7 admin",
   "kind": "list",
   "nav": "auth",
-  "layout": "list-worklist",
+  "layout": "02-list-worklist",
   "body_layouts": {
-    "mobile": "list-worklist",
-    "tablet": "list-worklist",
-    "desktop": "dual-pane-desktop"
+    "mobile": "02-list-worklist",
+    "tablet": "02-list-worklist",
+    "desktop": "03-dual-pane-desktop"
   },
   "shells": {
-    "mobile": "auth-centered-card",
-    "tablet": "auth-centered-card",
-    "desktop": "auth-centered-card"
+    "mobile": "01-auth-centered-card",
+    "tablet": "01-auth-centered-card",
+    "desktop": "01-auth-centered-card"
   },
   "state": "default",
   "supported_states": [

@@ -1,0 +1,25 @@
+{
+  "title": "Dual-pane desktop",
+  "slug": "03-dual-pane-desktop",
+  "purpose": "Two-column lists / dashboards on wide screens",
+  "composes": [
+    "07-side-nav-desktop",
+    "03-list-row-card",
+    "02-stat-card-row"
+  ],
+  "surfaces": [
+    "facility overview",
+    "cascade metrics",
+    "NGO monitor"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

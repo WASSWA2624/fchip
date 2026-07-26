@@ -3,16 +3,16 @@
   "subtitle": "Village hotspots + climate overlay",
   "kind": "map",
   "nav": "facility",
-  "layout": "map-explorer",
+  "layout": "13-map-explorer",
   "body_layouts": {
-    "mobile": "map-explorer",
-    "tablet": "map-explorer",
-    "desktop": "map-explorer"
+    "mobile": "13-map-explorer",
+    "tablet": "13-map-explorer",
+    "desktop": "13-map-explorer"
   },
   "shells": {
-    "mobile": "field-mobile-shell",
-    "tablet": "field-tablet-shell",
-    "desktop": "desktop-sidebar-shell"
+    "mobile": "04-field-mobile-shell",
+    "tablet": "05-field-tablet-shell",
+    "desktop": "06-desktop-sidebar-shell"
   },
   "state": "default",
   "supported_states": [

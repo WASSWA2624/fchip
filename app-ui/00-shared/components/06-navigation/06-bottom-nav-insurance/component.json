@@ -1,0 +1,19 @@
+{
+  "title": "Bottom nav \u00b7 insurance",
+  "category": "06-navigation",
+  "slug": "06-bottom-nav-insurance",
+  "purpose": "Prevent \u00b7 Cohorts \u00b7 Trends",
+  "used_by": [
+    "23"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

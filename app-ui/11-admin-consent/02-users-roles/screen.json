@@ -3,16 +3,16 @@
   "subtitle": "Consumers and data-feeder roles",
   "kind": "settings",
   "nav": "admin",
-  "layout": "settings-admin",
+  "layout": "08-settings-admin",
   "body_layouts": {
-    "mobile": "settings-admin",
-    "tablet": "settings-admin",
-    "desktop": "settings-admin"
+    "mobile": "08-settings-admin",
+    "tablet": "08-settings-admin",
+    "desktop": "08-settings-admin"
   },
   "shells": {
-    "mobile": "field-mobile-shell",
-    "tablet": "field-tablet-shell",
-    "desktop": "desktop-sidebar-shell"
+    "mobile": "04-field-mobile-shell",
+    "tablet": "05-field-tablet-shell",
+    "desktop": "06-desktop-sidebar-shell"
   },
   "state": "default",
   "supported_states": [

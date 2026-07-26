@@ -22,9 +22,9 @@ _Subtitle: M&E exports from metrics spine_
 | Chronology status | `not-started` |
 | Route | `/03-cascade-metrics/03-partner-reports` |
 | Parent route | `/14-ngo-partner/01-programme-monitoring` |
-| Layout | `list-worklist` |
-| Body layouts | `mobile` → `list-worklist`, `tablet` → `list-worklist`, `desktop` → `dual-pane-desktop` |
-| Shells | `mobile` → `field-mobile-shell`, `tablet` → `field-tablet-shell`, `desktop` → `desktop-sidebar-shell` |
+| Layout | `02-list-worklist` |
+| Body layouts | `mobile` → `02-list-worklist`, `tablet` → `02-list-worklist`, `desktop` → `03-dual-pane-desktop` |
+| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
 | Roles | `ngo-partner`, `researcher` |
 | Supported states | `default`, `loading`, `empty`, `error`, `forbidden` |
 | Localization prefix | `03_cascade_metrics.03_partner_reports` |
@@ -48,7 +48,7 @@ Also read:
 
 - `app-ui/03-cascade-metrics/README.md`
 - `app-ui/00-shared/tokens.json`
-- Shared layout specimens for `list-worklist` under `app-ui/00-shared/layouts/list-worklist/`
+- Shared layout specimens for `02-list-worklist` under `app-ui/00-shared/layouts/02-list-worklist/`
 - Shared component specimens listed by that layout's `layout.json` `composes` array
 - Connected journeys under `app-flows/` (especially `07-navigation.md` and module journeys)
 
@@ -64,7 +64,7 @@ Also read:
 | Data / repository impl | `frontend/lib/features/cascade_metrics/data/` |
 | Repository contract | `frontend/lib/features/cascade_metrics/domain/repositories/cascade_metrics_repository.dart` |
 | Router entry | `frontend/lib/app/router/` (route must equal `/03-cascade-metrics/03-partner-reports`) |
-| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `list-worklist`) |
+| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `02-list-worklist`) |
 | Shared components | `frontend/lib/shared/components/` |
 | Tests | `frontend/test/features/cascade_metrics/` |
 | Backend module | `backend/src/modules/cascade_metrics/` |
@@ -164,7 +164,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-031`:
 
 4. Treat `screen.json` in this folder as the contract for route, roles, access, layout, shells, states, navigation, and `l10n_key_prefix`.
 5. Open all six mockups (mobile/tablet/desktop × light/dark) and note hierarchy, spacing, CTAs, empty regions, and chrome.
-6. Resolve `list-worklist` and every composed component against `app-ui/00-shared/`.
+6. Resolve `02-list-worklist` and every composed component against `app-ui/00-shared/`.
 7. Map navigation:
    - Tabs: Monitor → `/14-ngo-partner/01-programme-monitoring`; Evidence → `/14-ngo-partner/02-impact-evidence`; Training → `/14-ngo-partner/03-training-skills-analytics`; More → `/23-research-exports/01-evidence-catalog`
    - Primary action: Generate report → `/14-ngo-partner/01-programme-monitoring`
@@ -174,7 +174,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-031`:
 ### Phase 2 — Flutter UI on fixtures (maximum reuse)
 
 8. Register route `/03-cascade-metrics/03-partner-reports` with the access guard for roles `ngo-partner`, `researcher`.
-9. Compose the page from shared shells + `list-worklist` + catalog components. Prefer:
+9. Compose the page from shared shells + `02-list-worklist` + catalog components. Prefer:
    - `AsyncStateScaffold`, `ResponsivePage`, `AppWorkspace`, `AppListTable`, `AppWorkspaceDetailPanel`, `AppActionPanel` when they fit `ui-workspace.mdc`.
 10. Implement **every** supported state: `default`, `loading`, `empty`, `error`, `forbidden`.
 11. Add ARB keys under `03_cascade_metrics.03_partner_reports` only — no hard-coded user strings.
@@ -204,7 +204,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-031`:
 ## Reusability checklist
 
 - [ ] No duplicate button, chip, banner, form field, nav, or feedback widget invented in the feature folder when a shared catalog item exists
-- [ ] Layout `list-worklist` is a shared layout implementation, not a one-off Scaffold tree
+- [ ] Layout `02-list-worklist` is a shared layout implementation, not a one-off Scaffold tree
 - [ ] Feature widgets accept data via typed props / providers — no embedded API clients in widgets
 - [ ] Repository is the only place that talks to the network / local DB for this screen's data
 - [ ] Permissions hide unauthorized actions rather than showing disabled dead ends when policy says omit

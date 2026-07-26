@@ -1,0 +1,21 @@
+{
+  "title": "Logo lockup",
+  "category": "01-brand",
+  "slug": "01-logo-lockup",
+  "purpose": "FCHIP mark from frontend/assets/logos for headers and auth",
+  "used_by": [
+    "all shells",
+    "splash",
+    "login"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

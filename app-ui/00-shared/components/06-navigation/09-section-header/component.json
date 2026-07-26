@@ -1,0 +1,19 @@
+{
+  "title": "Section header",
+  "category": "06-navigation",
+  "slug": "09-section-header",
+  "purpose": "Title + subtitle block",
+  "used_by": [
+    "mobile/tablet screens"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

@@ -3,16 +3,16 @@
   "subtitle": "Local device lock only \u2014 not account auth",
   "kind": "auth",
   "nav": "auth",
-  "layout": "auth-centered-card",
+  "layout": "01-auth-centered-card",
   "body_layouts": {
-    "mobile": "auth-centered-card",
-    "tablet": "auth-centered-card",
-    "desktop": "auth-centered-card"
+    "mobile": "01-auth-centered-card",
+    "tablet": "01-auth-centered-card",
+    "desktop": "01-auth-centered-card"
   },
   "shells": {
-    "mobile": "auth-centered-card",
-    "tablet": "auth-centered-card",
-    "desktop": "auth-centered-card"
+    "mobile": "01-auth-centered-card",
+    "tablet": "01-auth-centered-card",
+    "desktop": "01-auth-centered-card"
   },
   "state": "offline",
   "supported_states": [

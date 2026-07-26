@@ -22,9 +22,9 @@ _Subtitle: District early-warning geography_
 | Chronology status | `not-started` |
 | Route | `/08-district-moh/01-population-map` |
 | Parent route | `/08-district-moh/01-population-map` |
-| Layout | `map-explorer` |
-| Body layouts | `mobile` → `map-explorer`, `tablet` → `map-explorer`, `desktop` → `map-explorer` |
-| Shells | `mobile` → `field-mobile-shell`, `tablet` → `field-tablet-shell`, `desktop` → `desktop-sidebar-shell` |
+| Layout | `13-map-explorer` |
+| Body layouts | `mobile` → `13-map-explorer`, `tablet` → `13-map-explorer`, `desktop` → `13-map-explorer` |
+| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
 | Roles | `district-health-officer`, `moh` |
 | Supported states | `default`, `loading`, `empty`, `error`, `forbidden` |
 | Localization prefix | `08_district_moh.01_population_map` |
@@ -48,7 +48,7 @@ Also read:
 
 - `app-ui/08-district-moh/README.md`
 - `app-ui/00-shared/tokens.json`
-- Shared layout specimens for `map-explorer` under `app-ui/00-shared/layouts/map-explorer/`
+- Shared layout specimens for `13-map-explorer` under `app-ui/00-shared/layouts/13-map-explorer/`
 - Shared component specimens listed by that layout's `layout.json` `composes` array
 - Connected journeys under `app-flows/` (especially `07-navigation.md` and module journeys)
 
@@ -64,7 +64,7 @@ Also read:
 | Data / repository impl | `frontend/lib/features/district_moh/data/` |
 | Repository contract | `frontend/lib/features/district_moh/domain/repositories/district_moh_repository.dart` |
 | Router entry | `frontend/lib/app/router/` (route must equal `/08-district-moh/01-population-map`) |
-| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `map-explorer`) |
+| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `13-map-explorer`) |
 | Shared components | `frontend/lib/shared/components/` |
 | Tests | `frontend/test/features/district_moh/` |
 | Backend module | `backend/src/modules/district_moh/` |
@@ -164,7 +164,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-057`:
 
 4. Treat `screen.json` in this folder as the contract for route, roles, access, layout, shells, states, navigation, and `l10n_key_prefix`.
 5. Open all six mockups (mobile/tablet/desktop × light/dark) and note hierarchy, spacing, CTAs, empty regions, and chrome.
-6. Resolve `map-explorer` and every composed component against `app-ui/00-shared/`.
+6. Resolve `13-map-explorer` and every composed component against `app-ui/00-shared/`.
 7. Map navigation:
    - Tabs: Map → `/08-district-moh/01-population-map`; Warnings → `/08-district-moh/02-early-warnings`; Metrics → `/03-cascade-metrics/01-indicators-overview`; Plan → `/08-district-moh/04-cascade-planning`
    - Primary action: (none declared)
@@ -174,7 +174,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-057`:
 ### Phase 2 — Flutter UI on fixtures (maximum reuse)
 
 8. Register route `/08-district-moh/01-population-map` with the access guard for roles `district-health-officer`, `moh`.
-9. Compose the page from shared shells + `map-explorer` + catalog components. Prefer:
+9. Compose the page from shared shells + `13-map-explorer` + catalog components. Prefer:
    - `AsyncStateScaffold`, `ResponsivePage`, `AppWorkspace`, `AppListTable`, `AppWorkspaceDetailPanel`, `AppActionPanel` when they fit `ui-workspace.mdc`.
 10. Implement **every** supported state: `default`, `loading`, `empty`, `error`, `forbidden`.
 11. Add ARB keys under `08_district_moh.01_population_map` only — no hard-coded user strings.
@@ -204,7 +204,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-057`:
 ## Reusability checklist
 
 - [ ] No duplicate button, chip, banner, form field, nav, or feedback widget invented in the feature folder when a shared catalog item exists
-- [ ] Layout `map-explorer` is a shared layout implementation, not a one-off Scaffold tree
+- [ ] Layout `13-map-explorer` is a shared layout implementation, not a one-off Scaffold tree
 - [ ] Feature widgets accept data via typed props / providers — no embedded API clients in widgets
 - [ ] Repository is the only place that talks to the network / local DB for this screen's data
 - [ ] Permissions hide unauthorized actions rather than showing disabled dead ends when policy says omit

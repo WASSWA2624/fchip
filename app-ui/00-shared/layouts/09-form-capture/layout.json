@@ -1,0 +1,27 @@
+{
+  "title": "Form capture",
+  "slug": "09-form-capture",
+  "purpose": "Structured offline / online data entry",
+  "composes": [
+    "09-section-header",
+    "02-form-stack",
+    "03-consent-toggle",
+    "01-primary-cta",
+    "03-success-toast"
+  ],
+  "surfaces": [
+    "visits",
+    "referrals",
+    "all feeder entry"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

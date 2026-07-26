@@ -22,9 +22,9 @@ _Subtitle: Supervisors upload structured visit packs_
 | Chronology status | `not-started` |
 | Route | `/10-outreach-school-health/05-home-visit-batch-upload` |
 | Parent route | `/08-district-moh/01-population-map` |
-| Layout | `upload-batch` |
-| Body layouts | `mobile` → `upload-batch`, `tablet` → `upload-batch`, `desktop` → `upload-batch` |
-| Shells | `mobile` → `field-mobile-shell`, `tablet` → `field-tablet-shell`, `desktop` → `desktop-sidebar-shell` |
+| Layout | `16-upload-batch` |
+| Body layouts | `mobile` → `16-upload-batch`, `tablet` → `16-upload-batch`, `desktop` → `16-upload-batch` |
+| Shells | `mobile` → `04-field-mobile-shell`, `tablet` → `05-field-tablet-shell`, `desktop` → `06-desktop-sidebar-shell` |
 | Roles | `district-health-officer`, `moh` |
 | Supported states | `default`, `loading`, `error`, `success`, `offline`, `forbidden` |
 | Localization prefix | `10_outreach_school_health.05_home_visit_batch_upload` |
@@ -48,7 +48,7 @@ Also read:
 
 - `app-ui/10-outreach-school-health/README.md`
 - `app-ui/00-shared/tokens.json`
-- Shared layout specimens for `upload-batch` under `app-ui/00-shared/layouts/upload-batch/`
+- Shared layout specimens for `16-upload-batch` under `app-ui/00-shared/layouts/16-upload-batch/`
 - Shared component specimens listed by that layout's `layout.json` `composes` array
 - Connected journeys under `app-flows/` (especially `07-navigation.md` and module journeys)
 
@@ -64,7 +64,7 @@ Also read:
 | Data / repository impl | `frontend/lib/features/outreach_school_health/data/` |
 | Repository contract | `frontend/lib/features/outreach_school_health/domain/repositories/outreach_school_health_repository.dart` |
 | Router entry | `frontend/lib/app/router/` (route must equal `/10-outreach-school-health/05-home-visit-batch-upload`) |
-| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `upload-batch`) |
+| Shared layout | `frontend/lib/shared/layout/` (implement/reuse `16-upload-batch`) |
 | Shared components | `frontend/lib/shared/components/` |
 | Tests | `frontend/test/features/outreach_school_health/` |
 | Backend module | `backend/src/modules/outreach_school_health/` |
@@ -164,7 +164,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-069`:
 
 4. Treat `screen.json` in this folder as the contract for route, roles, access, layout, shells, states, navigation, and `l10n_key_prefix`.
 5. Open all six mockups (mobile/tablet/desktop × light/dark) and note hierarchy, spacing, CTAs, empty regions, and chrome.
-6. Resolve `upload-batch` and every composed component against `app-ui/00-shared/`.
+6. Resolve `16-upload-batch` and every composed component against `app-ui/00-shared/`.
 7. Map navigation:
    - Tabs: Map → `/08-district-moh/01-population-map`; Warnings → `/08-district-moh/02-early-warnings`; Metrics → `/03-cascade-metrics/01-indicators-overview`; Plan → `/08-district-moh/04-cascade-planning`
    - Primary action: Upload batch → `/10-outreach-school-health/05-home-visit-batch-upload?state=success`
@@ -174,7 +174,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-069`:
 ### Phase 2 — Flutter UI on fixtures (maximum reuse)
 
 8. Register route `/10-outreach-school-health/05-home-visit-batch-upload` with the access guard for roles `district-health-officer`, `moh`.
-9. Compose the page from shared shells + `upload-batch` + catalog components. Prefer:
+9. Compose the page from shared shells + `16-upload-batch` + catalog components. Prefer:
    - `AsyncStateScaffold`, `ResponsivePage`, `AppWorkspace`, `AppListTable`, `AppWorkspaceDetailPanel`, `AppActionPanel` when they fit `ui-workspace.mdc`.
 10. Implement **every** supported state: `default`, `loading`, `error`, `success`, `offline`, `forbidden`.
 11. Add ARB keys under `10_outreach_school_health.05_home_visit_batch_upload` only — no hard-coded user strings.
@@ -204,7 +204,7 @@ Follow `frontend/dev-plan/25-slice-execution-playbook.md` for `S-069`:
 ## Reusability checklist
 
 - [ ] No duplicate button, chip, banner, form field, nav, or feedback widget invented in the feature folder when a shared catalog item exists
-- [ ] Layout `upload-batch` is a shared layout implementation, not a one-off Scaffold tree
+- [ ] Layout `16-upload-batch` is a shared layout implementation, not a one-off Scaffold tree
 - [ ] Feature widgets accept data via typed props / providers — no embedded API clients in widgets
 - [ ] Repository is the only place that talks to the network / local DB for this screen's data
 - [ ] Permissions hide unauthorized actions rather than showing disabled dead ends when policy says omit

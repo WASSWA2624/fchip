@@ -1,0 +1,21 @@
+{
+  "title": "Consent toggle",
+  "category": "05-forms",
+  "slug": "03-consent-toggle",
+  "purpose": "Consent / privacy affirmation",
+  "used_by": [
+    "capture",
+    "self-report",
+    "EMR share"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
+  ]
+}

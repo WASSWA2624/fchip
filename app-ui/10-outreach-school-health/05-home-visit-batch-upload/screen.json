@@ -3,16 +3,16 @@
   "subtitle": "Supervisors upload structured visit packs",
   "kind": "form",
   "nav": "district",
-  "layout": "upload-batch",
+  "layout": "16-upload-batch",
   "body_layouts": {
-    "mobile": "upload-batch",
-    "tablet": "upload-batch",
-    "desktop": "upload-batch"
+    "mobile": "16-upload-batch",
+    "tablet": "16-upload-batch",
+    "desktop": "16-upload-batch"
   },
   "shells": {
-    "mobile": "field-mobile-shell",
-    "tablet": "field-tablet-shell",
-    "desktop": "desktop-sidebar-shell"
+    "mobile": "04-field-mobile-shell",
+    "tablet": "05-field-tablet-shell",
+    "desktop": "06-desktop-sidebar-shell"
   },
   "state": "default",
   "supported_states": [

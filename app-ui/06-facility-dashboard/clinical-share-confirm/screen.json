@@ -1,0 +1,7 @@
+{
+  "title": "Clinical share confirm",
+  "subtitle": "Facility staff approve what leaves EMR into FCHIP",
+  "kind": "form",
+  "nav": "facility",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

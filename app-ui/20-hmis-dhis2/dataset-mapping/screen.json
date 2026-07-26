@@ -1,0 +1,7 @@
+{
+  "title": "Dataset mapping",
+  "subtitle": "Map HMIS/DHIS2 elements to cascade indicators",
+  "kind": "settings",
+  "nav": "hmis",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

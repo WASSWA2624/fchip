@@ -1,0 +1,7 @@
+{
+  "title": "Nutrition monitoring",
+  "subtitle": "Growth / nutrition programme feed",
+  "kind": "form",
+  "nav": "mch",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

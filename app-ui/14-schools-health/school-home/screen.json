@@ -1,0 +1,7 @@
+{
+  "title": "School health home",
+  "subtitle": "Schools feed sessions · screening · absenteeism",
+  "kind": "dashboard",
+  "nav": "school",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

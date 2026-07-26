@@ -1,0 +1,7 @@
+{
+  "title": "HMIS / DHIS2 home",
+  "subtitle": "Approved public-health aggregates into FCHIP",
+  "kind": "dashboard",
+  "nav": "hmis",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

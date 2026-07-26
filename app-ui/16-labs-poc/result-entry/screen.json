@@ -1,0 +1,7 @@
+{
+  "title": "Result entry",
+  "subtitle": "Point-of-care / lab result → ingest",
+  "kind": "form",
+  "nav": "lab",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

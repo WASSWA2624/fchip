@@ -1,0 +1,7 @@
+{
+  "title": "HMIS audit",
+  "subtitle": "What public aggregates entered the pipeline",
+  "kind": "list",
+  "nav": "hmis",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

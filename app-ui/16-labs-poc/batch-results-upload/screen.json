@@ -1,0 +1,7 @@
+{
+  "title": "Batch results upload",
+  "subtitle": "Facility lab batches into FCHIP",
+  "kind": "form",
+  "nav": "lab",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

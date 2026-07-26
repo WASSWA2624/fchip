@@ -1,0 +1,7 @@
+{
+  "title": "Push event log",
+  "subtitle": "EMR/HMS systems feeding FCHIP in real time",
+  "kind": "list",
+  "nav": "admin",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

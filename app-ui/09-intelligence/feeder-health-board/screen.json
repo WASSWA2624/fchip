@@ -1,0 +1,7 @@
+{
+  "title": "Feeder health board",
+  "subtitle": "Which data parties are sending clean signals",
+  "kind": "dashboard",
+  "nav": "admin",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

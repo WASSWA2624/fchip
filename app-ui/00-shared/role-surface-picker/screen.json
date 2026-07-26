@@ -1,6 +1,6 @@
 {
   "title": "Choose your workspace",
-  "subtitle": "One platform · cascade surfaces",
+  "subtitle": "Consumers · data feeders · admin",
   "kind": "list",
   "nav": "auth",
   "source": "app-flows + .cursor/app-write-up.mdc"

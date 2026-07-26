@@ -1,0 +1,7 @@
+{
+  "title": "Pharmacy outlet home",
+  "subtitle": "Drug shops feed stock · dispense · complaints",
+  "kind": "dashboard",
+  "nav": "pharmacy",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

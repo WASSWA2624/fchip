@@ -1,0 +1,7 @@
+{
+  "title": "Outreach event log",
+  "subtitle": "Community outreach events → ingest",
+  "kind": "form",
+  "nav": "community",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

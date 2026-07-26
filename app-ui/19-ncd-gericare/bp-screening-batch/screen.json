@@ -1,0 +1,7 @@
+{
+  "title": "BP screening batch",
+  "subtitle": "Community/clinic BP packs for hotspot detection",
+  "kind": "form",
+  "nav": "ncd",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

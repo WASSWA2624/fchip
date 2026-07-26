@@ -1,0 +1,7 @@
+{
+  "title": "Climate feeds home",
+  "subtitle": "Climate API as a first-class data feeder",
+  "kind": "dashboard",
+  "nav": "climate",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

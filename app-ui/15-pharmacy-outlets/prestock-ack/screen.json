@@ -1,0 +1,7 @@
+{
+  "title": "Pre-stock acknowledgement",
+  "subtitle": "Respond to district medicine demand actions",
+  "kind": "form",
+  "nav": "pharmacy",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

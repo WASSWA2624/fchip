@@ -1,0 +1,7 @@
+{
+  "title": "Household needs",
+  "subtitle": "Community members feed priorities into cascade",
+  "kind": "form",
+  "nav": "field",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

@@ -1,0 +1,7 @@
+{
+  "title": "Facility onboarding",
+  "subtitle": "Register an existing EMR/HMS as a data feeder",
+  "kind": "form",
+  "nav": "admin",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

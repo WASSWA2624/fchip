@@ -1,0 +1,7 @@
+{
+  "title": "Camp summary push",
+  "subtitle": "Aggregate wellness signals to NCD intelligence",
+  "kind": "form",
+  "nav": "corporate",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

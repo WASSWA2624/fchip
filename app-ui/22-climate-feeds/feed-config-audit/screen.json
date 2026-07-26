@@ -1,0 +1,7 @@
+{
+  "title": "Feed config & audit",
+  "subtitle": "Which climate feeds may enter the pipeline",
+  "kind": "settings",
+  "nav": "climate",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

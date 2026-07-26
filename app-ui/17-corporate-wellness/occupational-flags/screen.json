@@ -1,0 +1,7 @@
+{
+  "title": "Occupational flags",
+  "subtitle": "Workplace health risk patterns",
+  "kind": "list",
+  "nav": "corporate",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

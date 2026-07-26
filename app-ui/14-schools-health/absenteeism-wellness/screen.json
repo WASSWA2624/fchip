@@ -1,0 +1,7 @@
+{
+  "title": "Absenteeism & wellness",
+  "subtitle": "Wellness signals from school rolls",
+  "kind": "form",
+  "nav": "school",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

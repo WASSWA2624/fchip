@@ -1,0 +1,7 @@
+{
+  "title": "NCD / Gericare home",
+  "subtitle": "Chronic and elderly cohorts feed longitudinal signals",
+  "kind": "dashboard",
+  "nav": "ncd",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

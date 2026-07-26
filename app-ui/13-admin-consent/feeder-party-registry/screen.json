@@ -1,0 +1,7 @@
+{
+  "title": "Feeder party registry",
+  "subtitle": "Register every source that may push into ingest",
+  "kind": "settings",
+  "nav": "admin",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

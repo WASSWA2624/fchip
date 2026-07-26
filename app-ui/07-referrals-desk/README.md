@@ -6,3 +6,4 @@ Source: `app-flows/04-modules.md` + `.cursor/app-write-up.mdc`.
 | --- | --- | --- | --- |
 | Referrals desk (`referral-queue`) | [mobile](referral-queue/mobile.png) | [tablet](referral-queue/tablet.png) | [desktop](referral-queue/desktop.png) |
 | Referral detail (`referral-detail`) | [mobile](referral-detail/mobile.png) | [tablet](referral-detail/tablet.png) | [desktop](referral-detail/desktop.png) |
+| Outcome feed-back (`outcome-feed-back`) | [mobile](outcome-feed-back/mobile.png) | [tablet](outcome-feed-back/tablet.png) | [desktop](outcome-feed-back/desktop.png) |

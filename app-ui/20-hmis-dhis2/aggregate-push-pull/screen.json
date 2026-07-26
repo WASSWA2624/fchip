@@ -1,0 +1,7 @@
+{
+  "title": "Aggregate push / pull",
+  "subtitle": "Scheduled exchange with district HMIS",
+  "kind": "form",
+  "nav": "hmis",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

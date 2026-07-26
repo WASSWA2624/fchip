@@ -1,6 +1,6 @@
 {
   "title": "Users & roles",
-  "subtitle": "CHW · Facility · District · Partner",
+  "subtitle": "Consumers and data-feeder roles",
   "kind": "settings",
   "nav": "admin",
   "source": "app-flows + .cursor/app-write-up.mdc"

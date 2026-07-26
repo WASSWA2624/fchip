@@ -1,6 +1,6 @@
 {
   "title": "Ingest & sync",
-  "subtitle": "Field · EMR · climate → store",
+  "subtitle": "All feeder parties → validate → store",
   "kind": "dashboard",
   "nav": "admin",
   "source": "app-flows + .cursor/app-write-up.mdc"

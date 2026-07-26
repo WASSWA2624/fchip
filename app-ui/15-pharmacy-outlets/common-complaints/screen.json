@@ -1,0 +1,7 @@
+{
+  "title": "Common complaints",
+  "subtitle": "Community symptom patterns from outlets",
+  "kind": "list",
+  "nav": "pharmacy",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

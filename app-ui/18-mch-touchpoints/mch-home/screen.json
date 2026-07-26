@@ -1,0 +1,7 @@
+{
+  "title": "MCH touchpoints home",
+  "subtitle": "ANC / PNC · immunisation · nutrition posts feed care signals",
+  "kind": "dashboard",
+  "nav": "mch",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

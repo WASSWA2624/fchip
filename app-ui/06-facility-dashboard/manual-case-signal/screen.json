@@ -1,0 +1,7 @@
+{
+  "title": "Manual case signal",
+  "subtitle": "When EMR link is down — structured facility feed",
+  "kind": "form",
+  "nav": "facility",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

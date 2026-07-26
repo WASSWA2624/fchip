@@ -1,0 +1,7 @@
+{
+  "title": "Rainfall & temperature",
+  "subtitle": "Weather signals fused with health",
+  "kind": "detail",
+  "nav": "climate",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

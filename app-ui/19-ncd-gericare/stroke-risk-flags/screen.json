@@ -1,0 +1,7 @@
+{
+  "title": "Stroke / NCD risk flags",
+  "subtitle": "Signals that feed NCD predictions",
+  "kind": "list",
+  "nav": "ncd",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

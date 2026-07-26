@@ -1,0 +1,7 @@
+{
+  "title": "School sync status",
+  "subtitle": "Offline school forms → cloud",
+  "kind": "detail",
+  "nav": "school",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

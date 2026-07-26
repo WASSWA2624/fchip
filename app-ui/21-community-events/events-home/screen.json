@@ -1,0 +1,7 @@
+{
+  "title": "Community events home",
+  "subtitle": "Churches · mosques · dialogues feed community signals",
+  "kind": "dashboard",
+  "nav": "community",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

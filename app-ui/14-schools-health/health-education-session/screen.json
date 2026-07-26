@@ -1,0 +1,7 @@
+{
+  "title": "Health education session",
+  "subtitle": "School / community education metrics",
+  "kind": "form",
+  "nav": "school",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

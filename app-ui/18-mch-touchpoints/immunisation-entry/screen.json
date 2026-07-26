@@ -1,0 +1,7 @@
+{
+  "title": "Immunisation entry",
+  "subtitle": "Immunisation post doses → child health coverage",
+  "kind": "form",
+  "nav": "mch",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

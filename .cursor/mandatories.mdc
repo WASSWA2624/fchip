@@ -11,8 +11,8 @@ Apply on every code change. Do not ship UI or API work that skips these.
 
 Align with [`.cursor/app-write-up.mdc`](app-write-up.mdc):
 
-- **FCHIP** is FairBanks' Community Health Intelligence Platform **component** on the Data & Feedback loop.
-- **FairBanks** is the ecosystem (Community Reach + Medical Centre + CHIS + livelihoods + research).
+- **FCHIP** is the Community Health Intelligence Platform — the product this monorepo builds.
+- Frame FCHIP as a **predictive intelligence platform** on the community health cascade Data & Feedback loop — not a company-ecosystem write-up and not a generic hospital/EMR brand.
 - EMR/HMS wording is only for **external** facility systems FCHIP connects to via secure data APIs.
 - Do not invent alternate cascade order, programme names, or a stand-alone hospital brand for FCHIP.
 

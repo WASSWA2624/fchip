@@ -1,5 +1,5 @@
 ---
-description: English-first locale editing aligned with FairBanks / FCHIP product SoT
+description: English-first locale editing aligned with FCHIP product SoT
 globs:
   - "frontend/lib/l10n/**"
   - "backend/src/locales/**"
@@ -19,10 +19,10 @@ Edit English locale files by default. Product wording must follow [`.cursor/app-
 
 ## Product wording (SoT)
 
-- Use canonical names exactly: **FairBanks**, **FCHIP**, **Community Reach**, **CHIS**, **CHW/VHT**.
-- Describe FCHIP as a FairBanks **component**, not a separate hospital brand.
+- Use canonical names exactly: **FCHIP**, **CHIS** (optional data domain), **CHW/VHT**, cascade terms from the SoT.
+- Describe FCHIP as the Community Health Intelligence Platform — not a hospital or EMR brand.
 - EMR/HMS in copy = external systems FCHIP interoperates with — not FCHIP itself.
-- Do not invent alternate programme names or reorder the Community Reach cascade.
+- Do not invent alternate programme names or reorder the community health cascade.
 - Slogan when needed: **Your health, our mission.**
 
 ## Explicit overrides

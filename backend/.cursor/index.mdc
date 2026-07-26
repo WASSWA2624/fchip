@@ -20,7 +20,7 @@ Define backend technical standards for `fchip-backend`.
 - Database objects, Prisma models, and documented payload fields use lowercase `snake_case`.
 - Public APIs and realtime payloads expose `human_friendly_id` only; must not return raw primary keys.
 - Effective access = `union(role, module, user grants) ∩ active subscription ∩ assigned modules ∩ ABAC scope`; no grant bypasses subscription limits.
-- Product framing follows FairBanks / FCHIP SoT; do not present the API as a generic hospital brand.
+- Product framing follows the FCHIP SoT; do not present the API as a generic hospital or EMR brand.
 - Every business module must stay standalone and entitlement-aware.
 - Public APIs and complex logic require JSDoc documentation.
 - Circular dependencies are forbidden.

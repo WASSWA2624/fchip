@@ -8,11 +8,11 @@ alwaysApply: false
 
 # Project Scope
 
-FCHIP frontend is the Flutter client for FairBanks’ Community Health Intelligence Platform, against the `fchip-backend` API. Product boundaries: [`.cursor/app-write-up.mdc`](../../.cursor/app-write-up.mdc).
+FCHIP frontend is the Flutter client for the Community Health Intelligence Platform, against the `fchip-backend` API. Product boundaries: [`.cursor/app-write-up.mdc`](../../.cursor/app-write-up.mdc).
 
 ## Mandatory rules
 
-- Must build production-ready workspaces aligned with the FairBanks / FCHIP SoT, not a generic disconnected starter.
+- Must build production-ready workspaces aligned with the FCHIP SoT, not a generic disconnected starter.
 - Must support Android, iOS, Web, Windows, macOS, and Linux where enabled; extra-small mobile through large desktop; smartwatch out of scope.
 - Must integrate with `fchip-backend` via repositories and DTOs; HTTP details live in `backend/.cursor/api.mdc` and `network_api.mdc`.
 - Should prefer Flutter SDK widgets, Material Design, and shared `lib/shared/` abstractions before custom packages.

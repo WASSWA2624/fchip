@@ -9,15 +9,15 @@ alwaysApply: false
 
 # FCHIP Rules Index
 
-FCHIP is the FairBanks Community Health Intelligence Platform monorepo (`backend/` + `frontend/`).
+FCHIP is the Community Health Intelligence Platform monorepo (`backend/` + `frontend/`).
 
 ## Source of truth
 
 [`.cursor/app-write-up.mdc`](app-write-up.mdc) is the **only** product SoT (always apply). It owns:
 
-- FairBanks vs FCHIP positioning (FCHIP = FairBanks component on Data & Feedback)
-- Community Reach cascade, CHIS, indicators, partnership menu (section 2)
-- Canonical terms: FairBanks, FCHIP, Community Reach, CHIS, CHW/VHT, EMR/HMS, GIS + climate APIs
+- FCHIP product positioning (intelligence platform on the cascade Data & Feedback loop)
+- Community health cascade, indicators, partner pathways, community journey (section 2)
+- Canonical terms: FCHIP, cascade, CHIS (optional data domain), CHW/VHT, EMR/HMS, GIS + climate APIs
 - Vision, MVP, funding copy, and do-not-invent rules
 
 Slogan: **Your health, our mission.** Mission: Connecting Care, Empowering Communities, Creating Lasting Impact.
@@ -31,7 +31,7 @@ Slogan: **Your health, our mission.** Mission: Connecting Care, Empowering Commu
 
 ## Keep / do not invent
 
-- Frame FCHIP as FairBanks' intelligence layer on Community Reach — not a generic hospital brand.
+- Frame FCHIP as the Community Health Intelligence Platform — not a generic hospital or EMR brand.
 - EMR/HMS means **external** facility systems FCHIP interoperates with via secure data APIs.
 - Do not invent alternate cascade order or programme names — follow SoT section 2.
 

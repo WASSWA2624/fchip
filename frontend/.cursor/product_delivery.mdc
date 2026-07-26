@@ -7,13 +7,13 @@ alwaysApply: false
 
 # Frontend-First Product Delivery
 
-`app-ui/` and `app-flows/` define the proposed screens, routes, states, and journeys. Product identity remains owned by `.cursor/app-write-up.mdc`.
+`app-ui/` and `app-flows/` define the proposed screens, routes, states, and journeys. Product identity remains owned by `.cursor/app-write-up.mdc`. Existing HIS workspaces are not proof that a FCHIP screen is implemented.
 
 ## Slice order
 
 For every screen or tightly connected journey:
 
-1. Read its `app-ui/<module>/<screen>/screen.json`, all six mockups, module `README.md`, and relevant `app-flows/` journey.
+1. Read its `app-ui/<module>/<screen>/screen.json`, all six mockups, module `README.md`, shared tokens/components/layouts, and relevant `app-flows/` journey.
 2. List route, roles, access scope, responsive layout, supported states, actions, data, offline behavior, and backend effects.
 3. Implement the Flutter screen first with typed fixtures or a fake repository. Match mobile, tablet, desktop, light, and dark references without copying raster images into the UI.
 4. Define the smallest typed repository and API contract required by that UI. Do not design an unused generic backend.
@@ -27,8 +27,9 @@ Do not start the next product slice while the current slice has an undocumented 
 1. Security, privacy, safety, and `.cursor/app-write-up.mdc`.
 2. `app-flows/`, especially `06-mvp-phases.md` and `07-navigation.md`.
 3. The screen's `screen.json`.
-4. Its six `app-ui` visual references and shared kit.
-5. Frontend/backend technical rules.
+4. `app-ui/generate_mockups.py`, `app-ui/00-shared/tokens.json`, and the shared component/layout kit.
+5. Its six visual references.
+6. Frontend/backend technical rules.
 
 If references conflict, resolve and document the decision before coding.
 

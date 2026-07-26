@@ -4,7 +4,7 @@ Build the reusable backend foundation, then deliver product capabilities in tand
 ## Execution Order
 
 1. Prepare or verify the minimum shared foundation in `P000_setup` through `P008_perf`.
-2. Start product work from [`frontend/dev-plan/24-product-vertical-slices.md`](../../frontend/dev-plan/24-product-vertical-slices.md), not from a backend module backlog.
+2. Start product work from [`frontend/dev-plan/24-product-vertical-slices.md`](../../frontend/dev-plan/24-product-vertical-slices.md) and the paired `frontend/dev-plan/slices/registry.yaml` / `backend/dev-plan/slices/registry.yaml`, not from a backend module backlog.
 3. For each active frontend screen/journey, apply `P009_models` through `P015_offline` only as needed inside that same slice.
 4. Wire and prove the real frontend repository before opening the next slice.
 

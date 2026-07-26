@@ -12,7 +12,7 @@ Define the mandatory build sequence for every backend module.
 
 0. A frontend screen or connected journey must be active in `frontend/dev-plan/24-product-vertical-slices.md`.
 1. Read the implemented UI/repository contract, its `screen.json`, mockups, and `app-flows/` journey; record the smallest backend capability needed.
-2. Declare module, role, permission, subscription, and ABAC scope in canonical catalogs.
+2. Declare roles in `src/config/roles.js`, permissions in `src/config/permissions.js`, subscription/module mapping in `src/lib/subscriptions/plan-module-matrix.js`, and the applicable ABAC scope.
 3. Define API/problem/event contracts, then create module and mirrored test folders.
 4. Add only required Prisma models and migrations.
 5. Zod schemas use `snake_case` and `human_friendly_id`; repositories enforce tenancy, scope, soft-delete, and audit-friendly access.
@@ -25,7 +25,7 @@ Define the mandatory build sequence for every backend module.
 
 - Owned tables and permission keys must exist.
 - Public routes and responses must use `human_friendly_id` only.
-- Defaults must match `frontend/.cursor/permissions.mdc` and `backend/.cursor/auth-security.mdc`; subscription intersection tests must pass.
+- Backend catalogs must match `frontend/.cursor/permissions.mdc` and `backend/.cursor/auth-security.mdc`; subscription intersection tests must pass.
 - Effective permissions must equal `union(role, module, user grants) ∩ subscription ∩ ABAC`; unauthorized access must not occur.
 - The screen's workflow must work without an unrelated paid module.
 - Mutations must create audit evidence; names must match docs.

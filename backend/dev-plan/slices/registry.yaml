@@ -1,0 +1,79 @@
+version: 1
+frontend_registry: frontend/dev-plan/slices/registry.yaml
+policy:
+  start_only_after_frontend_fixture_ui: true
+  implementation_unit: schema_contract_module_seed_tests_and_frontend_wiring
+  speculative_his_domains: forbidden
+slices:
+  - id: VS-00
+    frontend_module: 00-shared
+    capability: identity_sessions_consent_access_notifications_preferences
+  - id: VS-01
+    frontend_module: 01-chw-vht-mobile
+    capability: field_worklists_household_visits_referrals_alerts_offline_sync
+  - id: VS-02
+    frontend_module: 02-community-caregiver
+    capability: households_self_reports_guidance_and_needs
+  - id: VS-03
+    frontend_module: 03-outreach-school-health
+    capability: outreach_planning_sessions_screening_coverage_and_batch_ingest
+  - id: VS-04
+    frontend_module: 04-cascade-metrics
+    capability: indicators_gap_detection_and_partner_reports
+  - id: VS-05
+    frontend_module: 05-chis-livelihoods
+    capability: optional_chis_enrolment_contributions_access_and_iga
+  - id: VS-06
+    frontend_module: 06-facility-dashboard
+    capability: facility_intelligence_catchment_referral_stock_and_priority_views
+  - id: VS-07
+    frontend_module: 07-referrals-desk
+    capability: community_referral_queue_detail_outcome_and_status_history
+  - id: VS-08
+    frontend_module: 08-emr-connector
+    capability: scoped_emr_connector_health_events_and_facility_onboarding
+  - id: VS-09
+    frontend_module: 09-intelligence
+    capability: ingest_feed_health_gis_climate_risk_guidance_alerts_and_worklists
+  - id: VS-10
+    frontend_module: 10-district-moh
+    capability: population_maps_warnings_action_deployment_planning_and_rollup
+  - id: VS-11
+    frontend_module: 11-ngo-partner
+    capability: partner_monitoring_evidence_training_uploads_and_indicators
+  - id: VS-12
+    frontend_module: 12-research-exports
+    capability: contribution_ingest_ethics_review_anonymisation_and_expiring_exports
+  - id: VS-13
+    frontend_module: 13-admin-consent
+    capability: organisations_catchments_roles_consent_connector_access_and_feeders
+  - id: VS-14
+    frontend_module: 14-schools-health
+    capability: school_sessions_screenings_wellness_and_offline_sync
+  - id: VS-15
+    frontend_module: 15-pharmacy-outlets
+    capability: outlet_stock_dispensing_complaint_signals_and_prestock_actions
+  - id: VS-16
+    frontend_module: 16-labs-poc
+    capability: lab_results_batches_and_result_queues
+  - id: VS-17
+    frontend_module: 17-corporate-wellness
+    capability: wellness_camps_vitals_summaries_and_occupational_flags
+  - id: VS-18
+    frontend_module: 18-mch-touchpoints
+    capability: anc_pnc_immunisation_and_nutrition_touchpoints
+  - id: VS-19
+    frontend_module: 19-ncd-gericare
+    capability: cohorts_visits_bp_batches_and_ncd_risk_flags
+  - id: VS-20
+    frontend_module: 20-hmis-dhis2
+    capability: approved_dataset_mapping_aggregate_exchange_and_audit
+  - id: VS-21
+    frontend_module: 21-community-events
+    capability: events_dialogues_outreach_logs_and_participation
+  - id: VS-22
+    frontend_module: 22-climate-feeds
+    capability: climate_observations_extremes_configuration_quality_and_audit
+  - id: VS-23
+    frontend_module: 23-insurance-insights
+    capability: prevention_only_aggregated_anonymised_insights

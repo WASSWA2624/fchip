@@ -6,7 +6,7 @@ Lock the smallest public contract required by the active frontend slice.
 - Business endpoints must live under `/api/v1`.
 - Resource paths must use plural kebab-case.
 - Standard operations must provide list, create, get, update, and archive or soft-delete behavior as applicable.
-- Workflow transitions must use `POST /resource/:id/<action>`.
+- Workflow transitions must use `POST /resource/:human_friendly_id/<action>`.
 - Request/response/problem fixtures must be shared with frontend contract tests.
 - List, map, dashboard, and worklist endpoints return only the fields the active UI needs.
 

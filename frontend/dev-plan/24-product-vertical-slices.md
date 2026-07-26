@@ -2,6 +2,10 @@
 
 Build the real FCHIP product from `app-ui/` and `app-flows/`. This plan starts product development after the shared foundation in steps `01`–`23`.
 
+## Starting Baseline
+
+The current frontend/backend contain broad hospital HIS workspaces. Reuse suitable platform primitives such as auth, tenancy, consent, repositories, responsive shells, sync, integrations, and tests, but do not rename an HIS page and count it as a FCHIP screen. Add FCHIP feature folders and routes from `screen.json`; retire unrelated HIS surfaces through explicit migration/feature-gate decisions.
+
 ## Non-Negotiable Delivery Loop
 
 Do not build all Flutter screens and postpone the backend. For each screen, or the smallest connected journey:
@@ -19,6 +23,8 @@ Follow `frontend/.cursor/product_delivery.mdc` and `backend/.cursor/vertical-sli
 ## Slice Record
 
 For each screen keep: route; phase; roles/ABAC scope; visual references; supported states; frontend files/tests; repository methods; API routes/events; models/migration; permissions/consent/audit; offline/idempotency/conflict policy; seeds; and validation evidence. Mark `backend: none` only for a proven static screen.
+
+Maintain a machine-readable slice registry under `frontend/dev-plan/slices/` with the same slice IDs mirrored under `backend/dev-plan/slices/`. Add a coverage check that reads all `app-ui/**/screen.json` files and fails when a route, localization prefix, supported state, frontend owner, or backend disposition is missing.
 
 ## Delivery Order
 
@@ -87,6 +93,7 @@ Research export delivery must include ethics/privacy review, pending/denied/appr
 - Realtime-capable flows prove scoped delivery and targeted Riverpod reconciliation.
 - No public payload or UI exposes internal database IDs.
 - The real backend is wired and the connected journey passes before the next slice starts.
+- Frontend and backend slice registries agree, and automated coverage reports no missing or duplicate screen ownership.
 
 ## Completion
 

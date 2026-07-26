@@ -9,20 +9,21 @@ alwaysApply: false
 Define backend identity and authorization behavior.
 
 ## Authentication
+- Current account creation, sign-in, and password recovery use phone number + password as declared by `app-ui/00-shared`; offline PIN is device unlock only.
 - JWT access tokens and finite-lifetime refresh or session records are required.
 - Session revocation must be supported.
-- MFA-capable flows must stay compatible with the auth module.
+- Keep the auth module extensible, but do not add email, OTP, biometrics, social login, or other mandatory methods without a changed product contract.
 
 ## Authorization
 - Authority order: subscription package → module assignment → role → permission → ABAC scope.
 - Subscription package is the hard gate; roles/permissions must not unlock anything outside the active package.
 - Users may hold multiple roles and module assignments via `user_role` tables.
 - Effective permissions = `union(role, module, user grants) ∩ subscription modules/permissions ∩ assigned modules ∩ ABAC scope`.
-- RBAC grants baseline actions; ABAC narrows by tenant, facility, department, ownership, shift, and emergency state.
+- RBAC grants baseline actions; ABAC narrows by tenant, catchment, facility, programme, feeder, geography, record ownership, consent, and other slice-declared scope.
 - Enforce in middleware and re-validate in services for sensitive workflows.
 
 ## Access defaults
-- Shipped defaults live in `frontend/.cursor/permissions.mdc` / `backend/.cursor/auth-security.mdc` (`modules.mdc`, `permissions.mdc`, `subscriptions.mdc`, `default_user_roles.mdc`).
+- Backend defaults live in `src/config/roles.js`, `src/config/permissions.js`, and `src/lib/subscriptions/plan-module-matrix.js`; frontend visibility must match `frontend/.cursor/permissions.mdc`.
 - Admins may customize or reset permissions to shipped defaults.
 - All permission, role, module, and subscription changes must be atomic, versioned, auditable, and restorable.
 

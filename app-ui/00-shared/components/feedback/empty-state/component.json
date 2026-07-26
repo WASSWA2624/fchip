@@ -1,0 +1,15 @@
+{
+  "title": "Empty state",
+  "category": "feedback",
+  "slug": "empty-state",
+  "purpose": "No items yet",
+  "used_by": [
+    "queues",
+    "inboxes"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

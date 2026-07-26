@@ -1,0 +1,15 @@
+{
+  "title": "Warn banner",
+  "category": "cards",
+  "slug": "warn-banner",
+  "purpose": "Attention callout",
+  "used_by": [
+    "gaps",
+    "consent"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

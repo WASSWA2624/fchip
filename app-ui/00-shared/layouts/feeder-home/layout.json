@@ -1,0 +1,20 @@
+{
+  "title": "Feeder home",
+  "slug": "feeder-home",
+  "purpose": "Home for schools, pharmacy, lab, MCH, corporate, NCD, community, climate",
+  "composes": [
+    "stat-card-row",
+    "list-row-card",
+    "offline-ready-chip",
+    "primary-cta",
+    "bottom-nav-feeder"
+  ],
+  "surfaces": [
+    "14\u201322"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

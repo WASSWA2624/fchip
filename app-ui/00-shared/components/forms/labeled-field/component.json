@@ -1,0 +1,14 @@
+{
+  "title": "Labeled field",
+  "category": "forms",
+  "slug": "labeled-field",
+  "purpose": "Label + value input shell",
+  "used_by": [
+    "all forms"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

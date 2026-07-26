@@ -1,0 +1,15 @@
+{
+  "title": "Explainability block",
+  "category": "cards",
+  "slug": "explainability-block",
+  "purpose": "Why an alert fired",
+  "used_by": [
+    "alert follow-up",
+    "district warnings"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Stat card",
+  "category": "cards",
+  "slug": "stat-card",
+  "purpose": "Single metric tile",
+  "used_by": [
+    "dashboards"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

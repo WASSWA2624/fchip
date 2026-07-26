@@ -1,0 +1,14 @@
+{
+  "title": "Loading skeleton",
+  "category": "feedback",
+  "slug": "loading-skeleton",
+  "purpose": "Placeholder while data loads",
+  "used_by": [
+    "dashboards"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

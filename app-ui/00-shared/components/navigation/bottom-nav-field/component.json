@@ -1,0 +1,15 @@
+{
+  "title": "Bottom nav \u00b7 field",
+  "category": "navigation",
+  "slug": "bottom-nav-field",
+  "purpose": "CHW / caregiver tabs",
+  "used_by": [
+    "01",
+    "02"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

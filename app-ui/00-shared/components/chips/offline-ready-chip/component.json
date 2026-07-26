@@ -1,0 +1,15 @@
+{
+  "title": "Offline-ready chip",
+  "category": "chips",
+  "slug": "offline-ready-chip",
+  "purpose": "Field offline readiness",
+  "used_by": [
+    "CHW",
+    "feeders"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

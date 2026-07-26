@@ -1,0 +1,16 @@
+{
+  "title": "Logo lockup",
+  "category": "brand",
+  "slug": "logo-lockup",
+  "purpose": "FCHIP wordmark for headers and auth",
+  "used_by": [
+    "all shells",
+    "splash",
+    "login"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

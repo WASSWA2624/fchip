@@ -1,0 +1,16 @@
+{
+  "title": "Hotspot map",
+  "category": "data-display",
+  "slug": "hotspot-map",
+  "purpose": "GIS + climate overlay block",
+  "used_by": [
+    "facility",
+    "district",
+    "coverage"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

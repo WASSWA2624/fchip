@@ -2020,7 +2020,13 @@ def main():
         "",
         "```bash",
         "python app-ui/generate_mockups.py",
+        "# screens + shared kit (components + layouts)",
         "```",
+        "",
+        "## Shared kit (`00-shared`)",
+        "",
+        "- [Components](00-shared/components/README.md) — reusable UI pieces",
+        "- [Layouts](00-shared/layouts/README.md) — page shells for every surface / feeder",
         "",
         "## Sources",
         "",
@@ -2030,6 +2036,13 @@ def main():
     ]
     (ROOT / "README.md").write_text("\n".join(lines), encoding="utf-8")
     print(f"Wrote {len(SCREENS)} screens × 3 breakpoints = {total} PNGs under {ROOT}")
+
+    # Shared reusable kit (components + layouts) under 00-shared/
+    import runpy
+
+    kit = ROOT / "00-shared" / "generate_kit.py"
+    if kit.exists():
+        runpy.run_path(str(kit), run_name="__main__")
 
 
 if __name__ == "__main__":

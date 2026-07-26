@@ -1,0 +1,15 @@
+{
+  "title": "Error inline",
+  "category": "feedback",
+  "slug": "error-inline",
+  "purpose": "Validation / feed error",
+  "used_by": [
+    "forms",
+    "connectors"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

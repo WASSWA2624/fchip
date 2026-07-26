@@ -214,7 +214,13 @@ Slogan: **Your health, our mission.**
 
 ```bash
 python app-ui/generate_mockups.py
+# screens + shared kit (components + layouts)
 ```
+
+## Shared kit (`00-shared`)
+
+- [Components](00-shared/components/README.md) — reusable UI pieces
+- [Layouts](00-shared/layouts/README.md) — page shells for every surface / feeder
 
 ## Sources
 

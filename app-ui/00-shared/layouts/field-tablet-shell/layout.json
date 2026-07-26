@@ -1,0 +1,22 @@
+{
+  "title": "Field tablet shell",
+  "slug": "field-tablet-shell",
+  "purpose": "Same field IA with wider content column",
+  "composes": [
+    "top-app-bar",
+    "section-header",
+    "bottom-nav-field",
+    "stat-card-row",
+    "list-row-card"
+  ],
+  "surfaces": [
+    "01",
+    "02",
+    "feeders"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

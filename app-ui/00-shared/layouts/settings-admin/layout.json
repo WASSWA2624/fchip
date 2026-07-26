@@ -1,0 +1,22 @@
+{
+  "title": "Settings / admin",
+  "slug": "settings-admin",
+  "purpose": "Org \u00b7 roles \u00b7 consent \u00b7 API scopes \u00b7 feeder registry",
+  "composes": [
+    "section-header",
+    "list-row-card",
+    "note-banner",
+    "primary-cta"
+  ],
+  "surfaces": [
+    "13",
+    "08 scopes",
+    "20 mapping",
+    "22 config"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

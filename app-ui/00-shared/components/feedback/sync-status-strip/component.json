@@ -1,0 +1,15 @@
+{
+  "title": "Sync status strip",
+  "category": "feedback",
+  "slug": "sync-status-strip",
+  "purpose": "Queue \u00b7 last sync \u00b7 errors",
+  "used_by": [
+    "sync screens",
+    "feeder sync"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

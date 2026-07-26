@@ -1,0 +1,15 @@
+{
+  "title": "Queue item",
+  "category": "data-display",
+  "slug": "queue-item",
+  "purpose": "Desk / referral / lab queue row",
+  "used_by": [
+    "07",
+    "16"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Success toast",
+  "category": "feedback",
+  "slug": "success-toast",
+  "purpose": "Saved / synced confirmation",
+  "used_by": [
+    "forms"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

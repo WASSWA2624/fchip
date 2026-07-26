@@ -1,0 +1,15 @@
+{
+  "title": "List row card",
+  "category": "cards",
+  "slug": "list-row-card",
+  "purpose": "Tappable title + subtitle row",
+  "used_by": [
+    "worklists",
+    "inboxes"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

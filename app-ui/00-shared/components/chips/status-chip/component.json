@@ -1,0 +1,15 @@
+{
+  "title": "Status chip",
+  "category": "chips",
+  "slug": "status-chip",
+  "purpose": "Compact status or count",
+  "used_by": [
+    "worklists",
+    "queues"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

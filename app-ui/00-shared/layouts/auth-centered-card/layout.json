@@ -1,0 +1,20 @@
+{
+  "title": "Auth centered card",
+  "slug": "auth-centered-card",
+  "purpose": "Splash \u00b7 login \u00b7 role picker on a centered card",
+  "composes": [
+    "logo-lockup",
+    "slogan-line",
+    "labeled-field",
+    "primary-cta",
+    "master-loop-badge"
+  ],
+  "surfaces": [
+    "00-shared"
+  ],
+  "breakpoints": [
+    "mobile",
+    "tablet",
+    "desktop"
+  ]
+}

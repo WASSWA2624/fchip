@@ -9,39 +9,18 @@ from __future__ import annotations
 
 import json
 import math
+import sys
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 
 ROOT = Path(__file__).resolve().parent
 COMPONENTS = ROOT / "components"
 LAYOUTS = ROOT / "layouts"
 
-C = {
-    "bg": (247, 250, 249),
-    "surface": (255, 255, 255),
-    "ink": (26, 46, 53),
-    "muted": (90, 110, 118),
-    "line": (214, 226, 224),
-    "primary": (0, 109, 119),
-    "primary_soft": (214, 237, 239),
-    "accent": (20, 145, 155),
-    "warn": (196, 92, 38),
-    "warn_soft": (255, 236, 224),
-    "ok": (46, 125, 90),
-    "ok_soft": (220, 240, 230),
-    "map": (168, 206, 198),
-    "chrome": (18, 38, 44),
-    "white": (255, 255, 255),
-    "canvas": (236, 242, 240),
-}
-
-SIZES = {
-    "mobile": (390, 844),
-    "tablet": (768, 1024),
-    "desktop": (1440, 900),
-}
+sys.path.insert(0, str(ROOT.parent))
+from ui_primitives import C, DARK_C, SIZES, font, rr, tx
 
 # Compact specimen canvas for isolated components
 SPECIMEN = {
@@ -49,28 +28,6 @@ SPECIMEN = {
     "tablet": (768, 560),
     "desktop": (1100, 520),
 }
-
-
-def font(size: int, bold: bool = False):
-    candidates = [
-        r"C:\Windows\Fonts\segoeuib.ttf" if bold else r"C:\Windows\Fonts\segoeui.ttf",
-        r"C:\Windows\Fonts\arialbd.ttf" if bold else r"C:\Windows\Fonts\arial.ttf",
-    ]
-    for path in candidates:
-        try:
-            return ImageFont.truetype(path, size)
-        except OSError:
-            continue
-    return ImageFont.load_default()
-
-
-def rr(draw, box, fill, radius=12, outline=None, width=1):
-    draw.rounded_rectangle(box, radius=radius, fill=fill, outline=outline, width=width)
-
-
-def tx(draw, xy, value, size=14, bold=False, fill=None, anchor=None):
-    draw.text(xy, value, font=font(size, bold), fill=fill or C["ink"], anchor=anchor)
-
 
 def save_meta(path: Path, meta: dict):
     path.write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
@@ -94,7 +51,7 @@ def specimen_frame(bp: str, title: str, subtitle: str) -> tuple[Image.Image, Ima
 
 def draw_app_bar(draw, x0, y0, x1, y1, title="FCHIP", right="Your health, our mission."):
     draw.rectangle([x0, y0, x1, y1], fill=C["primary"])
-    tx(draw, (x0 + 16, (y0 + y1) / 2), title, size=14, bold=True, fill=C["white"], anchor="lm")
+    tx(draw, (x0 + 16, (y0 + y1) / 2), title, size=14, bold=True, fill=C["on_primary"], anchor="lm")
     tx(draw, (x1 - 16, (y0 + y1) / 2), right, size=10, fill=(210, 235, 236), anchor="rm")
 
 
@@ -105,8 +62,15 @@ def draw_bottom_nav(draw, x0, y0, x1, y1, items: list[str], active=0):
     for i, item in enumerate(items):
         cx = x0 + slot * i + slot / 2
         color = C["primary"] if i == active else C["muted"]
-        tx(draw, (cx, y0 + 18), "●", size=9, fill=color, anchor="mm")
-        tx(draw, (cx, y0 + 40), item, size=10, fill=color, anchor="mm")
+        rr(
+            draw,
+            (cx - 13, y0 + 6, cx + 13, y0 + 32),
+            C["primary_soft"] if i == active else C["surface"],
+            radius=8,
+            outline=color,
+        )
+        tx(draw, (cx, y0 + 19), item[:1], size=11, bold=True, fill=color, anchor="mm")
+        tx(draw, (cx, y0 + 44), item, size=11, fill=color, anchor="mm")
 
 
 def draw_side_nav(draw, x0, y0, x1, y1, items: list[str], active=0):
@@ -119,7 +83,7 @@ def draw_side_nav(draw, x0, y0, x1, y1, items: list[str], active=0):
         rr(draw, (x0 + 12, y, x1 - 12, y + 38), fill, radius=10)
         tx(draw, (x0 + 24, y + 19), item, size=12, fill=C["white"], anchor="lm")
         y += 46
-    tx(draw, (x0 + 20, y1 - 28), "Cascade Data & Feedback", size=9, fill=(120, 150, 155))
+    tx(draw, (x0 + 20, y1 - 28), "Cascade Data & Feedback", size=11, fill=(120, 150, 155))
 
 
 def draw_chip(draw, x, y, label, soft=True):
@@ -152,7 +116,7 @@ def draw_field(draw, x, y, w, label, value):
 
 def draw_cta(draw, x, y, w, label, fill=None):
     rr(draw, (x, y, x + w, y + 48), fill or C["primary"], radius=14)
-    tx(draw, (x + w / 2, y + 24), label, size=14, bold=True, fill=C["white"], anchor="mm")
+    tx(draw, (x + w / 2, y + 24), label, size=14, bold=True, fill=C["on_primary"], anchor="mm")
 
 
 def draw_map_block(draw, x, y, w, h, note: str):
@@ -304,7 +268,9 @@ def render_component(comp: Component, bp: str) -> Image.Image:
         tx(draw, (x + 14, y + 70), "Suggested action", size=11, fill=C["muted"])
         tx(draw, (x + 14, y + 92), "Home visit · RDT · refer if needed", size=12)
     elif slug == "labeled-field":
-        draw_field(draw, x, y, w, "Household ID", "HH-4821")
+        tx(draw, (x + 4, y), "Household ID · focused", size=11, fill=C["primary"])
+        rr(draw, (x, y + 18, x + w, y + 60), C["surface"], radius=12, outline=C["primary"], width=3)
+        tx(draw, (x + 14, y + 39), "HH-4821", size=13, anchor="lm")
     elif slug == "form-stack":
         yy = y
         for lab, val in [("Village", "Kyebando"), ("Members", "4"), ("Needs", "Fever · missed ANC")]:
@@ -314,7 +280,7 @@ def render_component(comp: Component, bp: str) -> Image.Image:
         rr(draw, (x, y, x1, y + 56), C["surface"], radius=14, outline=C["line"])
         tx(draw, (x + 16, y + 28), "Consent recorded", size=13, bold=True, anchor="lm")
         rr(draw, (x1 - 64, y + 14, x1 - 16, y + 42), C["ok"], radius=14)
-        tx(draw, (x1 - 40, y + 28), "ON", size=11, bold=True, fill=C["white"], anchor="mm")
+        tx(draw, (x1 - 40, y + 28), "ON", size=11, bold=True, fill=C["on_primary"], anchor="mm")
     elif slug == "file-upload-field":
         rr(draw, (x, y, x1, y + 88), C["surface"], radius=14, outline=C["line"])
         tx(draw, ((x + x1) / 2, y + 34), "Drop CSV / choose file", size=13, bold=True, fill=C["primary"], anchor="mm")
@@ -378,7 +344,7 @@ def render_component(comp: Component, bp: str) -> Image.Image:
         for i, s in enumerate(steps):
             cx = x + i * (w / 4) + (w / 8)
             draw.ellipse([cx - 14, y + 20, cx + 14, y + 48], fill=C["primary"] if i < 2 else C["primary_soft"])
-            tx(draw, (cx, y + 34), str(i + 1), size=11, bold=True, fill=C["white"] if i < 2 else C["primary"], anchor="mm")
+            tx(draw, (cx, y + 34), str(i + 1), size=11, bold=True, fill=C["on_primary"] if i < 2 else C["primary"], anchor="mm")
             tx(draw, (cx, y + 64), s, size=11, fill=C["ink"], anchor="mm")
             if i < 3:
                 draw.line([(cx + 18, y + 34), (cx + w / 4 - 18, y + 34)], fill=C["line"], width=2)
@@ -386,7 +352,7 @@ def render_component(comp: Component, bp: str) -> Image.Image:
         tx(draw, (x, y + 20), comp.title, size=14, bold=True)
 
     # footer tag
-    tx(draw, (16, img.height - 10), f"components/{comp.category}/{comp.slug} · {bp}", size=9, fill=C["muted"], anchor="lb")
+    tx(draw, (16, img.height - 10), f"components/{comp.category}/{comp.slug} · {bp}", size=11, fill=C["muted"], anchor="lb")
     return img
 
 
@@ -420,8 +386,8 @@ LAYOUTS_CATALOG: list[Layout] = [
     Layout(
         "field-tablet-shell",
         "Field tablet shell",
-        "Same field IA with wider content column",
-        ["top-app-bar", "section-header", "bottom-nav-field", "stat-card-row", "list-row-card"],
+        "Adaptive field IA with a compact navigation rail and wider content column",
+        ["top-app-bar", "side-nav-desktop", "section-header", "stat-card-row", "list-row-card"],
         ["01", "02", "feeders"],
     ),
     Layout(
@@ -535,8 +501,8 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
     top = 56
     bottom_nav_h = 0
 
-    if bp == "desktop" and slug not in {"auth-centered-card"}:
-        left = 220
+    if bp in {"tablet", "desktop"} and slug not in {"auth-centered-card"}:
+        left = 76 if bp == "tablet" else 220
         items = {
             "desktop-sidebar-shell": ["Overview", "Map", "Referrals", "Stock"],
             "dashboard-metrics": ["Overview", "Map", "Referrals", "Stock"],
@@ -553,14 +519,28 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
             "field-mobile-shell": ["Worklist", "Alerts", "Sync", "More"],
             "field-tablet-shell": ["Worklist", "Alerts", "Sync", "More"],
         }.get(slug, ["Home", "Map", "Metrics", "More"])
-        draw_side_nav(draw, 0, 0, left, h, items)
-        draw_app_bar(draw, left, 0, w, top, title=layout.title, right="DESKTOP")
+        if bp == "tablet":
+            draw.rectangle([0, 0, left, h], fill=C["chrome"])
+            tx(draw, (left / 2, 28), "F", size=18, bold=True, fill=C["white"], anchor="mm")
+            nav_y = 110
+            for index, item in enumerate(items):
+                rr(
+                    draw,
+                    (16, nav_y, left - 16, nav_y + 40),
+                    C["accent"] if index == 0 else (32, 54, 60),
+                    radius=10,
+                )
+                tx(draw, (left / 2, nav_y + 20), item[:1], size=13, bold=True, fill=C["white"], anchor="mm")
+                nav_y += 48
+        else:
+            draw_side_nav(draw, 0, 0, left, h, items)
+        draw_app_bar(draw, left, 0, w, top, title=layout.title)
     elif slug == "auth-centered-card":
         draw_app_bar(draw, 0, 0, w, top)
     else:
         draw_app_bar(draw, 0, 0, w, top)
-        if bp != "desktop":
-            bottom_nav_h = 64
+        if bp == "mobile":
+            bottom_nav_h = 72
             nav_items = {
                 "field-mobile-shell": ["Worklist", "Alerts", "Sync", "More"],
                 "field-tablet-shell": ["Worklist", "Alerts", "Sync", "More"],
@@ -578,9 +558,11 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
             }.get(slug, ["Home", "List", "Sync", "More"])
             draw_bottom_nav(draw, 0, h - bottom_nav_h, w, h, nav_items)
 
-    pad = 20 if bp == "mobile" else 28
-    x = left + pad
-    max_w = w - left - pad * 2
+    pad = 16 if bp == "mobile" else (24 if bp == "tablet" else 32)
+    available_w = w - left - pad * 2
+    content_cap = 720 if slug in {"form-capture", "settings-admin", "upload-batch"} else 1200
+    max_w = min(available_w, content_cap)
+    x = left + pad + max(0, (available_w - max_w) / 2)
     y = top + 18
     content_bottom = h - bottom_nav_h - 16
 
@@ -680,6 +662,19 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
         y += 116
         draw_cta(draw, x, y, max_w, "Mark follow-up done")
 
+    elif slug == "empty-state-shell":
+        rr(draw, (x, y, x + max_w, y + 156), C["surface"], radius=16, outline=C["line"])
+        tx(draw, (x + max_w / 2, y + 52), "No open items", size=16, bold=True, fill=C["muted"], anchor="mm")
+        tx(
+            draw,
+            (x + max_w / 2, y + 86),
+            "New work will appear here when it is assigned.",
+            size=12,
+            fill=C["muted"],
+            anchor="mm",
+        )
+        draw_cta(draw, x, y + 172, max_w, "Refresh")
+
     elif slug == "desktop-sidebar-shell":
         tx(draw, (x, y), "Content region", size=16, bold=True)
         y += 28
@@ -728,14 +723,6 @@ def render_layout(layout: Layout, bp: str) -> Image.Image:
             if slug not in {"map-explorer", "desktop-sidebar-shell"}:
                 draw_cta(draw, x, min(y + 4, content_bottom - 56), max_w, "Primary action")
 
-    tx(
-        draw,
-        (x, h - bottom_nav_h - 8 if bottom_nav_h else h - 10),
-        f"layouts/{layout.slug} · {bp}",
-        size=9,
-        fill=C["muted"],
-        anchor="lb",
-    )
     return img
 
 
@@ -747,7 +734,8 @@ def write_components_readme(by_cat: dict[str, list[Component]]):
         "",
         "Brand: teal health system · slogan **Your health, our mission.**",
         "",
-        f"**{sum(len(v) for v in by_cat.values())} components** × mobile / tablet / desktop.",
+        f"**{sum(len(v) for v in by_cat.values())} components** × mobile / tablet / desktop × light / dark.",
+        "Dark specimens use the same filename with `-dark` before `.png`.",
         "",
     ]
     for cat, items in by_cat.items():
@@ -781,7 +769,8 @@ def write_layouts_readme(layouts: list[Layout]):
         "Page shells for maximum reuse across consumer surfaces and data-feeder modules.",
         "Pick a layout, then drop in shared components.",
         "",
-        f"**{len(layouts)} layouts** × mobile / tablet / desktop.",
+        f"**{len(layouts)} layouts** × mobile / tablet / desktop × light / dark.",
+        "Dark specimens use the same filename with `-dark` before `.png`.",
         "",
         "| Layout | Purpose | Composes | Specimens |",
         "| --- | --- | --- | --- |",
@@ -869,10 +858,16 @@ def main():
                 "purpose": comp.purpose,
                 "used_by": comp.used_by,
                 "breakpoints": list(SPECIMEN.keys()),
+                "themes": ["light", "dark", "system"],
             },
         )
+        light_palette = C.copy()
         for bp in SPECIMEN:
             render_component(comp, bp).save(out / f"{bp}.png", optimize=True)
+            C.update(DARK_C)
+            render_component(comp, bp).save(out / f"{bp}-dark.png", optimize=True)
+            C.clear()
+            C.update(light_palette)
 
     for lay in LAYOUTS_CATALOG:
         out = LAYOUTS / lay.slug
@@ -886,17 +881,23 @@ def main():
                 "composes": lay.composes,
                 "surfaces": lay.surfaces,
                 "breakpoints": list(SIZES.keys()),
+                "themes": ["light", "dark", "system"],
             },
         )
+        light_palette = C.copy()
         for bp in SIZES:
             render_layout(lay, bp).save(out / f"{bp}.png", optimize=True)
+            C.update(DARK_C)
+            render_layout(lay, bp).save(out / f"{bp}-dark.png", optimize=True)
+            C.clear()
+            C.update(light_palette)
 
     write_components_readme(by_cat)
     write_layouts_readme(LAYOUTS_CATALOG)
     update_shared_readme()
 
-    n_comp = len(COMPONENTS_CATALOG) * 3
-    n_lay = len(LAYOUTS_CATALOG) * 3
+    n_comp = len(COMPONENTS_CATALOG) * len(SPECIMEN) * 2
+    n_lay = len(LAYOUTS_CATALOG) * len(SIZES) * 2
     print(
         f"Kit: {len(COMPONENTS_CATALOG)} components ({n_comp} PNGs), "
         f"{len(LAYOUTS_CATALOG)} layouts ({n_lay} PNGs) under {ROOT}"

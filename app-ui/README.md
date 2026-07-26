@@ -3,7 +3,7 @@
 Visual directory of **proposed** FCHIP screens from `.cursor/app-write-up.mdc` and `app-flows/`.
 Not generated from `frontend/` code.
 
-**118 screens** × mobile / tablet / desktop = **354 mockups**.
+**127 screens** × mobile / tablet / desktop × light / dark = **762 mockups**.
 
 Slogan: **Your health, our mission.**
 
@@ -14,6 +14,8 @@ Slogan: **Your health, our mission.**
 | mobile | 390 × 844 |
 | tablet | 768 × 1024 |
 | desktop | 1440 × 900 |
+
+Every screen also has a `*-dark.png` system-theme specimen.
 
 ## Data feeders covered (SoT §4.2 / app-flows 03)
 
@@ -61,13 +63,17 @@ Slogan: **Your health, our mission.**
 ### [00-shared](00-shared/README.md)
 
 - **FCHIP** — `00-shared/splash/` ([mobile](00-shared/splash/mobile.png) · [tablet](00-shared/splash/tablet.png) · [desktop](00-shared/splash/desktop.png))
+- **Create account** — `00-shared/create-account/` ([mobile](00-shared/create-account/mobile.png) · [tablet](00-shared/create-account/tablet.png) · [desktop](00-shared/create-account/desktop.png))
 - **Sign in** — `00-shared/login/` ([mobile](00-shared/login/mobile.png) · [tablet](00-shared/login/tablet.png) · [desktop](00-shared/login/desktop.png))
-- **Reset access** — `00-shared/forgot-password/` ([mobile](00-shared/forgot-password/mobile.png) · [tablet](00-shared/forgot-password/tablet.png) · [desktop](00-shared/forgot-password/desktop.png))
+- **Reset password** — `00-shared/forgot-password/` ([mobile](00-shared/forgot-password/mobile.png) · [tablet](00-shared/forgot-password/tablet.png) · [desktop](00-shared/forgot-password/desktop.png))
 - **Consent first** — `00-shared/consent-first-onboarding/` ([mobile](00-shared/consent-first-onboarding/mobile.png) · [tablet](00-shared/consent-first-onboarding/tablet.png) · [desktop](00-shared/consent-first-onboarding/desktop.png))
 - **Offline PIN** — `00-shared/offline-pin-lock/` ([mobile](00-shared/offline-pin-lock/mobile.png) · [tablet](00-shared/offline-pin-lock/tablet.png) · [desktop](00-shared/offline-pin-lock/desktop.png))
 - **Session locked** — `00-shared/session-locked/` ([mobile](00-shared/session-locked/mobile.png) · [tablet](00-shared/session-locked/tablet.png) · [desktop](00-shared/session-locked/desktop.png))
 - **Choose your workspace** — `00-shared/role-surface-picker/` ([mobile](00-shared/role-surface-picker/mobile.png) · [tablet](00-shared/role-surface-picker/tablet.png) · [desktop](00-shared/role-surface-picker/desktop.png))
 - **Notifications** — `00-shared/notifications-center/` ([mobile](00-shared/notifications-center/mobile.png) · [tablet](00-shared/notifications-center/tablet.png) · [desktop](00-shared/notifications-center/desktop.png))
+- **Access denied** — `00-shared/access-denied/` ([mobile](00-shared/access-denied/mobile.png) · [tablet](00-shared/access-denied/tablet.png) · [desktop](00-shared/access-denied/desktop.png))
+- **Page not found** — `00-shared/not-found/` ([mobile](00-shared/not-found/mobile.png) · [tablet](00-shared/not-found/tablet.png) · [desktop](00-shared/not-found/desktop.png))
+- **Language & appearance** — `00-shared/preferences/` ([mobile](00-shared/preferences/mobile.png) · [tablet](00-shared/preferences/tablet.png) · [desktop](00-shared/preferences/desktop.png))
 
 ### [01-chw-vht-mobile](01-chw-vht-mobile/README.md)
 
@@ -81,6 +87,10 @@ Slogan: **Your health, our mission.**
 - **Act on alert** — `01-chw-vht-mobile/alert-follow-up/` ([mobile](01-chw-vht-mobile/alert-follow-up/mobile.png) · [tablet](01-chw-vht-mobile/alert-follow-up/tablet.png) · [desktop](01-chw-vht-mobile/alert-follow-up/desktop.png))
 - **Sync status** — `01-chw-vht-mobile/sync-status/` ([mobile](01-chw-vht-mobile/sync-status/mobile.png) · [tablet](01-chw-vht-mobile/sync-status/tablet.png) · [desktop](01-chw-vht-mobile/sync-status/desktop.png))
 - **Sync failed** — `01-chw-vht-mobile/sync-failed/` ([mobile](01-chw-vht-mobile/sync-failed/mobile.png) · [tablet](01-chw-vht-mobile/sync-failed/tablet.png) · [desktop](01-chw-vht-mobile/sync-failed/desktop.png))
+- **Today’s worklist** — `01-chw-vht-mobile/worklist-loading/` ([mobile](01-chw-vht-mobile/worklist-loading/mobile.png) · [tablet](01-chw-vht-mobile/worklist-loading/tablet.png) · [desktop](01-chw-vht-mobile/worklist-loading/desktop.png))
+- **Visit saved** — `01-chw-vht-mobile/visit-saved/` ([mobile](01-chw-vht-mobile/visit-saved/mobile.png) · [tablet](01-chw-vht-mobile/visit-saved/tablet.png) · [desktop](01-chw-vht-mobile/visit-saved/desktop.png))
+- **Referral sent** — `01-chw-vht-mobile/referral-status/` ([mobile](01-chw-vht-mobile/referral-status/mobile.png) · [tablet](01-chw-vht-mobile/referral-status/tablet.png) · [desktop](01-chw-vht-mobile/referral-status/desktop.png))
+- **Review sync conflict** — `01-chw-vht-mobile/sync-conflict/` ([mobile](01-chw-vht-mobile/sync-conflict/mobile.png) · [tablet](01-chw-vht-mobile/sync-conflict/tablet.png) · [desktop](01-chw-vht-mobile/sync-conflict/desktop.png))
 
 ### [02-community-caregiver](02-community-caregiver/README.md)
 
@@ -114,7 +124,7 @@ Slogan: **Your health, our mission.**
 
 - **Facility overview** — `06-facility-dashboard/overview/` ([mobile](06-facility-dashboard/overview/mobile.png) · [tablet](06-facility-dashboard/overview/tablet.png) · [desktop](06-facility-dashboard/overview/desktop.png))
 - **Catchment map** — `06-facility-dashboard/catchment-map/` ([mobile](06-facility-dashboard/catchment-map/mobile.png) · [tablet](06-facility-dashboard/catchment-map/tablet.png) · [desktop](06-facility-dashboard/catchment-map/desktop.png))
-- **Open referrals** — `06-facility-dashboard/open-referrals/` ([mobile](06-facility-dashboard/open-referrals/mobile.png) · [tablet](06-facility-dashboard/open-referrals/tablet.png) · [desktop](06-facility-dashboard/open-referrals/desktop.png))
+- **Referral summary** — `06-facility-dashboard/open-referrals/` ([mobile](06-facility-dashboard/open-referrals/mobile.png) · [tablet](06-facility-dashboard/open-referrals/tablet.png) · [desktop](06-facility-dashboard/open-referrals/desktop.png))
 - **Stock signal** — `06-facility-dashboard/stock-signal/` ([mobile](06-facility-dashboard/stock-signal/mobile.png) · [tablet](06-facility-dashboard/stock-signal/tablet.png) · [desktop](06-facility-dashboard/stock-signal/desktop.png))
 - **Medicine demand forecast** — `06-facility-dashboard/medicine-demand-forecast/` ([mobile](06-facility-dashboard/medicine-demand-forecast/mobile.png) · [tablet](06-facility-dashboard/medicine-demand-forecast/tablet.png) · [desktop](06-facility-dashboard/medicine-demand-forecast/desktop.png))
 - **Outreach priorities** — `06-facility-dashboard/outreach-priorities/` ([mobile](06-facility-dashboard/outreach-priorities/mobile.png) · [tablet](06-facility-dashboard/outreach-priorities/tablet.png) · [desktop](06-facility-dashboard/outreach-priorities/desktop.png))
@@ -126,7 +136,7 @@ Slogan: **Your health, our mission.**
 - **Referrals desk** — `07-referrals-desk/referral-queue/` ([mobile](07-referrals-desk/referral-queue/mobile.png) · [tablet](07-referrals-desk/referral-queue/tablet.png) · [desktop](07-referrals-desk/referral-queue/desktop.png))
 - **Referrals desk** — `07-referrals-desk/referral-queue-empty/` ([mobile](07-referrals-desk/referral-queue-empty/mobile.png) · [tablet](07-referrals-desk/referral-queue-empty/tablet.png) · [desktop](07-referrals-desk/referral-queue-empty/desktop.png))
 - **Referral detail** — `07-referrals-desk/referral-detail/` ([mobile](07-referrals-desk/referral-detail/mobile.png) · [tablet](07-referrals-desk/referral-detail/tablet.png) · [desktop](07-referrals-desk/referral-detail/desktop.png))
-- **Outcome feed-back** — `07-referrals-desk/outcome-feed-back/` ([mobile](07-referrals-desk/outcome-feed-back/mobile.png) · [tablet](07-referrals-desk/outcome-feed-back/tablet.png) · [desktop](07-referrals-desk/outcome-feed-back/desktop.png))
+- **Outcome feedback** — `07-referrals-desk/outcome-feedback/` ([mobile](07-referrals-desk/outcome-feedback/mobile.png) · [tablet](07-referrals-desk/outcome-feedback/tablet.png) · [desktop](07-referrals-desk/outcome-feedback/desktop.png))
 
 ### [08-emr-connector](08-emr-connector/README.md)
 
@@ -167,6 +177,7 @@ Slogan: **Your health, our mission.**
 - **Evidence catalog** — `12-research-exports/evidence-catalog/` ([mobile](12-research-exports/evidence-catalog/mobile.png) · [tablet](12-research-exports/evidence-catalog/tablet.png) · [desktop](12-research-exports/evidence-catalog/desktop.png))
 - **Export request** — `12-research-exports/export-request/` ([mobile](12-research-exports/export-request/mobile.png) · [tablet](12-research-exports/export-request/tablet.png) · [desktop](12-research-exports/export-request/desktop.png))
 - **Research contribution upload** — `12-research-exports/research-contribution-upload/` ([mobile](12-research-exports/research-contribution-upload/mobile.png) · [tablet](12-research-exports/research-contribution-upload/tablet.png) · [desktop](12-research-exports/research-contribution-upload/desktop.png))
+- **Export under review** — `12-research-exports/export-pending/` ([mobile](12-research-exports/export-pending/mobile.png) · [tablet](12-research-exports/export-pending/tablet.png) · [desktop](12-research-exports/export-pending/desktop.png))
 
 ### [13-admin-consent](13-admin-consent/README.md)
 
@@ -263,4 +274,4 @@ python app-ui/generate_mockups.py
 ## Sources
 
 - `.cursor/app-write-up.mdc`
-- `app-flows/01-overview.md` … `06-mvp-phases.md` (especially `04-modules.md`)
+- `app-flows/01-overview.md` … `07-navigation.md` (especially `04-modules.md` and `07-navigation.md`)

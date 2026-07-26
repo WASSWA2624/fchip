@@ -1,9 +1,0 @@
-{
-  "title": "Outcome feed-back",
-  "subtitle": "Completed referral outcomes return into cascade metrics",
-  "kind": "form",
-  "nav": "facility",
-  "layout": "form-capture",
-  "state": "default",
-  "source": "app-flows + .cursor/app-write-up.mdc"
-}

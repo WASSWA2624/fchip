@@ -4,6 +4,62 @@
   "kind": "list",
   "nav": "field",
   "layout": "list-worklist",
+  "body_layouts": {
+    "mobile": "list-worklist",
+    "tablet": "list-worklist",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
   "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/01-chw-vht-mobile/worklist-home",
+  "parent_route": "/01-chw-vht-mobile/worklist-home",
+  "roles": [
+    "chw",
+    "vht"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "mvp",
+  "l10n_key_prefix": "01_chw_vht_mobile.worklist_home",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Worklist",
+        "to": "/01-chw-vht-mobile/worklist-home"
+      },
+      {
+        "label": "Alerts",
+        "to": "/01-chw-vht-mobile/alerts-inbox"
+      },
+      {
+        "label": "Sync",
+        "to": "/01-chw-vht-mobile/sync-status"
+      },
+      {
+        "label": "More",
+        "to": "/00-shared/notifications-center"
+      }
+    ],
+    "primary_action": {
+      "label": "Start next visit",
+      "to": "/01-chw-vht-mobile/household-visit-form"
+    },
+    "access_denied": "/00-shared/access-denied",
+    "not_found": "/00-shared/not-found"
+  },
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

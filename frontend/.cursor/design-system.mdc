@@ -14,7 +14,7 @@ Single source of truth for the FCHIP visual system, built on Material 3.
 ## Requirements
 
 - Provide comprehensive light, dark, and system themes with semantic status tones, spacing, radius, elevation, and typography via tokens/extensions.
-- Light theme is default (blue-based palette); dark theme stays readable and Material-aligned.
+- Light theme is default using the FCHIP health-teal palette (`primary #006D77` in `app-ui/00-shared/tokens.json`); dark theme stays readable and Material-aligned.
 - Must not hard-code color, spacing, radius, elevation, or typography in feature or shared widgets.
 - Surfaces must remain readable on mobile, tablet, and desktop ([`layouts.mdc`](./layouts.mdc)).
 - Reusable theme-aware components must live in `frontend/lib/shared/`.

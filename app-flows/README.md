@@ -30,6 +30,7 @@ flowchart LR
 | 4 | [04-modules.md](04-modules.md) | Proposed modules / screens and how they connect |
 | 5 | [05-use-cases.md](05-use-cases.md) | Signal → prediction → action flows |
 | 6 | [06-mvp-phases.md](06-mvp-phases.md) | MVP pieces and roadmap phasing |
+| 7 | [07-navigation.md](07-navigation.md) | Entry, role homes, routes, states, and complete journeys |
 
 ## Positioning guards (from SoT)
 

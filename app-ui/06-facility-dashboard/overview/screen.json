@@ -3,7 +3,60 @@
   "subtitle": "Alerts \u00b7 caseload risk \u00b7 cascade gaps",
   "kind": "dashboard",
   "nav": "facility",
-  "layout": "",
+  "layout": "dashboard-metrics",
+  "body_layouts": {
+    "mobile": "dashboard-metrics",
+    "tablet": "dashboard-metrics",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
   "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/06-facility-dashboard/overview",
+  "parent_route": "/06-facility-dashboard/overview",
+  "roles": [
+    "facility-clinician",
+    "facility-manager"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "mvp",
+  "l10n_key_prefix": "06_facility_dashboard.overview",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Overview",
+        "to": "/06-facility-dashboard/overview"
+      },
+      {
+        "label": "Map",
+        "to": "/06-facility-dashboard/catchment-map"
+      },
+      {
+        "label": "Referrals",
+        "to": "/07-referrals-desk/referral-queue"
+      },
+      {
+        "label": "Stock",
+        "to": "/06-facility-dashboard/stock-signal"
+      }
+    ],
+    "primary_action": null,
+    "access_denied": "/00-shared/access-denied",
+    "not_found": "/00-shared/not-found"
+  },
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

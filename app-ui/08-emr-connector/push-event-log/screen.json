@@ -4,6 +4,62 @@
   "kind": "list",
   "nav": "admin",
   "layout": "list-worklist",
+  "body_layouts": {
+    "mobile": "list-worklist",
+    "tablet": "list-worklist",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
   "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/08-emr-connector/push-event-log",
+  "parent_route": "/08-emr-connector/connector-status",
+  "roles": [
+    "organisation-admin",
+    "privacy-admin"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "mvp",
+  "l10n_key_prefix": "08_emr_connector.push_event_log",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Org",
+        "to": "/13-admin-consent/org-catchment"
+      },
+      {
+        "label": "Users",
+        "to": "/13-admin-consent/users-roles"
+      },
+      {
+        "label": "Consent",
+        "to": "/13-admin-consent/consent-privacy"
+      },
+      {
+        "label": "APIs",
+        "to": "/08-emr-connector/connector-status"
+      }
+    ],
+    "primary_action": {
+      "label": "Download audit CSV",
+      "to": "/08-emr-connector/connector-status"
+    },
+    "access_denied": "/00-shared/access-denied",
+    "not_found": "/00-shared/not-found"
+  },
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

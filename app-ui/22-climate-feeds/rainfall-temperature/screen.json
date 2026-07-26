@@ -3,7 +3,62 @@
   "subtitle": "Weather signals fused with health",
   "kind": "detail",
   "nav": "climate",
-  "layout": "",
+  "layout": "detail-action",
+  "body_layouts": {
+    "mobile": "detail-action",
+    "tablet": "detail-action",
+    "desktop": "detail-action"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
   "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden",
+    "success",
+    "conflict",
+    "offline"
+  ],
+  "route": "/22-climate-feeds/rainfall-temperature",
+  "parent_route": "/22-climate-feeds/rainfall-temperature",
+  "roles": [
+    "climate-data-operator"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "mvp",
+  "l10n_key_prefix": "22_climate_feeds.rainfall_temperature",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Home",
+        "to": "/22-climate-feeds/climate-home"
+      },
+      {
+        "label": "Rain",
+        "to": "/22-climate-feeds/rainfall-temperature"
+      },
+      {
+        "label": "Extremes",
+        "to": "/22-climate-feeds/extremes-flood-heat"
+      },
+      {
+        "label": "Config",
+        "to": "/22-climate-feeds/feed-config-audit"
+      }
+    ],
+    "primary_action": null,
+    "access_denied": "/00-shared/access-denied",
+    "not_found": "/00-shared/not-found"
+  },
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

@@ -3,13 +3,14 @@
 Page shells for maximum reuse across consumer surfaces and data-feeder modules.
 Pick a layout, then drop in shared components.
 
-**17 layouts** × mobile / tablet / desktop.
+**17 layouts** × mobile / tablet / desktop × light / dark.
+Dark specimens use the same filename with `-dark` before `.png`.
 
 | Layout | Purpose | Composes | Specimens |
 | --- | --- | --- | --- |
-| **Auth centered card** (`auth-centered-card`) | Splash · login · role picker on a centered card | `logo-lockup`, `slogan-line`, `labeled-field`, `primary-cta`, … | [m](auth-centered-card/mobile.png) · [t](auth-centered-card/tablet.png) · [d](auth-centered-card/desktop.png) |
+| **Auth centered card** (`auth-centered-card`) | Create account / sign in — phone number + password only | `logo-lockup`, `slogan-line`, `labeled-field`, `primary-cta`, … | [m](auth-centered-card/mobile.png) · [t](auth-centered-card/tablet.png) · [d](auth-centered-card/desktop.png) |
 | **Field mobile shell** (`field-mobile-shell`) | CHW / caregiver / feeder capture on phone | `top-app-bar`, `section-header`, `bottom-nav-field`, `status-chip`, … | [m](field-mobile-shell/mobile.png) · [t](field-mobile-shell/tablet.png) · [d](field-mobile-shell/desktop.png) |
-| **Field tablet shell** (`field-tablet-shell`) | Same field IA with wider content column | `top-app-bar`, `section-header`, `bottom-nav-field`, `stat-card-row`, … | [m](field-tablet-shell/mobile.png) · [t](field-tablet-shell/tablet.png) · [d](field-tablet-shell/desktop.png) |
+| **Field tablet shell** (`field-tablet-shell`) | Adaptive field IA with a compact navigation rail and wider content column | `top-app-bar`, `side-nav-desktop`, `section-header`, `stat-card-row`, … | [m](field-tablet-shell/mobile.png) · [t](field-tablet-shell/tablet.png) · [d](field-tablet-shell/desktop.png) |
 | **Desktop sidebar shell** (`desktop-sidebar-shell`) | Facility · district · admin · feeder desktop chrome | `side-nav-desktop`, `top-app-bar`, `cascade-footer` | [m](desktop-sidebar-shell/mobile.png) · [t](desktop-sidebar-shell/tablet.png) · [d](desktop-sidebar-shell/desktop.png) |
 | **Dashboard metrics** (`dashboard-metrics`) | Overview with stats + list + CTA | `stat-card-row`, `list-row-card`, `filter-chip-row`, `primary-cta` | [m](dashboard-metrics/mobile.png) · [t](dashboard-metrics/tablet.png) · [d](dashboard-metrics/desktop.png) |
 | **Form capture** (`form-capture`) | Structured offline / online data entry | `section-header`, `form-stack`, `consent-toggle`, `primary-cta`, … | [m](form-capture/mobile.png) · [t](form-capture/tablet.png) · [d](form-capture/desktop.png) |

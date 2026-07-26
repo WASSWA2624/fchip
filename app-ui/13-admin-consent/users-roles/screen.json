@@ -3,7 +3,63 @@
   "subtitle": "Consumers and data-feeder roles",
   "kind": "settings",
   "nav": "admin",
-  "layout": "",
+  "layout": "settings-admin",
+  "body_layouts": {
+    "mobile": "settings-admin",
+    "tablet": "settings-admin",
+    "desktop": "settings-admin"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
   "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/13-admin-consent/users-roles",
+  "parent_route": "/13-admin-consent/users-roles",
+  "roles": [
+    "organisation-admin",
+    "privacy-admin"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "mvp",
+  "l10n_key_prefix": "13_admin_consent.users_roles",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Org",
+        "to": "/13-admin-consent/org-catchment"
+      },
+      {
+        "label": "Users",
+        "to": "/13-admin-consent/users-roles"
+      },
+      {
+        "label": "Consent",
+        "to": "/13-admin-consent/consent-privacy"
+      },
+      {
+        "label": "APIs",
+        "to": "/08-emr-connector/connector-status"
+      }
+    ],
+    "primary_action": {
+      "label": "Invite user",
+      "to": "/13-admin-consent/users-roles?state=success"
+    },
+    "access_denied": "/00-shared/access-denied",
+    "not_found": "/00-shared/not-found"
+  },
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

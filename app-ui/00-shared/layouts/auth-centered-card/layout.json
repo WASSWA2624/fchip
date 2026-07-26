@@ -1,7 +1,7 @@
 {
   "title": "Auth centered card",
   "slug": "auth-centered-card",
-  "purpose": "Splash \u00b7 login \u00b7 role picker on a centered card",
+  "purpose": "Create account / sign in \u2014 phone number + password only",
   "composes": [
     "logo-lockup",
     "slogan-line",
@@ -16,5 +16,10 @@
     "mobile",
     "tablet",
     "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
   ]
 }

@@ -15,5 +15,10 @@
     "mobile",
     "tablet",
     "desktop"
+  ],
+  "themes": [
+    "light",
+    "dark",
+    "system"
   ]
 }

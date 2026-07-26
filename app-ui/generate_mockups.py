@@ -8,81 +8,17 @@ from __future__ import annotations
 
 import json
 import math
+import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
+
+from ui_primitives import C, DARK_C, SIZES, font, rr as round_rect, tx as text, wrap
 
 ROOT = Path(__file__).resolve().parent
 
-# Brand — health teal (not purple / cream-serif AI defaults)
-C = {
-    "bg": (247, 250, 249),
-    "surface": (255, 255, 255),
-    "ink": (26, 46, 53),
-    "muted": (90, 110, 118),
-    "line": (214, 226, 224),
-    "primary": (0, 109, 119),
-    "primary_soft": (214, 237, 239),
-    "accent": (20, 145, 155),
-    "warn": (196, 92, 38),
-    "warn_soft": (255, 236, 224),
-    "ok": (46, 125, 90),
-    "ok_soft": (220, 240, 230),
-    "map": (168, 206, 198),
-    "map_hot": (196, 92, 38),
-    "chrome": (18, 38, 44),
-    "white": (255, 255, 255),
-}
-
-SIZES = {
-    "mobile": (390, 844),
-    "tablet": (768, 1024),
-    "desktop": (1440, 900),
-}
-
-
-def font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont | ImageFont.ImageFont:
-    candidates = [
-        r"C:\Windows\Fonts\segoeuib.ttf" if bold else r"C:\Windows\Fonts\segoeui.ttf",
-        r"C:\Windows\Fonts\arialbd.ttf" if bold else r"C:\Windows\Fonts\arial.ttf",
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
-        if bold
-        else "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-    ]
-    for path in candidates:
-        try:
-            return ImageFont.truetype(path, size)
-        except OSError:
-            continue
-    return ImageFont.load_default()
-
-
-def round_rect(draw: ImageDraw.ImageDraw, box, fill, radius=12, outline=None, width=1):
-    draw.rounded_rectangle(box, radius=radius, fill=fill, outline=outline, width=width)
-
-
-def text(draw, xy, value, size=14, bold=False, fill=None, anchor=None):
-    draw.text(xy, value, font=font(size, bold), fill=fill or C["ink"], anchor=anchor)
-
-
-def wrap(draw, value: str, max_w: int, size=13) -> list[str]:
-    f = font(size)
-    words = value.split()
-    lines: list[str] = []
-    cur = ""
-    for w in words:
-        trial = f"{cur} {w}".strip()
-        if draw.textlength(trial, font=f) <= max_w:
-            cur = trial
-        else:
-            if cur:
-                lines.append(cur)
-            cur = w
-    if cur:
-        lines.append(cur)
-    return lines or [value]
-
+DEBUG_CHROME = os.getenv("FCHIP_UI_DEBUG", "").lower() in {"1", "true", "yes"}
 
 @dataclass
 class Screen:
@@ -98,7 +34,7 @@ class Screen:
     primary_cta: str = ""
     nav: str = "field"
     layout: str = ""  # kit layout slug in 00-shared/layouts
-    state: str = "default"  # default | empty | error | offline
+    state: str = "default"  # default | loading | empty | error | success | offline | conflict | forbidden
 
 
 # Module notes injected into per-module READMEs
@@ -276,7 +212,7 @@ SCREENS: list[Screen] = [
             ("Sync complete", "14 visits uploaded"),
             ("Campaign starts tomorrow", "School health · Kisaasi"),
         ],
-        nav="field",
+        nav="shared",
         layout="list-worklist",
     ),
     # 01 CHW
@@ -563,7 +499,7 @@ SCREENS: list[Screen] = [
             ("Offline queue", "Ready to sync"),
         ],
         primary_cta="Queue to ingest",
-        nav="field",
+        nav="district",
     ),
     Screen(
         "03-outreach-school-health",
@@ -705,16 +641,16 @@ SCREENS: list[Screen] = [
     Screen(
         "06-facility-dashboard",
         "open-referrals",
-        "Open referrals",
-        "Inbound from CHWs · completion",
-        "queue",
+        "Referral summary",
+        "Inbound volume and completion at a glance",
+        "list",
         chips=["18 open"],
         rows=[
             ("HH-4821 · ANC risk", "CHW Namuli · due today"),
             ("HH-1190 · child fever", "Kyebando · urgent"),
             ("HH-3302 · NCD follow-up", "Scheduled"),
         ],
-        primary_cta="Complete selected",
+        primary_cta="Open referrals desk",
         nav="facility",
     ),
     Screen(
@@ -844,8 +780,8 @@ SCREENS: list[Screen] = [
     ),
     Screen(
         "07-referrals-desk",
-        "outcome-feed-back",
-        "Outcome feed-back",
+        "outcome-feedback",
+        "Outcome feedback",
         "Completed referral outcomes return into cascade metrics",
         "form",
         rows=[
@@ -1970,11 +1906,130 @@ SCREENS: list[Screen] = [
         nav="insurance",
         layout="dashboard-metrics",
     ),
+    # Shared production states and completion steps.
+    Screen(
+        "00-shared",
+        "access-denied",
+        "Access denied",
+        "You do not have permission to open this workspace",
+        "empty",
+        note="Ask an administrator if your role or catchment assignment has changed.",
+        primary_cta="Return to workspaces",
+        nav="auth",
+        layout="empty-state-shell",
+        state="forbidden",
+    ),
+    Screen(
+        "00-shared",
+        "not-found",
+        "Page not found",
+        "This link is unavailable or has moved",
+        "empty",
+        note="Return to a workspace you can access.",
+        primary_cta="Return to workspaces",
+        nav="auth",
+        layout="empty-state-shell",
+        state="error",
+    ),
+    Screen(
+        "00-shared",
+        "preferences",
+        "Language & appearance",
+        "Choose readable settings for this device",
+        "settings",
+        rows=[
+            ("Language", "English"),
+            ("Theme", "Use device setting"),
+            ("Text size", "Default"),
+            ("Reduced motion", "Use device setting"),
+        ],
+        primary_cta="Save preferences",
+        nav="shared",
+        layout="settings-admin",
+    ),
+    Screen(
+        "01-chw-vht-mobile",
+        "worklist-loading",
+        "Today’s worklist",
+        "Loading visits and alert tasks",
+        "list",
+        note="Your saved offline work remains available.",
+        nav="field",
+        layout="list-worklist",
+        state="loading",
+    ),
+    Screen(
+        "01-chw-vht-mobile",
+        "visit-saved",
+        "Visit saved",
+        "The household record is safe on this device",
+        "detail",
+        rows=[
+            ("Local record", "HH-4821"),
+            ("Sync", "Queued for upload"),
+            ("Next step", "Create a referral if needed"),
+        ],
+        primary_cta="Create referral",
+        nav="field",
+        layout="detail-action",
+        state="success",
+    ),
+    Screen(
+        "01-chw-vht-mobile",
+        "referral-status",
+        "Referral sent",
+        "Track the household through facility care",
+        "detail",
+        stats=[("Status", "Sent"), ("Urgency", "48h"), ("Facility", "Bukoto")],
+        rows=[
+            ("Referral", "REF-9021"),
+            ("Facility acknowledgement", "Pending"),
+            ("Outcome", "Will return to this worklist"),
+        ],
+        primary_cta="Return to worklist",
+        nav="field",
+        layout="detail-action",
+        state="success",
+    ),
+    Screen(
+        "01-chw-vht-mobile",
+        "sync-conflict",
+        "Review sync conflict",
+        "A newer version was received from the facility",
+        "detail",
+        rows=[
+            ("Record", "HH-4821 · referral outcome"),
+            ("Device version", "Saved 14:18"),
+            ("Server version", "Updated 14:22"),
+        ],
+        note="Nothing will be discarded until you choose which update to keep.",
+        primary_cta="Review versions",
+        nav="field",
+        layout="detail-action",
+        state="conflict",
+    ),
+    Screen(
+        "12-research-exports",
+        "export-pending",
+        "Export under review",
+        "Approval and privacy checks are in progress",
+        "detail",
+        rows=[
+            ("Request", "EXP-2041"),
+            ("Dataset", "Fever + rainfall aggregates"),
+            ("Status", "Ethics review pending"),
+        ],
+        primary_cta="Return to evidence catalog",
+        nav="partner",
+        layout="detail-action",
+        state="loading",
+    ),
 ]
 
 
 NAV = {
     "auth": [],
+    "shared": ["Workspaces", "Notifications", "Preferences", "Sign out"],
     "field": ["Worklist", "Alerts", "Sync", "More"],
     "caregiver": ["Home", "Report", "Guidance", "More"],
     "facility": ["Overview", "Map", "Referrals", "Stock"],
@@ -1994,18 +2049,293 @@ NAV = {
     "climate": ["Home", "Rain", "Extremes", "Config"],
 }
 
+NAV_ROUTES = {
+    "shared": [
+        "/00-shared/role-surface-picker",
+        "/00-shared/notifications-center",
+        "/00-shared/preferences",
+        "/00-shared/login",
+    ],
+    "field": [
+        "/01-chw-vht-mobile/worklist-home",
+        "/01-chw-vht-mobile/alerts-inbox",
+        "/01-chw-vht-mobile/sync-status",
+        "/00-shared/notifications-center",
+    ],
+    "caregiver": [
+        "/02-community-caregiver/my-household",
+        "/02-community-caregiver/self-report",
+        "/02-community-caregiver/guidance-hints",
+        "/02-community-caregiver/household-needs-capture",
+    ],
+    "facility": [
+        "/06-facility-dashboard/overview",
+        "/06-facility-dashboard/catchment-map",
+        "/07-referrals-desk/referral-queue",
+        "/06-facility-dashboard/stock-signal",
+    ],
+    "district": [
+        "/10-district-moh/population-map",
+        "/10-district-moh/early-warnings",
+        "/04-cascade-metrics/indicators-overview",
+        "/10-district-moh/cascade-planning",
+    ],
+    "partner": [
+        "/11-ngo-partner/programme-monitoring",
+        "/11-ngo-partner/impact-evidence",
+        "/11-ngo-partner/training-skills-analytics",
+        "/12-research-exports/evidence-catalog",
+    ],
+    "admin": [
+        "/13-admin-consent/org-catchment",
+        "/13-admin-consent/users-roles",
+        "/13-admin-consent/consent-privacy",
+        "/08-emr-connector/connector-status",
+    ],
+    "intel": [
+        "/09-intelligence/ingest-pipeline",
+        "/09-intelligence/ai-risk-scores",
+        "/09-intelligence/gis-explorer",
+        "/09-intelligence/clinical-support-guidance",
+    ],
+    "insurance": [
+        "/23-insurance-insights/prevention-overview",
+        "/23-insurance-insights/risk-cohort-insights",
+        "/23-insurance-insights/anonymised-trends",
+        "/00-shared/notifications-center",
+    ],
+    "school": [
+        "/14-schools-health/school-home",
+        "/14-schools-health/health-education-session",
+        "/14-schools-health/learner-screening-entry",
+        "/14-schools-health/school-sync-status",
+    ],
+    "pharmacy": [
+        "/15-pharmacy-outlets/stock-levels-entry",
+        "/15-pharmacy-outlets/dispense-log",
+        "/15-pharmacy-outlets/common-complaints",
+        "/15-pharmacy-outlets/prestock-ack",
+    ],
+    "lab": [
+        "/16-labs-poc/lab-home",
+        "/16-labs-poc/result-entry",
+        "/16-labs-poc/result-queue",
+        "/16-labs-poc/batch-results-upload",
+    ],
+    "corporate": [
+        "/17-corporate-wellness/corporate-home",
+        "/17-corporate-wellness/camp-vitals-entry",
+        "/17-corporate-wellness/camp-summary-push",
+        "/17-corporate-wellness/occupational-flags",
+    ],
+    "mch": [
+        "/18-mch-touchpoints/mch-home",
+        "/18-mch-touchpoints/anc-visit-entry",
+        "/18-mch-touchpoints/immunisation-entry",
+        "/18-mch-touchpoints/nutrition-monitoring",
+    ],
+    "ncd": [
+        "/19-ncd-gericare/cohort-home",
+        "/19-ncd-gericare/cohort-visit-entry",
+        "/19-ncd-gericare/bp-screening-batch",
+        "/19-ncd-gericare/stroke-risk-flags",
+    ],
+    "hmis": [
+        "/20-hmis-dhis2/hmis-home",
+        "/20-hmis-dhis2/dataset-mapping",
+        "/20-hmis-dhis2/aggregate-push-pull",
+        "/20-hmis-dhis2/hmis-audit",
+    ],
+    "community": [
+        "/21-community-events/events-home",
+        "/21-community-events/outreach-event-log",
+        "/21-community-events/community-dialogue",
+        "/21-community-events/participation-register",
+    ],
+    "climate": [
+        "/22-climate-feeds/climate-home",
+        "/22-climate-feeds/rainfall-temperature",
+        "/22-climate-feeds/extremes-flood-heat",
+        "/22-climate-feeds/feed-config-audit",
+    ],
+}
+
+ROLE_BY_NAV = {
+    "auth": ["authenticated-user"],
+    "shared": ["authenticated-user"],
+    "field": ["chw", "vht"],
+    "caregiver": ["caregiver", "community-member"],
+    "facility": ["facility-clinician", "facility-manager"],
+    "district": ["district-health-officer", "moh"],
+    "partner": ["ngo-partner", "researcher"],
+    "admin": ["organisation-admin", "privacy-admin"],
+    "intel": ["intelligence-analyst", "platform-operator"],
+    "insurance": ["insurance-analyst"],
+    "school": ["school-health-worker"],
+    "pharmacy": ["pharmacy-outlet-worker"],
+    "lab": ["lab-worker"],
+    "corporate": ["wellness-programme-worker"],
+    "mch": ["mch-worker"],
+    "ncd": ["ncd-care-worker"],
+    "hmis": ["hmis-operator"],
+    "community": ["community-programme-worker"],
+    "climate": ["climate-data-operator"],
+}
+
+PRIMARY_TARGETS = {
+    ("00-shared", "splash"): "/00-shared/login",
+    ("00-shared", "create-account"): "/00-shared/consent-first-onboarding",
+    ("00-shared", "login"): "/00-shared/role-surface-picker",
+    ("00-shared", "forgot-password"): "/00-shared/login",
+    ("00-shared", "consent-first-onboarding"): "/00-shared/role-surface-picker",
+    ("00-shared", "offline-pin-lock"): "/01-chw-vht-mobile/worklist-home",
+    ("00-shared", "session-locked"): "/00-shared/role-surface-picker",
+    ("00-shared", "access-denied"): "/00-shared/role-surface-picker",
+    ("00-shared", "not-found"): "/00-shared/role-surface-picker",
+    ("01-chw-vht-mobile", "worklist-home"): "/01-chw-vht-mobile/household-visit-form",
+    ("01-chw-vht-mobile", "household-visit-form"): "/01-chw-vht-mobile/symptoms-vitals",
+    ("01-chw-vht-mobile", "symptoms-vitals"): "/01-chw-vht-mobile/maternal-child-indicators",
+    ("01-chw-vht-mobile", "maternal-child-indicators"): "/01-chw-vht-mobile/visit-saved",
+    ("01-chw-vht-mobile", "visit-saved"): "/01-chw-vht-mobile/create-referral",
+    ("01-chw-vht-mobile", "create-referral"): "/01-chw-vht-mobile/referral-status",
+    ("01-chw-vht-mobile", "referral-status"): "/01-chw-vht-mobile/worklist-home",
+    ("01-chw-vht-mobile", "alerts-inbox"): "/01-chw-vht-mobile/alert-follow-up",
+    ("01-chw-vht-mobile", "alert-follow-up"): "/01-chw-vht-mobile/worklist-home",
+    ("01-chw-vht-mobile", "sync-failed"): "/01-chw-vht-mobile/sync-status",
+    ("02-community-caregiver", "self-report"): "/02-community-caregiver/my-household?state=success",
+    ("06-facility-dashboard", "open-referrals"): "/07-referrals-desk/referral-queue",
+    ("07-referrals-desk", "referral-queue"): "/07-referrals-desk/referral-detail",
+    ("07-referrals-desk", "referral-detail"): "/07-referrals-desk/outcome-feedback",
+    ("07-referrals-desk", "outcome-feedback"): "/07-referrals-desk/referral-queue?state=success",
+    ("10-district-moh", "early-warnings"): "/10-district-moh/action-deploy",
+    ("10-district-moh", "action-deploy"): "/10-district-moh/cascade-planning?state=success",
+    ("12-research-exports", "export-request"): "/12-research-exports/export-pending",
+    ("12-research-exports", "export-pending"): "/12-research-exports/evidence-catalog",
+}
+
+WORKSPACE_DESTINATIONS = [
+    {"workspace": "CHW / VHT mobile", "to": "/01-chw-vht-mobile/worklist-home"},
+    {"workspace": "Caregiver mobile", "to": "/02-community-caregiver/my-household"},
+    {"workspace": "Outreach planning", "to": "/03-outreach-school-health/campaign-planner"},
+    {"workspace": "Cascade metrics", "to": "/04-cascade-metrics/indicators-overview"},
+    {"workspace": "CHIS / livelihoods", "to": "/05-chis-livelihoods/enrolment"},
+    {"workspace": "Facility dashboard", "to": "/06-facility-dashboard/overview"},
+    {"workspace": "Referrals desk", "to": "/07-referrals-desk/referral-queue"},
+    {"workspace": "EMR / HMS connector", "to": "/08-emr-connector/connector-status"},
+    {"workspace": "Intelligence operations", "to": "/09-intelligence/ingest-pipeline"},
+    {"workspace": "District / MoH", "to": "/10-district-moh/population-map"},
+    {"workspace": "NGO / partner M&E", "to": "/11-ngo-partner/programme-monitoring"},
+    {"workspace": "Research exports", "to": "/12-research-exports/evidence-catalog"},
+    {"workspace": "Admin · consent · access", "to": "/13-admin-consent/org-catchment"},
+    {"workspace": "School health", "to": "/14-schools-health/school-home"},
+    {"workspace": "Pharmacy outlet", "to": "/15-pharmacy-outlets/stock-levels-entry"},
+    {"workspace": "Lab / PoC", "to": "/16-labs-poc/lab-home"},
+    {"workspace": "Corporate wellness", "to": "/17-corporate-wellness/corporate-home"},
+    {"workspace": "MCH touchpoints", "to": "/18-mch-touchpoints/mch-home"},
+    {"workspace": "NCD / Gericare", "to": "/19-ncd-gericare/cohort-home"},
+    {"workspace": "HMIS / DHIS2", "to": "/20-hmis-dhis2/hmis-home"},
+    {"workspace": "Community events", "to": "/21-community-events/events-home"},
+    {"workspace": "Climate feeds", "to": "/22-climate-feeds/climate-home"},
+    {"workspace": "Insurance insights", "to": "/23-insurance-insights/prevention-overview"},
+]
+
+
+def screen_route(screen: Screen) -> str:
+    return f"/{screen.module}/{screen.slug}"
+
+
+def infer_layout(screen: Screen) -> str:
+    if screen.layout:
+        return screen.layout
+    if screen.kind == "auth":
+        return "auth-centered-card"
+    if screen.kind == "map":
+        return "map-explorer"
+    if screen.kind == "queue":
+        return "queue-desk"
+    if screen.kind == "empty":
+        return "empty-state-shell"
+    if screen.kind == "settings":
+        return "settings-admin"
+    if screen.kind == "detail":
+        return "connector-status" if "connector" in screen.slug else "detail-action"
+    if screen.kind == "form":
+        return "upload-batch" if "upload" in screen.slug else "form-capture"
+    if screen.kind == "dashboard":
+        if screen.module == "23-insurance-insights":
+            return "insurance-prevention"
+        if screen.module[:2].isdigit() and 14 <= int(screen.module[:2]) <= 22:
+            return "feeder-home"
+        return "dashboard-metrics"
+    return "list-worklist"
+
+
+def infer_shell_layout(screen: Screen, breakpoint: str) -> str:
+    if screen.nav == "auth":
+        return "auth-centered-card"
+    if breakpoint == "mobile":
+        return "field-mobile-shell"
+    if breakpoint == "tablet":
+        return "field-tablet-shell"
+    return "desktop-sidebar-shell"
+
+
+def infer_phase(screen: Screen) -> str:
+    if screen.module == "00-shared":
+        return "shared"
+    if screen.slug in {"medicine-demand-forecast", "national-roll-up"}:
+        return "phase-3"
+    if screen.module == "12-research-exports":
+        return "phase-4"
+    if screen.module in {"11-ngo-partner", "05-chis-livelihoods"}:
+        return "phase-2"
+    if screen.module[:2].isdigit() and 14 <= int(screen.module[:2]) <= 21:
+        return "phase-2"
+    return "mvp"
+
+
+def supported_states(screen: Screen) -> list[str]:
+    if screen.kind == "auth":
+        return ["default", "loading", "error"]
+    if screen.kind == "form":
+        return ["default", "loading", "error", "success", "offline", "forbidden"]
+    states = ["default", "loading", "empty", "error", "forbidden"]
+    if screen.kind in {"queue", "detail"}:
+        states += ["success", "conflict", "offline"]
+    return states
+
+
+def parent_route(screen: Screen) -> str:
+    route = screen_route(screen)
+    routes = NAV_ROUTES.get(screen.nav, [])
+    if route in routes:
+        return route
+    module_routes = [candidate for candidate in routes if f"/{screen.module}/" in candidate]
+    return module_routes[0] if module_routes else (routes[0] if routes else "/00-shared/role-surface-picker")
+
+
+def primary_target(screen: Screen) -> str | None:
+    if not screen.primary_cta:
+        return None
+    explicit = PRIMARY_TARGETS.get((screen.module, screen.slug))
+    if explicit:
+        return explicit
+    if screen.kind in {"form", "settings"}:
+        return f"{screen_route(screen)}?state=success"
+    return parent_route(screen)
+
 
 def draw_header(draw, w, h, screen: Screen, breakpoint: str, content_left: int):
     bar_h = 56 if breakpoint != "desktop" else 64
     draw.rectangle([content_left, 0, w, bar_h], fill=C["primary"])
     label = screen.title if content_left else "FCHIP"
-    text(draw, (content_left + 16, bar_h // 2), label, size=16, bold=True, fill=C["white"], anchor="lm")
-    right = "DESKTOP" if content_left else "Your health, our mission."
+    text(draw, (content_left + 16, bar_h // 2), label, size=16, bold=True, fill=C["on_primary"], anchor="lm")
+    right = "Your health, our mission."
     text(
         draw,
         (w - 16, bar_h // 2),
         right,
-        size=11 if not content_left else 10,
+        size=11,
         fill=(210, 235, 236),
         anchor="rm",
     )
@@ -2013,27 +2343,40 @@ def draw_header(draw, w, h, screen: Screen, breakpoint: str, content_left: int):
 
 
 def draw_side_nav(img, draw, screen: Screen, breakpoint: str) -> int:
-    if breakpoint != "desktop" or screen.nav == "auth":
+    if breakpoint == "mobile" or screen.nav == "auth":
         return 0
-    sw = 220
+    compact = breakpoint == "tablet"
+    sw = 76 if compact else 220
     draw.rectangle([0, 0, sw, img.height], fill=C["chrome"])
-    text(draw, (24, 28), "FCHIP", size=18, bold=True, fill=C["white"])
-    text(draw, (24, 54), "Community Health\nIntelligence Platform", size=10, fill=(160, 190, 194))
+    text(draw, (sw / 2 if compact else 24, 28), "F" if compact else "FCHIP", size=18, bold=True, fill=C["white"], anchor="mm" if compact else None)
+    if not compact:
+        text(draw, (24, 54), "Community Health\nIntelligence Platform", size=11, fill=(160, 190, 194))
     y = 110
-    for item in NAV.get(screen.nav, []):
-        active = item.lower() in screen.title.lower() or item.lower() in screen.slug.replace("-", " ")
+    current_parent = parent_route(screen)
+    routes = NAV_ROUTES.get(screen.nav, [])
+    for index, item in enumerate(NAV.get(screen.nav, [])):
+        active = index < len(routes) and routes[index] == current_parent
         fill = C["accent"] if active else (32, 54, 60)
         round_rect(draw, (16, y, sw - 16, y + 40), fill, radius=10)
-        text(draw, (28, y + 20), item, size=13, fill=C["white"], anchor="lm")
+        text(
+            draw,
+            (sw / 2 if compact else 28, y + 20),
+            item[:1] if compact else item,
+            size=13,
+            bold=compact,
+            fill=C["white"],
+            anchor="mm" if compact else "lm",
+        )
         y += 48
-    text(draw, (24, img.height - 36), "Cascade Data & Feedback", size=10, fill=(120, 150, 155))
+    if not compact:
+        text(draw, (24, img.height - 36), "Cascade Data & Feedback", size=11, fill=(120, 150, 155))
     return sw
 
 
 def draw_bottom_nav(draw, w, h, screen: Screen, breakpoint: str):
-    if breakpoint == "desktop" or screen.nav == "auth":
+    if breakpoint != "mobile" or screen.nav == "auth":
         return 0
-    bh = 64
+    bh = 72
     y0 = h - bh
     draw.rectangle([0, y0, w, h], fill=C["surface"])
     draw.line([(0, y0), (w, y0)], fill=C["line"], width=1)
@@ -2041,17 +2384,22 @@ def draw_bottom_nav(draw, w, h, screen: Screen, breakpoint: str):
     if not items:
         return bh
     slot = w / len(items)
-    active_i = 0
-    hay = f"{screen.title} {screen.slug} {screen.kind}".lower()
-    for i, item in enumerate(items):
-        if item.lower() in hay or item.lower()[:4] in hay:
-            active_i = i
-            break
+    routes = NAV_ROUTES.get(screen.nav, [])
+    current_parent = parent_route(screen)
+    active_i = routes.index(current_parent) if current_parent in routes else 0
     for i, item in enumerate(items):
         cx = slot * i + slot / 2
         on = i == active_i
-        text(draw, (cx, y0 + 24), "●", size=10, fill=C["primary"] if on else C["muted"], anchor="mm")
-        text(draw, (cx, y0 + 44), item, size=10, fill=C["ink"] if on else C["muted"], anchor="mm")
+        icon_fill = C["primary_soft"] if on else C["surface"]
+        round_rect(
+            draw,
+            (cx - 14, y0 + 8, cx + 14, y0 + 36),
+            icon_fill,
+            radius=9,
+            outline=C["primary"] if on else C["line"],
+        )
+        text(draw, (cx, y0 + 22), item[:1], size=12, bold=True, fill=C["primary"] if on else C["muted"], anchor="mm")
+        text(draw, (cx, y0 + 54), item, size=11, fill=C["ink"] if on else C["muted"], anchor="mm")
     return bh
 
 
@@ -2142,7 +2490,7 @@ def draw_cta(draw, x, y, max_w, label: str):
     if not label:
         return y
     round_rect(draw, (x, y, x + max_w, y + 48), C["primary"], radius=14)
-    text(draw, (x + max_w / 2, y + 24), label, size=14, bold=True, fill=C["white"], anchor="mm")
+    text(draw, (x + max_w / 2, y + 24), label, size=14, bold=True, fill=C["on_primary"], anchor="mm")
     return y + 60
 
 
@@ -2155,9 +2503,11 @@ def render_screen(screen: Screen, breakpoint: str) -> Image.Image:
     top = draw_header(draw, w, h, screen, breakpoint, left)
     bottom_nav = draw_bottom_nav(draw, w, h, screen, breakpoint)
     content_bottom = h - bottom_nav - 16
-    pad = 20 if breakpoint == "mobile" else 28
-    x = left + pad
-    max_w = w - left - pad * 2
+    pad = 16 if breakpoint == "mobile" else (24 if breakpoint == "tablet" else 32)
+    available_w = w - left - pad * 2
+    content_cap = 720 if screen.kind in {"form", "settings", "auth"} else (1040 if screen.kind == "detail" else 1200)
+    max_w = min(available_w, content_cap)
+    x = left + pad + max(0, (available_w - max_w) / 2)
     y = top + 18
 
     if screen.kind == "auth":
@@ -2239,17 +2589,35 @@ def render_screen(screen: Screen, breakpoint: str) -> Image.Image:
         text(draw, (x, y), screen.subtitle, size=13, fill=C["muted"])
         y += 26
 
-    if screen.layout:
+    if DEBUG_CHROME and screen.layout:
         text(draw, (x, y), f"Layout · {screen.layout}", size=10, fill=C["accent"])
         y += 18
 
     y = draw_chips(draw, x, y, screen.chips, max_w)
     y = draw_stats(draw, x, y, screen.stats, max_w, breakpoint)
 
-    if screen.state == "error":
+    if screen.state == "loading":
+        round_rect(draw, (x, y, x + max_w, y + 64), C["primary_soft"], radius=12)
+        text(draw, (x + 16, y + 22), "Loading securely…", size=13, bold=True, fill=C["primary"])
+        text(draw, (x + 16, y + 44), "Saved offline work remains available.", size=11, fill=C["muted"])
+        y += 76
+    elif screen.state == "error":
         round_rect(draw, (x, y, x + max_w, y + 40), C["warn_soft"], radius=12)
         text(draw, (x + 12, y + 20), "Error / degraded state", size=11, fill=C["warn"], anchor="lm")
         y += 52
+    elif screen.state == "forbidden":
+        round_rect(draw, (x, y, x + max_w, y + 48), C["warn_soft"], radius=12)
+        text(draw, (x + 12, y + 24), "Permission required", size=12, bold=True, fill=C["warn"], anchor="lm")
+        y += 60
+    elif screen.state == "success":
+        round_rect(draw, (x, y, x + max_w, y + 48), C["ok_soft"], radius=12)
+        text(draw, (x + 12, y + 24), "Saved successfully", size=12, bold=True, fill=C["ok"], anchor="lm")
+        y += 60
+    elif screen.state == "conflict":
+        round_rect(draw, (x, y, x + max_w, y + 56), C["warn_soft"], radius=12)
+        text(draw, (x + 12, y + 20), "Two safe versions need review", size=12, bold=True, fill=C["warn"])
+        text(draw, (x + 12, y + 40), "No information has been discarded.", size=11, fill=C["muted"])
+        y += 68
     elif screen.state == "offline":
         round_rect(draw, (x, y, x + max_w, y + 40), C["primary_soft"], radius=12)
         text(draw, (x + 12, y + 20), "Offline-capable · local only", size=11, fill=C["primary"], anchor="lm")
@@ -2285,8 +2653,9 @@ def render_screen(screen: Screen, breakpoint: str) -> Image.Image:
 
     if screen.note and screen.kind not in {"map", "detail", "empty"} and screen.state != "empty":
         y += 4
-        banner = C["warn_soft"] if screen.state == "error" else C["warn_soft"]
-        ink = C["warn"]
+        is_warning = screen.state in {"error", "conflict", "forbidden"}
+        banner = C["warn_soft"] if is_warning else C["primary_soft"]
+        ink = C["warn"] if is_warning else C["primary"]
         round_rect(draw, (x, y, x + max_w, y + 44), banner, radius=12)
         note_lines = wrap(draw, screen.note, int(max_w - 24), 11)
         text(draw, (x + 12, y + 22), note_lines[0], size=11, fill=ink, anchor="lm")
@@ -2295,15 +2664,15 @@ def render_screen(screen: Screen, breakpoint: str) -> Image.Image:
     if screen.primary_cta:
         draw_cta(draw, x, min(y + 8, content_bottom - 56), max_w, screen.primary_cta)
 
-    # footer tag
-    text(
-        draw,
-        (x, h - bottom_nav - 8 if bottom_nav else h - 10),
-        f"{screen.module}/{screen.slug} · {breakpoint}",
-        size=9,
-        fill=C["muted"],
-        anchor="lb",
-    )
+    if DEBUG_CHROME:
+        text(
+            draw,
+            (x, h - bottom_nav - 8 if bottom_nav else h - 10),
+            f"{screen.module}/{screen.slug} · {breakpoint}",
+            size=11,
+            fill=C["muted"],
+            anchor="lb",
+        )
     return img
 
 
@@ -2319,14 +2688,14 @@ def write_module_readme(module: str, screens: list[Screen]):
     if module in MODULE_NOTES:
         lines += [MODULE_NOTES[module], ""]
     lines += [
-        "| Screen | Layout (kit) | State | Mobile | Tablet | Desktop |",
-        "| --- | --- | --- | --- | --- | --- |",
+        "| Screen | Layout (kit) | State | Light | Dark |",
+        "| --- | --- | --- | --- | --- |",
     ]
     for s in screens:
         lines.append(
             f"| {s.title} (`{s.slug}`) | `{s.layout or '—'}` | `{s.state}` | "
-            f"[mobile]({s.slug}/mobile.png) | "
-            f"[tablet]({s.slug}/tablet.png) | [desktop]({s.slug}/desktop.png) |"
+            f"[mobile]({s.slug}/mobile.png) · [tablet]({s.slug}/tablet.png) · [desktop]({s.slug}/desktop.png) | "
+            f"[mobile]({s.slug}/mobile-dark.png) · [tablet]({s.slug}/tablet-dark.png) · [desktop]({s.slug}/desktop-dark.png) |"
         )
     (mod_dir / "README.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -2334,35 +2703,81 @@ def write_module_readme(module: str, screens: list[Screen]):
 def main():
     by_module: dict[str, list[Screen]] = {}
     for screen in SCREENS:
+        screen.layout = infer_layout(screen)
         by_module.setdefault(screen.module, []).append(screen)
         out_dir = ROOT / screen.module / screen.slug
         out_dir.mkdir(parents=True, exist_ok=True)
+        tabs = [
+            {"label": label, "to": route}
+            for label, route in zip(NAV.get(screen.nav, []), NAV_ROUTES.get(screen.nav, []))
+        ]
         meta = {
             "title": screen.title,
             "subtitle": screen.subtitle,
             "kind": screen.kind,
             "nav": screen.nav,
             "layout": screen.layout,
+            "body_layouts": {
+                "mobile": screen.layout,
+                "tablet": screen.layout,
+                "desktop": "dual-pane-desktop"
+                if screen.kind in {"dashboard", "list", "queue"} and len(screen.rows) >= 3
+                else screen.layout,
+            },
+            "shells": {
+                breakpoint: infer_shell_layout(screen, breakpoint)
+                for breakpoint in SIZES
+            },
             "state": screen.state,
+            "supported_states": supported_states(screen),
+            "route": screen_route(screen),
+            "parent_route": parent_route(screen),
+            "roles": ROLE_BY_NAV.get(screen.nav, ["authenticated-user"]),
+            "access": {
+                "policy": "RBAC + ABAC + subscription + assigned modules",
+                "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied",
+            },
+            "phase": infer_phase(screen),
+            "l10n_key_prefix": f"{screen.module.replace('-', '_')}.{screen.slug.replace('-', '_')}",
+            "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+            "navigation": {
+                "tabs": tabs,
+                "primary_action": {
+                    "label": screen.primary_cta,
+                    "to": primary_target(screen),
+                }
+                if screen.primary_cta
+                else None,
+                "access_denied": "/00-shared/access-denied",
+                "not_found": "/00-shared/not-found",
+            },
             "source": "app-flows + .cursor/app-write-up.mdc",
         }
+        if screen.slug == "role-surface-picker":
+            meta["workspace_destinations"] = WORKSPACE_DESTINATIONS
         (out_dir / "screen.json").write_text(json.dumps(meta, indent=2) + "\n", encoding="utf-8")
+        light_palette = C.copy()
         for bp in SIZES:
             img = render_screen(screen, bp)
             img.save(out_dir / f"{bp}.png", optimize=True)
+            C.update(DARK_C)
+            dark_img = render_screen(screen, bp)
+            dark_img.save(out_dir / f"{bp}-dark.png", optimize=True)
+            C.clear()
+            C.update(light_palette)
 
     for module, screens in by_module.items():
         write_module_readme(module, screens)
 
     # root index
-    total = len(SCREENS) * 3
+    total = len(SCREENS) * len(SIZES) * 2
     lines = [
         "# FCHIP app-ui",
         "",
         "Visual directory of **proposed** FCHIP screens from `.cursor/app-write-up.mdc` and `app-flows/`.",
         "Not generated from `frontend/` code.",
         "",
-        f"**{len(SCREENS)} screens** × mobile / tablet / desktop = **{total} mockups**.",
+        f"**{len(SCREENS)} screens** × mobile / tablet / desktop × light / dark = **{total} mockups**.",
         "",
         "Slogan: **Your health, our mission.**",
         "",
@@ -2373,6 +2788,8 @@ def main():
         "| mobile | 390 × 844 |",
         "| tablet | 768 × 1024 |",
         "| desktop | 1440 × 900 |",
+        "",
+        "Every screen also has a `*-dark.png` system-theme specimen.",
         "",
         "## Data feeders covered (SoT §4.2 / app-flows 03)",
         "",
@@ -2445,7 +2862,7 @@ def main():
         "## Sources",
         "",
         "- `.cursor/app-write-up.mdc`",
-        "- `app-flows/01-overview.md` … `06-mvp-phases.md` (especially `04-modules.md`)",
+        "- `app-flows/01-overview.md` … `07-navigation.md` (especially `04-modules.md` and `07-navigation.md`)",
         "",
     ]
     (ROOT / "README.md").write_text("\n".join(lines), encoding="utf-8")

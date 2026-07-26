@@ -3,7 +3,62 @@
   "subtitle": "Community symptom patterns from outlets",
   "kind": "list",
   "nav": "pharmacy",
-  "layout": "",
+  "layout": "list-worklist",
+  "body_layouts": {
+    "mobile": "list-worklist",
+    "tablet": "list-worklist",
+    "desktop": "dual-pane-desktop"
+  },
+  "shells": {
+    "mobile": "field-mobile-shell",
+    "tablet": "field-tablet-shell",
+    "desktop": "desktop-sidebar-shell"
+  },
   "state": "default",
+  "supported_states": [
+    "default",
+    "loading",
+    "empty",
+    "error",
+    "forbidden"
+  ],
+  "route": "/15-pharmacy-outlets/common-complaints",
+  "parent_route": "/15-pharmacy-outlets/common-complaints",
+  "roles": [
+    "pharmacy-outlet-worker"
+  ],
+  "access": {
+    "policy": "RBAC + ABAC + subscription + assigned modules",
+    "unauthorised_behavior": "omit navigation and actions; deep links redirect to access-denied"
+  },
+  "phase": "phase-2",
+  "l10n_key_prefix": "15_pharmacy_outlets.common_complaints",
+  "identifier_policy": "Display human_friendly_id only; never expose raw database IDs",
+  "navigation": {
+    "tabs": [
+      {
+        "label": "Stock",
+        "to": "/15-pharmacy-outlets/stock-levels-entry"
+      },
+      {
+        "label": "Dispense",
+        "to": "/15-pharmacy-outlets/dispense-log"
+      },
+      {
+        "label": "Complaints",
+        "to": "/15-pharmacy-outlets/common-complaints"
+      },
+      {
+        "label": "Sync",
+        "to": "/15-pharmacy-outlets/prestock-ack"
+      }
+    ],
+    "primary_action": {
+      "label": "Submit weekly rollup",
+      "to": "/15-pharmacy-outlets/common-complaints"
+    },
+    "access_denied": "/00-shared/access-denied",
+    "not_found": "/00-shared/not-found"
+  },
   "source": "app-flows + .cursor/app-write-up.mdc"
 }

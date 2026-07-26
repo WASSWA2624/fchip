@@ -4,7 +4,8 @@ Reusable building blocks for every `app-ui` screen. Compose screens from these �
 
 Brand: teal health system · slogan **Your health, our mission.**
 
-**42 components** × mobile / tablet / desktop.
+**42 components** × mobile / tablet / desktop × light / dark.
+Dark specimens use the same filename with `-dark` before `.png`.
 
 ## brand
 

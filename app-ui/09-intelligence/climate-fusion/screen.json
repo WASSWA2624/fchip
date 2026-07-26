@@ -1,0 +1,7 @@
+{
+  "title": "Climate fusion",
+  "subtitle": "Rainfall · heat · floods × health",
+  "kind": "dashboard",
+  "nav": "district",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

@@ -1,0 +1,7 @@
+{
+  "title": "Org · catchment · facilities",
+  "subtitle": "Where FCHIP is deployed",
+  "kind": "settings",
+  "nav": "admin",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

@@ -1,0 +1,7 @@
+{
+  "title": "FCHIP",
+  "subtitle": "Your health, our mission.",
+  "kind": "auth",
+  "nav": "auth",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

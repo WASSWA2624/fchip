@@ -1,0 +1,7 @@
+{
+  "title": "Referral detail",
+  "subtitle": "Track completion · link EMR outcome",
+  "kind": "detail",
+  "nav": "facility",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

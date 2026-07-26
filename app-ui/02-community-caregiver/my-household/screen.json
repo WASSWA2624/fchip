@@ -1,0 +1,7 @@
+{
+  "title": "My household",
+  "subtitle": "Optional caregiver self-view",
+  "kind": "dashboard",
+  "nav": "field",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

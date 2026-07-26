@@ -1,0 +1,7 @@
+{
+  "title": "API scopes setup",
+  "subtitle": "What clinical data may flow in",
+  "kind": "settings",
+  "nav": "admin",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

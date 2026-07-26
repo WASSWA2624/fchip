@@ -1,0 +1,7 @@
+{
+  "title": "CHIS enrolment",
+  "subtitle": "Optional financial-protection data",
+  "kind": "form",
+  "nav": "partner",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

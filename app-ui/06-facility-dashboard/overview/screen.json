@@ -1,0 +1,7 @@
+{
+  "title": "Facility overview",
+  "subtitle": "Alerts · caseload risk · cascade gaps",
+  "kind": "dashboard",
+  "nav": "facility",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

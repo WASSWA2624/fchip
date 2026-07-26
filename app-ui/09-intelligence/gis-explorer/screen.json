@@ -1,0 +1,7 @@
+{
+  "title": "GIS maps",
+  "subtitle": "Disease distribution · hotspots · gaps",
+  "kind": "map",
+  "nav": "district",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

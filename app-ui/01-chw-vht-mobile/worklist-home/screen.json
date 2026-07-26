@@ -1,0 +1,7 @@
+{
+  "title": "Today’s worklist",
+  "subtitle": "Visits · follow-ups · alert tasks",
+  "kind": "list",
+  "nav": "field",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

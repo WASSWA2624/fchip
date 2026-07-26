@@ -1,0 +1,7 @@
+{
+  "title": "Population map",
+  "subtitle": "District early-warning geography",
+  "kind": "map",
+  "nav": "district",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

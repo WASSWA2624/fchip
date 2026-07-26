@@ -1,0 +1,7 @@
+{
+  "title": "Partner reports",
+  "subtitle": "M&E exports from metrics spine",
+  "kind": "list",
+  "nav": "partner",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

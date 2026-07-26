@@ -1,0 +1,7 @@
+{
+  "title": "Act on alert",
+  "subtitle": "Explainable next steps",
+  "kind": "detail",
+  "nav": "field",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

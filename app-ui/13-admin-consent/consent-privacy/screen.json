@@ -1,0 +1,7 @@
+{
+  "title": "Consent & privacy",
+  "subtitle": "Household consent · least privilege",
+  "kind": "settings",
+  "nav": "admin",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

@@ -1,0 +1,7 @@
+{
+  "title": "Users & roles",
+  "subtitle": "CHW · Facility · District · Partner",
+  "kind": "settings",
+  "nav": "admin",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

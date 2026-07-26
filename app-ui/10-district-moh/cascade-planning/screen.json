@@ -1,0 +1,7 @@
+{
+  "title": "Cascade M&E planning",
+  "subtitle": "Plan from gaps and metrics",
+  "kind": "dashboard",
+  "nav": "district",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

@@ -1,0 +1,7 @@
+{
+  "title": "Self-report",
+  "subtitle": "Symptoms · needs · concerns",
+  "kind": "form",
+  "nav": "field",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

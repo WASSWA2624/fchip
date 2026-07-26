@@ -1,0 +1,7 @@
+{
+  "title": "Guidance",
+  "subtitle": "Care tips · appointment hints",
+  "kind": "list",
+  "nav": "field",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

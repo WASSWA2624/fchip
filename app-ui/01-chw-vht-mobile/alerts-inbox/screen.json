@@ -1,0 +1,7 @@
+{
+  "title": "Alerts inbox",
+  "subtitle": "Risk flags from intelligence core",
+  "kind": "list",
+  "nav": "field",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

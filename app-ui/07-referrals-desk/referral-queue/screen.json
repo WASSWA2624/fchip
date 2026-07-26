@@ -1,0 +1,7 @@
+{
+  "title": "Referrals desk",
+  "subtitle": "Facility referral queue",
+  "kind": "queue",
+  "nav": "facility",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

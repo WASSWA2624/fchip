@@ -1,0 +1,7 @@
+{
+  "title": "Claims / access",
+  "subtitle": "Livelihood-linked care access",
+  "kind": "detail",
+  "nav": "partner",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

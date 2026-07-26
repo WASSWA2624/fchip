@@ -1,0 +1,7 @@
+{
+  "title": "Sync status",
+  "subtitle": "Offline queue health",
+  "kind": "detail",
+  "nav": "field",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

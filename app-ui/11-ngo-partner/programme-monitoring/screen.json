@@ -1,0 +1,7 @@
+{
+  "title": "Programme monitoring",
+  "subtitle": "Partner-scoped real-time M&E",
+  "kind": "dashboard",
+  "nav": "partner",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

@@ -1,0 +1,7 @@
+{
+  "title": "Deploy action",
+  "subtitle": "Testing · stock · outreach",
+  "kind": "form",
+  "nav": "district",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

@@ -1,0 +1,7 @@
+{
+  "title": "Household visit",
+  "subtitle": "Offline structured capture",
+  "kind": "form",
+  "nav": "field",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

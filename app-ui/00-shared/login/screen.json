@@ -1,0 +1,7 @@
+{
+  "title": "Sign in",
+  "subtitle": "CHW · Facility · District · Partner",
+  "kind": "auth",
+  "nav": "auth",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

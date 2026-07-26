@@ -1,0 +1,7 @@
+{
+  "title": "EMR API access",
+  "subtitle": "Facility credentials · scopes",
+  "kind": "settings",
+  "nav": "admin",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

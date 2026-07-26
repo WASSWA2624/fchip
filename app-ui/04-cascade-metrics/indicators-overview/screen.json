@@ -1,0 +1,7 @@
+{
+  "title": "Cascade metrics",
+  "subtitle": "CHW · outreach · referrals · MCH · education",
+  "kind": "dashboard",
+  "nav": "district",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

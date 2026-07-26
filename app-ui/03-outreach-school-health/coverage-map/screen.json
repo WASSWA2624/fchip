@@ -1,0 +1,7 @@
+{
+  "title": "Coverage map",
+  "subtitle": "Where programmes ran",
+  "kind": "map",
+  "nav": "district",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

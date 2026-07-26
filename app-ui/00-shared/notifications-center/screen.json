@@ -1,0 +1,7 @@
+{
+  "title": "Notifications",
+  "subtitle": "Alerts across your surfaces",
+  "kind": "list",
+  "nav": "field",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

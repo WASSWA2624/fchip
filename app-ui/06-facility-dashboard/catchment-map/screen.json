@@ -1,0 +1,7 @@
+{
+  "title": "Catchment map",
+  "subtitle": "Village hotspots + climate overlay",
+  "kind": "map",
+  "nav": "facility",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

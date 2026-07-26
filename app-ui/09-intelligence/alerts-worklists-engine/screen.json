@@ -1,0 +1,7 @@
+{
+  "title": "Alerts & worklists engine",
+  "subtitle": "Routes intelligence to surfaces",
+  "kind": "settings",
+  "nav": "admin",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

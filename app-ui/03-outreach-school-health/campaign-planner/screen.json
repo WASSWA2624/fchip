@@ -1,0 +1,7 @@
+{
+  "title": "Campaign planner",
+  "subtitle": "Outreach · screening · school health",
+  "kind": "dashboard",
+  "nav": "district",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

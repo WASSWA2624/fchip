@@ -1,0 +1,7 @@
+{
+  "title": "Stock signal",
+  "subtitle": "Demand forecast hints",
+  "kind": "dashboard",
+  "nav": "facility",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

@@ -1,0 +1,7 @@
+{
+  "title": "Outreach priorities",
+  "subtitle": "Where facility should support field action",
+  "kind": "list",
+  "nav": "facility",
+  "source": "app-flows + .cursor/app-write-up.mdc"
+}

@@ -2,7 +2,7 @@
 
 Visual directory of **proposed** FCHIP screens from `.cursor/app-write-up.mdc` and `app-flows/`.
 Screen content is not generated from Flutter code. Brand marks load from
-`frontend/assets/logos` via `app-ui/branding.py`.
+`frontend/assets/logos` via `app-ui/branding.py` (logo left · FCHIP right · slogan under FCHIP).
 
 **127 screens** × mobile / tablet / desktop × light / dark = **762 mockups**.
 

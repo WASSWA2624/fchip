@@ -6,7 +6,6 @@ import 'package:fchip/app/theme/app_theme_extensions.dart';
 import 'package:fchip/core/responsive/app_breakpoints.dart';
 import 'package:fchip/l10n/app_localizations.dart';
 import 'package:fchip/l10n/app_localizations_x.dart';
-import 'package:fchip/shared/actions/app_global_fault_report_action.dart';
 import 'package:fchip/shared/actions/app_workspace_refresh_action.dart';
 import 'package:fchip/shared/components/app_action_label_scope.dart';
 import 'package:fchip/shared/components/app_button.dart';
@@ -27,11 +26,7 @@ final class AppWorkspaceToolbarConfig {
     this.onRefresh,
     this.isRefreshing = false,
     this.showGlobalActions = true,
-    this.showFaultReport = true,
-    this.showHousekeepingRequest = true,
     this.refreshLabel,
-    this.faultReportLabel,
-    this.housekeepingRequestLabel,
     this.overflowLabel,
     this.notificationsMenuLabel,
     this.notificationsMenuTooltip,
@@ -46,11 +41,7 @@ final class AppWorkspaceToolbarConfig {
   final Future<void> Function()? onRefresh;
   final bool isRefreshing;
   final bool showGlobalActions;
-  final bool showFaultReport;
-  final bool showHousekeepingRequest;
   final String? refreshLabel;
-  final String? faultReportLabel;
-  final String? housekeepingRequestLabel;
   final String? overflowLabel;
   final String? notificationsMenuLabel;
   final String? notificationsMenuTooltip;
@@ -323,9 +314,6 @@ class AppWorkspaceToolbar extends ConsumerWidget {
     if (action is AppWorkspaceViewToggle) {
       return showLabels ? _viewToggleWidth : _iconActionWidth;
     }
-    if (action is AppGlobalFaultReportAction) {
-      return showLabels ? _longLabeledActionWidth : _iconActionWidth;
-    }
     if (action is AppWorkspaceRefreshAction) {
       return showLabels ? _labeledActionWidth : _iconActionWidth;
     }
@@ -346,13 +334,6 @@ class AppWorkspaceToolbar extends ConsumerWidget {
           onPressed: () {
             unawaited(config.onRefresh?.call());
           },
-        ),
-      );
-    }
-    if (config.showFaultReport) {
-      actions.add(
-        AppGlobalFaultReportAction(
-          label: config.faultReportLabel ?? 'Report equipment fault',
         ),
       );
     }
@@ -1038,8 +1019,6 @@ AppWorkspaceToolbarConfig appWorkspaceToolbarWithLabels(
   Future<void> Function()? onRefresh,
   bool isRefreshing = false,
   bool showGlobalActions = true,
-  bool showFaultReport = true,
-  bool showHousekeepingRequest = true,
   List<AppWorkspaceSummaryNotification> summaryNotifications =
       const <AppWorkspaceSummaryNotification>[],
   int maxVisibleScreenActions = 3,
@@ -1052,11 +1031,7 @@ AppWorkspaceToolbarConfig appWorkspaceToolbarWithLabels(
     onRefresh: onRefresh,
     isRefreshing: isRefreshing,
     showGlobalActions: showGlobalActions,
-    showFaultReport: showFaultReport,
-    showHousekeepingRequest: showHousekeepingRequest,
     refreshLabel: l10n.commonRefreshActionLabel,
-    faultReportLabel: l10n.workspaceGlobalFaultReportAction,
-    housekeepingRequestLabel: l10n.workspaceGlobalHousekeepingRequestAction,
     overflowLabel: l10n.workspaceToolbarOverflowLabel,
     notificationsMenuLabel: l10n.workspaceNotificationsMenuLabel,
     notificationsMenuTooltip: l10n.workspaceNotificationsToolbarTooltip,

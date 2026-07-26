@@ -111,8 +111,6 @@ class _TenantFacilitySetupContent extends ConsumerWidget {
       toolbar: appWorkspaceToolbarWithLabels(
         l10n,
         showGlobalActions: false,
-        showFaultReport: false,
-        showHousekeepingRequest: false,
       ),
       body: _SetupBody(
         snapshot: snapshot,

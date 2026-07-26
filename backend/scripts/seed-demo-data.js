@@ -1,10 +1,12 @@
 /**
- * Curated demo seed orchestration.
+ * Curated demo seed orchestration (platform packs only).
  *
  * Usage:
  *   node scripts/seed-demo-data.js
  */
 
+const fs = require('fs');
+const path = require('path');
 const {
   createSeedContext,
   DEFAULT_RANDOM_SEED,
@@ -14,18 +16,8 @@ const {
 const env = require('@config/env');
 const { seedOrgPack } = require('./seeders/seed-org-pack');
 const { seedAccessPack } = require('./seeders/seed-access-pack');
-const { seedClinicalCatalogPack } = require('./seeders/seed-clinical-catalog-pack');
-const { seedClinicalPack } = require('./seeders/seed-clinical-pack');
-const { seedOperationsPack } = require('./seeders/seed-operations-pack');
 const { seedSubscriptionsPack } = require('./seeders/seed-subscriptions-pack');
-const { seedCommunicationsPack } = require('./seeders/seed-communications-pack');
-const { seedBiomedicalPack } = require('./seeders/seed-biomedical-pack');
-const { seedMortuaryPack } = require('./seeders/seed-mortuary-pack');
-const { seedCompliancePack } = require('./seeders/seed-compliance-pack');
-const { seedGovernancePack } = require('./seeders/seed-governance-pack');
-const { seedFillerPack } = require('./seeders/seed-filler-pack');
 const { assertDemoTaskAllowed } = require('./demo-safety');
-const { verifyDemoData } = require('./verify-demo-data');
 
 const getDeterministicDate = (sequence = 0, minuteOffset = 0, randomSeed = DEFAULT_RANDOM_SEED) => {
   const seedOffsetMs = (Math.abs(Number(randomSeed) || DEFAULT_RANDOM_SEED) % 100000) * 1000;
@@ -35,6 +27,15 @@ const getDeterministicDate = (sequence = 0, minuteOffset = 0, randomSeed = DEFAU
 const resolveNumericEnv = (value, fallback) => {
   const parsed = Number.parseInt(String(value), 10);
   return Number.isFinite(parsed) ? parsed : fallback;
+};
+
+const tryRequireSeeder = (relativePath) => {
+  const absolutePath = path.join(__dirname, relativePath);
+  if (!fs.existsSync(absolutePath)) {
+    return null;
+  }
+  // eslint-disable-next-line import/no-dynamic-require, global-require
+  return require(absolutePath);
 };
 
 const seedDemoData = async ({
@@ -57,28 +58,33 @@ const seedDemoData = async ({
   const orgPack = await seedOrgPack(ctx);
   const accessPack = await seedAccessPack(ctx, orgPack);
   const subscriptionsPack = await seedSubscriptionsPack(ctx, orgPack);
-  const clinicalCatalogPack = await seedClinicalCatalogPack(ctx, orgPack);
-  const clinicalPack = await seedClinicalPack(ctx, orgPack, accessPack, clinicalCatalogPack);
-  const operationsPack = await seedOperationsPack(ctx, orgPack, accessPack);
-  const communicationsPack = await seedCommunicationsPack(ctx, orgPack, accessPack);
-  const biomedicalPack = await seedBiomedicalPack(ctx, orgPack, accessPack, operationsPack);
-  const mortuaryPack = await seedMortuaryPack(ctx, orgPack, accessPack, clinicalPack);
-  const compliancePack = await seedCompliancePack(ctx, orgPack, accessPack, clinicalPack);
-  const governancePack = await seedGovernancePack(
-    ctx,
-    orgPack,
-    accessPack,
-    clinicalPack,
-    operationsPack
-  );
-  const fillerSummary = await seedFillerPack(ctx, targetCount);
-  const verification = await verifyDemoData();
 
-  if (!verification.ok) {
-    throw new Error(`Demo data verification failed: ${verification.errors.join(' | ')}`);
+  // HIS clinical / operations packs were removed; skip if files are absent.
+  const skippedPacks = [];
+  const optionalPacks = [
+    { name: 'clinical_catalog', file: './seeders/seed-clinical-catalog-pack.js', exportName: 'seedClinicalCatalogPack' },
+    { name: 'clinical', file: './seeders/seed-clinical-pack.js', exportName: 'seedClinicalPack' },
+    { name: 'operations', file: './seeders/seed-operations-pack.js', exportName: 'seedOperationsPack' },
+    { name: 'communications', file: './seeders/seed-communications-pack.js', exportName: 'seedCommunicationsPack' },
+    { name: 'biomedical', file: './seeders/seed-biomedical-pack.js', exportName: 'seedBiomedicalPack' },
+    { name: 'mortuary', file: './seeders/seed-mortuary-pack.js', exportName: 'seedMortuaryPack' },
+    { name: 'compliance', file: './seeders/seed-compliance-pack.js', exportName: 'seedCompliancePack' },
+    { name: 'governance', file: './seeders/seed-governance-pack.js', exportName: 'seedGovernancePack' },
+    { name: 'filler', file: './seeders/seed-filler-pack.js', exportName: 'seedFillerPack' },
+  ];
+
+  for (const pack of optionalPacks) {
+    const mod = tryRequireSeeder(pack.file);
+    if (!mod || typeof mod[pack.exportName] !== 'function') {
+      skippedPacks.push(pack.name);
+    }
   }
 
-  console.log('Curated demo data seeded successfully.');
+  if (skippedPacks.length > 0) {
+    console.log(`Skipping removed HIS seed packs: ${skippedPacks.join(', ')}`);
+  }
+
+  console.log('Platform demo data seeded successfully.');
 
   return {
     skipped: false,
@@ -86,29 +92,7 @@ const seedDemoData = async ({
       tenants: Object.keys(orgPack.tenants).length,
       users: Object.keys(accessPack.users).length,
       subscriptions: Object.keys(subscriptionsPack.subscriptions).length,
-      lab_catalog: {
-        tenants: clinicalCatalogPack.summary.tenants,
-        tests_per_tenant: clinicalCatalogPack.summary.lab_tests_per_tenant,
-        panels_per_tenant: clinicalCatalogPack.summary.lab_panels_per_tenant,
-      },
-      clinical_catalog: clinicalCatalogPack.summary,
-      patients: Object.keys(clinicalPack.patients).length,
-      conversations: Object.keys(communicationsPack.conversations).length,
-      biomedical_assets: Object.keys(biomedicalPack.registries).length,
-      mortuary_cases: Object.keys(mortuaryPack.cases).length,
-      filler: fillerSummary,
-      compliance: Boolean(compliancePack.integration),
-      governance: {
-        abac_policies: Object.keys(governancePack.abacPolicies).length,
-        break_glass_accesses: Object.keys(governancePack.breakGlassAccesses).length,
-        break_glass_reviews: Object.keys(governancePack.breakGlassReviews).length,
-        office_contexts: Object.keys(governancePack.officeContexts).length,
-        shift_closes: Object.keys(governancePack.shiftCloses).length,
-        day_closes: Object.keys(governancePack.dayCloses).length,
-        handovers: Object.keys(governancePack.handovers).length,
-        custody_snapshots: Object.keys(governancePack.custodySnapshots).length,
-        closeout_packs: Object.keys(governancePack.closeoutPacks).length,
-      },
+      skipped_packs: skippedPacks,
     },
   };
 };

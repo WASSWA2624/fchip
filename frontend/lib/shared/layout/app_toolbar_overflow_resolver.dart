@@ -1,11 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fchip/core/permissions/access_policy.dart';
-import 'package:fchip/core/permissions/access_requirement.dart';
-import 'package:fchip/core/permissions/app_permission.dart';
-import 'package:fchip/core/permissions/permission_providers.dart';
-import 'package:fchip/shared/actions/app_global_fault_report_action.dart';
-import 'package:fchip/shared/actions/app_global_fault_report_dialog.dart';
 import 'package:fchip/shared/actions/app_workspace_refresh_action.dart';
 import 'package:fchip/shared/components/app_button.dart';
 import 'package:fchip/shared/layout/app_workspace_board_toggle.dart';
@@ -28,14 +22,6 @@ final class AppToolbarOverflowEntry {
   final bool enabled;
   final AppToolbarOverflowCallback? onSelected;
 }
-
-const AccessRequirement _faultReportRequirement = AccessRequirement(
-  anyPermissions: <AppPermission>[
-    AppPermissions.biomedWrite,
-    AppPermissions.operationsWrite,
-  ],
-  activeModules: <String>['biomedical-engineering-suite'],
-);
 
 List<AppToolbarOverflowEntry> resolveToolbarOverflowEntries(
   List<Widget> actions,
@@ -78,26 +64,6 @@ AppToolbarOverflowEntry? _resolveAction(Widget action, WidgetRef ref) {
       label: action.label,
       enabled: action.onPressed != null && !action.isLoading,
       onSelected: (_, _) => action.onPressed?.call(),
-    );
-  }
-  if (action is AppGlobalFaultReportAction) {
-    final bool isAllowed = _faultReportRequirement.isAllowed(
-      ref.read(appAccessPolicyProvider),
-    );
-    return AppToolbarOverflowEntry(
-      icon: Icons.report_problem_outlined,
-      label: action.label,
-      enabled: isAllowed,
-      onSelected: (BuildContext context, WidgetRef menuRef) {
-        if (!isAllowed) {
-          return;
-        }
-        showAppGlobalFaultReportDialog(
-          context: context,
-          ref: menuRef,
-          onCompleted: action.onCompleted,
-        );
-      },
     );
   }
   if (action is AppWorkspaceViewToggle) {
@@ -145,11 +111,8 @@ IconData? _segmentIcon(Widget? iconWidget) {
   return null;
 }
 
-/// Whether a toolbar action should appear in the overflow menu (permission-gated globals).
+/// Whether a toolbar action should appear in the overflow menu.
 bool isToolbarOverflowActionVisible(Widget action, WidgetRef ref) {
-  if (action is AppGlobalFaultReportAction) {
-    return _faultReportRequirement.isAllowed(ref.read(appAccessPolicyProvider));
-  }
   return true;
 }
 

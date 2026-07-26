@@ -340,31 +340,18 @@ void main() {
     expect(find.byIcon(Icons.refresh), findsOneWidget);
   });
 
-  testWidgets('facilities section hidden when both global actions disallowed', (
+  testWidgets('overflow menu hidden when global actions disabled and no screen actions', (
     WidgetTester tester,
   ) async {
-    const Widget faultReportAction = AppGlobalFaultReportAction(
-      label: 'Report equipment fault',
-    );
-
     await pumpComponent(
       tester,
       const ProviderScope(
         child: AppWorkspace(
-          title: 'HR',
+          title: 'Settings',
           toolbar: AppWorkspaceToolbarConfig(
             showGlobalActions: false,
             maxVisibleScreenActions: 0,
             overflowLabel: 'More actions',
-            toolbarLayoutActions: <Widget>[
-              faultReportAction,
-            ],
-            overflowSections: <AppToolbarOverflowSection>[
-              AppToolbarOverflowSection(
-                headerLabel: 'Facilities',
-                actions: <Widget>[faultReportAction],
-              ),
-            ],
           ),
           body: Text('Directory'),
         ),
@@ -373,7 +360,6 @@ void main() {
     );
 
     expect(find.byIcon(Icons.more_vert), findsNothing);
-    expect(find.text('Facilities'), findsNothing);
   });
 
   testWidgets('sectioned overflow keeps notifications in approvals section', (

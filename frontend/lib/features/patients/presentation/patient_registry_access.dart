@@ -1,0 +1,11 @@
+import 'package:fchip/core/permissions/access_policy.dart';
+
+bool isPharmacyRegistryReader(AppAccessPolicy policy) {
+  return policy.hasRole(AppRole.pharmacist) &&
+      !policy.grants(AppPermissions.patientWrite);
+}
+
+bool isBillingRegistryReader(AppAccessPolicy policy) {
+  return policy.hasRole(AppRole.billing) &&
+      !policy.grants(AppPermissions.patientWrite);
+}

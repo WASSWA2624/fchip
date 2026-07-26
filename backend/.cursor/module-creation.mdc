@@ -1,0 +1,32 @@
+---
+description: Mandatory backend module build sequence from schemas through tests and access alignment.
+globs:
+  - "backend/**"
+alwaysApply: false
+---
+# Module Creation Rules
+
+Define the mandatory build sequence for every backend module.
+
+## Required sequence
+
+0. Permissions must be declared in `.cursor/access/modules.mdc`, roles in `default_user_roles.mdc`, and the module in `subscriptions.mdc`.
+1. The contract must be defined in `../../.cursor/app-write-up.mdc`, `dev-plan/P010_api_endpoints.md`, and `dev-plan/P011_modules.md`.
+2. Module and mirrored test folders must be created.
+3. Zod schemas must use `snake_case` and `human_friendly_id` for public identifiers.
+4. Repositories must support `human_friendly_id` lookup, tenancy, soft-delete, and audit-friendly queries.
+5. Services must enforce RBAC, ABAC, entitlements, audit, workflow rules, and post-mutation websocket events.
+6. Controllers must use response helpers and must not contain business logic.
+7. Routes must include validation, auth, authorization, and documentation.
+8. The module must be mounted; every user-visible mutation must emit websockets.
+9. Tests, seeds, and docs must be complete before declaring done.
+
+## Done gate
+
+- Owned tables and permission keys must exist.
+- Public routes and responses must use `human_friendly_id` only.
+- Defaults must match `.cursor/access/`; subscription intersection tests must pass.
+- Effective permissions must equal `union(role, module, user grants) ∩ subscription ∩ ABAC`; unauthorized access must not occur.
+- Standalone workflow must work without another paid module open.
+- Mutations must create audit evidence; names must match docs.
+- Schema, repository, service, controller, and route tests must pass.

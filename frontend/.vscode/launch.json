@@ -1,0 +1,80 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Flutter: Web Chrome (development)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "chrome",
+      "flutterMode": "debug",
+      "preLaunchTask": "Release Flutter web port 5201",
+      "toolArgs": [
+        "--web-hostname=127.0.0.1",
+        "--web-port=5201",
+        "--dart-define-from-file=env/development.json.example",
+        "--no-web-enable-expression-evaluation",
+        "--no-web-resources-cdn",
+        "--web-browser-flag=--user-data-dir=${workspaceFolder}/.dart_tool/flutter_chrome_profile",
+        "--web-browser-flag=--disable-extensions",
+        "--web-browser-flag=--no-first-run",
+        "--web-browser-flag=--remote-allow-origins=*"
+      ]
+    },
+    {
+      "name": "Flutter: Android (development)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "android",
+      "flutterMode": "debug",
+      "toolArgs": [
+        "--dart-define-from-file=env/development.json.example"
+      ]
+    },
+    {
+      "name": "Flutter: iOS (development)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "ios",
+      "flutterMode": "debug",
+      "toolArgs": [
+        "--dart-define-from-file=env/development.json.example"
+      ]
+    },
+    {
+      "name": "Flutter: macOS (development)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "macos",
+      "flutterMode": "debug",
+      "toolArgs": [
+        "--dart-define-from-file=env/development.json.example"
+      ]
+    },
+    {
+      "name": "Flutter: Windows (development)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "windows",
+      "flutterMode": "debug",
+      "toolArgs": [
+        "--dart-define-from-file=env/development.json.example"
+      ]
+    },
+    {
+      "name": "Flutter: Linux (development)",
+      "request": "launch",
+      "type": "dart",
+      "program": "lib/main.dart",
+      "deviceId": "linux",
+      "flutterMode": "debug",
+      "toolArgs": [
+        "--dart-define-from-file=env/development.json.example"
+      ]
+    }
+  ]
+}

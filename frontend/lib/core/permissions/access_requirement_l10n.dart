@@ -1,0 +1,67 @@
+import 'package:fchip/core/permissions/access_policy.dart';
+import 'package:fchip/core/permissions/access_requirement.dart';
+import 'package:fchip/core/utils/app_display.dart';
+import 'package:fchip/l10n/app_localizations.dart';
+
+String accessRequirementDenialMessage(
+  AppLocalizations l10n,
+  AccessRequirement requirement,
+  AppAccessPolicy policy,
+) {
+  if (requirement.isAllowed(policy)) {
+    return l10n.accessDeniedPermissionRequired;
+  }
+
+  // Authority order: Plan (modules) → Role → Rights → scope.
+  for (final String moduleCode in requirement.effectiveModules) {
+    if (!policy.hasActiveModule(moduleCode)) {
+      return l10n.accessDeniedModuleRequired(
+        accessRequirementModuleLabel(l10n, moduleCode),
+      );
+    }
+  }
+
+  if (requirement.anyRoles.isNotEmpty &&
+      !policy.hasAnyRole(requirement.anyRoles)) {
+    return l10n.accessDeniedRoleRequired;
+  }
+
+  if (requirement.allPermissions.isNotEmpty &&
+      !policy.grantsAll(requirement.allPermissions)) {
+    return l10n.accessDeniedPermissionRequired;
+  }
+
+  if (requirement.anyPermissions.isNotEmpty &&
+      !policy.grantsAny(requirement.anyPermissions)) {
+    return l10n.accessDeniedPermissionRequired;
+  }
+
+  if (requirement.requiresTenantContext &&
+      !policy.hasTenantContext &&
+      !policy.isElevated) {
+    return l10n.accessDeniedTenantContextRequired;
+  }
+
+  if (requirement.requiresFacilityContext &&
+      !policy.hasFacilityContext &&
+      !policy.isElevated) {
+    return l10n.accessDeniedFacilityContextRequired;
+  }
+
+  return l10n.accessDeniedPermissionRequired;
+}
+
+String accessRequirementModuleLabel(AppLocalizations l10n, String moduleCode) {
+  return switch (moduleCode.trim().toLowerCase()) {
+    'scheduling-queue' ||
+    'scheduling' ||
+    'emergency' => l10n.accessDeniedModuleSchedulingLabel,
+    'inpatient-bed-management' => l10n.accessDeniedModuleInpatientLabel,
+    'lab' || 'lab-workflows' => l10n.accessDeniedModuleLabLabel,
+    'radiology' ||
+    'radiology-workflows' => l10n.accessDeniedModuleRadiologyLabel,
+    'theater' || 'theatre-anesthesia' => l10n.accessDeniedModuleTheaterLabel,
+    'physiotherapy' => l10n.accessDeniedModulePhysiotherapyLabel,
+    _ => AppDisplay.apiLabel(moduleCode),
+  };
+}

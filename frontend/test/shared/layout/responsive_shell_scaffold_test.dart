@@ -1,0 +1,454 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:fchip/shared/components/app_search_bar.dart';
+import 'package:fchip/shared/layout/app_shell_layout.dart';
+import 'package:fchip/shared/layout/responsive_shell_scaffold.dart';
+
+void main() {
+  Future<void> pumpShellAtSize(
+    WidgetTester tester,
+    Size size, {
+    ValueChanged<int>? onDestinationSelected,
+    List<ResponsiveShellDestination> destinations =
+        const <ResponsiveShellDestination>[
+          ResponsiveShellDestination(
+            label: 'Home',
+            icon: Icons.home_outlined,
+            selectedIcon: Icons.home,
+          ),
+          ResponsiveShellDestination(
+            label: 'Settings',
+            icon: Icons.settings_outlined,
+            selectedIcon: Icons.settings,
+          ),
+        ],
+  }) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = size;
+    addTearDown(tester.view.resetDevicePixelRatio);
+    addTearDown(tester.view.resetPhysicalSize);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        home: ResponsiveAppShell(
+          title: 'Template',
+          compactTitle: 'App',
+          destinations: destinations,
+          selectedIndex: 0,
+          onDestinationSelected: onDestinationSelected ?? (_) {},
+          child: const Text('Body'),
+        ),
+      ),
+    );
+  }
+
+  group('ResponsiveShellScaffold', () {
+    testWidgets('uses a drawer for mobile widths', (WidgetTester tester) async {
+      await pumpShellAtSize(tester, const Size(320, 640));
+
+      final Scaffold scaffold = tester.widget<Scaffold>(find.byType(Scaffold));
+
+      expect(scaffold.drawer, isNotNull);
+      expect(find.byType(AppMenuBar), findsOneWidget);
+      expect(find.byType(SideNavigation), findsNothing);
+      expect(find.byType(NavigationBar), findsNothing);
+      expect(find.byType(NavigationRail), findsNothing);
+      expect(find.text('Online'), findsNothing);
+      expect(find.byType(CircleAvatar), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('uses side navigation for md tablet widths', (
+      WidgetTester tester,
+    ) async {
+      await pumpShellAtSize(tester, const Size(600, 800));
+
+      final Scaffold scaffold = tester.widget<Scaffold>(find.byType(Scaffold));
+
+      expect(scaffold.drawer, isNull);
+      expect(find.byType(AppMenuBar), findsOneWidget);
+      expect(find.byType(SideNavigation), findsOneWidget);
+      expect(find.byType(NavigationBar), findsNothing);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('shows the compact title on medium mobile widths', (
+      WidgetTester tester,
+    ) async {
+      await pumpShellAtSize(tester, const Size(390, 844));
+
+      expect(find.text('App'), findsOneWidget);
+      expect(find.text('Template'), findsNothing);
+      expect(find.text('Online'), findsNothing);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('omits the mobile drawer for a single destination', (
+      WidgetTester tester,
+    ) async {
+      await pumpShellAtSize(
+        tester,
+        const Size(320, 640),
+        destinations: const <ResponsiveShellDestination>[
+          ResponsiveShellDestination(
+            label: 'Home',
+            icon: Icons.home_outlined,
+            selectedIcon: Icons.home,
+          ),
+        ],
+      );
+
+      final Scaffold scaffold = tester.widget<Scaffold>(find.byType(Scaffold));
+
+      expect(scaffold.drawer, isNull);
+      expect(find.byType(NavigationBar), findsNothing);
+      expect(find.byType(NavigationRail), findsNothing);
+      expect(find.text('Body'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('uses a compact sidebar for tablet widths', (
+      WidgetTester tester,
+    ) async {
+      await pumpShellAtSize(tester, const Size(840, 800));
+
+      expect(find.byType(AppMenuBar), findsOneWidget);
+      expect(find.byType(SideNavigation), findsOneWidget);
+      expect(find.byType(NavigationBar), findsNothing);
+      expect(find.byType(NavigationRail), findsNothing);
+      expect(find.text('Home'), findsOneWidget);
+      expect(find.text('Settings'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('uses a sidebar for desktop widths', (
+      WidgetTester tester,
+    ) async {
+      await pumpShellAtSize(tester, const Size(1200, 900));
+
+      expect(find.byType(AppMenuBar), findsOneWidget);
+      expect(find.byType(SideNavigation), findsOneWidget);
+      expect(find.byType(NavigationBar), findsNothing);
+      expect(find.byType(NavigationRail), findsNothing);
+      expect(find.byIcon(Icons.notifications_none_outlined), findsNothing);
+      expect(find.text('Template'), findsOneWidget);
+      expect(find.text('Settings'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('honors initialSidebarCollapsed and reports toggles', (
+      WidgetTester tester,
+    ) async {
+      bool? reported;
+      tester.view.devicePixelRatio = 1;
+      tester.view.physicalSize = const Size(1200, 900);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      addTearDown(tester.view.resetPhysicalSize);
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: ResponsiveAppShell(
+            title: 'Template',
+            compactTitle: 'App',
+            destinations: const <ResponsiveShellDestination>[
+              ResponsiveShellDestination(
+                label: 'Home',
+                icon: Icons.home_outlined,
+                selectedIcon: Icons.home,
+              ),
+              ResponsiveShellDestination(
+                label: 'Settings',
+                icon: Icons.settings_outlined,
+                selectedIcon: Icons.settings,
+              ),
+            ],
+            selectedIndex: 0,
+            initialSidebarCollapsed: true,
+            onSidebarCollapsedChanged: (bool collapsed) {
+              reported = collapsed;
+            },
+            onDestinationSelected: (_) {},
+            child: const Text('Body'),
+          ),
+        ),
+      );
+
+      final SideNavigation collapsedNav = tester.widget<SideNavigation>(
+        find.byType(SideNavigation),
+      );
+      expect(collapsedNav.collapsed, isTrue);
+      expect(collapsedNav.width, AppShellLayout.collapsedSidebarWidth);
+
+      await tester.tap(find.byTooltip('Toggle sidebar'));
+      await tester.pumpAndSettle();
+
+      expect(reported, isFalse);
+      final SideNavigation expandedNav = tester.widget<SideNavigation>(
+        find.byType(SideNavigation),
+      );
+      expect(expandedNav.collapsed, isFalse);
+      expect(expandedNav.width, AppShellLayout.defaultSidebarWidth);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets(
+      'shows notification control only when notifications are wired',
+      (WidgetTester tester) async {
+        tester.view.devicePixelRatio = 1;
+        tester.view.physicalSize = const Size(1200, 900);
+        addTearDown(tester.view.resetDevicePixelRatio);
+        addTearDown(tester.view.resetPhysicalSize);
+
+        await tester.pumpWidget(
+          MaterialApp(
+            home: ResponsiveAppShell(
+              title: 'Template',
+              compactTitle: 'App',
+              destinations: const <ResponsiveShellDestination>[
+                ResponsiveShellDestination(
+                  label: 'Home',
+                  icon: Icons.home_outlined,
+                  selectedIcon: Icons.home,
+                ),
+              ],
+              selectedIndex: 0,
+              unreadNotificationCount: 3,
+              onNotificationsSelected: () {},
+              onDestinationSelected: (_) {},
+              child: const Text('Body'),
+            ),
+          ),
+        );
+
+        expect(find.byIcon(Icons.notifications_none_outlined), findsOneWidget);
+        expect(find.text('3'), findsOneWidget);
+        expect(tester.takeException(), isNull);
+      },
+    );
+
+    testWidgets('collapses desktop sidebar labels from the header toggle', (
+      WidgetTester tester,
+    ) async {
+      await pumpShellAtSize(tester, const Size(1200, 900));
+
+      await tester.tap(find.byTooltip('Toggle sidebar'));
+      await tester.pumpAndSettle();
+
+      final sideNavigation = tester.widget<SideNavigation>(
+        find.byType(SideNavigation),
+      );
+
+      expect(sideNavigation.collapsed, isTrue);
+      expect(sideNavigation.width, AppShellLayout.collapsedSidebarWidth);
+      expect(find.text('Settings'), findsNothing);
+      expect(find.byIcon(Icons.settings_outlined), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('shows fixed search only for the expanded desktop sidebar', (
+      WidgetTester tester,
+    ) async {
+      await pumpShellAtSize(tester, const Size(1200, 900));
+
+      final Finder sidebar = find.byType(SideNavigation);
+      final Finder sidebarListView = find.descendant(
+        of: sidebar,
+        matching: find.byType(ListView),
+      );
+
+      expect(find.byType(AppSearchBar), findsOneWidget);
+      expect(
+        find.descendant(
+          of: sidebarListView,
+          matching: find.byType(AppSearchBar),
+        ),
+        findsNothing,
+      );
+
+      await tester.tap(find.byTooltip('Toggle sidebar'));
+      await tester.pumpAndSettle();
+
+      expect(find.byType(AppSearchBar), findsNothing);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('filters desktop side navigation items by group label text', (
+      WidgetTester tester,
+    ) async {
+      await pumpShellAtSize(
+        tester,
+        const Size(1200, 900),
+        destinations: const <ResponsiveShellDestination>[
+          ResponsiveShellDestination(
+            label: 'Home',
+            groupLabel: 'Overview',
+            icon: Icons.home_outlined,
+            selectedIcon: Icons.home,
+          ),
+          ResponsiveShellDestination(
+            label: 'Claims',
+            groupLabel: 'Billing & revenue',
+            icon: Icons.receipt_long_outlined,
+            selectedIcon: Icons.receipt_long,
+          ),
+          ResponsiveShellDestination(
+            label: 'Settings',
+            groupLabel: 'Administration',
+            icon: Icons.settings_outlined,
+            selectedIcon: Icons.settings,
+          ),
+        ],
+      );
+
+      await tester.enterText(
+        find.descendant(
+          of: find.byType(SideNavigation),
+          matching: find.byType(TextFormField),
+        ),
+        'admin',
+      );
+      await tester.pump();
+
+      expect(find.text('Administration'), findsNothing);
+      expect(find.text('Settings'), findsOneWidget);
+      expect(find.text('Home'), findsNothing);
+      expect(find.text('Claims'), findsNothing);
+
+      await tester.enterText(
+        find.descendant(
+          of: find.byType(SideNavigation),
+          matching: find.byType(TextFormField),
+        ),
+        'missing',
+      );
+      await tester.pump();
+
+      expect(find.text('No menu items found'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('opens and closes the mobile drawer from header controls', (
+      WidgetTester tester,
+    ) async {
+      await pumpShellAtSize(tester, const Size(320, 640));
+
+      await tester.tap(find.byTooltip('Open navigation menu'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Settings'), findsOneWidget);
+
+      await tester.tap(find.byTooltip('Close navigation menu'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Settings'), findsNothing);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('shows the compact title in the mobile drawer header', (
+      WidgetTester tester,
+    ) async {
+      await pumpShellAtSize(tester, const Size(320, 640));
+
+      await tester.tap(find.byTooltip('Open navigation menu'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('App'), findsOneWidget);
+      expect(find.text('Template'), findsNothing);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('shows short labels in the mobile drawer', (
+      WidgetTester tester,
+    ) async {
+      await pumpShellAtSize(
+        tester,
+        const Size(320, 640),
+        destinations: const <ResponsiveShellDestination>[
+          ResponsiveShellDestination(
+            label: 'Patient registry',
+            shortLabel: 'Patients',
+            groupLabel: 'Patient intake',
+            icon: Icons.people_outline,
+            selectedIcon: Icons.people,
+          ),
+          ResponsiveShellDestination(
+            label: 'Radiology',
+            shortLabel: 'Imaging',
+            groupLabel: 'Diagnostics & pharmacy',
+            icon: Icons.medical_services_outlined,
+            selectedIcon: Icons.medical_services,
+          ),
+        ],
+      );
+
+      await tester.tap(find.byTooltip('Open navigation menu'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Patients'), findsOneWidget);
+      expect(find.text('Imaging'), findsOneWidget);
+      expect(find.text('Patient registry'), findsNothing);
+      expect(find.text('Radiology'), findsNothing);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('search matches short labels on desktop sidebar', (
+      WidgetTester tester,
+    ) async {
+      await pumpShellAtSize(
+        tester,
+        const Size(1200, 900),
+        destinations: const <ResponsiveShellDestination>[
+          ResponsiveShellDestination(
+            label: 'Radiology',
+            shortLabel: 'Imaging',
+            groupLabel: 'Diagnostics & pharmacy',
+            icon: Icons.medical_services_outlined,
+            selectedIcon: Icons.medical_services,
+          ),
+          ResponsiveShellDestination(
+            label: 'Settings',
+            icon: Icons.settings_outlined,
+            selectedIcon: Icons.settings,
+          ),
+        ],
+      );
+
+      await tester.enterText(
+        find.descendant(
+          of: find.byType(SideNavigation),
+          matching: find.byType(TextFormField),
+        ),
+        'imaging',
+      );
+      await tester.pump();
+
+      expect(find.text('Radiology'), findsOneWidget);
+      expect(find.text('Settings'), findsNothing);
+      expect(tester.takeException(), isNull);
+    });
+
+    testWidgets('selects desktop side navigation from the keyboard', (
+      WidgetTester tester,
+    ) async {
+      int? selectedIndex;
+      await pumpShellAtSize(
+        tester,
+        const Size(1200, 900),
+        onDestinationSelected: (int index) {
+          selectedIndex = index;
+        },
+      );
+
+      for (var tabIndex = 0; tabIndex < 5; tabIndex += 1) {
+        await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+        await tester.pump();
+      }
+      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+      await tester.pump();
+
+      expect(selectedIndex, 1);
+      expect(tester.takeException(), isNull);
+    });
+  });
+}

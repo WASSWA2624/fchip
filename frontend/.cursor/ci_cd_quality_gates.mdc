@@ -1,0 +1,51 @@
+---
+description: Define automated CI checks, local quality gates, and release readiness for the frontend.
+globs:
+  - ".github/workflows/**"
+  - "frontend/scripts/ci/**"
+  - "frontend/.cursor/ci_cd_quality_gates.mdc"
+alwaysApply: false
+---
+
+# CI/CD and Quality Gates
+
+Automated checks and release-readiness gates for the frontend.
+
+## Requirements
+
+- CI must fail on formatting differences, analyzer errors, or failing required tests.
+- CI must fail when committed generated code is stale.
+- CI must not use production credentials and must not print secrets.
+- Release builds must use production-safe configuration.
+- Deployment scripts must be POSIX-friendly for Linux/macOS hosts; platform builds may split by OS when tooling requires.
+
+## Local quality commands
+
+```bash
+flutter pub get
+dart run build_runner build --delete-conflicting-outputs
+dart format --set-exit-if-changed .
+flutter analyze
+flutter test
+```
+
+Run generation before analysis only when the project uses generated files.
+
+## Release checklist
+
+- Version, formatting, analyzer, and tests pass.
+- Generated code is current when generation is used.
+- No secrets committed; production API URL and logging level correct.
+- Supported platform builds complete on compatible hosts.
+
+## Acceptance
+
+- CI reproduces the local quality-gate commands.
+- Builds are deterministic enough for release packaging.
+- Platform host requirements are documented.
+
+## Related
+
+- [`testing.mdc`](./testing.mdc)
+- [`dependencies.mdc`](./dependencies.mdc)
+- [`security.mdc`](./security.mdc)

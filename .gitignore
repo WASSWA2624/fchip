@@ -1,0 +1,62 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/*
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Secrets / local env
+.env
+.env.*
+!.env.example
+!.env.*.example
+!**/.env.example
+!**/.env.*.example
+!**/.env.test.example
+!**/env.template.txt
+
+# Dependencies / build
+node_modules/
+dist/
+build/
+coverage/
+tmp/
+temp/
+*.log
+logs/
+
+# Flutter / Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+**/doc/api/
+**/ios/Flutter/.last_build_id
+**/android/.gradle/
+**/android/local.properties
+**/android/app/debug
+**/android/app/profile
+**/android/app/release
+**/linux/flutter/ephemeral/
+**/macos/Flutter/ephemeral/
+**/windows/flutter/ephemeral/
+*.iml
+
+# Test / tooling artifacts
+playwright-report/
+test-results/
+.eslintcache
+.jest-cache/
+.cache/
+
+# Local scratch / MCP snapshots
+web_test_out*.txt
+.playwright-mcp/
+frontend/web_test_out*.txt
+frontend/.playwright-mcp/

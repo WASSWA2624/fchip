@@ -1,0 +1,43 @@
+---
+description: Default user roles seeded on install and their module scope.
+globs:
+  - "backend/**"
+  - "frontend/**"
+alwaysApply: false
+---
+
+# Default User Roles
+
+These roles must be seeded automatically on install; see `permissions.mdc` for access semantics.
+
+## Shipped Roles
+
+- `super_admin`: platform manage, all active modules.
+- `tenant_admin`: tenant manage, all entitled modules.
+- `facility_admin`: facility manage, facility modules.
+- `integration_admin`: integrations and reports_audit.
+- `doctor`: clinical care, diagnostics, and billing visibility.
+- `nurse`: ward care, triage, diagnostics, and registry.
+- `receptionist`: registration, queues, and billing.
+- `accountant`: billing, claims, and reporting.
+- `pharmacist`: dispensing, stock, billing view.
+- `laboratory_technician`: lab work.
+- `radiographer`: radiology scan workflow.
+- `radiologist`: imaging interpretation.
+- `physiotherapist`: therapy workflow.
+- `discharge_planner`: discharge coordination.
+- `operations_staff`, `housekeeper`, `biomedical_engineer`, `mortuary_attendant`: their own modules.
+- `hr_staff`: HR administration.
+- `patient`: own-data only.
+- `visitor_guest`: limited visitor info.
+
+## Administration
+
+- Admins may add custom roles using the same vocabulary.
+- Reset must restore this shipped matrix atomically.
+- Failed changes must roll back completely and stay auditable.
+- Frontend and backend must deny unauthorized menus, actions, and workflows.
+
+## Related Rules
+
+- `modules.mdc`, `permissions.mdc`, `subscriptions.mdc`

@@ -1,0 +1,45 @@
+---
+description: Apply when adding or reviewing localization, ARB keys, and locale-aware formatting.
+globs:
+  - "frontend/lib/l10n/**"
+  - "frontend/lib/**/presentation/**"
+  - "frontend/lib/**/widgets/**"
+alwaysApply: false
+---
+
+# Localization and Internationalization
+
+Defines how user-facing text, formatting, and accessibility labels are handled.
+
+## Mandatory rules
+
+- Must not hard-code user-facing text in widgets, controllers, validators, or error views.
+- Must use Flutter generated localization from `lib/l10n`; enable `flutter: generate: true` in `pubspec.yaml`; keep `l10n.yaml` at project root.
+- English is the initial locale; every future locale must have its own ARB file.
+- Must use locale-aware formatting for dates, times, numbers, currency, and plurals.
+- Keys must be descriptive and stable; copy concise and clinically appropriate.
+- Must include accessibility labels and error messages in localization files.
+- Must not concatenate translated strings when interpolation or pluralization applies.
+- Must not use private string holder classes (`_BillingText`, etc.); add keys to `app_en.arb` and use `context.l10n` / `AppLocalizations`.
+- Controllers and repositories must not own user-facing copy.
+
+## Key naming
+
+| Purpose | Example |
+|---|---|
+| Page title | `homeTitle` |
+| Button | `commonSaveButton` |
+| Field label | `profileFirstNameLabel` |
+| Validation | `validationRequired` |
+| Error | `networkTimeoutMessage` |
+
+## Acceptance checklist
+
+- `flutter gen-l10n` succeeds.
+- No hard-coded user-facing strings in `lib/features`.
+- Changing locale updates the app without touching business logic.
+
+## Related rules
+
+- [`ui-patterns.mdc`](./ui-patterns.mdc)
+- [`error_handling.mdc`](./error_handling.mdc)

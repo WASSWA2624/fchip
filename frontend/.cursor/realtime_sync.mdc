@@ -1,0 +1,44 @@
+---
+description: Apply when implementing WebSocket transport, subscriptions, or controller realtime refresh.
+globs:
+  - "frontend/lib/core/realtime/**"
+  - "frontend/lib/features/**/presentation/controllers/**"
+alwaysApply: false
+---
+
+# Realtime Sync
+
+Keep visible UI state aligned with backend persistence through authenticated WebSockets. Mutation-to-UI flow is owned by [`instant_ui_sync.mdc`](./instant_ui_sync.mdc); this file owns transport, subscription, reconnect, and reconciliation. WebSockets are server → client into Riverpod; CRUD writes use HTTP.
+
+## Mandatory rules
+
+- Must connect only when authenticated; token travels in `/ws?token=`.
+- Widgets must not parse websocket payloads; controllers own refresh and write into Riverpod only.
+- Local mutation success must update Riverpod before the websocket round-trip; events reconcile, not replace, the optimistic patch.
+- Every workspace showing shared, multi-user data must register listeners in `build()`.
+- Must use `RealtimeEventGroups` for event sets; must not duplicate long event lists per module.
+- Must filter events with `RealtimeScope` when the workspace is tenant/facility scoped.
+- Let `listenForRealtimeRefresh` coalesce bursts; defer refresh while local saves are in flight.
+- Must use `WorkspaceSyncEngine`: apply a safe typed `RealtimeDelta`, otherwise a targeted HTTP refresh via `WorkspaceRefreshPlan`.
+- Must disable periodic polling while connected; poll only as an offline fallback.
+- Websocket failures must not block writes; HTTP stays source of truth.
+- Must reconnect on token rotation via `realtimeMessagesProvider`; keep `refreshOnReconnect: true` to reconcile missed data.
+- Use `includeCrudMutations: true` to refresh on audit-driven `{entity}.{operation}` events.
+
+## Core layout
+
+```txt
+core/realtime/
+├── realtime_service.dart
+├── realtime_providers.dart
+├── realtime_events.dart
+├── realtime_event_groups.dart
+├── realtime_refresh.dart
+└── realtime_scope.dart
+```
+
+## See also
+
+- [`instant_ui_sync.mdc`](./instant_ui_sync.mdc)
+- [`network_api.mdc`](./network_api.mdc)
+- [`offline_sync.mdc`](./offline_sync.mdc)

@@ -1,0 +1,41 @@
+---
+description: Apply when reviewing frontend scope, invariants, and minimum runnable contract.
+globs:
+  - "frontend/lib/**"
+  - "frontend/test/**"
+alwaysApply: false
+---
+
+# Project Scope
+
+FCHIP frontend is the Flutter client for the hospital management system, implementing module workspaces, clinical and operational flows, and shared shell UI against the `fchip-backend` API. Boundaries: [`.cursor/app-write-up.mdc`](../../.cursor/app-write-up.mdc).
+
+## Mandatory rules
+
+- Must build production-ready module workspaces, not a generic disconnected starter.
+- Must support Android, iOS, Web, Windows, macOS, and Linux where enabled; extra-small mobile through large desktop; smartwatch out of scope.
+- Must integrate with `fchip-backend` via repositories, DTOs, and [`.cursor/api-contract.mdc`](../../.cursor/api-contract.mdc).
+- Should prefer Flutter SDK widgets, Material Design, and shared `lib/shared/` abstractions before custom packages.
+- Must not duplicate dependencies, folders, components, rules, and competing design systems.
+- Module menus, routes, forms, actions, and visibility must match backend permissions, entitlements, and APIs.
+- Must reference entities by `human_friendly_id`; backend maps internal IDs.
+- Must enforce RBAC+ABAC and subscription-package intersection ([`permissions.mdc`](./permissions.mdc)).
+
+## Architecture invariants
+
+- One architecture, one routing system (`go_router`), one state system (Riverpod), one design system, one shared component strategy.
+- Mutation/reconciliation is owned by [`instant_ui_sync.mdc`](./instant_ui_sync.mdc); layer boundaries by [`architecture.mdc`](./architecture.mdc).
+
+## Minimum runnable contract
+
+- Startup: `main.dart`, `bootstrap.dart`, provider scope, predictable flow.
+- Shell: `MaterialApp.router`, `go_router`, not-found route, responsive shell with menu bar and collapsible side nav.
+- Theme: Material 3 light/dark/system with shared tokens.
+- State: Riverpod with override-ready boundaries.
+- Localization: English ARB baseline, `l10n.yaml`, generated l10n.
+- Workspaces: `AppWorkspace` + `AppListTable` ([`ui-workspace.mdc`](./ui-workspace.mdc)).
+
+## See also
+
+- [`project_structure.mdc`](./project_structure.mdc)
+- [`checklists.mdc`](./checklists.mdc)

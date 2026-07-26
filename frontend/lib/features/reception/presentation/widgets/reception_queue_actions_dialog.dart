@@ -1,0 +1,37 @@
+import 'package:flutter/material.dart';
+import 'package:fchip/features/opd/domain/entities/opd_entities.dart';
+import 'package:fchip/features/reception/presentation/reception_access.dart';
+import 'package:fchip/shared/components/components.dart';
+import 'package:fchip/shared/opd_actions/opd_queue_actions_dialog.dart';
+
+/// Opens reception queue actions through the shared OPD queue action hub.
+Future<bool?> showReceptionQueueActionsDialog({
+  required BuildContext context,
+  required OpdQueueEntry entry,
+}) {
+  return showAppDialog<bool>(
+    context: context,
+    barrierDismissible: false,
+    builder: (_) => ReceptionQueueActionsDialog(entry: entry),
+  );
+}
+
+/// Reception front-desk queue actions.
+///
+/// Composes [QueueActionsDialog] with [receptionFrontDeskWriteRequirement]
+/// rather than forking a divergent reception shell.
+class ReceptionQueueActionsDialog extends StatelessWidget {
+  const ReceptionQueueActionsDialog({required this.entry, super.key});
+
+  final OpdQueueEntry entry;
+
+  @override
+  Widget build(BuildContext context) {
+    return QueueActionsDialog(
+      entry: entry,
+      // Explicit reception gate (alias of OPD front-desk write) for RBAC clarity.
+      // ignore: avoid_redundant_argument_values
+      actionRequirement: receptionFrontDeskWriteRequirement,
+    );
+  }
+}

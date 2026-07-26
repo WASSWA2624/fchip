@@ -1,0 +1,40 @@
+---
+description: Govern how frontend assets and branding are named, sized, and registered.
+globs:
+  - "frontend/assets/**"
+  - "frontend/pubspec.yaml"
+  - "frontend/lib/shared/assets/**"
+alwaysApply: false
+---
+
+# Asset and Branding Strategy
+
+Rules for asset folders, naming, branding, icons, splash screens, and image quality.
+
+## Requirements
+
+- Asset file names must be lowercase with underscores.
+- Must not duplicate the same asset under multiple names.
+- Must compress images before committing them.
+- Use appropriately sized raster images per context; prefer vectors for simple scalable icons.
+- Keep logos in a dedicated folder and register all assets explicitly in `pubspec.yaml`.
+- Brand colors must come through the theme system, not raw widget colors.
+- Use localized alt text and semantic labels for meaningful images.
+
+## Implementation
+
+- Recommended folders: `assets/images`, `assets/icons`, `assets/logos`, `assets/illustrations`, and `assets/fonts` when needed.
+- Keep launcher icon and splash setup documented and repeatable.
+- Provide light/dark variants only when the design requires them.
+
+## Acceptance
+
+- Assets load on all supported platforms.
+- Large images are not committed uncompressed.
+- Reused asset paths are centralized.
+
+## Related
+
+- [`design-system.mdc`](./design-system.mdc)
+- [`accessibility.mdc`](./accessibility.mdc)
+- [`dependencies.mdc`](./dependencies.mdc)

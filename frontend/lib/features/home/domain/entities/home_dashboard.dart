@@ -1,0 +1,438 @@
+import 'package:fchip/core/permissions/access_policy.dart';
+
+enum HomeDashboardLoadState { ready, tenantContextRequired }
+
+final class HomeDashboardRequest {
+  const HomeDashboardRequest({this.tenantId, this.facilityId});
+
+  factory HomeDashboardRequest.fromQuery(Map<String, String> query) {
+    return HomeDashboardRequest(
+      tenantId: _string(query['tenant_id'] ?? query['tenantId']),
+      facilityId: _string(query['facility_id'] ?? query['facilityId']),
+    );
+  }
+
+  static const empty = HomeDashboardRequest();
+
+  final String? tenantId;
+  final String? facilityId;
+
+  Map<String, Object?> toQueryParameters() {
+    return <String, Object?>{
+      if (tenantId != null) 'tenant_id': tenantId,
+      if (facilityId != null) 'facility_id': facilityId,
+      'limit': 5,
+    };
+  }
+
+  bool get hasTenantContext => tenantId != null;
+
+  @override
+  bool operator ==(Object other) {
+    return other is HomeDashboardRequest &&
+        other.tenantId == tenantId &&
+        other.facilityId == facilityId;
+  }
+
+  @override
+  int get hashCode => Object.hash(tenantId, facilityId);
+}
+
+final class HomeDashboard {
+  const HomeDashboard({
+    required this.state,
+    required this.profile,
+    required this.context,
+    required this.statusCards,
+    required this.trend,
+    required this.distribution,
+    required this.quickActionIds,
+    required this.shortcutIds,
+    required this.queuePreview,
+    required this.alerts,
+    required this.activity,
+    required this.tenantOptions,
+    this.resultsPreview = const <HomeQueueItem>[],
+    this.followUpPreview = const <HomeQueueItem>[],
+    this.generatedAt,
+    this.usesFallbackData = false,
+  });
+
+  final HomeDashboardLoadState state;
+  final HomeDashboardProfile profile;
+  final HomeDashboardContext context;
+  final List<HomeStatusCard> statusCards;
+  final HomeDashboardTrend trend;
+  final HomeDashboardDistribution distribution;
+  final List<String> quickActionIds;
+  final List<String> shortcutIds;
+  final List<HomeQueueItem> queuePreview;
+  final List<HomeAlertItem> alerts;
+  final List<HomeActivityItem> activity;
+  final List<HomeTenantOption> tenantOptions;
+  final List<HomeQueueItem> resultsPreview;
+  final List<HomeQueueItem> followUpPreview;
+  final DateTime? generatedAt;
+  final bool usesFallbackData;
+
+  HomeDashboard copyWith({
+    HomeDashboardProfile? profile,
+    HomeDashboardContext? context,
+    List<HomeStatusCard>? statusCards,
+    HomeDashboardTrend? trend,
+    HomeDashboardDistribution? distribution,
+    List<String>? quickActionIds,
+    List<String>? shortcutIds,
+    List<HomeQueueItem>? queuePreview,
+    List<HomeAlertItem>? alerts,
+    List<HomeActivityItem>? activity,
+    List<HomeTenantOption>? tenantOptions,
+    List<HomeQueueItem>? resultsPreview,
+    List<HomeQueueItem>? followUpPreview,
+    DateTime? generatedAt,
+    bool? usesFallbackData,
+  }) {
+    return HomeDashboard(
+      state: state,
+      profile: profile ?? this.profile,
+      context: context ?? this.context,
+      statusCards: statusCards ?? this.statusCards,
+      trend: trend ?? this.trend,
+      distribution: distribution ?? this.distribution,
+      quickActionIds: quickActionIds ?? this.quickActionIds,
+      shortcutIds: shortcutIds ?? this.shortcutIds,
+      queuePreview: queuePreview ?? this.queuePreview,
+      alerts: alerts ?? this.alerts,
+      activity: activity ?? this.activity,
+      tenantOptions: tenantOptions ?? this.tenantOptions,
+      resultsPreview: resultsPreview ?? this.resultsPreview,
+      followUpPreview: followUpPreview ?? this.followUpPreview,
+      generatedAt: generatedAt ?? this.generatedAt,
+      usesFallbackData: usesFallbackData ?? this.usesFallbackData,
+    );
+  }
+
+  bool get isTenantContextRequired {
+    return state == HomeDashboardLoadState.tenantContextRequired;
+  }
+
+  bool get hasLiveContent {
+    return statusCards.any((HomeStatusCard card) => card.numericValue > 0) ||
+        trend.hasData ||
+        distribution.hasData ||
+        queuePreview.isNotEmpty ||
+        resultsPreview.isNotEmpty ||
+        followUpPreview.isNotEmpty ||
+        alerts.any((HomeAlertItem alert) => alert.count > 0) ||
+        activity.isNotEmpty;
+  }
+
+  int get attentionCount {
+    final int alertTotal = alerts.fold<int>(
+      0,
+      (int sum, HomeAlertItem item) => sum + item.count,
+    );
+    return alertTotal +
+        queuePreview.length +
+        resultsPreview.length +
+        followUpPreview.length;
+  }
+}
+
+final class HomeMetricRouteTarget {
+  const HomeMetricRouteTarget({
+    this.queryParameters = const <String, String>{},
+  });
+
+  final Map<String, String> queryParameters;
+}
+
+/// Typed modal action for a home KPI card (HR workforce dashboard).
+enum HomeMetricActionKind {
+  hrStaffDirectory,
+  hrWorkQueue,
+  hrTodayShifts,
+  hrOnLeaveToday,
+  hrAttendedToday,
+}
+
+final class HomeMetricActionTarget {
+  const HomeMetricActionTarget({
+    required this.kind,
+    this.hrQueue,
+    this.staffStatusFilter,
+    this.workItemStatus,
+  });
+
+  final HomeMetricActionKind kind;
+  final String? hrQueue;
+  final String? staffStatusFilter;
+  final String? workItemStatus;
+}
+
+/// Toolbar action ids resolved by [buildHomeToolbarSecondary].
+enum HomeToolbarActionId { openHrWorkspace }
+
+final class HomeDashboardProfile {
+  const HomeDashboardProfile({
+    required this.id,
+    required this.role,
+    required this.roleLabel,
+    required this.homeTitle,
+    required this.emptyMessage,
+    required this.statusCards,
+    required this.quickActionIds,
+    required this.shortcutIds,
+    this.emptyActionIds = const <String>[],
+    this.metricRouteTargets = const <String, HomeMetricRouteTarget>{},
+    this.metricActionTargets = const <String, HomeMetricActionTarget>{},
+    this.toolbarActionIds = const <HomeToolbarActionId>[],
+    this.maxStatusCards = 6,
+    this.showEmptyWorkspaceLink = false,
+    this.suppressHomeQuickActions = false,
+    this.suppressHomeShortcuts = false,
+  });
+
+  final String id;
+  final AppRole role;
+  final String roleLabel;
+  final String homeTitle;
+  final String emptyMessage;
+  final List<HomeStatusCardTemplate> statusCards;
+  final List<String> quickActionIds;
+  final List<String> shortcutIds;
+  final List<String> emptyActionIds;
+  final Map<String, HomeMetricRouteTarget> metricRouteTargets;
+  final Map<String, HomeMetricActionTarget> metricActionTargets;
+  final List<HomeToolbarActionId> toolbarActionIds;
+  final int maxStatusCards;
+  final bool showEmptyWorkspaceLink;
+  final bool suppressHomeQuickActions;
+  final bool suppressHomeShortcuts;
+
+  List<HomeStatusCard> fallbackStatusCards() {
+    return statusCards
+        .map(
+          (HomeStatusCardTemplate template) => HomeStatusCard(
+            id: template.id,
+            label: template.label,
+            value: 0,
+            format: template.format,
+          ),
+        )
+        .toList(growable: false);
+  }
+}
+
+final class HomeStatusCardTemplate {
+  const HomeStatusCardTemplate({
+    required this.id,
+    required this.label,
+    this.format = 'number',
+  });
+
+  final String id;
+  final String label;
+  final String format;
+}
+
+final class HomeDashboardContext {
+  const HomeDashboardContext({
+    this.roleValue,
+    this.tenantId,
+    this.facilityId,
+    this.facilityName,
+    this.facilityType,
+    this.nurseContext,
+    this.departmentName,
+  });
+
+  final String? roleValue;
+  final String? tenantId;
+  final String? facilityId;
+  final String? facilityName;
+  final String? facilityType;
+  final String? nurseContext;
+  final String? departmentName;
+}
+
+final class HomeStatusCard {
+  const HomeStatusCard({
+    required this.id,
+    required this.label,
+    required this.value,
+    this.secondaryValue,
+    this.hint,
+    this.format = 'number',
+  });
+
+  final String id;
+  final String label;
+  final num value;
+  final num? secondaryValue;
+  final String? hint;
+  final String format;
+
+  int get numericValue => value.round();
+}
+
+final class HomeDashboardTrend {
+  const HomeDashboardTrend({
+    required this.title,
+    required this.subtitle,
+    required this.points,
+  });
+
+  static const empty = HomeDashboardTrend(
+    title: '',
+    subtitle: '',
+    points: <HomeTrendPoint>[],
+  );
+
+  final String title;
+  final String subtitle;
+  final List<HomeTrendPoint> points;
+
+  bool get hasData {
+    return points.any((HomeTrendPoint point) => point.value > 0);
+  }
+}
+
+final class HomeTrendPoint {
+  const HomeTrendPoint({
+    required this.id,
+    required this.date,
+    required this.value,
+    this.label,
+  });
+
+  final String id;
+  final DateTime? date;
+  final num value;
+  final String? label;
+}
+
+final class HomeDashboardDistribution {
+  const HomeDashboardDistribution({
+    required this.title,
+    required this.subtitle,
+    required this.total,
+    required this.segments,
+  });
+
+  static const empty = HomeDashboardDistribution(
+    title: '',
+    subtitle: '',
+    total: 0,
+    segments: <HomeDistributionSegment>[],
+  );
+
+  final String title;
+  final String subtitle;
+  final num total;
+  final List<HomeDistributionSegment> segments;
+
+  bool get hasData {
+    return total > 0 ||
+        segments.any((HomeDistributionSegment segment) => segment.value > 0);
+  }
+}
+
+final class HomeDistributionSegment {
+  const HomeDistributionSegment({
+    required this.id,
+    required this.label,
+    required this.value,
+    this.color,
+  });
+
+  final String id;
+  final String label;
+  final num value;
+  final String? color;
+}
+
+final class HomeQueueItem {
+  const HomeQueueItem({
+    required this.id,
+    required this.label,
+    required this.moduleSlug,
+    required this.status,
+    required this.severity,
+    this.subtitle,
+    this.occurredAt,
+    this.target,
+  });
+
+  final String id;
+  final String label;
+  final String moduleSlug;
+  final String? status;
+  final String? severity;
+  final String? subtitle;
+  final DateTime? occurredAt;
+  final HomeRouteTarget? target;
+}
+
+final class HomeAlertItem {
+  const HomeAlertItem({
+    required this.id,
+    required this.label,
+    required this.severity,
+    required this.count,
+    this.target,
+  });
+
+  final String id;
+  final String label;
+  final String severity;
+  final int count;
+  final HomeRouteTarget? target;
+}
+
+final class HomeActivityItem {
+  const HomeActivityItem({
+    required this.id,
+    required this.label,
+    required this.moduleSlug,
+    this.status,
+    this.occurredAt,
+    this.target,
+  });
+
+  final String id;
+  final String label;
+  final String moduleSlug;
+  final String? status;
+  final DateTime? occurredAt;
+  final HomeRouteTarget? target;
+}
+
+final class HomeRouteTarget {
+  const HomeRouteTarget({
+    required this.moduleSlug,
+    this.resource,
+    this.publicId,
+    this.action,
+  });
+
+  final String moduleSlug;
+  final String? resource;
+  final String? publicId;
+  final String? action;
+}
+
+final class HomeTenantOption {
+  const HomeTenantOption({required this.id, required this.label});
+
+  final String id;
+  final String label;
+}
+
+String? _string(Object? value) {
+  if (value == null) {
+    return null;
+  }
+  final String normalized = value.toString().trim();
+  return normalized.isEmpty ? null : normalized;
+}

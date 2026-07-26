@@ -1,0 +1,44 @@
+---
+description: Apply when implementing offline queues, conflict handling, or sync recovery in the frontend.
+globs:
+  - "frontend/lib/core/sync/**"
+  - "frontend/lib/features/**/data/**"
+alwaysApply: false
+---
+
+# Offline and Sync
+
+Client-side offline behavior per [`.cursor/api-contract.mdc`](../../.cursor/api-contract.mdc).
+
+## Mandatory rules
+
+- Connectivity is a hint, not proof of reachability.
+- Must queue offline drafts and pending writes in structured local storage when required.
+- Sync operations should be idempotent where possible.
+- Must show sync states: pending, syncing, synced, failed, conflict.
+- Must not silently discard offline changes.
+- Conflict handling must be explicit; surface `409` with version metadata.
+- Repositories must expose consistent local and remote views.
+- After successful HTTP writes, controllers must reconcile via `WorkspaceSyncEngine` (safe typed deltas or the smallest HTTP refresh); widgets must not consume raw websocket payloads.
+
+## Online-only (must not queue)
+
+Auth/session changes, entitlement/break-glass approval, payments/refunds, mortuary release, final closeout — see `api-contract.mdc`.
+
+## Sync queue fields
+
+| Field | Purpose |
+|---|---|
+| local id | stable local reference |
+| operation type | create, update, delete, upload |
+| payload | serialized request |
+| status | pending, syncing, failed, synced, conflict |
+| retry count | retry policy |
+| timestamps | ordering and diagnostics |
+
+## See also
+
+- [`database_strategy.mdc`](./database_strategy.mdc)
+- [`network_api.mdc`](./network_api.mdc)
+- [`realtime_sync.mdc`](./realtime_sync.mdc)
+- [`ui-feedback.mdc`](./ui-feedback.mdc)

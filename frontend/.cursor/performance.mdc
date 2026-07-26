@@ -1,0 +1,44 @@
+---
+description: Apply when reviewing frontend performance for rendering, lists, images, and networking.
+globs:
+  - "frontend/lib/**"
+  - "frontend/test/**"
+alwaysApply: false
+---
+
+# Performance Strategy
+
+Defines performance expectations for startup, rendering, lists, images, networking, and local data.
+
+## Mandatory rules
+
+- UI must be smooth, responsive, and efficient across mobile, tablet, and desktop breakpoints.
+- Must use theme tokens exclusively; no hard-coded style tokens ([`design-system.mdc`](./design-system.mdc)).
+- Should not unnecessary rebuilds by keeping provider watches focused.
+- Should use `const` widgets where possible.
+- Must paginate or virtualize large lists and tables; must not load huge datasets into memory.
+- Should use image sizes appropriate to their display context.
+- Must not heavy synchronous work on the UI thread.
+- Should cache thoughtfully and invalidate explicitly.
+- Startup work should stay minimal and visible through a startup state when needed.
+- Must use release/profile builds for meaningful performance checks.
+- Optimizations must not break uniform UI or responsive layouts ([`layouts.mdc`](./layouts.mdc)).
+
+## UI performance rules
+
+- Should split large pages into focused widgets.
+- Should use slivers or builders for long lists.
+- Should not expensive layout nesting when simpler layout works.
+- Must apply max-width constraints on large screens for readability.
+
+## Acceptance checklist
+
+- Common screens scroll smoothly on target devices.
+- Startup is not blocked by unnecessary network calls.
+- Large lists are paginated, streamed, or built lazily.
+
+## Related rules
+
+- [`layouts.mdc`](./layouts.mdc)
+- [`network_api.mdc`](./network_api.mdc)
+- [`scalability.mdc`](./scalability.mdc)

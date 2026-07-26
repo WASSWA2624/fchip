@@ -1,0 +1,22 @@
+---
+description: Backend offline support for idempotency, sync metadata, and online-only boundaries.
+globs:
+  - "backend/**"
+alwaysApply: false
+---
+# Offline Support Rules
+
+Define server behavior for sync-capable clients.
+
+## Requirements
+- Offline-capable mutations must use idempotency and deterministic conflict handling.
+- Endpoints exposed to offline clients should support incremental sync metadata.
+- Sync metadata (`updated_since`, version/etag fields) must use `human_friendly_id` for record identity.
+- After successful reconciliation, persisted mutations must still emit scoped realtime events per `websockets.mdc`.
+- Auth, entitlement changes, break-glass approval, payments, refunds, mortuary release, and last-office final close are online-only.
+- Conflict responses must identify the conflicting record and latest version metadata.
+- Server logic must not assume the client clock is authoritative.
+
+## See also
+- [`.cursor/api-contract.mdc`](../../.cursor/api-contract.mdc)
+- [`frontend/.cursor/offline_sync.mdc`](../../frontend/.cursor/offline_sync.mdc)

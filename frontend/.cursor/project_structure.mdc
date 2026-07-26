@@ -1,0 +1,59 @@
+---
+description: Apply when designing or refactoring the canonical Flutter frontend folder layout.
+globs:
+  - "frontend/lib/**"
+  - "frontend/test/**"
+alwaysApply: false
+---
+
+# Project Structure
+
+Canonical layout for `frontend/`.
+
+## Root structure
+
+```txt
+frontend/
+├── .cursor/            # rules only, not imported
+├── dev-plan/           # planning only, not imported
+├── analysis_options.yaml
+├── l10n.yaml
+├── pubspec.yaml
+├── assets/             # icons, images, illustrations, logos
+├── env/
+├── lib/
+├── test/
+├── integration_test/
+└── tool/
+```
+
+## `lib/` structure
+
+```txt
+lib/
+├── main.dart
+├── bootstrap.dart
+├── app/          # app.dart, locale, router, startup, theme
+├── core/         # config, errors, logging, network, permissions,
+│                 # responsive, security, storage, sync, utils
+├── features/<feature_name>/  # data, domain, presentation
+├── l10n/
+└── shared/       # components, data, forms, layout, search, widgets
+```
+
+## Rules
+
+- `features/<feature_name>` must own product behavior and screens.
+- `core` must hold only cross-cutting infrastructure used by multiple features.
+- `shared` must hold reusable UI, layouts, forms, and search helpers not tied to one feature; it is the only home for cross-feature reusable UI.
+- Features must not fork parallel component libraries; check the shared catalog first.
+- Must not place feature-specific business logic in `core` or `shared`.
+- All user-facing text must be localized via ARB keys; no hard-coded strings in `lib/`.
+- Must not create duplicate folders/files for the same responsibility.
+- Tests must mirror source structure.
+
+## See also
+
+- [`architecture.mdc`](./architecture.mdc)
+- [`layouts.mdc`](./layouts.mdc)
+- [`index.mdc`](./index.mdc)

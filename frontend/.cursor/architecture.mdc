@@ -1,0 +1,38 @@
+---
+description: Define frontend layer boundaries and dependency direction for the FCHIP app.
+globs:
+  - "frontend/lib/**"
+alwaysApply: false
+---
+
+# Architecture
+
+Feature-first clean architecture for FCHIP frontend: `presentation → domain → data contracts`, with data implementations calling external services.
+
+## Requirements
+
+- Widgets must not call APIs, databases, secure storage, or sync services directly.
+- Widgets must read display data only from Riverpod providers/controllers — no authoritative `setState` or server-data caches ([`instant_ui_sync.mdc`](./instant_ui_sync.mdc)).
+- Widgets must not store tokens or secrets.
+- Repositories must not show dialogs, snackbars, or navigate.
+- Data sources must not hold UI state; domain entities must not depend on widgets.
+- `core` must not contain feature business rules; features expose intentional entry points.
+- Use cases are required when decisions span multiple repositories.
+- Mapping between DTOs, database models, and entities must be explicit.
+- Reference entities by `human_friendly_id`; internal IDs must not leak into UI or routes.
+- Presentation must follow [`components.mdc`](./components.mdc) and [`layouts.mdc`](./layouts.mdc), localize all text, enforce RBAC+ABAC visibility ([`permissions.mdc`](./permissions.mdc)), and use design tokens only ([`design-system.mdc`](./design-system.mdc)).
+
+## Layer ownership
+
+| Layer | Owns | Must not own |
+|---|---|---|
+| Presentation | pages, widgets, controllers, UI state | API, SQL, tokens |
+| Domain | entities, contracts, use cases | JSON, widgets |
+| Data | repos, DTOs, mappers, sources | navigation, UI messages |
+| Core | cross-cutting infrastructure | feature rules |
+
+## Related
+
+- [`project_structure.mdc`](./project_structure.mdc)
+- [`state_management.mdc`](./state_management.mdc)
+- [`realtime_sync.mdc`](./realtime_sync.mdc)

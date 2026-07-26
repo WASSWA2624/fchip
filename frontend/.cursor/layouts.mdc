@@ -1,0 +1,49 @@
+---
+description: Define frontend breakpoints, responsive shell behavior, and content widths.
+globs:
+  - "frontend/lib/shared/layout/**"
+  - "frontend/lib/core/responsive/**"
+  - "frontend/lib/app/router/**"
+alwaysApply: false
+---
+
+# Layouts and Responsive Design
+
+Single source of truth for breakpoints, shell behavior, and content width.
+
+## Breakpoints
+
+| Token | Width | Layout |
+|---|---|---|
+| `xs`/`sm` | `< 600` | mobile, one column |
+| `md` | `600–839` | large mobile / small tablet |
+| `lg` | `840–1199` | tablet / small desktop, rail |
+| `xl` | `1200–1599` | desktop: menu bar, side nav |
+| `xxl` | `≥ 1600` | large desktop, max-width |
+
+## Requirements
+
+- Use centralized responsive utilities in `lib/core/responsive/`.
+- Must not duplicate screens per size unless the interaction model changes.
+- Scale one-column to multi-column; use readable max widths and must not use fixed widths.
+- Keep touch and pointer targets comfortable per platform.
+- Keep shell and content-width behavior uniform across modules.
+- Reusable layout components must live in `frontend/lib/shared/layout/`.
+- Localize navigation text; omit destinations for unauthorized users (RBAC+ABAC, [`permissions.mdc`](./permissions.mdc)).
+- Reference entities by `human_friendly_id`; use design tokens only ([`design-system.mdc`](./design-system.mdc)).
+
+## Navigation by width
+
+- `< 600`: app bar plus bottom navigation or drawer.
+- `600–1199`: navigation rail or compact side navigation.
+- `≥ 1200`: menu bar and side navigation (collapsed `64–80`, expanded `220–280`); persist collapsed state as a non-sensitive preference.
+
+## Max content widths
+
+- Auth forms `420–520`; general forms `560–720`; detail pages `840–1040`; dashboards `1200–1440`; data-heavy `1440`+.
+
+## Related
+
+- [`navigation.mdc`](./navigation.mdc)
+- [`components.mdc`](./components.mdc)
+- [`design-system.mdc`](./design-system.mdc)

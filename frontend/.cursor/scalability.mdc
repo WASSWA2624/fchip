@@ -1,0 +1,45 @@
+---
+description: Apply when reviewing feature-first structure and scaling patterns in the frontend.
+globs:
+  - "frontend/lib/**"
+alwaysApply: false
+---
+
+# Scalability Strategy
+
+Defines how the template stays maintainable as more features, platforms, and teams are added.
+
+## Mandatory rules
+
+- Must keep features independent and feature-first.
+- Must keep cross-cutting services in `core` only when multiple features use them.
+- Shared UI must stay generic and business-free; all reusable components must live under `frontend/lib/shared/`.
+- Public feature exports must be intentional.
+- Must not global mutable state.
+- Must use clear contracts between layers.
+- Should document architecture decisions that affect future development.
+- Must not copy whole screens to support new layouts.
+- UI must be fully responsive across mobile, tablet, and desktop breakpoints.
+- Must use theme tokens exclusively; no hard-coded style tokens.
+
+## Scaling patterns
+
+| Problem | Required pattern |
+|---|---|
+| many features | feature-first modules |
+| many screens | route groups and shell routes |
+| many data records | pagination, streams, local indexes |
+| many UI variants | theme tokens and component composition |
+| many developers | rules, linting, tests, PR checklist |
+
+## Acceptance checklist
+
+- Adding a feature does not require modifying unrelated features.
+- Shared components must not become product-specific dumping grounds.
+- Architecture boundaries remain enforceable by review and tests.
+
+## Related rules
+
+- [`architecture.mdc`](./architecture.mdc)
+- [`project_structure.mdc`](./project_structure.mdc)
+- [`performance.mdc`](./performance.mdc)

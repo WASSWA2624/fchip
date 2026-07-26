@@ -1,0 +1,79 @@
+import 'package:fchip/core/errors/result.dart';
+import 'package:fchip/features/theater/domain/entities/theater_entities.dart';
+import 'package:fchip/shared/data/data.dart';
+
+abstract interface class TheaterRepository {
+  Future<Result<AppPage<TheaterCase>>> listCases(TheaterCaseQuery query);
+
+  Future<Result<TheaterCase>> getCase(String caseId);
+
+  Future<Result<TheaterCase>> scheduleCase(Map<String, Object?> payload);
+
+  Future<Result<TheaterCase>> updateCaseSchedule(
+    String caseId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<TheaterCase>> updateStage(
+    String caseId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<TheaterCase>> upsertAnesthesiaRecord(
+    String caseId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<TheaterCase>> addAnesthesiaObservation(
+    String caseId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<TheaterCase>> upsertPostOpNote(
+    String caseId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<TheaterCase>> toggleChecklistItem(
+    String caseId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<TheaterCase>> assignResource(
+    String caseId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<TheaterCase>> releaseResource(
+    String caseId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<TheaterCase>> finalizeRecord(
+    String caseId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<TheaterCase>> reopenRecord(
+    String caseId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<List<TheaterSchedulePatient>>> searchSchedulePatients(
+    String query,
+  );
+
+  Future<Result<TheaterSchedulePatientDetail>> loadSchedulePatientEncounters(
+    String patientId,
+  );
+
+  Future<Result<List<TheaterScheduleEmergencyCase>>>
+  searchScheduleEmergencyCases(String patientId);
+
+  Future<Result<List<TheaterRoomOption>>> searchTheatreRooms(String query);
+
+  Future<Result<List<TheaterStaffOption>>> searchTheatreStaff(
+    String query, {
+    String? role,
+  });
+}

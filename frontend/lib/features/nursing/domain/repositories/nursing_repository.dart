@@ -1,0 +1,59 @@
+import 'package:fchip/core/errors/result.dart';
+import 'package:fchip/features/nursing/domain/entities/nursing_entities.dart';
+import 'package:fchip/shared/data/data.dart';
+
+abstract interface class NursingRepository {
+  Future<Result<AppPage<NursingPatientSummary>>> listWardPatients(
+    NursingWorklistQuery query,
+  );
+
+  Future<Result<NursingPatientDetail>> loadPatientDetail(
+    NursingPatientSummary summary,
+  );
+
+  Future<Result<List<NursingHandover>>> listPendingHandovers();
+
+  Future<Result<List<NursingRosterAssignment>>> listCurrentRosters();
+
+  Future<Result<List<NursingUserOption>>> searchUsers(String query);
+
+  Future<Result<NursingPatientDetail>> recordVitals(
+    NursingPatientSummary summary,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<NursingPatientDetail>> recordVitalSet(
+    NursingPatientSummary summary,
+    List<Map<String, Object?>> payloads,
+  );
+
+  Future<Result<NursingPatientDetail>> addNursingNote(
+    NursingPatientSummary summary,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<NursingPatientDetail>> addMedicationAdministration(
+    NursingPatientSummary summary,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<NursingPatientDetail>> addCarePlan(
+    NursingPatientSummary summary,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<NursingPatientDetail>> createHandover(
+    NursingPatientSummary summary,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<void>> acceptHandover(
+    String handoverId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<NursingPatientDetail>> updateTransfer(
+    NursingPatientSummary summary,
+    Map<String, Object?> payload,
+  );
+}

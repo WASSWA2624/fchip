@@ -1,0 +1,20 @@
+---
+description: Backend health check endpoints and readiness probes for safe health reporting.
+globs:
+  - "backend/**"
+alwaysApply: false
+---
+# Health Check Rules
+
+Define runtime health endpoints.
+
+## Endpoints
+- `/live`: process is running and the event loop is healthy.
+- `/ready`: dependencies needed for safe traffic are available.
+- `/health`: operator-facing summary of app status.
+
+## Requirements
+- Readiness may check database, storage, websocket gateway, and required background infrastructure.
+- Health responses must not expose secrets or raw stack traces.
+- Startup diagnostics may publish deeper detail to logs, not public health payloads.
+- Failing readiness must stop new traffic but should not crash the process by itself.

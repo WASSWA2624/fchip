@@ -1,0 +1,166 @@
+import 'package:fchip/core/errors/result.dart';
+import 'package:fchip/features/opd/domain/entities/opd_entities.dart';
+import 'package:fchip/shared/data/data.dart';
+
+abstract interface class OpdRepository {
+  Future<Result<AppPage<OpdAppointment>>> listAppointments(
+    OpdAppointmentQuery query,
+  );
+
+  Future<Result<OpdAppointment>> createAppointment(
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<OpdAppointment>> updateAppointment(
+    String appointmentId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<OpdAppointment>> cancelAppointment(
+    String appointmentId,
+    String? reason,
+  );
+
+  Future<Result<AppPage<OpdQueueEntry>>> listVisitQueues(OpdQueueQuery query);
+
+  Future<Result<OpdQueueEntry>> createVisitQueue(
+    Map<String, Object?> payload, {
+    String? idempotencyKey,
+  });
+
+  Future<Result<OpdQueueEntry>> updateVisitQueue(
+    String queueId,
+    Map<String, Object?> payload, {
+    String? idempotencyKey,
+  });
+
+  Future<Result<OpdQueueEntry>> prioritizeVisitQueue(
+    String queueId,
+    Map<String, Object?> payload, {
+    String? idempotencyKey,
+  });
+
+  Future<Result<void>> deleteVisitQueue(String queueId);
+
+  Future<Result<AppPage<OpdFlowSummary>>> listOpdFlows(OpdFlowQuery query);
+
+  Future<Result<OpdFlowAggregateCounts>> getOpdSummaryCounts();
+
+  Future<Result<OpdFlowDetail>> getOpdFlow(String flowId);
+
+  Future<Result<AppPage<OpdFlowSummary>>> listTriageQueue(
+    OpdTriageQueueQuery query,
+  );
+
+  Future<Result<OpdFlowDetail>> getTriageCase(String flowId);
+
+  Future<Result<OpdFlowDetail>> startOpdFlow(
+    Map<String, Object?> payload, {
+    String? idempotencyKey,
+  });
+
+  Future<Result<OpdFlowDetail>> updateActiveEncounter(
+    String flowId,
+    Map<String, Object?> payload, {
+    String? idempotencyKey,
+  });
+
+  Future<Result<OpdFlowDetail>> bootstrapOpdFlow(
+    Map<String, Object?> payload, {
+    String? idempotencyKey,
+  });
+
+  Future<Result<OpdFlowDetail>> payConsultation(
+    String flowId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<OpdFlowDetail>> recordVitals(
+    String flowId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<OpdFlowDetail>> recordTriageVitals(
+    String flowId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<OpdFlowDetail>> updateVitals(
+    OpdFlowDetail detail,
+    List<Map<String, Object?>> vitals,
+  );
+
+  Future<Result<OpdFlowDetail>> assignTriageProvider(
+    String flowId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<OpdFlowDetail>> routeTriage(
+    String flowId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<OpdFlowDetail>> correctTriageStage(
+    String flowId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<OpdFlowDetail>> assignDoctor(
+    String flowId,
+    Map<String, Object?> payload, {
+    String? idempotencyKey,
+  });
+
+  Future<Result<OpdFlowDetail>> doctorReview(
+    String flowId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<OpdFlowDetail>> correctStage(
+    String flowId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<OpdFlowDetail>> disposition(
+    String flowId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<OpdFlowDetail>> cancelEncounter(
+    String flowId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<OpdFlowDetail>> closeEncounter(
+    String flowId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<OpdBillingDefaults>> getBillingDefaults({
+    String? facilityId,
+    String? tenantId,
+  });
+
+  Future<Result<void>> createReferral(Map<String, Object?> payload);
+
+  Future<Result<void>> createFollowUp(Map<String, Object?> payload);
+
+  Future<Result<void>> updateLabOrder(
+    String labOrderId,
+    Map<String, Object?> payload,
+  );
+
+  Future<Result<List<OpdProviderOption>>> listProviders({String? search});
+
+  Future<Result<List<OpdProviderSchedule>>> listProviderSchedules();
+
+  Future<Result<List<OpdAvailabilitySlot>>> listAvailabilitySlots(
+    String scheduleId,
+  );
+
+  Future<Result<List<OpdClinicalAlertThreshold>>> listClinicalAlertThresholds({
+    String? vitalType,
+  });
+
+  Future<Result<List<OpdDrugOption>>> listAvailableDrugs({String? search});
+}

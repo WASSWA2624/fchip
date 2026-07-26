@@ -1,0 +1,37 @@
+---
+description: Standardize locale-aware date, time, number, and currency formatting.
+globs:
+  - "frontend/lib/core/utils/**"
+  - "frontend/lib/shared/formatters/**"
+alwaysApply: false
+---
+
+# Date, Time, and Formatting Strategy
+
+Storage, transfer, and display formatting for dates, times, numbers, and units.
+
+## Requirements
+
+- Store timestamps consistently, preferably UTC for backend communication, unless the domain requires local time.
+- Display dates and times using the user locale.
+- Must not format dates manually inside widgets.
+- Use shared formatting utilities for dates, times, numbers, currency, and units.
+- Use interpolation instead of concatenating formatted values with translated text.
+- Be explicit about time zones in API contracts and documentation.
+
+## Implementation
+
+- Use ISO-like backend formats and localized display formats.
+- Keep formatting utilities in `core/utils` or a clearly named shared formatter folder.
+
+## Acceptance
+
+- Date/time display is consistent across screens.
+- Tests cover important formatting utilities.
+- Locale changes update formatting correctly.
+
+## Related
+
+- [`localization_i18n.mdc`](./localization_i18n.mdc)
+- [`data_modeling.mdc`](./data_modeling.mdc)
+- [`validation.mdc`](./validation.mdc)

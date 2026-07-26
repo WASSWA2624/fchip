@@ -1,0 +1,45 @@
+---
+description: Apply when implementing or reviewing app startup, bootstrap, and initialization order.
+globs:
+  - "frontend/lib/**"
+  - "frontend/test/**"
+alwaysApply: false
+---
+
+# Startup Flow
+
+Defines how the app initializes configuration, storage, session, localization, theme, and the first route.
+
+## Mandatory rules
+
+- Must keep `main.dart` small and free of feature logic.
+- Must perform setup through `bootstrap.dart` and startup services.
+- Must initialize Flutter bindings before platform or storage services.
+- Must load environment configuration before creating API clients.
+- Should restore theme and locale preferences before rendering the main app where practical.
+- Must restore session state before allowing protected-route decisions.
+- Must show a predictable startup/loading state when initialization is incomplete.
+- Must not run network calls in widget `build` methods.
+
+## Startup order
+
+1. Initialize bindings.
+2. Load environment configuration.
+3. Initialize logging.
+4. Initialize local storage/database adapters.
+5. Initialize secure storage and session manager.
+6. Restore theme and locale preferences.
+7. Create root `ProviderScope` overrides.
+8. Start `App` with router guards.
+
+## Acceptance checklist
+
+- Cold start, warm start, and session-expired start behave predictably.
+- Startup errors show a localized recovery path.
+- `main.dart` remains readable.
+
+## Related rules
+
+- [`environment_configuration.mdc`](./environment_configuration.mdc)
+- [`state_management.mdc`](./state_management.mdc)
+- [`error_handling.mdc`](./error_handling.mdc)

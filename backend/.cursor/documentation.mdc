@@ -1,0 +1,16 @@
+---
+description: Backend documentation standards for JSDoc, route docs, and inline comments.
+globs:
+  - "backend/**"
+alwaysApply: false
+---
+# Documentation Rules
+
+Require professional code documentation.
+
+## Requirements
+- Exported functions, modules, classes, and complex logic must have JSDoc-style comments.
+- Route handlers must document purpose, authentication, permissions, params, body, responses, and important side effects.
+- Repositories and services must document scope assumptions, audit expectations, and non-obvious workflow constraints.
+- Inline comments must explain intent or edge cases only.
+- Code, migrations, seeds, and docs must be updated in the same change when behavior changes.

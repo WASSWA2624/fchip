@@ -1,0 +1,25 @@
+---
+description: Standard success/error envelopes, human_friendly_id fields, and localized messages.
+globs:
+  - "backend/**"
+alwaysApply: false
+---
+# Response Format Rules
+
+Standardize success and error payloads.
+
+## Success
+- Responses return a top-level `success` flag and `data`.
+- List responses include pagination or cursor metadata in `meta`.
+- Mutation responses return the authoritative resource or accepted job metadata.
+- Resource objects expose `human_friendly_id` as the client-visible identifier; omit internal primary keys from `data` and `meta`.
+- Nested references use `human_friendly_id` or stable business codes; must not use raw foreign-key IDs.
+- Human-facing messages must use translation keys or localized strings; no hard-coded user-facing strings.
+- Use concise, appropriate clinical/operational terminology.
+- See [`.cursor/api-contract.mdc`](../../.cursor/api-contract.mdc) for cross-stack envelope details.
+
+## Errors
+- Errors use one normalized problem-details shape.
+- Every error includes a stable machine-readable code.
+- Validation errors include field-level detail when safe.
+- Internal traces, Prisma internals, secrets, and PHI must not reach clients.

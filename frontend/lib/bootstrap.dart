@@ -1,0 +1,65 @@
+import 'dart:async';
+
+import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fchip/app/app.dart';
+import 'package:fchip/app/router/url_strategy.dart';
+import 'package:fchip/app/startup/app_startup_initializer.dart';
+import 'package:fchip/app/startup/startup_shell.dart';
+import 'package:fchip/core/config/app_config.dart';
+import 'package:fchip/core/logging/app_logger.dart';
+import 'package:fchip/shared/workflow_actions/workflow_action_dialog_openers.dart';
+import 'package:fchip/shared/workflow_actions/workflow_action_registry.dart';
+
+Future<void> bootstrap({
+  AppConfig? config,
+  AppStartupInitializer startupInitializer = const AppStartupInitializer(),
+}) async {
+  WidgetsFlutterBinding.ensureInitialized();
+  configureAppUrlStrategy();
+  initializeWorkflowActionRegistry();
+  registerWorkflowDialogOpeners();
+  final String initialLocation = _platformInitialLocation();
+
+  runApp(ProviderScope(key: UniqueKey(), child: const StartupLoadingApp()));
+
+  try {
+    final startupResult = await startupInitializer.initialize(config: config);
+
+    runApp(
+      ProviderScope(
+        key: UniqueKey(),
+        overrides: startupResult
+            .providerOverrides(initialLocation: initialLocation)
+            .cast(),
+        child: const FchipApp(),
+      ),
+    );
+  } catch (error, stackTrace) {
+    AppLogger.error('Startup failed.', error, stackTrace);
+
+    runApp(
+      ProviderScope(
+        key: UniqueKey(),
+        child: StartupErrorApp(
+          onRetry: () {
+            unawaited(
+              bootstrap(config: config, startupInitializer: startupInitializer),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+String _platformInitialLocation() {
+  final String routeName =
+      WidgetsBinding.instance.platformDispatcher.defaultRouteName;
+
+  if (routeName.isEmpty || !routeName.startsWith('/')) {
+    return '/';
+  }
+
+  return routeName;
+}

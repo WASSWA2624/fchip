@@ -1,0 +1,34 @@
+---
+description: English-first locale editing rule for routine development.
+globs:
+  - "frontend/lib/l10n/**"
+  - "backend/src/locales/**"
+alwaysApply: false
+---
+
+# Locale Development
+
+Edit English locale files by default and treat other locales as explicit work.
+
+## Routine Edits
+
+- Frontend: edit `app_en.arb` first.
+- Backend: edit `en.json` first.
+- Add new keys in English before translating them.
+- Run locale generation after English changes when needed.
+
+## Explicit Overrides
+
+- Edit non-English locale files only when the user asks for translation or parity work.
+- Must not bulk-sync French or other locales during normal development.
+
+## Invariants
+
+- User-facing strings must stay in locale files.
+- Clinical, legal, and user-entered text must not be auto-translated.
+- English must remain the fallback when a non-English key is missing.
+
+## Related Rules
+
+- `frontend/.cursor/localization_i18n.mdc`
+- `backend/.cursor/internationalization.mdc`

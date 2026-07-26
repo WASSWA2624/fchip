@@ -1,0 +1,53 @@
+---
+description: Serve as the single source of truth for the FCHIP theme, tokens, and typography.
+globs:
+  - "frontend/lib/app/theme/**"
+  - "frontend/lib/shared/**"
+  - "frontend/lib/features/**/presentation/**"
+alwaysApply: false
+---
+
+# Design System
+
+Single source of truth for the FCHIP visual system, built on Material 3.
+
+## Requirements
+
+- Provide comprehensive light, dark, and system themes with semantic status tones, spacing, radius, elevation, and typography via tokens/extensions.
+- Light theme is default (blue-based palette); dark theme stays readable and Material-aligned.
+- Must not hard-code color, spacing, radius, elevation, or typography in feature or shared widgets.
+- Surfaces must remain readable on mobile, tablet, and desktop ([`layouts.mdc`](./layouts.mdc)).
+- Reusable theme-aware components must live in `frontend/lib/shared/`.
+- Localize all user-facing text; theme changes must update reactively.
+
+## Token access
+
+```dart
+final theme = Theme.of(context);
+theme.spacing.md;           // AppSpacingTokens
+theme.appTokens;            // AppDesignTokens
+theme.colorScheme.primary;  // ColorScheme roles
+```
+
+- Use `theme.textTheme` for typography, not inline `TextStyle`.
+- Use semantic status tones from theme extensions, not ad-hoc `Colors.green`.
+
+## Tokens
+
+| Group | Values |
+|---|---|
+| Spacing | `xs=4`, `sm=8`, `md=12`, `lg=16`, `xl=24`, `xxl=32` |
+| Radius | `xs=4` … `xxl=24`, `full=pill` (open scale, no cap) |
+| Page padding | mobile `16`, tablet `24`, desktop `32` |
+| Icon size | `20–24`; larger only when required |
+
+## Shape
+
+- Source radii from `theme.radius`; make them responsive via `context.responsiveRadius(...)`.
+- Rely on `BorderRadius` auto-clamping; keep shape language uniform across cards, buttons, dialogs.
+
+## Related
+
+- [`components.mdc`](./components.mdc)
+- [`layouts.mdc`](./layouts.mdc)
+- [`accessibility.mdc`](./accessibility.mdc)

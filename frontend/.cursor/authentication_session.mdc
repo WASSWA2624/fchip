@@ -1,0 +1,44 @@
+---
+description: Define auth flows, secure session storage, token refresh, and route protection.
+globs:
+  - "frontend/lib/shared/auth/**"
+  - "frontend/lib/features/**/auth/**"
+alwaysApply: false
+---
+
+# Authentication and Session Strategy
+
+Covers sign-in, session restoration, secure token storage, logout, and protected routes.
+
+## Requirements
+
+- Keep auth logic inside the auth feature and core session services.
+- Store session tokens only in secure storage; must not use `shared_preferences`, plain files, logs, screenshots, or analytics.
+- Restore session state at startup before protected route checks finish.
+- Refresh tokens before expiry when the backend supports refresh, using a refresh lock to prevent concurrent calls.
+- On refresh failure, clear the session and redirect to login.
+- Logout must clear sensitive local session data.
+- UI route protection must be backed by backend authorization.
+- Session context must carry effective permissions (RBAC + ABAC + subscription); guards enforce them per [`permissions.mdc`](./permissions.mdc).
+
+## Session states
+
+| State | Meaning |
+|---|---|
+| unknown | startup restoration running |
+| unauthenticated | no valid session |
+| authenticated | valid session and profile available |
+| expired | refresh failed or session rejected |
+| forbidden | authenticated but lacks permission |
+
+## Acceptance
+
+- Authenticated routes require a valid session.
+- Restoration must not flash protected content to unauthenticated users.
+- Token values must not appear in logs or UI.
+
+## Related
+
+- [`navigation.mdc`](./navigation.mdc)
+- [`permissions.mdc`](./permissions.mdc)
+- [`security.mdc`](./security.mdc)

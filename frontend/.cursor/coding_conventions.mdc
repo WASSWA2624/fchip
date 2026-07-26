@@ -1,0 +1,50 @@
+---
+description: Set Dart/Flutter naming, imports, style, and file-focus conventions.
+globs:
+  - "frontend/lib/**"
+alwaysApply: false
+---
+
+# Coding Conventions
+
+Naming, imports, style, and file focus for the frontend.
+
+## Naming
+
+- Files: `snake_case.dart`.
+- Classes, enums, typedefs, extensions: `PascalCase`.
+- Variables, methods, parameters, providers: `camelCase`.
+- Private members: `_privateName`.
+
+## Imports
+
+- Use package imports across folders; relative only within a small folder tree.
+- No circular imports; order Dart SDK → Flutter → packages → project.
+
+## Style
+
+- Use `const` constructors where possible; keep widgets small with no business logic.
+- Use typed models, not maps, for app data.
+- Must not hard-code route strings, user-facing text, colors, spacing, or repeated formatting; use design tokens ([`design-system.mdc`](./design-system.mdc)).
+- Localize all user-facing text via ARB keys; must not define `_XxxText` copy classes.
+- Use `human_friendly_id` in routes and user-visible identifiers, not raw database IDs.
+- Reuse shared components from `frontend/lib/shared/` before creating feature widgets.
+- Enforce RBAC+ABAC visibility for menus, components, and actions ([`permissions.mdc`](./permissions.mdc)).
+- Keep `*_workspace_page.dart` compositional; extract widgets near ~800 lines.
+
+## File focus
+
+| Suffix | Owns |
+|---|---|
+| `*_page.dart` | page composition |
+| `*_controller.dart` | user actions, presentation state |
+| `*_state.dart` | UI state shape |
+| `*_repository.dart` | domain contract |
+| `*_repository_impl.dart` | data coordination |
+| `*_dto.dart` | API shape (`snake_case` JSON) |
+| `*_mapper.dart` | explicit conversion |
+
+## Related
+
+- [`architecture.mdc`](./architecture.mdc)
+- [`design-system.mdc`](./design-system.mdc)

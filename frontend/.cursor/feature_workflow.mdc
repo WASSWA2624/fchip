@@ -1,0 +1,39 @@
+---
+description: Define the repeatable process for adding a new frontend feature.
+globs:
+  - "frontend/lib/features/**"
+alwaysApply: false
+---
+
+# Feature Workflow
+
+Repeatable process for adding a feature to the FCHIP frontend.
+
+## Requirements
+
+- Start by identifying route, state, data needs, validation, localization, responsive behavior, and tests.
+- Create the feature folder with the standard `data/domain/presentation` structure.
+- Define domain models and repository contracts before wiring UI to real data when non-trivial.
+- Add localization keys before adding user-facing text.
+- Reuse shared components before creating feature-specific widgets.
+- Queue/workspace features must confirm layout against [`ui-workspace.mdc`](./ui-workspace.mdc) and a reference module first.
+- Confirm subscription-gated access and permission gates before exposing routes or actions ([`permissions.mdc`](./permissions.mdc)).
+- Verify mobile, tablet, and desktop layouts; must not hard-code colors, spacing, or typography ([`design-system.mdc`](./design-system.mdc)).
+- Reference entities by `human_friendly_id`; must not expose raw table IDs.
+- Enforce RBAC+ABAC visibility for menus, components, and actions.
+- Shared-data mutations must update Riverpod immediately and reconcile via [`instant_ui_sync.mdc`](./instant_ui_sync.mdc).
+- Add tests for controller logic, repository mapping, and important widgets.
+- Update docs when structure or conventions change.
+
+## Acceptance
+
+- The feature works at supported breakpoints with no boundary violations.
+- Queue screens match [`ui-workspace.mdc`](./ui-workspace.mdc) when applicable.
+- Tests and localization are included.
+
+## Related
+
+- [`ui-workspace.mdc`](./ui-workspace.mdc)
+- [`architecture.mdc`](./architecture.mdc)
+- [`components.mdc`](./components.mdc)
+- [`testing.mdc`](./testing.mdc)

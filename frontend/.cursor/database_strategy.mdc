@@ -1,0 +1,47 @@
+---
+description: Govern Drift local database structure, migrations, and offline storage.
+globs:
+  - "frontend/lib/core/storage/database/**"
+alwaysApply: false
+---
+
+# Database Strategy
+
+How the frontend uses local structured storage through Drift.
+
+## Requirements
+
+- Use Drift for local structured records, offline cache, drafts, and sync-queue tables.
+- Keep database access inside local data sources.
+- Must not query Drift from widgets or controllers directly.
+- Use explicit migrations for schema changes and test them when versions change.
+- Add indexes for frequently queried fields; use pagination or streams for large results.
+- Must not destructive migrations unless the product requires them and documents the behavior.
+
+## Folder standard
+
+```txt
+core/storage/database/
+├── app_database.dart
+├── migrations/
+├── tables/
+└── type_converters/
+```
+
+## Migration rules
+
+- Increment schema versions intentionally and keep migration code deterministic.
+- Document schema changes in the related feature or ADR.
+- Back up important data before destructive changes where supported.
+
+## Acceptance
+
+- Local data reads offline through repositories.
+- Database code is not imported by presentation widgets.
+- Migration tests exist for non-trivial schema changes.
+
+## Related
+
+- [`storage_strategy.mdc`](./storage_strategy.mdc)
+- [`offline_sync.mdc`](./offline_sync.mdc)
+- [`data_modeling.mdc`](./data_modeling.mdc)

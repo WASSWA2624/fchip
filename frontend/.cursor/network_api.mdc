@@ -1,0 +1,43 @@
+---
+description: Apply when implementing HTTP clients, API data models, interceptors, or network error handling.
+globs:
+  - "frontend/lib/core/network/**"
+  - "frontend/lib/features/**/data/**"
+alwaysApply: false
+---
+
+# Network and API
+
+HTTP access against `fchip-backend` per [`.cursor/api-contract.mdc`](../../.cursor/api-contract.mdc).
+
+## Mandatory rules
+
+- Repository contracts must live in the domain layer; no HTTP from UI.
+- Must use `dio` for clients and interceptors.
+- DTOs must live in the data layer with `snake_case` JSON mapping.
+- Must map API errors to app failures before UI.
+- Must apply request timeouts and support cancellation for stale requests.
+- Must not log tokens, passwords, or sensitive payloads.
+- Must handle `401` through the session manager.
+- Base URLs and timeouts must be environment-driven.
+- HTTP owns CRUD mutations; WebSocket listeners refresh UI after server broadcasts ([`realtime_sync.mdc`](./realtime_sync.mdc)).
+- DTOs and API paths exposed to presentation must use `human_friendly_id` (or domain aliases like `displayId`); must not surface raw database primary keys.
+- Repositories map `human_friendly_id` on the wire; internal IDs stay in the data/backend layer only.
+
+## Client layout
+
+```txt
+core/network/
+├── api_client.dart
+├── api_endpoints.dart
+├── api_interceptors.dart
+├── api_result.dart
+└── network_failure_mapper.dart
+```
+
+## See also
+
+- [`authentication_session.mdc`](./authentication_session.mdc)
+- [`error_handling.mdc`](./error_handling.mdc)
+- [`offline_sync.mdc`](./offline_sync.mdc)
+- [`realtime_sync.mdc`](./realtime_sync.mdc)

@@ -1,0 +1,48 @@
+---
+description: Apply when implementing forms, tables, search, filters, or list data-entry patterns.
+globs:
+  - "frontend/lib/shared/forms/**"
+  - "frontend/lib/features/**/presentation/**"
+alwaysApply: false
+---
+
+# UI Patterns
+
+Uniform form, table, and search patterns.
+
+## Product standards
+
+- Must use shared components from `frontend/lib/shared/` only; check the catalog before creating feature-local widgets ([`components.mdc`](./components.mdc)).
+- Must use design tokens exclusively; no hard-coded colors, spacing, or typography ([`design-system.mdc`](./design-system.mdc)).
+- Must stay fully responsive: mobile list/card fallbacks, desktop tables ([`layouts.mdc`](./layouts.mdc)).
+- Must use lazy lists, pagination, and debounced search ([`performance.mdc`](./performance.mdc)).
+- Workflows must use hospital language, not internal codes.
+
+## Forms
+
+- Must localize all labels, hints, helper text, and validation messages.
+- Field errors beside fields; form-level errors for server/cross-field failures.
+- Must prevent duplicate submissions and preserve input on recoverable errors.
+- Validation timing: required on blur/submit; format after interaction; map server errors back to fields.
+
+## Lists, tables, pagination
+
+- Must use lazy builders; paginate or server-query large datasets.
+- Must not load large tables into memory unnecessarily.
+- On mobile, dense tables may become list rows/cards with the same meaning.
+- Must localize column labels and use stable item keys.
+
+## Search and filtering
+
+- Must use shared search/select components and debounce remote requests.
+- Must show loading, empty, error, and results states clearly.
+- Must keep query, filters, and sort explicit in the controller.
+
+## Module workspaces
+
+Queue screens must follow [`ui-workspace.mdc`](./ui-workspace.mdc) with permission-gated actions and `human_friendly_id`; must not show raw table IDs.
+
+## See also
+
+- [`ui-workspace.mdc`](./ui-workspace.mdc)
+- [`validation.mdc`](./validation.mdc)

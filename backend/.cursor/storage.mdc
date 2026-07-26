@@ -1,0 +1,17 @@
+---
+description: Document and file storage abstraction, encryption, metadata, retention, and downloads.
+globs:
+  - "backend/**"
+alwaysApply: false
+---
+# Storage Rules
+
+Control document and file storage behavior.
+
+## Requirements
+- All file operations must go through the storage abstraction.
+- Provider selection must be configuration-driven.
+- Sensitive reports, exports, and legal evidence must support encryption and controlled download access.
+- File metadata belongs in the database; binary provider details stay behind the storage service.
+- Retention and deletion workflows must preserve audit evidence.
+- Routes and controllers must not talk directly to the filesystem or S3 client.

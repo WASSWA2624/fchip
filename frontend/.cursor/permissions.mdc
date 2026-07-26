@@ -1,0 +1,37 @@
+---
+description: Apply when implementing frontend RBAC, ABAC, subscription entitlements, or guards.
+globs:
+  - "frontend/lib/core/permissions/**"
+  - "frontend/lib/app/router/**"
+  - "frontend/lib/features/**"
+alwaysApply: false
+---
+
+# Permissions and Authorization
+
+Frontend RBAC, ABAC, entitlements, and platform permissions — aligned with `backend/.cursor/auth-security.mdc` and [`.cursor/access/`](../../.cursor/access/).
+
+## Backend source of truth
+
+- `user_role` is the role-assignment source of truth; users may hold multiple active scoped roles and module assignments.
+- RBAC grants baseline permissions; ABAC narrows by tenant, facility, scope, ownership, shift, patient relationship, and emergency state.
+- Subscription package is the hard gate; break-glass access is explicit, time-limited, and audited.
+
+## Frontend rules
+
+- Shipped defaults live in [`.cursor/access/`](../../.cursor/access/); admin changes must be versioned, auditable, and atomically restorable.
+- Authority order (strict): active **subscription package** → assigned **roles/modules** → **permissions** → tenant/facility ABAC scope.
+- Effective permissions = union(role/module/user grants) ∩ subscription package ∩ assigned modules ∩ ABAC scope. No grant may unlock excluded modules, menus, routes, actions, or workflows.
+- `AppAccessPolicy.grants` and route/action gates must enforce this formula before rendering or enabling UI.
+- Must hide/disable menus, components, actions, and workflows unauthorized users cannot access; backend authorization remains mandatory.
+- Must separate platform permissions (camera, etc.) from app authorization.
+- Must protect restricted routes via guards ([`navigation.mdc`](./navigation.mdc)).
+- Must map `403` to a localized forbidden state ([`ui-feedback.mdc`](./ui-feedback.mdc)).
+- Permissions must be typed; centralize checks in providers/guards (`AccessGate`, `AppAccessActionGate`).
+- Assignable rights must stay within actor ceiling and tenant subscription module set.
+
+## See also
+
+- [`authentication_session.mdc`](./authentication_session.mdc)
+- [`security.mdc`](./security.mdc)
+- [`.cursor/api-contract.mdc`](../../.cursor/api-contract.mdc)

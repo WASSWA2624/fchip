@@ -1,0 +1,75 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:fchip/core/errors/app_failure.dart';
+import 'package:fchip/shared/components/app_form_information_banner.dart';
+
+import '../../../../helpers/test_harness.dart';
+
+void main() {
+  testWidgets('shows a missing account login message', (
+    WidgetTester tester,
+  ) async {
+    await pumpLocalizedWidget(
+      tester,
+      Builder(
+        builder: (BuildContext context) {
+          return AppFormInformationBanner.failure(
+            context: context,
+            failure: const AppFailure.unauthorized(
+              code: 'auth.account_not_found',
+            ),
+          );
+        },
+      ),
+    );
+
+    expect(
+      find.text(
+        'No account exists for that email or phone. Check the details or create an account.',
+      ),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('shows a wrong password login message', (
+    WidgetTester tester,
+  ) async {
+    await pumpLocalizedWidget(
+      tester,
+      Builder(
+        builder: (BuildContext context) {
+          return AppFormInformationBanner.failure(
+            context: context,
+            failure: const AppFailure.unauthorized(code: 'auth.wrong_password'),
+          );
+        },
+      ),
+    );
+
+    expect(
+      find.text('The password is incorrect for this account.'),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('shows a rate limited auth message', (WidgetTester tester) async {
+    await pumpLocalizedWidget(
+      tester,
+      Builder(
+        builder: (BuildContext context) {
+          return AppFormInformationBanner.failure(
+            context: context,
+            failure: const AppFailure.network(code: 'network.rate_limited'),
+          );
+        },
+      ),
+    );
+
+    expect(
+      find.text(
+        'Too many sign-in attempts. Please wait a moment and try again.',
+      ),
+      findsOneWidget,
+    );
+  });
+}

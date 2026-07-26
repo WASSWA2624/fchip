@@ -1,0 +1,13 @@
+{
+  "APP_ENV": "production",
+  "APP_NAME": "FCHIP",
+  "APP_LOGO_URL": "assets/logos/logo.png",
+  "APP_ADMIN_NAME": "FCHIP Admin",
+  "APP_ADMIN_EMAIL": "wasswawilson0001@gmail.com",
+  "APP_ADMIN_PHONE": "+256783230321",
+  "APP_SUPPORT_URL": "https://fchip.com/support",
+  "API_BASE_URL": "https://api.fchip.com",
+  "API_TIMEOUT_SECONDS": "30",
+  "LOG_LEVEL": "warn",
+  "FEATURE_DEVELOPER_TOOLS_ENABLED": "false"
+}

@@ -1,0 +1,45 @@
+---
+description: Apply when designing or updating clinical or operational module workspace pages.
+globs:
+  - "frontend/lib/features/**/presentation/**"
+  - "frontend/lib/shared/components/**"
+  - "frontend/lib/shared/layout/**"
+alwaysApply: false
+---
+
+# Module Workspace UI Contract
+
+Keep clinical and operational module screens consistent. Applies to new and changed screens; legacy pages may refactor incrementally.
+
+## Mandatory layout stack
+
+Module work queues (OPD, IPD, Lab, Billing, Nursing) must use this stack unless the interaction model is fundamentally different:
+
+- Page root: `AsyncStateScaffold`
+- Page width: `ResponsivePage` + `PageMaxWidth`
+- Workspace shell: `AppWorkspace`
+- Worklist: `AppListTable`
+- Detail: `AppWorkspaceDetailPanel`
+- Actions: `AppActionPanel` / `AppActionList`
+- Mutations: `AppDialog` / `AppWorkspaceMutationDialog`
+
+Must import from `shared/layout`, `shared/components`, and `shared/actions` before adding feature-local equivalents.
+
+## Mandatory behavior
+
+- Notifications submenu must filter the current worklist, not open modal lists; hide zero-value rows where expected.
+- Must use hospital workflow language; must not expose raw enum names, stage codes, or internal IDs.
+- Must surface `human_friendly_id` and patient display name; must not show raw table IDs or UUIDs.
+- Must gate actions by backend stage, permission, and subscription entitlement.
+- Must keep worklists paginated/lazy and the shell responsive across mobile, tablet, desktop.
+- After modal mutations, must refresh the affected row, detail, counts, and nav badges via targeted refresh.
+- Must subscribe to the module's `RealtimeEventGroups` where defined.
+
+## Forbidden patterns
+
+- Custom full-page `Scaffold` + hand-rolled table when the contract fits; duplicate status chips; private feature string classes; hard-coded colors, spacing, or `TextStyle`; unlocalized `SnackBar` copy.
+
+## See also
+
+- [`ui-patterns.mdc`](./ui-patterns.mdc)
+- [`permissions.mdc`](./permissions.mdc)

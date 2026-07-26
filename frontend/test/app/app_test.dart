@@ -1,0 +1,245 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
+import 'package:fchip/app/accessibility/app_accessibility_preferences.dart';
+import 'package:fchip/app/app.dart';
+import 'package:fchip/app/router/route_status_pages.dart';
+import 'package:fchip/app/startup/app_startup_state.dart';
+import 'package:fchip/app/startup/startup_providers.dart';
+import 'package:fchip/core/security/auth_session.dart';
+import 'package:fchip/core/security/session_controller.dart';
+import 'package:fchip/core/security/session_state.dart';
+import 'package:fchip/core/security/session_tokens.dart';
+import 'package:fchip/core/storage/storage_readiness.dart';
+import 'package:fchip/features/home/presentation/pages/home_page.dart';
+import 'package:fchip/l10n/app_localizations_x.dart';
+import 'package:fchip/shared/components/components.dart';
+
+import '../helpers/test_harness.dart';
+
+void main() {
+  const Locale englishLocale = Locale('en');
+  final authenticatedSessionState = SessionState.authenticated(
+    session: AuthSession(
+      tokens: SessionTokens(accessToken: 'test-access-token'),
+      subject: 'admin@example.com',
+      user: const AuthUserProfile(
+        id: 'user-123',
+        displayId: 'USR-123',
+        email: 'admin@example.com',
+        firstName: 'Wilson',
+        lastName: 'Admin',
+        tenantName: 'IHK Hospital',
+        facilityName: 'IHK Hospital',
+        facilityType: 'hospital',
+        positionTitle: 'tenant_admin',
+        staffNumber: 'STF-001',
+        staffPosition: 'administrator',
+        roles: <String>['tenant_admin'],
+      ),
+    ),
+  );
+
+  List<Object?> authenticatedOverrides({String? initialLocation}) {
+    return <Object?>[
+      ...testReadyAppOverrides(
+        themeMode: ThemeMode.system,
+        locale: englishLocale,
+        sessionState: authenticatedSessionState,
+        initialLocation: initialLocation,
+        mockHomeRepository: true,
+      ),
+    ];
+  }
+
+  testWidgets('renders the FCHIP shell', (WidgetTester tester) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1200, 900);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    addTearDown(tester.view.resetPhysicalSize);
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: authenticatedOverrides().cast(),
+        child: const FchipApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final l10n = tester.element(find.byType(HomePage)).l10n;
+
+    expect(find.text(l10n.appTitle), findsWidgets);
+    expect(find.byTooltip(l10n.appStatusOnlineLabel), findsOneWidget);
+    expect(find.text('Organization overview'), findsOneWidget);
+    expect(find.text('Today at a glance'), findsOneWidget);
+    expect(find.byType(AppLogo), findsOneWidget);
+  });
+
+  testWidgets('renders the home screen at 320px width', (
+    WidgetTester tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(320, 640);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    addTearDown(tester.view.resetPhysicalSize);
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: authenticatedOverrides().cast(),
+        child: const FchipApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byType(HomePage), findsOneWidget);
+    final Scaffold scaffold = tester
+        .widgetList<Scaffold>(find.byType(Scaffold))
+        .singleWhere((Scaffold value) => value.drawer != null);
+
+    expect(find.byType(NavigationBar), findsNothing);
+    expect(scaffold.drawer, isNotNull);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('renders the home screen at medium mobile width', (
+    WidgetTester tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(390, 800);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    addTearDown(tester.view.resetPhysicalSize);
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: authenticatedOverrides().cast(),
+        child: const FchipApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byType(HomePage), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('navigates to settings and shows FCHIP preferences', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: authenticatedOverrides().cast(),
+        child: const FchipApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final homeContext = tester.element(find.byType(HomePage));
+    final l10n = homeContext.l10n;
+
+    GoRouter.of(homeContext).go('/settings');
+    await tester.pumpAndSettle();
+
+    expect(find.text(l10n.settingsTitle), findsWidgets);
+    expect(find.text(l10n.settingsBody), findsOneWidget);
+    expect(find.text(l10n.settingsThemeModeFieldLabel), findsOneWidget);
+    expect(find.byType(AppLogo), findsOneWidget);
+  });
+
+  testWidgets('opens the profile screen from the account menu', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: authenticatedOverrides().cast(),
+        child: const FchipApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final homeContext = tester.element(find.byType(HomePage));
+    final l10n = homeContext.l10n;
+
+    await tester.tap(find.byTooltip(l10n.appAccountTooltip));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Wilson Admin'), findsOneWidget);
+    expect(find.text('admin@example.com'), findsWidgets);
+    expect(find.text('Tenant Admin'), findsWidgets);
+    expect(find.text('Administrator'), findsWidgets);
+
+    await tester.tap(find.text(l10n.appUserMenuProfileLabel));
+    await tester.pumpAndSettle();
+
+    expect(find.text(l10n.profileTitle), findsWidgets);
+  });
+
+  testWidgets('uses startup theme and locale providers', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          appStartupStateProvider.overrideWithValue(
+            AppStartupState(
+              themeMode: ThemeMode.dark,
+              locale: englishLocale,
+              accessibility: const AppAccessibilityPreferences(),
+              storageReadiness: const StorageReadiness.ready(),
+              sessionReadiness: authenticatedSessionState,
+            ),
+          ),
+          initialSessionStateProvider.overrideWithValue(
+            authenticatedSessionState,
+          ),
+        ],
+        child: const FchipApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final materialApp = tester.widget<MaterialApp>(find.byType(MaterialApp));
+
+    expect(materialApp.themeMode, ThemeMode.dark);
+    expect(materialApp.locale, englishLocale);
+  });
+
+  testWidgets('shows localized not-found UI for unknown routes', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: authenticatedOverrides().cast(),
+        child: const FchipApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    GoRouter.of(tester.element(find.byType(HomePage))).go('/missing-route');
+    await tester.pumpAndSettle();
+
+    final l10n = tester.element(find.byType(NotFoundPage)).l10n;
+
+    expect(find.text(l10n.routeNotFoundTitle), findsOneWidget);
+    expect(find.text(l10n.routeNotFoundBody), findsOneWidget);
+    expect(find.text('/missing-route'), findsOneWidget);
+  });
+
+  testWidgets('restores unknown initial locations to not-found UI', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: authenticatedOverrides(
+          initialLocation: '/missing-route',
+        ).cast(),
+        child: const FchipApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    final l10n = tester.element(find.byType(NotFoundPage)).l10n;
+
+    expect(find.text(l10n.routeNotFoundTitle), findsOneWidget);
+    expect(find.text('/missing-route'), findsOneWidget);
+  });
+}

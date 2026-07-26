@@ -1,0 +1,492 @@
+import 'package:fchip/core/permissions/access_policy.dart';
+import 'package:fchip/features/home/domain/entities/home_dashboard.dart';
+import 'package:fchip/features/home/domain/entities/home_dashboard_profiles.dart';
+
+typedef HomeJsonMap = Map<String, Object?>;
+
+final class HomeDashboardDto {
+  const HomeDashboardDto(this.json);
+
+  final HomeJsonMap json;
+
+  factory HomeDashboardDto.fromResponse(Object? responseData) {
+    return HomeDashboardDto(_dataMap(responseData));
+  }
+
+  HomeDashboard toEntity() {
+    final String state = _string(json['state']) ?? 'ready';
+    if (state == 'tenant_context_required') {
+      final String? roleValue = _contextRoleValue(json['context']);
+      final profile = homeProfileForRole(appRoleFromValue(roleValue));
+
+      return HomeDashboard(
+        state: HomeDashboardLoadState.tenantContextRequired,
+        profile: profile,
+        context: HomeDashboardContext(roleValue: roleValue),
+        statusCards: profile.fallbackStatusCards(),
+        trend: HomeDashboardTrend.empty,
+        distribution: HomeDashboardDistribution.empty,
+        quickActionIds: _quickActionIds(json, fallback: profile.quickActionIds),
+        shortcutIds: profile.shortcutIds,
+        queuePreview: const <HomeQueueItem>[],
+        alerts: const <HomeAlertItem>[],
+        activity: const <HomeActivityItem>[],
+        resultsPreview: const <HomeQueueItem>[],
+        followUpPreview: const <HomeQueueItem>[],
+        tenantOptions: _list(json['tenant_options'])
+            .map(HomeTenantOptionDto.new)
+            .map((HomeTenantOptionDto dto) => dto.toEntity())
+            .where((HomeTenantOption option) => option.id.isNotEmpty)
+            .toList(growable: false),
+        generatedAt: _date(json['generated_at']),
+      );
+    }
+
+    final HomeJsonMap context = _map(json['context']);
+    final HomeJsonMap roleProfile = _map(context['role']);
+    final HomeJsonMap overview = _map(json['overview']);
+    final HomeJsonMap hero = _map(overview['hero']);
+    final String? profileId =
+        _string(roleProfile['id']) ?? _string(hero['role_profile_id']);
+    final String? roleValue =
+        _string(roleProfile['role']) ?? _string(hero['role']);
+    final profile = _profile(profileId: profileId, roleValue: roleValue);
+    final List<HomeStatusCard> statusCards = _list(json['status_strip'])
+        .map(HomeStatusCardDto.new)
+        .map(
+          (HomeStatusCardDto dto) => dto.toEntity(
+            fallbackLabel: _fallbackStatusLabel(profile, dto.id),
+          ),
+        )
+        .where((HomeStatusCard card) => card.id.isNotEmpty)
+        .toList(growable: false);
+    final List<HomeQueueItem> queuePreview = _list(overview['queue_preview'])
+        .map(HomeQueueItemDto.new)
+        .map((HomeQueueItemDto dto) => dto.toEntity())
+        .where((HomeQueueItem item) => item.id.isNotEmpty)
+        .toList(growable: false);
+    final List<HomeQueueItem> resultsPreview =
+        _list(overview['results_preview'])
+            .map(HomeQueueItemDto.new)
+            .map((HomeQueueItemDto dto) => dto.toEntity())
+            .where((HomeQueueItem item) => item.id.isNotEmpty)
+            .toList(growable: false);
+    final List<HomeQueueItem> followUpPreview =
+        _list(overview['follow_up_preview'])
+            .map(HomeQueueItemDto.new)
+            .map((HomeQueueItemDto dto) => dto.toEntity())
+            .where((HomeQueueItem item) => item.id.isNotEmpty)
+            .toList(growable: false);
+    final List<HomeAlertItem> alerts = _list(overview['alerts'])
+        .map(HomeAlertItemDto.new)
+        .map((HomeAlertItemDto dto) => dto.toEntity())
+        .where((HomeAlertItem item) => item.id.isNotEmpty)
+        .toList(growable: false);
+    final List<HomeActivityItem> activity = _list(overview['activity_preview'])
+        .map(HomeActivityItemDto.new)
+        .map((HomeActivityItemDto dto) => dto.toEntity())
+        .where((HomeActivityItem item) => item.id.isNotEmpty)
+        .toList(growable: false);
+    final HomeDashboardTrend trend = HomeTrendDto(
+      _firstMap(<Object?>[json['trend'], overview['trend']]),
+    ).toEntity();
+    final HomeDashboardDistribution distribution = HomeDistributionDto(
+      _firstMap(<Object?>[json['distribution'], overview['distribution']]),
+    ).toEntity();
+
+    return HomeDashboard(
+      state: HomeDashboardLoadState.ready,
+      profile: profile,
+      context: HomeDashboardContext(
+        roleValue: roleValue,
+        tenantId: _string(context['tenant_id']),
+        facilityId: _string(context['facility_id']),
+        facilityName:
+            _string(context['facility_name']) ?? _string(hero['facility_name']),
+        facilityType:
+            _string(context['facility_type']) ?? _string(hero['facility_type']),
+        nurseContext: _string(context['nurse_context']),
+        departmentName: _string(context['department_name']),
+      ),
+      statusCards: statusCards.isEmpty
+          ? profile.fallbackStatusCards()
+          : statusCards,
+      trend: trend,
+      distribution: distribution,
+      quickActionIds: _quickActionIds(json, fallback: profile.quickActionIds),
+      shortcutIds: profile.shortcutIds,
+      queuePreview: queuePreview,
+      resultsPreview: resultsPreview,
+      followUpPreview: followUpPreview,
+      alerts: alerts,
+      activity: activity,
+      tenantOptions: const <HomeTenantOption>[],
+      generatedAt: _date(json['generated_at']),
+    );
+  }
+}
+
+final class HomeTrendDto {
+  const HomeTrendDto(this.json);
+
+  final HomeJsonMap json;
+
+  HomeDashboardTrend toEntity() {
+    final List<HomeTrendPoint> points = _list(json['points'])
+        .map(HomeTrendPointDto.new)
+        .map((HomeTrendPointDto dto) => dto.toEntity())
+        .where((HomeTrendPoint point) => point.id.isNotEmpty)
+        .toList(growable: false);
+
+    return HomeDashboardTrend(
+      title: _string(json['title']) ?? 'Dashboard trend',
+      subtitle: _string(json['subtitle']) ?? '',
+      points: points,
+    );
+  }
+}
+
+final class HomeTrendPointDto {
+  const HomeTrendPointDto(this.json);
+
+  final HomeJsonMap json;
+
+  HomeTrendPoint toEntity() {
+    final String? dateText = _string(json['date']) ?? _string(json['id']);
+    return HomeTrendPoint(
+      id: _string(json['id']) ?? dateText ?? '',
+      date: _date(dateText),
+      value: _num(json['value']) ?? 0,
+      label: _string(json['label']),
+    );
+  }
+}
+
+final class HomeDistributionDto {
+  const HomeDistributionDto(this.json);
+
+  final HomeJsonMap json;
+
+  HomeDashboardDistribution toEntity() {
+    final List<HomeDistributionSegment> segments = _list(json['segments'])
+        .map(HomeDistributionSegmentDto.new)
+        .map((HomeDistributionSegmentDto dto) => dto.toEntity())
+        .where((HomeDistributionSegment segment) => segment.id.isNotEmpty)
+        .toList(growable: false);
+    final num total =
+        _num(json['total']) ??
+        segments.fold<num>(0, (num sum, HomeDistributionSegment segment) {
+          return sum + segment.value;
+        });
+
+    return HomeDashboardDistribution(
+      title: _string(json['title']) ?? 'Status distribution',
+      subtitle: _string(json['subtitle']) ?? '',
+      total: total,
+      segments: segments,
+    );
+  }
+}
+
+final class HomeDistributionSegmentDto {
+  const HomeDistributionSegmentDto(this.json);
+
+  final HomeJsonMap json;
+
+  HomeDistributionSegment toEntity() {
+    final String id = _string(json['id']) ?? _string(json['label']) ?? '';
+    return HomeDistributionSegment(
+      id: id,
+      label: _string(json['label']) ?? _friendlyToken(id),
+      value: _num(json['value']) ?? 0,
+      color: _string(json['color']),
+    );
+  }
+}
+
+final class HomeTenantOptionDto {
+  const HomeTenantOptionDto(this.json);
+
+  final HomeJsonMap json;
+
+  HomeTenantOption toEntity() {
+    return HomeTenantOption(
+      id: _string(json['id']) ?? '',
+      label: _string(json['label']) ?? _string(json['name']) ?? '',
+    );
+  }
+}
+
+final class HomeStatusCardDto {
+  const HomeStatusCardDto(this.json);
+
+  final HomeJsonMap json;
+
+  String get id => _string(json['id']) ?? '';
+
+  HomeStatusCard toEntity({String? fallbackLabel}) {
+    return HomeStatusCard(
+      id: id,
+      label: _string(json['label']) ?? fallbackLabel ?? _fallbackLabel(id),
+      value: _num(json['value']) ?? 0,
+      secondaryValue: _num(json['secondary_value']),
+      hint: _string(json['hint']),
+      format: _string(json['format']) ?? 'number',
+    );
+  }
+}
+
+final class HomeQueueItemDto {
+  const HomeQueueItemDto(this.json);
+
+  final HomeJsonMap json;
+
+  HomeQueueItem toEntity() {
+    final String displayId =
+        _string(json['human_friendly_id']) ?? _string(json['id']) ?? '';
+    final String queue = _string(json['queue']) ?? _string(json['kind']) ?? '';
+    final String moduleSlug = _string(json['module_slug']) ?? '';
+    final String? title = _string(json['title']);
+    final String? subtitle = _string(json['subtitle']);
+    final String fallbackLabel = displayId.isEmpty
+        ? _friendlyToken(queue)
+        : '${_friendlyToken(queue)} $displayId';
+    return HomeQueueItem(
+      id: _string(json['id']) ?? displayId,
+      label: title ?? fallbackLabel,
+      moduleSlug: moduleSlug,
+      status: _string(json['status']),
+      severity: _string(json['severity']),
+      subtitle: subtitle,
+      occurredAt: _date(json['occurred_at']),
+      target: HomeRouteTargetDto(_map(json['target'])).toEntity(),
+    );
+  }
+}
+
+final class HomeAlertItemDto {
+  const HomeAlertItemDto(this.json);
+
+  final HomeJsonMap json;
+
+  HomeAlertItem toEntity() {
+    final String id = _string(json['id']) ?? _string(json['kind']) ?? '';
+    return HomeAlertItem(
+      id: id,
+      label: _alertLabel(_string(json['kind']) ?? id),
+      severity: _string(json['severity']) ?? 'info',
+      count: _int(json['count']) ?? 0,
+      target: HomeRouteTargetDto(_map(json['target'])).toEntity(),
+    );
+  }
+}
+
+final class HomeActivityItemDto {
+  const HomeActivityItemDto(this.json);
+
+  final HomeJsonMap json;
+
+  HomeActivityItem toEntity() {
+    final String displayId =
+        _string(json['human_friendly_id']) ?? _string(json['id']) ?? '';
+    final String eventType = _string(json['event_type']) ?? '';
+    final String? title = _string(json['title']);
+    final String fallbackLabel = displayId.isEmpty
+        ? _friendlyToken(eventType)
+        : '${_friendlyToken(eventType)} $displayId'.trim();
+    return HomeActivityItem(
+      id: _string(json['id']) ?? displayId,
+      label: title ?? fallbackLabel,
+      moduleSlug: _string(json['module_slug']) ?? '',
+      status: _string(json['status']),
+      occurredAt: _date(json['occurred_at']),
+      target: HomeRouteTargetDto(_map(json['target'])).toEntity(),
+    );
+  }
+}
+
+final class HomeRouteTargetDto {
+  const HomeRouteTargetDto(this.json);
+
+  final HomeJsonMap json;
+
+  HomeRouteTarget? toEntity() {
+    final String? moduleSlug = _string(json['module_slug']);
+    if (moduleSlug == null) {
+      return null;
+    }
+
+    return HomeRouteTarget(
+      moduleSlug: moduleSlug,
+      resource: _string(json['resource']),
+      publicId: _string(json['public_id']),
+      action: _string(json['action']),
+    );
+  }
+}
+
+HomeDashboardProfile _profile({String? profileId, String? roleValue}) {
+  final HomeDashboardProfile byProfile = homeProfileForProfileId(profileId);
+  if (byProfile.role != AppRole.other || profileId == 'other') {
+    return byProfile;
+  }
+
+  return homeProfileForRole(appRoleFromValue(roleValue));
+}
+
+String? _contextRoleValue(Object? value) {
+  if (value is String) {
+    return _string(value);
+  }
+  return _string(_map(value)['role']) ?? _string(_map(value)['name']);
+}
+
+String? _fallbackStatusLabel(
+  HomeDashboardProfile profile,
+  String statusCardId,
+) {
+  for (final HomeStatusCardTemplate template in profile.statusCards) {
+    if (template.id == statusCardId) {
+      return template.label;
+    }
+  }
+  return null;
+}
+
+String _alertLabel(String value) {
+  return switch (value) {
+    'overdue_invoices' => 'Overdue invoices',
+    'critical_labs' => 'Critical lab results',
+    'radiology_results_ready' => 'Imaging results ready',
+    'bed_occupancy_pressure' => 'Bed occupancy pressure',
+    'plan_limit_pressure' => 'Plan-limit pressure',
+    'guide_signal' => 'Getting started',
+    _ => _friendlyToken(value),
+  };
+}
+
+String _friendlyToken(String value) {
+  final String normalized = value
+      .trim()
+      .replaceAll(RegExp(r'[_-]+'), ' ')
+      .replaceAll(RegExp(r'\s+'), ' ');
+  if (normalized.isEmpty) {
+    return '';
+  }
+
+  return normalized
+      .split(' ')
+      .where((String word) => word.isNotEmpty)
+      .map((String word) {
+        final String lower = word.toLowerCase();
+        return '${lower.substring(0, 1).toUpperCase()}${lower.substring(1)}';
+      })
+      .join(' ');
+}
+
+String _fallbackLabel(String id) {
+  final String label = _friendlyToken(id);
+  return label.isEmpty ? 'Dashboard item' : label;
+}
+
+HomeJsonMap _dataMap(Object? responseData) {
+  final HomeJsonMap response = _map(responseData);
+  final HomeJsonMap data = _map(response['data']);
+  return data.isNotEmpty ? data : response;
+}
+
+HomeJsonMap _firstMap(Iterable<Object?> values) {
+  for (final Object? value in values) {
+    final HomeJsonMap mapped = _map(value);
+    if (mapped.isNotEmpty) {
+      return mapped;
+    }
+  }
+  return <String, Object?>{};
+}
+
+HomeJsonMap _map(Object? value) {
+  if (value is Map) {
+    return value.map<String, Object?>((Object? key, Object? value) {
+      return MapEntry<String, Object?>(key.toString(), value);
+    });
+  }
+  return <String, Object?>{};
+}
+
+List<HomeJsonMap> _list(Object? value) {
+  if (value is! List) {
+    return const <HomeJsonMap>[];
+  }
+  return value
+      .map(_map)
+      .where((HomeJsonMap item) => item.isNotEmpty)
+      .toList(growable: false);
+}
+
+List<String> _strings(Object? value) {
+  if (value is! Iterable<Object?>) {
+    return const <String>[];
+  }
+  return value.map(_string).whereType<String>().toSet().toList(growable: false);
+}
+
+List<String> _quickActionIds(
+  HomeJsonMap json, {
+  Iterable<String> fallback = const <String>[],
+}) {
+  final ids = _strings(json['quick_action_ids']);
+  if (ids.isNotEmpty) {
+    return ids;
+  }
+
+  final actionIds = _list(json['quick_actions'])
+      .map((HomeJsonMap item) => _string(item['id']))
+      .whereType<String>()
+      .toSet()
+      .toList(growable: false);
+  if (actionIds.isNotEmpty) {
+    return actionIds;
+  }
+
+  return fallback.toSet().toList(growable: false);
+}
+
+String? _string(Object? value) {
+  if (value == null) {
+    return null;
+  }
+  final String normalized = value.toString().trim();
+  return normalized.isEmpty ? null : normalized;
+}
+
+num? _num(Object? value) {
+  if (value is num) {
+    return value;
+  }
+  if (value is String) {
+    return num.tryParse(value.replaceAll(',', '').trim());
+  }
+  return null;
+}
+
+int? _int(Object? value) {
+  if (value is int) {
+    return value;
+  }
+  if (value is num) {
+    return value.toInt();
+  }
+  if (value is String) {
+    return int.tryParse(value.trim());
+  }
+  return null;
+}
+
+DateTime? _date(Object? value) {
+  final String? normalized = _string(value);
+  if (normalized == null) {
+    return null;
+  }
+  return DateTime.tryParse(normalized);
+}

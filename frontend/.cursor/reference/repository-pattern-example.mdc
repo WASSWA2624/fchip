@@ -1,0 +1,47 @@
+---
+description: Reference example for repository layer boundaries.
+globs:
+  - "frontend/.cursor/reference/repository-pattern-example.mdc"
+alwaysApply: false
+---
+
+# Repository Pattern Example
+
+Reference only. Policy lives in [`architecture.mdc`](../architecture.mdc) and [`data_modeling.mdc`](../data_modeling.mdc).
+
+## Example
+
+```dart
+abstract class ProfileRepository {
+  Future<Result<Profile>> getCurrentProfile();
+}
+
+class ProfileRepositoryImpl implements ProfileRepository {
+  const ProfileRepositoryImpl({
+    required ProfileRemoteDataSource remoteDataSource,
+    required ProfileLocalDataSource localDataSource,
+  })  : _remoteDataSource = remoteDataSource,
+        _localDataSource = localDataSource;
+
+  final ProfileRemoteDataSource _remoteDataSource;
+  final ProfileLocalDataSource _localDataSource;
+
+  @override
+  Future<Result<Profile>> getCurrentProfile() async {
+    try {
+      final dto = await _remoteDataSource.getCurrentProfile();
+      final profile = dto.toEntity();
+      await _localDataSource.cacheProfile(profile);
+      return Result.success(profile);
+    } catch (error, stackTrace) {
+      return Result.failure(mapToFailure(error, stackTrace));
+    }
+  }
+}
+```
+
+## Rules
+
+- Repositories must return `Result` and map errors to typed failures.
+- Data sources must own I/O; repositories must coordinate remote and local.
+- Domain must depend on the abstract contract, not the implementation.

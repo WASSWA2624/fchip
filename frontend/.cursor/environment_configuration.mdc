@@ -1,0 +1,43 @@
+---
+description: Define how development, staging, and production configuration and secrets are handled.
+globs:
+  - "frontend/lib/core/config/**"
+  - "frontend/lib/core/bootstrap/environment.dart"
+  - "frontend/lib/core/bootstrap/app_config.dart"
+alwaysApply: false
+---
+
+# Environment Configuration
+
+How development, staging, and production configuration is represented.
+
+## Requirements
+
+- Keep environment-specific values outside feature widgets.
+- Must not commit secrets in source, assets, config files, or docs.
+- Use Flutter compile-time define files for non-secret public values.
+- Validate required configuration during startup and separate per-environment values.
+- Production API base URLs must use HTTPS unless a controlled private network requires otherwise.
+- Logs must identify the environment without exposing secrets.
+
+## Recommended values
+
+| Value | Example |
+|---|---|
+| environment name | `development`, `staging`, `production` |
+| API base URL | public non-secret URL |
+| API timeout | duration in seconds |
+| logging level | debug/info/warn/error |
+| feature flag defaults | safe defaults |
+
+## Acceptance
+
+- Missing required config fails fast with a clear message.
+- Production builds exclude development-only endpoints.
+- Tests can override environment config.
+
+## Related
+
+- [`security.mdc`](./security.mdc)
+- [`network_api.mdc`](./network_api.mdc)
+- [`feature_flags.mdc`](./feature_flags.mdc)

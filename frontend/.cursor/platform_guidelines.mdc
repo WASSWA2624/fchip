@@ -1,0 +1,31 @@
+---
+description: Apply when reviewing platform-specific behavior for enabled Flutter targets.
+globs:
+  - "frontend/lib/**"
+alwaysApply: false
+---
+
+# Platform Guidelines
+
+Per-platform behavior for FCHIP on all enabled Flutter targets.
+
+## Mandatory rules
+
+- Must support Android, iOS, Web, Windows, macOS, and Linux where enabled.
+- Platform checks must live only at infrastructure boundaries, not throughout feature UI.
+- Web: must handle URLs, refresh, keyboard/pointer, and storage limits.
+- Desktop: must support resizable windows, menu bar, side nav, shortcuts, and hover.
+- Mobile: must handle touch, safe areas, keyboard insets, and back behavior.
+- Smartwatch layouts are out of scope.
+
+## Build hosts
+
+- iOS/macOS builds require a macOS host with Apple tooling.
+- Windows/Linux builds require matching host tooling.
+- CI may split platform builds across OS images.
+
+## See also
+
+- [`layouts.mdc`](./layouts.mdc)
+- [`multi_platform_input.mdc`](./multi_platform_input.mdc)
+- [`ci_cd_quality_gates.mdc`](./ci_cd_quality_gates.mdc)

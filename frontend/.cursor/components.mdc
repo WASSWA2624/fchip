@@ -1,0 +1,41 @@
+---
+description: Govern shared, reusable UI components and when feature widgets belong in shared.
+globs:
+  - "frontend/lib/shared/**"
+  - "frontend/lib/features/**/presentation/widgets/**"
+alwaysApply: false
+---
+
+# Shared Components
+
+Uniform, reusable UI built on Flutter Material primitives.
+
+## Requirements
+
+- Prefer Material/Cupertino widgets; wrap only for consistency or repeated behavior.
+- Reusable components must live under `frontend/lib/shared/`; must not duplicate in feature folders, and check the catalog before creating new UI.
+- Must not create multiple components for one job or embed product business logic.
+- Optimize for performance: `const` constructors, focused rebuilds, lazy builders for large lists.
+- Match design tokens on every variant ([`design-system.mdc`](./design-system.mdc)) and adapt to mobile, tablet, desktop ([`layouts.mdc`](./layouts.mdc)).
+- All labels, hints, validation, and accessibility text must be localized.
+- Support enabled, disabled, loading, error, focused, and empty states where relevant.
+- Data-bound components render Riverpod changes immediately without owning sync logic.
+- Reference entities by `human_friendly_id`; must not expose raw table IDs.
+- Enforce RBAC+ABAC: unauthorized menus, components, and actions must not render ([`permissions.mdc`](./permissions.mdc)).
+- Module work-queue screens must follow [`ui-workspace.mdc`](./ui-workspace.mdc).
+
+## Standard catalog
+
+Reuse the standard set instead of new abstractions: `AppWorkspace`, `AppListTable`, `AppWorkspaceDetailPanel`, `AppActionPanel`, `AppPermissionActionPanel`, `AppWorkspaceMutationDialog`, `AppButton`, `AppTextField`, `AppSelectField`, `AppRadioGroup`, `AppCheckboxField`, `AppSwitchField`, `AppDateField`, `AppDialog`, `AsyncStateScaffold`, `AppStatusBadge`, `ResponsivePage`, `ResponsiveAppShell`, `SideNavigation`.
+
+## Styling bounds
+
+- Icons `20–24px`; button heights `40–48px`.
+- Radii from `theme.radius` tokens via `context.responsiveRadius(...)`.
+- Form fields expose validation hooks but must not own feature rules.
+
+## Related
+
+- [`ui-workspace.mdc`](./ui-workspace.mdc)
+- [`ui-patterns.mdc`](./ui-patterns.mdc)
+- [`layouts.mdc`](./layouts.mdc)

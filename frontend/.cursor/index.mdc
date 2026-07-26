@@ -1,0 +1,36 @@
+---
+description: Index frontend rule ownership, conflict precedence, and app-wide invariants.
+globs:
+  - "frontend/**"
+alwaysApply: false
+---
+
+# Frontend Rules Index
+
+Entry point to Flutter technical standards for FCHIP (`frontend/`).
+
+## Conflict order
+
+When rules conflict, you must apply this order:
+
+1. Security, privacy, and safety rules.
+2. [`.cursor/api-contract.mdc`](../../.cursor/api-contract.mdc) for HTTP and cross-stack behavior.
+3. [`instant_ui_sync.mdc`](./instant_ui_sync.mdc), then [`realtime_sync.mdc`](./realtime_sync.mdc).
+4. This index and the named owner file.
+5. Other frontend rule files.
+6. `dev-plan/` steps (chronology only).
+
+## Invariants
+
+- You must prioritize performance, uniform reusable UI in `frontend/lib/shared/`, real-time sync, full responsiveness, and simple workflows.
+- Entities must be referenced by `human_friendly_id` only; raw table IDs must not be exposed.
+- Effective access must equal role/module/user grants ∩ subscription package ∩ assigned modules ∩ ABAC scope, defined in [`.cursor/access/`](../../.cursor/access/).
+
+## Owner map
+
+- Structure: [`project_structure.mdc`](./project_structure.mdc), [`feature_workflow.mdc`](./feature_workflow.mdc), [`checklists.mdc`](./checklists.mdc).
+- UI/UX: [`design-system.mdc`](./design-system.mdc), [`components.mdc`](./components.mdc), [`layouts.mdc`](./layouts.mdc), [`ui-patterns.mdc`](./ui-patterns.mdc), [`ui-workspace.mdc`](./ui-workspace.mdc), [`ui-feedback.mdc`](./ui-feedback.mdc), [`navigation.mdc`](./navigation.mdc), [`accessibility.mdc`](./accessibility.mdc).
+- Data/network: [`state_management.mdc`](./state_management.mdc), [`data_modeling.mdc`](./data_modeling.mdc), [`network_api.mdc`](./network_api.mdc), [`database_strategy.mdc`](./database_strategy.mdc), [`realtime_sync.mdc`](./realtime_sync.mdc).
+- Security/auth: [`security.mdc`](./security.mdc), [`authentication_session.mdc`](./authentication_session.mdc), [`permissions.mdc`](./permissions.mdc).
+- Platform/config: [`environment_configuration.mdc`](./environment_configuration.mdc), [`localization_i18n.mdc`](./localization_i18n.mdc), [`feature_flags.mdc`](./feature_flags.mdc).
+- Quality: [`dependencies.mdc`](./dependencies.mdc), [`code_generation.mdc`](./code_generation.mdc), [`testing.mdc`](./testing.mdc), [`ci_cd_quality_gates.mdc`](./ci_cd_quality_gates.mdc), [`error_handling.mdc`](./error_handling.mdc).

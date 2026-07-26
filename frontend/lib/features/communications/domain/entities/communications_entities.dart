@@ -1,0 +1,735 @@
+import 'package:flutter/foundation.dart';
+import 'package:fchip/core/utils/person_display_name.dart';
+import 'package:fchip/shared/data/data.dart';
+
+enum CommunicationsPanel {
+  inbox('inbox'),
+  notifications('notifications'),
+  deliveries('deliveries'),
+  templates('templates');
+
+  const CommunicationsPanel(this.serverValue);
+
+  final String serverValue;
+
+  static CommunicationsPanel fromServer(String? value) {
+    final String normalized = (value ?? '').trim().toLowerCase();
+    for (final CommunicationsPanel panel in values) {
+      if (panel.serverValue == normalized) {
+        return panel;
+      }
+    }
+    return CommunicationsPanel.inbox;
+  }
+}
+
+@immutable
+final class CommunicationsWorkspaceQuery {
+  const CommunicationsWorkspaceQuery({
+    this.panel = CommunicationsPanel.inbox,
+    this.search = '',
+    this.filter,
+    this.conversationId,
+    this.messageId,
+    this.notificationId,
+    this.templateId,
+    this.action,
+    this.unreadOnly = false,
+    this.sensitive = false,
+    this.pageRequest = const AppPageRequest(pageSize: 30),
+  });
+
+  factory CommunicationsWorkspaceQuery.fromUri(Uri uri) {
+    final Map<String, String> params = uri.queryParameters;
+    return CommunicationsWorkspaceQuery(
+      panel: CommunicationsPanel.fromServer(params['panel']),
+      search: params['search'] ?? '',
+      filter: _nonEmpty(params['filter']),
+      conversationId: _nonEmpty(params['conversationId']),
+      messageId: _nonEmpty(params['messageId']),
+      notificationId: _nonEmpty(params['notificationId']),
+      templateId: _nonEmpty(params['templateId']),
+      action: _nonEmpty(params['action']),
+      unreadOnly: _boolParam(params['unreadOnly']),
+      sensitive: _boolParam(params['sensitive']),
+    );
+  }
+
+  final CommunicationsPanel panel;
+  final String search;
+  final String? filter;
+  final String? conversationId;
+  final String? messageId;
+  final String? notificationId;
+  final String? templateId;
+  final String? action;
+  final bool unreadOnly;
+  final bool sensitive;
+  final AppPageRequest pageRequest;
+
+  bool get hasActiveFilters {
+    return search.trim().isNotEmpty ||
+        filter != null ||
+        conversationId != null ||
+        notificationId != null ||
+        templateId != null ||
+        unreadOnly ||
+        sensitive;
+  }
+
+  CommunicationsWorkspaceQuery copyWith({
+    CommunicationsPanel? panel,
+    String? search,
+    String? filter,
+    String? conversationId,
+    String? messageId,
+    String? notificationId,
+    String? templateId,
+    String? action,
+    bool? unreadOnly,
+    bool? sensitive,
+    AppPageRequest? pageRequest,
+    bool clearFilter = false,
+    bool clearUnreadOnly = false,
+    bool clearConversationId = false,
+    bool clearMessageId = false,
+    bool clearNotificationId = false,
+    bool clearTemplateId = false,
+    bool clearAction = false,
+  }) {
+    return CommunicationsWorkspaceQuery(
+      panel: panel ?? this.panel,
+      search: search ?? this.search,
+      filter: clearFilter ? null : filter ?? this.filter,
+      conversationId: clearConversationId
+          ? null
+          : conversationId ?? this.conversationId,
+      messageId: clearMessageId ? null : messageId ?? this.messageId,
+      notificationId: clearNotificationId
+          ? null
+          : notificationId ?? this.notificationId,
+      templateId: clearTemplateId ? null : templateId ?? this.templateId,
+      action: clearAction ? null : action ?? this.action,
+      unreadOnly: clearUnreadOnly ? false : unreadOnly ?? this.unreadOnly,
+      sensitive: sensitive ?? this.sensitive,
+      pageRequest: pageRequest ?? this.pageRequest,
+    );
+  }
+
+  Map<String, String> toQueryParameters() {
+    final Map<String, String> params = <String, String>{
+      'panel': panel.serverValue,
+    };
+    if (search.trim().isNotEmpty) {
+      params['search'] = search.trim();
+    }
+    if (filter != null && filter!.trim().isNotEmpty) {
+      params['filter'] = filter!.trim();
+    }
+    if (conversationId != null && conversationId!.trim().isNotEmpty) {
+      params['conversationId'] = conversationId!.trim();
+    }
+    if (messageId != null && messageId!.trim().isNotEmpty) {
+      params['messageId'] = messageId!.trim();
+    }
+    if (notificationId != null && notificationId!.trim().isNotEmpty) {
+      params['notificationId'] = notificationId!.trim();
+    }
+    if (templateId != null && templateId!.trim().isNotEmpty) {
+      params['templateId'] = templateId!.trim();
+    }
+    if (action != null && action!.trim().isNotEmpty) {
+      params['action'] = action!.trim();
+    }
+    if (unreadOnly) {
+      params['unreadOnly'] = 'true';
+    }
+    if (sensitive) {
+      params['sensitive'] = 'true';
+    }
+    return params;
+  }
+}
+
+@immutable
+final class CommunicationsSummary {
+  const CommunicationsSummary({
+    this.unreadThreads = 0,
+    this.archivedThreads = 0,
+    this.notifications = 0,
+    this.failedDeliveries = 0,
+    this.templates = 0,
+  });
+
+  final int unreadThreads;
+  final int archivedThreads;
+  final int notifications;
+  final int failedDeliveries;
+  final int templates;
+
+  int get workloadCount => unreadThreads + failedDeliveries;
+
+  CommunicationsSummary copyWith({
+    int? unreadThreads,
+    int? archivedThreads,
+    int? notifications,
+    int? failedDeliveries,
+    int? templates,
+  }) {
+    return CommunicationsSummary(
+      unreadThreads: unreadThreads ?? this.unreadThreads,
+      archivedThreads: archivedThreads ?? this.archivedThreads,
+      notifications: notifications ?? this.notifications,
+      failedDeliveries: failedDeliveries ?? this.failedDeliveries,
+      templates: templates ?? this.templates,
+    );
+  }
+}
+
+@immutable
+final class NotificationMetrics {
+  const NotificationMetrics({
+    this.total = 0,
+    this.unread = 0,
+    this.read = 0,
+    this.attentionRequired = 0,
+    this.failedDeliveries = 0,
+    this.retryableDeliveries = 0,
+    this.lastReceivedAt,
+  });
+
+  final int total;
+  final int unread;
+  final int read;
+  final int attentionRequired;
+  final int failedDeliveries;
+  final int retryableDeliveries;
+  final DateTime? lastReceivedAt;
+}
+
+@immutable
+final class CommunicationsPanelSummary {
+  const CommunicationsPanelSummary({
+    required this.panel,
+    required this.count,
+    this.id,
+    this.labelKey,
+  });
+
+  final CommunicationsPanel panel;
+  final int count;
+  final String? id;
+  final String? labelKey;
+}
+
+@immutable
+final class CommunicationsQueueSummary {
+  const CommunicationsQueueSummary({
+    required this.id,
+    required this.label,
+    required this.count,
+    required this.panel,
+    this.filter,
+  });
+
+  final String id;
+  final String label;
+  final int count;
+  final CommunicationsPanel panel;
+  final String? filter;
+}
+
+@immutable
+final class CommunicationUser {
+  const CommunicationUser({
+    required this.id,
+    this.name,
+    this.email,
+    this.positionTitle,
+    this.initials,
+    this.roles = const <String>[],
+  });
+
+  final String id;
+  final String? name;
+  final String? email;
+  final String? positionTitle;
+  final String? initials;
+  final List<String> roles;
+
+  String get displayName =>
+      resolvePersonDisplayName(email: email, displayName: name, fallbackId: id);
+}
+
+@immutable
+final class CommunicationAttachment {
+  const CommunicationAttachment({
+    required this.id,
+    required this.fileName,
+    this.contentType,
+    this.sizeBytes = 0,
+    this.attachmentKind,
+    this.publicUrl,
+    this.createdAt,
+  });
+
+  final String id;
+  final String fileName;
+  final String? contentType;
+  final int sizeBytes;
+  final String? attachmentKind;
+  final String? publicUrl;
+  final DateTime? createdAt;
+}
+
+@immutable
+final class CommunicationMessage {
+  const CommunicationMessage({
+    required this.id,
+    this.conversationId,
+    this.senderUserId,
+    this.sender,
+    this.content,
+    this.messageType,
+    this.sentAt,
+    this.editedAt,
+    this.replyToMessageId,
+    this.replyToMessage,
+    this.attachments = const <CommunicationAttachment>[],
+  });
+
+  final String id;
+  final String? conversationId;
+  final String? senderUserId;
+  final CommunicationUser? sender;
+  final String? content;
+  final String? messageType;
+  final DateTime? sentAt;
+  final DateTime? editedAt;
+  final String? replyToMessageId;
+  final CommunicationMessage? replyToMessage;
+  final List<CommunicationAttachment> attachments;
+
+  String get preview {
+    final String? text = _nonEmpty(content);
+    if (text != null) {
+      return text;
+    }
+    return attachments.isEmpty ? '' : attachments.first.fileName;
+  }
+}
+
+@immutable
+final class CommunicationsParticipant {
+  const CommunicationsParticipant({
+    required this.id,
+    required this.userId,
+    this.user,
+    this.roleSnapshot,
+    this.joinedAt,
+    this.archivedAt,
+    this.lastReadAt,
+    this.lastReadMessageId,
+    this.isFavorite = false,
+    this.isFlagged = false,
+  });
+
+  final String id;
+  final String userId;
+  final CommunicationUser? user;
+  final String? roleSnapshot;
+  final DateTime? joinedAt;
+  final DateTime? archivedAt;
+  final DateTime? lastReadAt;
+  final String? lastReadMessageId;
+  final bool isFavorite;
+  final bool isFlagged;
+}
+
+@immutable
+final class CommunicationsConversation {
+  const CommunicationsConversation({
+    required this.id,
+    required this.title,
+    this.subject,
+    this.conversationType,
+    this.status,
+    this.isSensitive = false,
+    this.archived = false,
+    this.unread = false,
+    this.isFavorite = false,
+    this.isFlagged = false,
+    this.lastMessageAt,
+    this.createdAt,
+    this.targetPath,
+    this.participants = const <CommunicationsParticipant>[],
+    this.lastMessage,
+    this.messages = const <CommunicationMessage>[],
+    this.attachmentCount = 0,
+  });
+
+  final String id;
+  final String title;
+  final String? subject;
+  final String? conversationType;
+  final String? status;
+  final bool isSensitive;
+  final bool archived;
+  final bool unread;
+  final bool isFavorite;
+  final bool isFlagged;
+  final DateTime? lastMessageAt;
+  final DateTime? createdAt;
+  final String? targetPath;
+  final List<CommunicationsParticipant> participants;
+  final CommunicationMessage? lastMessage;
+  final List<CommunicationMessage> messages;
+  final int attachmentCount;
+
+  String get preview => lastMessage?.preview ?? '';
+
+  bool get isGroup =>
+      (conversationType ?? '').trim().toUpperCase() == 'GROUP' ||
+      participants.length > 2;
+}
+
+@immutable
+final class CommunicationStaffOption {
+  const CommunicationStaffOption({
+    required this.id,
+    required this.label,
+    this.email,
+    this.positionTitle,
+    this.roles = const <String>[],
+  });
+
+  final String id;
+  final String label;
+  final String? email;
+  final String? positionTitle;
+  final List<String> roles;
+
+  String get searchableLabel {
+    final List<String> parts = <String>[
+      label,
+      if (email != null && email!.isNotEmpty) email!,
+      if (positionTitle != null && positionTitle!.isNotEmpty) positionTitle!,
+      ...roles,
+    ];
+    return parts.join(' ');
+  }
+}
+
+@immutable
+final class CommunicationAttachmentUpload {
+  const CommunicationAttachmentUpload({
+    required this.fileName,
+    required this.bytes,
+    this.contentType,
+  });
+
+  final String fileName;
+  final List<int> bytes;
+  final String? contentType;
+}
+
+@immutable
+final class NotificationDelivery {
+  const NotificationDelivery({
+    required this.id,
+    this.notificationId,
+    this.channel,
+    this.status,
+    this.recipientTarget,
+    this.providerName,
+    this.attemptCount = 0,
+    this.sentAt,
+    this.deliveredAt,
+    this.failedAt,
+    this.retryable = false,
+    this.errorMessage,
+    this.targetPath,
+    this.notificationTitle,
+    this.recipient,
+  });
+
+  final String id;
+  final String? notificationId;
+  final String? channel;
+  final String? status;
+  final String? recipientTarget;
+  final String? providerName;
+  final int attemptCount;
+  final DateTime? sentAt;
+  final DateTime? deliveredAt;
+  final DateTime? failedAt;
+  final bool retryable;
+  final String? errorMessage;
+  final String? targetPath;
+  final String? notificationTitle;
+  final CommunicationUser? recipient;
+}
+
+@immutable
+final class NotificationItem {
+  const NotificationItem({
+    required this.id,
+    required this.title,
+    this.notificationType,
+    this.priority,
+    this.message,
+    this.targetPath,
+    this.contextType,
+    this.contextPublicId,
+    this.readAt,
+    this.createdAt,
+    this.updatedAt,
+    this.deliveryStatus,
+    this.deliveries = const <NotificationDelivery>[],
+  });
+
+  final String id;
+  final String title;
+  final String? notificationType;
+  final String? priority;
+  final String? message;
+  final String? targetPath;
+  final String? contextType;
+  final String? contextPublicId;
+  final DateTime? readAt;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final String? deliveryStatus;
+  final List<NotificationDelivery> deliveries;
+
+  bool get isRead => readAt != null;
+
+  bool get isUrgent {
+    final String normalized = (priority ?? '').trim().toUpperCase();
+    return normalized == 'HIGH' || normalized == 'URGENT';
+  }
+
+  String? get effectiveDeliveryStatus {
+    if (_nonEmpty(deliveryStatus) != null) {
+      return deliveryStatus;
+    }
+    if (deliveries.isEmpty) {
+      return null;
+    }
+    return deliveries.first.status;
+  }
+
+  NotificationItem copyWith({DateTime? readAt, bool clearReadAt = false}) {
+    return NotificationItem(
+      id: id,
+      title: title,
+      notificationType: notificationType,
+      priority: priority,
+      message: message,
+      targetPath: targetPath,
+      contextType: contextType,
+      contextPublicId: contextPublicId,
+      readAt: clearReadAt ? null : readAt ?? this.readAt,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
+      deliveryStatus: deliveryStatus,
+      deliveries: deliveries,
+    );
+  }
+}
+
+@immutable
+final class CommunicationTemplate {
+  const CommunicationTemplate({
+    required this.id,
+    required this.name,
+    this.channel,
+    this.subject,
+    this.description,
+    this.body,
+    this.isActive = true,
+    this.variableCount = 0,
+    this.previewSubject,
+    this.previewBody,
+  });
+
+  final String id;
+  final String name;
+  final String? channel;
+  final String? subject;
+  final String? description;
+  final String? body;
+  final bool isActive;
+  final int variableCount;
+  final String? previewSubject;
+  final String? previewBody;
+}
+
+@immutable
+final class CommunicationsWorkspaceState {
+  const CommunicationsWorkspaceState({
+    required this.query,
+    required this.summary,
+    required this.metrics,
+    required this.conversations,
+    required this.notifications,
+    required this.deliveries,
+    required this.templates,
+    this.panels = const <CommunicationsPanelSummary>[],
+    this.queueSummaries = const <CommunicationsQueueSummary>[],
+    this.selectedConversation,
+    this.selectedNotification,
+    this.selectedDelivery,
+    this.selectedTemplate,
+    this.lastFailure,
+    this.isRefreshing = false,
+    this.isRefreshingConversations = false,
+    this.isRefreshingThread = false,
+    this.isRefreshingNotifications = false,
+    this.isRefreshingDeliveries = false,
+    this.isRefreshingTemplates = false,
+    this.isSaving = false,
+    this.usesClientMessageFilter = false,
+    this.composeAutofocus = false,
+  });
+
+  final CommunicationsWorkspaceQuery query;
+  final CommunicationsSummary summary;
+  final NotificationMetrics metrics;
+  final List<CommunicationsPanelSummary> panels;
+  final List<CommunicationsQueueSummary> queueSummaries;
+  final AppPage<CommunicationsConversation> conversations;
+  final AppPage<NotificationItem> notifications;
+  final AppPage<NotificationDelivery> deliveries;
+  final AppPage<CommunicationTemplate> templates;
+  final CommunicationsConversation? selectedConversation;
+  final NotificationItem? selectedNotification;
+  final NotificationDelivery? selectedDelivery;
+  final CommunicationTemplate? selectedTemplate;
+  final Object? lastFailure;
+  final bool isRefreshing;
+  final bool isRefreshingConversations;
+  final bool isRefreshingThread;
+  final bool isRefreshingNotifications;
+  final bool isRefreshingDeliveries;
+  final bool isRefreshingTemplates;
+  final bool isSaving;
+  final bool usesClientMessageFilter;
+  final bool composeAutofocus;
+
+  int get unreadBadgeCount => metrics.unread;
+
+  int get workloadCount {
+    return summary.unreadThreads + metrics.unread + metrics.failedDeliveries;
+  }
+
+  CommunicationsWorkspaceState copyWith({
+    CommunicationsWorkspaceQuery? query,
+    CommunicationsSummary? summary,
+    NotificationMetrics? metrics,
+    List<CommunicationsPanelSummary>? panels,
+    List<CommunicationsQueueSummary>? queueSummaries,
+    AppPage<CommunicationsConversation>? conversations,
+    AppPage<NotificationItem>? notifications,
+    AppPage<NotificationDelivery>? deliveries,
+    AppPage<CommunicationTemplate>? templates,
+    CommunicationsConversation? selectedConversation,
+    NotificationItem? selectedNotification,
+    NotificationDelivery? selectedDelivery,
+    CommunicationTemplate? selectedTemplate,
+    Object? lastFailure,
+    bool? isRefreshing,
+    bool? isRefreshingConversations,
+    bool? isRefreshingThread,
+    bool? isRefreshingNotifications,
+    bool? isRefreshingDeliveries,
+    bool? isRefreshingTemplates,
+    bool? isSaving,
+    bool? usesClientMessageFilter,
+    bool? composeAutofocus,
+    bool clearSelectedConversation = false,
+    bool clearSelectedNotification = false,
+    bool clearSelectedDelivery = false,
+    bool clearSelectedTemplate = false,
+    bool clearLastFailure = false,
+  }) {
+    return CommunicationsWorkspaceState(
+      query: query ?? this.query,
+      summary: summary ?? this.summary,
+      metrics: metrics ?? this.metrics,
+      panels: panels ?? this.panels,
+      queueSummaries: queueSummaries ?? this.queueSummaries,
+      conversations: conversations ?? this.conversations,
+      notifications: notifications ?? this.notifications,
+      deliveries: deliveries ?? this.deliveries,
+      templates: templates ?? this.templates,
+      selectedConversation: clearSelectedConversation
+          ? null
+          : selectedConversation ?? this.selectedConversation,
+      selectedNotification: clearSelectedNotification
+          ? null
+          : selectedNotification ?? this.selectedNotification,
+      selectedDelivery: clearSelectedDelivery
+          ? null
+          : selectedDelivery ?? this.selectedDelivery,
+      selectedTemplate: clearSelectedTemplate
+          ? null
+          : selectedTemplate ?? this.selectedTemplate,
+      lastFailure: clearLastFailure ? null : lastFailure ?? this.lastFailure,
+      isRefreshing: isRefreshing ?? this.isRefreshing,
+      isRefreshingConversations:
+          isRefreshingConversations ?? this.isRefreshingConversations,
+      isRefreshingThread: isRefreshingThread ?? this.isRefreshingThread,
+      isRefreshingNotifications:
+          isRefreshingNotifications ?? this.isRefreshingNotifications,
+      isRefreshingDeliveries:
+          isRefreshingDeliveries ?? this.isRefreshingDeliveries,
+      isRefreshingTemplates:
+          isRefreshingTemplates ?? this.isRefreshingTemplates,
+      isSaving: isSaving ?? this.isSaving,
+      usesClientMessageFilter:
+          usesClientMessageFilter ?? this.usesClientMessageFilter,
+      composeAutofocus: composeAutofocus ?? this.composeAutofocus,
+    );
+  }
+}
+
+@immutable
+final class CommunicationMessageDraft {
+  const CommunicationMessageDraft({
+    required this.content,
+    this.replyToMessageId,
+    this.mentionedUserIds = const <String>[],
+    this.attachments = const <CommunicationAttachmentUpload>[],
+  });
+
+  final String content;
+  final String? replyToMessageId;
+  final List<String> mentionedUserIds;
+  final List<CommunicationAttachmentUpload> attachments;
+}
+
+@immutable
+final class CommunicationConversationDraft {
+  const CommunicationConversationDraft({
+    required this.participantIds,
+    this.subject,
+    this.isSensitive = false,
+    this.conversationType,
+  });
+
+  final List<String> participantIds;
+  final String? subject;
+  final bool isSensitive;
+  final String? conversationType;
+}
+
+bool _boolParam(String? value) {
+  final String normalized = (value ?? '').trim().toLowerCase();
+  return normalized == 'true' || normalized == '1' || normalized == 'yes';
+}
+
+String? _nonEmpty(String? value) {
+  final String? normalized = value?.trim();
+  return normalized == null || normalized.isEmpty ? null : normalized;
+}

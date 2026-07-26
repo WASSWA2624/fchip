@@ -1,0 +1,82 @@
+import 'package:flutter/material.dart';
+import 'package:fchip/app/theme/app_theme_extensions.dart';
+import 'package:fchip/core/responsive/app_breakpoints.dart';
+
+enum AppResponsiveFieldRowGap { standard, form }
+
+/// Stacks children below [AppBreakpoints.md] and places them in a row above.
+class AppResponsiveFieldRow extends StatelessWidget {
+  const AppResponsiveFieldRow({
+    required this.children,
+    this.breakpoint = AppBreakpoints.md,
+    this.gap = AppResponsiveFieldRowGap.standard,
+    super.key,
+  });
+
+  AppResponsiveFieldRow.two({
+    required Widget left,
+    required Widget right,
+    double breakpoint = AppBreakpoints.md,
+    AppResponsiveFieldRowGap gap = AppResponsiveFieldRowGap.standard,
+    Key? key,
+  }) : this(
+         children: <Widget>[left, right],
+         breakpoint: breakpoint,
+         gap: gap,
+         key: key,
+       );
+
+  final List<Widget> children;
+  final double breakpoint;
+  final AppResponsiveFieldRowGap gap;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final bool stacked =
+            !constraints.hasBoundedWidth || constraints.maxWidth < breakpoint;
+
+        if (stacked) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              for (var index = 0; index < children.length; index += 1) ...[
+                children[index],
+                if (index < children.length - 1)
+                  SizedBox(height: _verticalGap(theme)),
+              ],
+            ],
+          );
+        }
+
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            for (var index = 0; index < children.length; index += 1) ...[
+              Expanded(child: children[index]),
+              if (index < children.length - 1)
+                SizedBox(width: _horizontalGap(theme)),
+            ],
+          ],
+        );
+      },
+    );
+  }
+
+  double _horizontalGap(ThemeData theme) {
+    return switch (gap) {
+      AppResponsiveFieldRowGap.standard => theme.spacing.sm,
+      AppResponsiveFieldRowGap.form => theme.spacing.md,
+    };
+  }
+
+  double _verticalGap(ThemeData theme) {
+    return switch (gap) {
+      AppResponsiveFieldRowGap.standard => theme.spacing.sm,
+      AppResponsiveFieldRowGap.form => theme.appTokens.formGapCompact,
+    };
+  }
+}

@@ -1,0 +1,43 @@
+---
+description: Monorepo rules index and conflict-resolution order for FCHIP.
+globs:
+  - ".cursor/**"
+  - "backend/**"
+  - "frontend/**"
+alwaysApply: false
+---
+
+# FCHIP Rules Index
+
+FCHIP is the hospital management monorepo for `backend/` and `frontend/`; agents must resolve rule conflicts using the order below.
+
+## Conflict Order
+
+When rules conflict, you must apply this order:
+
+1. Security, privacy, safety, and compliance.
+2. `api-contract.mdc` for shared HTTP and transport behavior.
+3. `app-write-up.mdc` for product scope and module ownership.
+4. `access/` rules for defaults, roles, permissions, and subscriptions.
+5. `flows/` rules when editing a matching patient journey.
+6. `frontend/.cursor/index.mdc` or `backend/.cursor/index.mdc` for stack-specific guidance.
+7. `dev-plan/` steps for chronology only.
+
+## Rule Pointers
+
+- `access/modules.mdc` defines shipped module keys and package coverage.
+- `access/permissions.mdc` defines access vocabulary, ABAC, and enforcement.
+- `access/subscriptions.mdc` defines package tiers and limits.
+- `access/default_user_roles.mdc` defines shipped role defaults.
+- `app-write-up.mdc` defines product scope and module responsibilities.
+
+## Stack Indexes
+
+- `frontend/.cursor/index.mdc` covers Flutter architecture, UI, and data flow.
+- `backend/.cursor/index.mdc` covers Express, Prisma, API, and security.
+
+## Prompt Set
+
+- You should use `prompts/00-global-delivery-acceptance.md` as the shared baseline.
+- `prompts/01` to `prompts/13` specialize delivery, security, workflow, and module work.
+- You may combine the prompt set with flow files and stack indexes for domain-specific work.

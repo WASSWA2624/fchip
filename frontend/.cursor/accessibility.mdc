@@ -1,0 +1,41 @@
+---
+description: Enforce accessibility labels, focus, contrast, and localized semantics in screens and components.
+globs:
+  - "frontend/lib/shared/**"
+  - "frontend/lib/features/**/presentation/**"
+alwaysApply: false
+---
+
+# Accessibility Strategy
+
+Baseline accessibility for screens, components, forms, navigation, and feedback states.
+
+## Requirements
+
+- Add semantic labels for icon-only buttons and meaningful images.
+- Keep tap targets at least `48px` where practical.
+- Support keyboard navigation and keep visible focus states.
+- Must not rely on color alone; pair status with icon plus text.
+- Keep text readable under font scaling.
+- Associate form errors with their fields.
+- Must not excessive motion; use simple default transitions.
+- Must use design tokens for color and contrast; hard-coded colors are prohibited ([`design-system.mdc`](./design-system.mdc)).
+- Reusable accessible components must live in `frontend/lib/shared/`; check the catalog first.
+- All user-facing text must be localized with concise clinical terminology.
+
+## Dialogs and states
+
+- Dialogs should trap focus and return focus after closing.
+- State views must announce loading, empty, and error messages.
+
+## Acceptance
+
+- Tab order is logical; important actions have labels.
+- Contrast is readable in light and dark themes.
+- Text scaling does not hide controls.
+
+## Related
+
+- [`design-system.mdc`](./design-system.mdc)
+- [`ui-patterns.mdc`](./ui-patterns.mdc)
+- [`localization_i18n.mdc`](./localization_i18n.mdc)

@@ -1,0 +1,460 @@
+import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fchip/core/errors/result.dart';
+import 'package:fchip/core/network/api_client.dart';
+import 'package:fchip/core/network/api_endpoints.dart';
+import 'package:fchip/core/network/network_providers.dart';
+import 'package:fchip/features/subscriptions/data/dtos/subscription_dtos.dart';
+import 'package:fchip/features/subscriptions/domain/entities/subscription_entities.dart';
+import 'package:fchip/features/subscriptions/domain/repositories/subscriptions_repository.dart';
+import 'package:fchip/shared/data/data.dart';
+
+final subscriptionsRepositoryProvider = Provider<SubscriptionsRepository>((
+  ref,
+) {
+  return SubscriptionsRepositoryImpl(apiClient: ref.watch(apiClientProvider));
+});
+
+final class SubscriptionsRepositoryImpl implements SubscriptionsRepository {
+  const SubscriptionsRepositoryImpl({required ApiClient apiClient})
+    : _apiClient = apiClient;
+
+  final ApiClient _apiClient;
+
+  @override
+  Future<Result<SubscriptionsWorkspaceData>> getWorkspace(
+    SubscriptionsWorkspaceQuery query,
+  ) {
+    final AppPageRequest request = query.pageRequest;
+    return _apiClient.get<SubscriptionsWorkspaceData>(
+      ApiEndpoints.nested(
+        HmsApiResource.subscriptionsWorkspace,
+        'workspace',
+        const <String>[],
+      ),
+      queryParameters: _withoutEmpty(<String, Object?>{
+        'page': request.pageIndex + 1,
+        'limit': request.pageSize,
+        'panel': query.panel.serverValue,
+        'resource': query.resource.serverValue,
+        'queue': query.queue,
+        'search': query.search,
+        'tenantId': query.tenantId,
+        'id': query.recordId,
+        'action': query.action,
+        'status': query.status,
+        'tierCode': query.tierCode,
+        'billingCycle': query.billingCycle,
+        'planId': query.planId,
+        'moduleId': query.moduleId,
+        'fitStatus': query.fitStatus,
+        'changeStatus': query.changeStatus,
+        'invoiceStatus': query.invoiceStatus,
+        'licenseType': query.licenseType,
+        'eligibilityState': query.eligibilityState,
+        'datePreset': query.datePreset == SubscriptionDatePreset.none
+            ? null
+            : query.datePreset.serverValue,
+      }),
+      decoder: (Object? data) {
+        return SubscriptionsWorkspaceDto.fromResponse(data, query).toEntity();
+      },
+    );
+  }
+
+  @override
+  Future<Result<SubscriptionLookups>> getReferenceData({String? tenantId}) {
+    return _apiClient.get<SubscriptionLookups>(
+      ApiEndpoints.nested(
+        HmsApiResource.subscriptionsWorkspace,
+        'reference-data',
+        const <String>[],
+      ),
+      queryParameters: _withoutEmpty(<String, Object?>{'tenantId': tenantId}),
+      decoder: (Object? data) {
+        return SubscriptionLookupsDto.fromResponse(data).toEntity();
+      },
+    );
+  }
+
+  @override
+  Future<Result<SubscriptionLegacyRouteResolution>> resolveLegacyRoute(
+    SubscriptionResource resource,
+    String identifier,
+  ) {
+    return _apiClient.get<SubscriptionLegacyRouteResolution>(
+      ApiEndpoints.nested(
+        HmsApiResource.subscriptionsWorkspace,
+        'resolve-legacy',
+        <String>[resource.serverValue, identifier],
+      ),
+      decoder: (Object? data) {
+        return SubscriptionLegacyRouteResolutionDto.fromResponse(
+          data,
+        ).toEntity();
+      },
+    );
+  }
+
+  @override
+  Future<Result<void>> createPlan(SubscriptionPlanDraft draft) {
+    return _apiClient.post<void>(
+      ApiEndpoints.collection(HmsApiResource.subscriptionPlans),
+      data: _planPayload(draft, includeTenant: true),
+      decoder: (_) {},
+    );
+  }
+
+  @override
+  Future<Result<void>> updatePlan(String planId, SubscriptionPlanDraft draft) {
+    return _apiClient.put<void>(
+      ApiEndpoints.byId(HmsApiResource.subscriptionPlans, planId),
+      data: _planPayload(draft),
+      decoder: (_) {},
+    );
+  }
+
+  @override
+  Future<Result<SubscriptionPlanDetail>> getPlanDetail(String planId) {
+    return _apiClient.get<SubscriptionPlanDetail>(
+      ApiEndpoints.nested(
+        HmsApiResource.subscriptionsWorkspace,
+        'plan-detail',
+        const <String>[],
+      ),
+      queryParameters: <String, Object?>{'planId': planId},
+      decoder: (Object? data) {
+        return SubscriptionPlanDetailDto.fromResponse(data).toEntity();
+      },
+    );
+  }
+
+  @override
+  Future<Result<void>> createSubscription(SubscriptionDraft draft) {
+    return _apiClient.post<void>(
+      ApiEndpoints.collection(HmsApiResource.subscriptions),
+      data: _withoutEmpty(<String, Object?>{
+        'tenant_id': draft.tenantId,
+        'plan_id': draft.planId,
+        'status': draft.status,
+        'start_date': _isoDateTimeOrNull(draft.startDate),
+        'end_date': _isoDateTimeOrNull(draft.endDate),
+      }),
+      decoder: (_) {},
+    );
+  }
+
+  @override
+  Future<Result<void>> updateSubscription(
+    String subscriptionId,
+    SubscriptionDraft draft,
+  ) {
+    return _apiClient.put<void>(
+      ApiEndpoints.byId(HmsApiResource.subscriptions, subscriptionId),
+      data: _withoutEmpty(<String, Object?>{
+        'plan_id': draft.planId,
+        'status': draft.status,
+        'start_date': _isoDateTimeOrNull(draft.startDate),
+        'end_date': _isoDateTimeOrNull(draft.endDate),
+      }),
+      decoder: (_) {},
+    );
+  }
+
+  @override
+  Future<Result<void>> activateSubscription(String subscriptionId) {
+    return _apiClient.put<void>(
+      ApiEndpoints.byId(HmsApiResource.subscriptions, subscriptionId),
+      data: const <String, Object?>{'status': 'ACTIVE'},
+      decoder: (_) {},
+    );
+  }
+
+  @override
+  Future<Result<void>> cancelSubscription(String subscriptionId) {
+    return _apiClient.put<void>(
+      ApiEndpoints.byId(HmsApiResource.subscriptions, subscriptionId),
+      data: const <String, Object?>{'status': 'CANCELLED'},
+      decoder: (_) {},
+    );
+  }
+
+  @override
+  Future<Result<void>> renewSubscription(
+    String subscriptionId,
+    SubscriptionRenewalDraft draft,
+  ) {
+    return _apiClient.post<void>(
+      ApiEndpoints.nested(
+        HmsApiResource.subscriptions,
+        subscriptionId,
+        const <String>['renew'],
+      ),
+      data: _withoutEmpty(<String, Object?>{
+        'end_date': _isoDateTimeOrNull(draft.endDate),
+        'reason': draft.reason,
+      }),
+      decoder: (_) {},
+    );
+  }
+
+  @override
+  Future<Result<void>> changeSubscriptionPlan(
+    String subscriptionId,
+    SubscriptionPlanChangeDraft draft,
+  ) {
+    final String action = draft.changeType.trim().toLowerCase() == 'downgrade'
+        ? 'downgrade'
+        : 'upgrade';
+    return _apiClient.post<void>(
+      ApiEndpoints.nested(
+        HmsApiResource.subscriptions,
+        subscriptionId,
+        <String>[action],
+      ),
+      data: _withoutEmpty(<String, Object?>{
+        'target_plan_id': draft.targetPlanId,
+        'effective_at': _isoDateTimeOrNull(draft.effectiveAt),
+        'reason': draft.reason,
+      }),
+      decoder: (_) {},
+    );
+  }
+
+  @override
+  Future<Result<void>> createModuleSubscription(ModuleSubscriptionDraft draft) {
+    return _apiClient.post<void>(
+      ApiEndpoints.collection(HmsApiResource.moduleSubscriptions),
+      data: _withoutEmpty(<String, Object?>{
+        'subscription_id': draft.subscriptionId,
+        'module_id': draft.moduleId,
+        'is_active': draft.isActive,
+      }),
+      decoder: (_) {},
+    );
+  }
+
+  @override
+  Future<Result<void>> setModuleSubscriptionActive(
+    String moduleSubscriptionId, {
+    required bool isActive,
+    String? reason,
+  }) {
+    return _apiClient.post<void>(
+      ApiEndpoints.nested(
+        HmsApiResource.moduleSubscriptions,
+        moduleSubscriptionId,
+        <String>[isActive ? 'activate' : 'deactivate'],
+      ),
+      data: _withoutEmpty(<String, Object?>{'reason': reason}),
+      decoder: (_) {},
+    );
+  }
+
+  @override
+  Future<Result<void>> createLicense(LicenseDraft draft) {
+    return _apiClient.post<void>(
+      ApiEndpoints.collection(HmsApiResource.licenses),
+      data: _licensePayload(draft, includeTenant: true),
+      decoder: (_) {},
+    );
+  }
+
+  @override
+  Future<Result<void>> updateLicense(String licenseId, LicenseDraft draft) {
+    return _apiClient.put<void>(
+      ApiEndpoints.byId(HmsApiResource.licenses, licenseId),
+      data: _licensePayload(draft, includeTenant: true),
+      decoder: (_) {},
+    );
+  }
+
+  @override
+  Future<Result<void>> collectInvoice(
+    String subscriptionInvoiceId,
+    SubscriptionActionDraft draft,
+  ) {
+    return _apiClient.post<void>(
+      ApiEndpoints.nested(
+        HmsApiResource.subscriptionInvoices,
+        subscriptionInvoiceId,
+        const <String>['collect'],
+      ),
+      data: _withoutEmpty(<String, Object?>{
+        'payment_method': draft.paymentMethod,
+        'notes': draft.notes,
+      }),
+      decoder: (_) {},
+    );
+  }
+
+  @override
+  Future<Result<void>> retryInvoice(
+    String subscriptionInvoiceId,
+    SubscriptionActionDraft draft,
+  ) {
+    return _apiClient.post<void>(
+      ApiEndpoints.nested(
+        HmsApiResource.subscriptionInvoices,
+        subscriptionInvoiceId,
+        const <String>['retry'],
+      ),
+      data: _withoutEmpty(<String, Object?>{'retry_reason': draft.reason}),
+      decoder: (_) {},
+    );
+  }
+
+  @override
+  Future<Result<SubscriptionUpgradeContext>> getUpgradeContext() {
+    return _apiClient.get<SubscriptionUpgradeContext>(
+      ApiEndpoints.nested(
+        HmsApiResource.subscriptionsWorkspace,
+        'upgrade-context',
+        const <String>[],
+      ),
+      decoder: (Object? data) {
+        return SubscriptionUpgradeContextDto.fromResponse(data).toEntity();
+      },
+    );
+  }
+
+  @override
+  Future<Result<void>> submitPaymentRequest(
+    SubscriptionPaymentRequestDraft draft,
+  ) {
+    final FormData formData = FormData.fromMap(<String, Object?>{
+      'target_plan_id': draft.targetPlanId,
+      'payment_method': draft.paymentMethod,
+      if (draft.amount != null) 'amount': draft.amount,
+      if (draft.currency != null) 'currency': draft.currency,
+      if (draft.billingCycle != null) 'billing_cycle': draft.billingCycle,
+      if (draft.invoiceEmail != null) 'invoice_email': draft.invoiceEmail,
+      if (draft.reference != null) 'reference': draft.reference,
+      if (draft.notes != null) 'notes': draft.notes,
+      if (draft.paymentProvider != null)
+        'payment_provider': draft.paymentProvider,
+      if (draft.payerPhone != null) 'payer_phone': draft.payerPhone,
+      if (draft.bankName != null) 'bank_name': draft.bankName,
+      if (draft.cardHolderName != null)
+        'card_holder_name': draft.cardHolderName,
+      if (draft.cardLastFour != null) 'card_last_four': draft.cardLastFour,
+    });
+
+    if (draft.proofBytes != null && draft.proofFileName != null) {
+      formData.files.add(
+        MapEntry<String, MultipartFile>(
+          'proof',
+          MultipartFile.fromBytes(
+            draft.proofBytes!,
+            filename: draft.proofFileName,
+            contentType: draft.proofMimeType == null
+                ? null
+                : DioMediaType.parse(draft.proofMimeType!),
+          ),
+        ),
+      );
+    }
+
+    return _apiClient.post<void>(
+      ApiEndpoints.nested(
+        HmsApiResource.subscriptionsWorkspace,
+        'payment-requests',
+        const <String>[],
+      ),
+      data: formData,
+      decoder: (_) {},
+    );
+  }
+}
+
+Map<String, Object?> _planPayload(
+  SubscriptionPlanDraft draft, {
+  bool includeTenant = false,
+}) {
+  final num monthly = _decimal(draft.monthlyPrice);
+  final num annual = _decimal(draft.annualPrice);
+  final bool yearlyDefault = draft.billingCycle.trim().toUpperCase().contains(
+    'YEAR',
+  );
+  final Map<String, Object?> payload = _withoutEmpty(<String, Object?>{
+    if (includeTenant) 'tenant_id': draft.tenantId,
+    'name': draft.name.trim(),
+    'code': draft.code,
+    'tier_code': draft.tierCode,
+    'price': yearlyDefault ? annual : monthly,
+    'billing_cycle': draft.billingCycle,
+    'max_users': _intOrNull(draft.maxUsers),
+    'max_facilities': _intOrNull(draft.maxFacilities),
+    'max_storage_mb': _intOrNull(draft.maxStorageMb),
+    'max_modules': _intOrNull(draft.maxModules),
+  });
+  payload['extension_json'] = <String, Object?>{
+    if (draft.description != null && draft.description!.trim().isNotEmpty)
+      'description': draft.description!.trim(),
+    'allowed_modules': <String, Object?>{'included': draft.includedModuleIds},
+    'pricing': <String, Object?>{
+      'monthly_price': monthly,
+      'annual_price': annual,
+    },
+  };
+  return payload;
+}
+
+Map<String, Object?> _licensePayload(
+  LicenseDraft draft, {
+  required bool includeTenant,
+}) {
+  return _withoutEmpty(<String, Object?>{
+    if (includeTenant) 'tenant_id': draft.tenantId,
+    'license_type': draft.licenseType,
+    'status': draft.status,
+    'issued_at': _isoDateTimeOrNull(draft.issuedAt),
+    'expires_at': _isoDateTimeOrNull(draft.expiresAt),
+  });
+}
+
+Map<String, Object?> _withoutEmpty(Map<String, Object?> payload) {
+  return <String, Object?>{
+    for (final MapEntry<String, Object?> entry in payload.entries)
+      if (!_isEmptyPayloadValue(entry.value)) entry.key: entry.value,
+  };
+}
+
+bool _isEmptyPayloadValue(Object? value) {
+  if (value == null) {
+    return true;
+  }
+  if (value is String) {
+    return value.trim().isEmpty;
+  }
+  if (value is Iterable) {
+    return value.isEmpty;
+  }
+  if (value is Map) {
+    return value.isEmpty;
+  }
+  return false;
+}
+
+num _decimal(String value) {
+  return num.tryParse(value.replaceAll(',', '').trim()) ?? 0;
+}
+
+int? _intOrNull(String? value) {
+  final String? normalized = _nonEmpty(value);
+  return normalized == null ? null : int.tryParse(normalized);
+}
+
+String? _isoDateTimeOrNull(String? value) {
+  final String? normalized = _nonEmpty(value);
+  if (normalized == null) {
+    return null;
+  }
+  final DateTime? parsed = DateTime.tryParse(normalized);
+  return parsed == null ? normalized : parsed.toUtc().toIso8601String();
+}
+
+String? _nonEmpty(String? value) {
+  final String? normalized = value?.trim();
+  return normalized == null || normalized.isEmpty ? null : normalized;
+}

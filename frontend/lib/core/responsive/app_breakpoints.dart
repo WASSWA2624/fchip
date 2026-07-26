@@ -1,0 +1,94 @@
+import 'package:flutter/widgets.dart';
+
+enum AppBreakpoint { xs, sm, md, lg, xl, xxl }
+
+extension AppBreakpointProperties on AppBreakpoint {
+  String get token => name;
+
+  /// Phone widths below the tablet threshold (`< 600`).
+  bool get isMobile => switch (this) {
+    AppBreakpoint.xs || AppBreakpoint.sm => true,
+    _ => false,
+  };
+
+  /// Drawer / bottom-nav shell for widths below `600`.
+  bool get usesDrawerNavigation => isMobile;
+
+  /// Side navigation (rail or expanded) for widths `600+`.
+  bool get supportsNavigationRail => !isMobile;
+
+  /// Expanded side-nav labels / denser chrome for tablet and up.
+  bool get supportsExtendedNavigationRail => switch (this) {
+    AppBreakpoint.md ||
+    AppBreakpoint.lg ||
+    AppBreakpoint.xl ||
+    AppBreakpoint.xxl => true,
+    _ => false,
+  };
+
+  /// Compact workspace headers hide the title text and keep only the module icon.
+  bool get hidesWorkspaceTitle => switch (this) {
+    AppBreakpoint.xs || AppBreakpoint.sm => true,
+    _ => false,
+  };
+
+  /// Toolbar inline actions show text labels only on large screens and above.
+  bool get showsToolbarActionLabels => switch (this) {
+    AppBreakpoint.xs || AppBreakpoint.sm || AppBreakpoint.md => false,
+    _ => true,
+  };
+}
+
+abstract final class AppBreakpoints {
+  static const double sm = 360;
+  static const double md = 600;
+  static const double lg = 840;
+  static const double xl = 1200;
+  static const double xxl = 1600;
+
+  static AppBreakpoint of(BuildContext context) {
+    return fromWidth(MediaQuery.sizeOf(context).width);
+  }
+
+  static AppBreakpoint fromConstraints(BoxConstraints constraints) {
+    return fromWidth(constraints.maxWidth);
+  }
+
+  static AppBreakpoint fromWidth(double width) {
+    if (width < sm) {
+      return AppBreakpoint.xs;
+    }
+    if (width < md) {
+      return AppBreakpoint.sm;
+    }
+    if (width < lg) {
+      return AppBreakpoint.md;
+    }
+    if (width < xl) {
+      return AppBreakpoint.lg;
+    }
+    if (width < xxl) {
+      return AppBreakpoint.xl;
+    }
+
+    return AppBreakpoint.xxl;
+  }
+}
+
+typedef ResponsiveWidgetBuilder =
+    Widget Function(BuildContext context, AppBreakpoint breakpoint);
+
+class ResponsiveBuilder extends StatelessWidget {
+  const ResponsiveBuilder({required this.builder, super.key});
+
+  final ResponsiveWidgetBuilder builder;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return builder(context, AppBreakpoints.fromConstraints(constraints));
+      },
+    );
+  }
+}

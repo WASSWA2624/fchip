@@ -18,5 +18,5 @@ Define server behavior for sync-capable clients.
 - Server logic must not assume the client clock is authoritative.
 
 ## See also
-- [`.cursor/api-contract.mdc`](../../.cursor/api-contract.mdc)
+- [`backend/.cursor/api.mdc`](../../backend/.cursor/api.mdc)
 - [`frontend/.cursor/offline_sync.mdc`](../../frontend/.cursor/offline_sync.mdc)

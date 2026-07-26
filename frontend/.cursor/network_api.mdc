@@ -8,7 +8,7 @@ alwaysApply: false
 
 # Network and API
 
-HTTP access against `fchip-backend` per [`.cursor/api-contract.mdc`](../../.cursor/api-contract.mdc).
+HTTP access against `fchip-backend` per [`backend/.cursor/api.mdc`](../../backend/.cursor/api.mdc).
 
 ## Mandatory rules
 

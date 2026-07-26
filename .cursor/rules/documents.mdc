@@ -20,7 +20,7 @@ Examples: `awief_pdf.pdf`, `fid_ppt.pptx`, `awief_word.docx`.
 
 1. Edit one format → update the other two in the same session (story, data, branding, compliance).
 2. Regenerate only with **that project's** build script(s). Never stamp many projects from a shared factory.
-3. Prefer the most recently edited format; if unclear, follow the project SoT. For FairBanks / FCHIP narrative across funding calls, use `.cursor/rules/fairBanks_refined_project_idea.mdc`.
+3. Prefer the most recently edited format; if unclear, follow the call SoT. For FairBanks / FCHIP narrative across funding calls, use [`.cursor/app-write-up.mdc`](../app-write-up.mdc).
 4. Keep only the three official files in `documents/` — no drafts or renamed copies.
 5. Use images from `assets/` (or a project `assets/` folder). Keep brand look consistent across formats.
 6. Before an external submission, meet all eligibility, theme, format, and deadline rules.
@@ -29,17 +29,16 @@ Examples: `awief_pdf.pdf`, `fid_ppt.pptx`, `awief_word.docx`.
 
 ## PowerPoint — `{project}_ppt.pptx` (elegant by default)
 
-Treat every deck as a polished visual product, not a text dump. Slides should look intentional, attractive, and easy to follow live.
+Treat every deck as a polished visual product, not a text dump. Prefer real photos and concept visuals from `.cursor/` (`concept_improved.jpeg`, `concept_simple.jpeg`, `concept.jpeg`).
 
-1. **Balance & type:** Size text for the space. On photo+text slides, grow and centre body text so it matches the photo’s weight. No tiny type in empty space; no crowding or overlap.
-2. **Pictures first:** Prefer real photos, diagrams, maps, and dashboards from `assets/` over long paragraphs. One clear image idea per slide.
-3. **Visual design:** Brand colours, clean margins, consistent headers/footers, calm contrast. Vary layouts (full-bleed cover, split photo/text, cards, process flows) so the deck feels designed.
-4. **Motion with purpose:** Light, tasteful animations (fade, wipe, appear) on titles, key bullets, and photo entrances where they help. Subtle and consistent — never noisy.
-5. **Readability check:** Before finishing, scan every slide: clear hierarchy, even spacing, sharp images, readable at distance, elegant and on-brand.
+1. **Balance & type:** Size text for the space. No tiny type in empty space; no crowding or overlap.
+2. **Pictures first:** One clear image idea per slide.
+3. **Visual design:** Brand colours, clean margins, consistent headers/footers, calm contrast.
+4. **Motion with purpose:** Light fade/wipe/appear only where it helps.
+5. **Readability check:** Clear hierarchy, even spacing, sharp images, readable at distance.
 
 ## Sources of truth
 
+- Product narrative: [`.cursor/app-write-up.mdc`](../app-write-up.mdc)
+- Cascade model: [`fairbanks-community-reach.mdc`](fairbanks-community-reach.mdc)
 - Call rules: `applications/{project}/rules/source_of_truth.mdc`
-- Opportunities: `opportunities/rules/source_of_truth.mdc`
-
-Follow the official call when unsure. One rules tree per project (globs, not always-on).

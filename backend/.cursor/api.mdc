@@ -33,4 +33,4 @@ Keep the HTTP surface consistent, predictable, and access-controlled.
 - Routes must not hold business logic or undocumented verbs.
 - No route may bypass tenancy or facility scope.
 - No endpoint or action may be reachable by unauthorized users; effective permissions follow `auth-security.mdc`.
-- `.cursor/access/` files are the source of truth for default permissions, roles, and entitlements.
+- `frontend/.cursor/permissions.mdc` / `backend/.cursor/auth-security.mdc` files are the source of truth for default permissions, roles, and entitlements.

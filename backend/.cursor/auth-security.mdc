@@ -22,7 +22,7 @@ Define backend identity and authorization behavior.
 - Enforce in middleware and re-validate in services for sensitive workflows.
 
 ## Access defaults
-- Shipped defaults live in `.cursor/access/` (`modules.mdc`, `permissions.mdc`, `subscriptions.mdc`, `default_user_roles.mdc`).
+- Shipped defaults live in `frontend/.cursor/permissions.mdc` / `backend/.cursor/auth-security.mdc` (`modules.mdc`, `permissions.mdc`, `subscriptions.mdc`, `default_user_roles.mdc`).
 - Admins may customize or reset permissions to shipped defaults.
 - All permission, role, module, and subscription changes must be atomic, versioned, auditable, and restorable.
 

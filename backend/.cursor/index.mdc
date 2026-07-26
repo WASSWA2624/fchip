@@ -10,7 +10,7 @@ Define backend technical standards for `fchip-backend`.
 
 ## Conflict order
 1. security, privacy, safety, and compliance rules
-2. [`.cursor/api-contract.mdc`](../../.cursor/api-contract.mdc) for cross-stack HTTP behavior
+2. [`.cursor/app-write-up.mdc`](../../.cursor/app-write-up.mdc) for product identity and scope
 3. the owner file named below
 4. other backend rule files
 5. backend dev-plan files
@@ -20,7 +20,7 @@ Define backend technical standards for `fchip-backend`.
 - Database objects, Prisma models, and documented payload fields use lowercase `snake_case`.
 - Public APIs and realtime payloads expose `human_friendly_id` only; must not return raw primary keys.
 - Effective access = `union(role, module, user grants) ∩ active subscription ∩ assigned modules ∩ ABAC scope`; no grant bypasses subscription limits.
-- Default modules, packages, roles, and permissions live in `.cursor/access/`; admin changes are versioned and auditable.
+- Product framing follows FairBanks / FCHIP SoT; do not present the API as a generic hospital brand.
 - Every business module must stay standalone and entitlement-aware.
 - Public APIs and complex logic require JSDoc documentation.
 - Circular dependencies are forbidden.
@@ -33,7 +33,6 @@ Define backend technical standards for `fchip-backend`.
 - `module-creation.mdc`: module build sequence
 - `api.mdc`, `api-versioning.mdc`, `response-format.mdc`, `validation.mdc`: HTTP contract
 - `auth-security.mdc`: authn, authz, ABAC, break-glass
-- `.cursor/access/*.mdc`: default access (cross-stack)
 - `cors.mdc`, `rate-limiting.mdc`, `health-checks.mdc`, `error-logging.mdc`, `constants-env.mdc`: runtime safety
 - `prisma.mdc`, `storage.mdc`, `websockets.mdc`, `performance.mdc`, `offline-support.mdc`, `internationalization.mdc`: platform behavior
 - `compliance.mdc`, `documentation.mdc`, `testing.mdc`: governance

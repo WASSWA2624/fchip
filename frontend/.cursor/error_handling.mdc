@@ -13,7 +13,7 @@ Typed failures and safe mapping at layer boundaries; UI presentation lives in [`
 ## Requirements
 
 - Convert exceptions to typed failures at layer boundaries.
-- Map API errors per [`.cursor/api-contract.mdc`](../../.cursor/api-contract.mdc) before reaching UI.
+- Map API errors per [`backend/.cursor/api.mdc`](../../backend/.cursor/api.mdc) before reaching UI.
 - Must not expose raw technical errors to users.
 - Log diagnostics without secrets ([`observability.mdc`](./observability.mdc)).
 - Handle startup, navigation, network, storage, validation, and permission errors explicitly.

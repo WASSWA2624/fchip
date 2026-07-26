@@ -11,39 +11,27 @@ Apply these standards when creating or editing `.mdc` rule files.
 
 - Start with valid YAML frontmatter.
 - Include:
-  - `description:`—concise, single-sentence purpose.
-  - `globs:`—relative globs for scoped rules; omit if `alwaysApply: true`.
-  - `alwaysApply:`—`true` for repo-wide, `false` for scoped.
-
-```yaml
----
-description: State the rule’s purpose
-globs:
-  - "relevant/path/**"
-alwaysApply: false
----
-```
+  - `description:` — concise purpose.
+  - `globs:` — relative globs for scoped rules; omit if `alwaysApply: true`.
+  - `alwaysApply:` — `true` for repo-wide, `false` for scoped.
 
 ## Content structure
 
-1. H1 title (specific to the rule).
-2. Brief purpose or outcome statement.
-3. Actionable requirements, grouped under clear H2s.
-4. Examples or exceptions only if they prevent ambiguity.
+1. H1 title.
+2. Brief purpose.
+3. Actionable requirements under clear H2s.
+4. Examples only if they prevent ambiguity.
 5. Related-rule links only if directly relevant.
 
 ## Quality requirements
 
-- Stay under 251 words (frontmatter included).
-- Use clear, direct, and professional language.
+- Stay under 501 words (frontmatter included), except the product SoT [app-write-up.mdc](app-write-up.mdc) and [fairbanks_raw_project_idea.mdc](rules/fairbanks_raw_project_idea.mdc).
+- Do not duplicate [app-write-up.mdc](app-write-up.mdc); point to it instead.
 - Make each instruction actionable and testable.
-- Prefer concise bullets over long text.
-- State only one primary concern per rule.
+- Prefer concise bullets; one primary concern per rule.
 - Use `must`, `must not`, `should`, and `may` consistently.
-- Remove any duplication or contradiction.
 - Give specific commands, files, or patterns when possible.
-- Maintain valid Markdown and YAML.
 
 ## Final check
 
-Confirm correct scope, word count, clarity, and no duplicates or contradictions.
+Confirm correct scope, word count, clarity, and no duplicates or contradictions with the product SoT.

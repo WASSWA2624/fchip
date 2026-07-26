@@ -10,7 +10,7 @@ Define the mandatory build sequence for every backend module.
 
 ## Required sequence
 
-0. Permissions must be declared in `.cursor/access/modules.mdc`, roles in `default_user_roles.mdc`, and the module in `subscriptions.mdc`.
+0. Permissions must be declared in `backend/.cursor/module-creation.mdc`, roles in `default_user_roles.mdc`, and the module in `subscriptions.mdc`.
 1. The contract must be defined in `../../.cursor/app-write-up.mdc`, `dev-plan/P010_api_endpoints.md`, and `dev-plan/P011_modules.md`.
 2. Module and mirrored test folders must be created.
 3. Zod schemas must use `snake_case` and `human_friendly_id` for public identifiers.
@@ -25,7 +25,7 @@ Define the mandatory build sequence for every backend module.
 
 - Owned tables and permission keys must exist.
 - Public routes and responses must use `human_friendly_id` only.
-- Defaults must match `.cursor/access/`; subscription intersection tests must pass.
+- Defaults must match `frontend/.cursor/permissions.mdc` / `backend/.cursor/auth-security.mdc`; subscription intersection tests must pass.
 - Effective permissions must equal `union(role, module, user grants) ∩ subscription ∩ ABAC`; unauthorized access must not occur.
 - Standalone workflow must work without another paid module open.
 - Mutations must create audit evidence; names must match docs.

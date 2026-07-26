@@ -19,7 +19,7 @@ Release and per-feature gates only; detailed standards live in owner files in [`
 - [ ] Auth/permissions must align with backend entitlements; menus/routes/actions must be hidden for unauthorized users (RBAC+ABAC).
 - [ ] UI/API must use `human_friendly_id` only ([`data_modeling.mdc`](./data_modeling.mdc)).
 - [ ] Subscription ∩ role permission intersection must be enforced ([`permissions.mdc`](./permissions.mdc)).
-- [ ] API integration must follow [`.cursor/api-contract.mdc`](../../.cursor/api-contract.mdc).
+- [ ] API integration must follow [`backend/.cursor/api.mdc`](../../backend/.cursor/api.mdc).
 - [ ] `flutter analyze` and `flutter test` must pass ([`ci_cd_quality_gates.mdc`](./ci_cd_quality_gates.mdc)).
 
 ## Per-feature gate

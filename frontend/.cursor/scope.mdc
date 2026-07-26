@@ -8,16 +8,16 @@ alwaysApply: false
 
 # Project Scope
 
-FCHIP frontend is the Flutter client for the hospital management system, implementing module workspaces, clinical and operational flows, and shared shell UI against the `fchip-backend` API. Boundaries: [`.cursor/app-write-up.mdc`](../../.cursor/app-write-up.mdc).
+FCHIP frontend is the Flutter client for FairBanks’ Community Health Intelligence Platform, against the `fchip-backend` API. Product boundaries: [`.cursor/app-write-up.mdc`](../../.cursor/app-write-up.mdc).
 
 ## Mandatory rules
 
-- Must build production-ready module workspaces, not a generic disconnected starter.
+- Must build production-ready workspaces aligned with the FairBanks / FCHIP SoT, not a generic disconnected starter.
 - Must support Android, iOS, Web, Windows, macOS, and Linux where enabled; extra-small mobile through large desktop; smartwatch out of scope.
-- Must integrate with `fchip-backend` via repositories, DTOs, and [`.cursor/api-contract.mdc`](../../.cursor/api-contract.mdc).
+- Must integrate with `fchip-backend` via repositories and DTOs; HTTP details live in `backend/.cursor/api.mdc` and `network_api.mdc`.
 - Should prefer Flutter SDK widgets, Material Design, and shared `lib/shared/` abstractions before custom packages.
 - Must not duplicate dependencies, folders, components, rules, and competing design systems.
-- Module menus, routes, forms, actions, and visibility must match backend permissions, entitlements, and APIs.
+- Menus, routes, forms, actions, and visibility must match backend permissions, entitlements, and APIs.
 - Must reference entities by `human_friendly_id`; backend maps internal IDs.
 - Must enforce RBAC+ABAC and subscription-package intersection ([`permissions.mdc`](./permissions.mdc)).
 

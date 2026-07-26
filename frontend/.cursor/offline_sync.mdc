@@ -8,7 +8,7 @@ alwaysApply: false
 
 # Offline and Sync
 
-Client-side offline behavior per [`.cursor/api-contract.mdc`](../../.cursor/api-contract.mdc).
+Client-side offline behavior per [`backend/.cursor/api.mdc`](../../backend/.cursor/api.mdc).
 
 ## Mandatory rules
 
@@ -23,7 +23,7 @@ Client-side offline behavior per [`.cursor/api-contract.mdc`](../../.cursor/api-
 
 ## Online-only (must not queue)
 
-Auth/session changes, entitlement/break-glass approval, payments/refunds, mortuary release, final closeout — see `api-contract.mdc`.
+Auth/session changes, entitlement/break-glass approval, payments/refunds, mortuary release, final closeout — see `backend/.cursor/api.mdc`.
 
 ## Sync queue fields
 

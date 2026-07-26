@@ -1,5 +1,5 @@
 ---
-description: FairBanks refined product narrative — FCHIP as FairBanks component with GIS and climate intelligence
+description: FairBanks / FCHIP product source of truth — Community Health Intelligence Platform narrative
 alwaysApply: true
 ---
 
@@ -10,7 +10,7 @@ alwaysApply: true
 **Grant & Pitch Application Write-Up**  
 **Sector:** HealthTech | Artificial Intelligence & Machine Learning  
 **Geography:** Uganda (pilot) → East Africa → Pan-African scale  
-**Use:** Canonical narrative for grants, accelerators, investors, and development partners — adapt programme name, theme, and eligibility to each call.
+**Use:** Canonical narrative for grants, accelerators, investors, and development partners — adapt programme name, theme, and eligibility to each call. This file is the **source of truth** for FCHIP product framing in this repo.
 
 **Mission:** Connecting Care, Empowering Communities, Creating Lasting Impact.  
 **Tagline:** Health for All — *Obulamu eri Bonna* · *Afya kwa Wote* · *Oburamu bwa Boona*  
@@ -304,6 +304,12 @@ This combination—AI + ML + **GIS** + **climate APIs** + **secure EMR/HMS inter
 **Prediction / insight:** Gaps in the cascade (e.g. high outreach but low completed referrals; low CHIS coverage in a high-risk parish).  
 **Action:** Programme managers rebalance training, camps, CHIS co-funding, or Medical Centre capacity — “learn, improve, and serve again.”
 
+### 6.7 Do not invent alternate product identity
+
+- Do **not** describe FCHIP as a generic hospital management system brand.
+- Do **not** reorder the Community Reach cascade or invent parallel programme names.
+- Facility clinical tools may support the Medical Centre layer, but product copy, pitch, and agent framing must follow this SoT.
+
 ---
 
 ## 7. Target Market & Customers
@@ -551,4 +557,4 @@ With an operating medical centre, established Community Reach across Kampala per
 
 ---
 
-*Canonical FairBanks / FCHIP funding narrative. Path: `.cursor/rules/fairBanks_refined_project_idea.mdc`. Community Reach visuals: `.cursor/concept.jpeg`, `.cursor/concept_improved.jpeg`, `.cursor/concept_simple.jpeg`.*
+*Canonical FairBanks / FCHIP product source of truth. Path: `.cursor/app-write-up.mdc`. Community Reach visuals: `.cursor/concept.jpeg`, `.cursor/concept_improved.jpeg`, `.cursor/concept_simple.jpeg`.*

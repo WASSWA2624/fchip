@@ -1,5 +1,5 @@
 ---
-description: Monorepo rules index and conflict-resolution order for FCHIP.
+description: Root .cursor index — FCHIP SoT and conflict order
 globs:
   - ".cursor/**"
   - "backend/**"
@@ -9,35 +9,35 @@ alwaysApply: false
 
 # FCHIP Rules Index
 
-FCHIP is the hospital management monorepo for `backend/` and `frontend/`; agents must resolve rule conflicts using the order below.
+FCHIP is the FairBanks Community Health Intelligence Platform monorepo (`backend/` + `frontend/`). Product framing must follow the SoT below.
 
-## Conflict Order
+## Source of truth
 
-When rules conflict, you must apply this order:
+1. [`.cursor/app-write-up.mdc`](app-write-up.mdc) — FairBanks / FCHIP product narrative (always apply).
+2. [`.cursor/rules/fairbanks-community-reach.mdc`](rules/fairbanks-community-reach.mdc) — Community Reach cascade and visuals.
+3. Concept images in `.cursor/` (`concept_improved.jpeg`, `concept_simple.jpeg`, `concept.jpeg`).
+
+## Conflict order
+
+When rules conflict, apply this order:
 
 1. Security, privacy, safety, and compliance.
-2. `api-contract.mdc` for shared HTTP and transport behavior.
-3. `app-write-up.mdc` for product scope and module ownership.
-4. `access/` rules for defaults, roles, permissions, and subscriptions.
-5. `flows/` rules when editing a matching patient journey.
-6. `frontend/.cursor/index.mdc` or `backend/.cursor/index.mdc` for stack-specific guidance.
-7. `dev-plan/` steps for chronology only.
+2. `.cursor/app-write-up.mdc` for product identity and scope.
+3. `.cursor/rules/fairbanks-community-reach.mdc` for cascade and programme naming.
+4. `frontend/.cursor/index.mdc` or `backend/.cursor/index.mdc` for stack guidance.
+5. `dev-plan/` steps for chronology only.
 
-## Rule Pointers
+## Keep / do not invent
 
-- `access/modules.mdc` defines shipped module keys and package coverage.
-- `access/permissions.mdc` defines access vocabulary, ABAC, and enforcement.
-- `access/subscriptions.mdc` defines package tiers and limits.
-- `access/default_user_roles.mdc` defines shipped role defaults.
-- `app-write-up.mdc` defines product scope and module responsibilities.
+- Frame FCHIP as FairBanks’ intelligence layer on Community Reach — not a generic hospital brand.
+- Keep EMR/HMS wording only for **external** facility systems FCHIP interoperates with.
+- Do not invent alternate cascade order or programme names.
 
-## Stack Indexes
+## Stack indexes
 
-- `frontend/.cursor/index.mdc` covers Flutter architecture, UI, and data flow.
-- `backend/.cursor/index.mdc` covers Express, Prisma, API, and security.
+- `frontend/.cursor/index.mdc` — Flutter architecture, UI, data flow.
+- `backend/.cursor/index.mdc` — Express, Prisma, API, security.
 
-## Prompt Set
+## Application packs
 
-- You should use `prompts/00-global-delivery-acceptance.md` as the shared baseline.
-- `prompts/01` to `prompts/13` specialize delivery, security, workflow, and module work.
-- You may combine the prompt set with flow files and stack indexes for domain-specific work.
+- Shared grant/doc rules live in `.cursor/rules/` (`documents.mdc`, `folder_structure.mdc`, `instructions.mdc`).

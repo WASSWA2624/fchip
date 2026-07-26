@@ -16,7 +16,7 @@ Standardize success and error payloads.
 - Nested references use `human_friendly_id` or stable business codes; must not use raw foreign-key IDs.
 - Human-facing messages must use translation keys or localized strings; no hard-coded user-facing strings.
 - Use concise, appropriate clinical/operational terminology.
-- See [`.cursor/api-contract.mdc`](../../.cursor/api-contract.mdc) for cross-stack envelope details.
+- See [`backend/.cursor/api.mdc`](../../backend/.cursor/api.mdc) for cross-stack envelope details.
 
 ## Errors
 - Errors use one normalized problem-details shape.

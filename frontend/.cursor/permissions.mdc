@@ -9,7 +9,7 @@ alwaysApply: false
 
 # Permissions and Authorization
 
-Frontend RBAC, ABAC, entitlements, and platform permissions — aligned with `backend/.cursor/auth-security.mdc` and [`.cursor/access/`](../../.cursor/access/).
+Frontend RBAC, ABAC, entitlements, and platform permissions — aligned with `backend/.cursor/auth-security.mdc` and [`frontend/.cursor/permissions.mdc`](./permissions.mdc) and `backend/.cursor/auth-security.mdc`.
 
 ## Backend source of truth
 
@@ -19,7 +19,7 @@ Frontend RBAC, ABAC, entitlements, and platform permissions — aligned with `ba
 
 ## Frontend rules
 
-- Shipped defaults live in [`.cursor/access/`](../../.cursor/access/); admin changes must be versioned, auditable, and atomically restorable.
+- Shipped defaults live in [`frontend/.cursor/permissions.mdc`](./permissions.mdc) and `backend/.cursor/auth-security.mdc`; admin changes must be versioned, auditable, and atomically restorable.
 - Authority order (strict): active **subscription package** → assigned **roles/modules** → **permissions** → tenant/facility ABAC scope.
 - Effective permissions = union(role/module/user grants) ∩ subscription package ∩ assigned modules ∩ ABAC scope. No grant may unlock excluded modules, menus, routes, actions, or workflows.
 - `AppAccessPolicy.grants` and route/action gates must enforce this formula before rendering or enabling UI.
@@ -34,4 +34,4 @@ Frontend RBAC, ABAC, entitlements, and platform permissions — aligned with `ba
 
 - [`authentication_session.mdc`](./authentication_session.mdc)
 - [`security.mdc`](./security.mdc)
-- [`.cursor/api-contract.mdc`](../../.cursor/api-contract.mdc)
+- [`backend/.cursor/api.mdc`](../../backend/.cursor/api.mdc)
